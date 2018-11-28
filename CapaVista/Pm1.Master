@@ -1,0 +1,235 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Pm1.master.cs" Inherits="CapaVista.Pm1" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <%--importante poner esto--%>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <%--css//////////////////////////////////////////////////////////////////////////--%>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/css/Admin.css" type="text/css" />
+    <link rel="stylesheet" href="/css/all.css" type="text/css" />
+    <link href="/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/animate.css" rel="stylesheet" />
+    <link href="/css/bootstrap3d.css" rel="stylesheet" />
+    <link href="/css/jquery-ui.min.css" rel="stylesheet" />
+    <%--importante poner esto--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body class="skin-blue">
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=errores/NoJava.aspx" />
+    </noscript>
+    <header class="header ">
+        <%--elementos horizontales superiores--%>
+        <a href="../Inicio.aspx" class="logo">Empresa X</a>
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Quitar menú
+                </span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+        </nav>
+    </header>
+    <%--elementos horizontales superiores--%>
+
+    <%--barra lateral izquierda--%>
+    <div id="barraderecha" class="wrapper row-offcanvas row-offcanvas-left">
+        <aside class="left-side sidebar-offcanvas collapse-left">
+            <%--collapse-left--%>
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="fa-pull-left image ">
+                        <img src="/img/nini.jpg" class="rounded-circle" />
+                        <%-- poner dinámico--%>
+                    </div>
+                    <div class="pull-left info">
+                        <p>
+                            <asp:Label ID="lblWelcome" runat="server" Text="Wellcome"></asp:Label>
+                            <%-- poner dinámico--%>
+                        </p>
+                        <div>
+                            <a href="../Login.aspx?Cerrrarsesion=1" class="btn btn-danger">
+                                <i class="fas fa-ban"></i>
+                                <span>Cerrar Sessión  <%-- poner dinámico--%>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-unstyled components">
+                    <li id="mdl1" class="active">
+                        <a href="#ulmdl1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-dashboard"></i><span>modulo1 </span>
+                        </a>
+                        <ul id="ulmdl1" class="collapse list-unstyled">
+                            <li id="vst1">
+                                <a href="../modulo1/vista1.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista1</span>
+                                </a>
+                            </li>
+                            <li id="vst2">
+                                <a href="../modulo1/vista2.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista2</span>
+                                </a>
+                            </li>
+                            <li id="vst3">
+                                <a href="../modulo1/vista3.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista3</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li id="mdl2">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i><span>modulo2</span>
+                        </a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li id="mdl3">
+                        <a href="#ulmdl3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-th"></i><span>modulo3</span>
+                        </a>
+                        <ul id="ulmdl3" class="collapse list-unstyled">
+                            <li id="vst4">
+                                <a href="../modulo3/vista4.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista4</span>
+                                </a>
+                            </li>
+                            <li id="vst5">
+                                <a href="../modulo3/vista5.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista5</span>
+                                </a>
+                            </li>
+                            <li id="vst11">
+                                <a href="../modulo3/vista11.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista11</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li id="mdl4">
+                        <a href="#ulmdl4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-th"></i><span>modulo4</span>
+                        </a>
+                        <ul id="ulmdl4" class="collapse list-unstyled">
+                            <li id="vst12">
+                                <a href="../modulo4/vista12.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista12</span>
+                                </a>
+                            </li>
+                            <li id="vst13">
+                                <a href="../modulo4/vista13.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista13</span>
+                                </a>
+                            </li>
+                            <li id="vst14">
+                                <a href="../modulo4/vista14.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista14</span>
+                                </a>
+                            </li>
+                            <li id="vst15">
+                                <a href="../modulo4/vista15.aspx">
+                                    <i class="fa fa-dashboard"></i><span>Vista15</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </section>
+        </aside>
+    </div>
+    <%--fin barra lateral izquierda--%>
+
+    <aside class="right-side strech">
+        <%--strech--%>
+        <section class=" content-header">
+            <h1>
+                <asp:Label ID="lblNombrePag" runat="server"></asp:Label>
+                <%--esto es dinámico--%>
+            </h1>
+        </section>
+        <section class="content">
+            <%-- contenido dinámico--%>
+            <form id="form1" runat="server">
+                <asp:HiddenField ID="hfIDU" runat="server" ClientIDMode="Static" Value="0" />
+                <asp:HiddenField ID="hfEU" runat="server" ClientIDMode="Static" Value="0" />
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </form>
+            <%-- contenido dinámico--%>
+        </section>
+    </aside>
+
+
+    <!-- Footer -->
+    <footer class="page-footer font-small special-color-dark pt-4">
+
+        <!-- Footer Elements -->
+        <div class="container">
+
+            <!-- Social buttons -->
+            <ul class="list-unstyled list-inline text-center">
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-fb mx-1">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </li>
+
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-gplus mx-1">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-li mx-1">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </li>
+
+            </ul>
+            <!-- Social buttons -->
+
+        </div>
+        <!-- Footer Elements -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2018 Copyright:
+      <a href="#">ICP Nicaragua</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+
+
+    <script src="/js/jquery.js" type="text/javascript"></script>
+    <%--1--%>
+    <script src="../js/jquery-ui.min.js"></script>
+    <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>--%>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    <%--3--%>
+    <script src="/js/Admin/app.js" type="text/javascript"></script>
+    <%--4--%>
+    <script src="/js/icp/pm.js" type="text/javascript"></script>
+
+    <asp:ContentPlaceHolder ID="cphJs" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+
+
+
+</html>
