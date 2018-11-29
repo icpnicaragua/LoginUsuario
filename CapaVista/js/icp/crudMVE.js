@@ -37,9 +37,9 @@ function addrowTC(data) {
                 text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
                 className: 'btn btn-info', //clase para mostrar
                 titleAttr: 'Ocultar/Mostrar Columnas',
-                //init: function (api, node, config) {
-                //    $(node).removeClass('dt-button')
-                //}
+                init: function (api, node, config) {
+                    $(node).removeClass('dt-button')
+                }
 
             },
             {
