@@ -70,7 +70,7 @@ namespace CapaVista.modulo4
             List<ClsElemento> LE = new List<ClsElemento>();
 
             ClsElemento oElemento = new ClsElemento();
-            oElemento.Id_elemtno = "1";
+            oElemento.Id_elemento = "1";
             oElemento.Elemento = "ele1";
             oElemento.ObjVista.Idvista = "1";
             LE.Add(oElemento);

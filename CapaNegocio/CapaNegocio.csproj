@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClsElementoN.cs" />
     <Compile Include="ClsPermisosN.cs" />
     <Compile Include="ClsTicoControlN.cs" />
     <Compile Include="ClsUsuarioN.cs" />

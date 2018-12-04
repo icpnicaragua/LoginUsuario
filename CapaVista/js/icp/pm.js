@@ -30,7 +30,7 @@ function blockmodulosobj( obj) {
         mod = (obj[cont].ObjM.Idaspmodulo);
         vis = obj[cont].ObjV.Idaspvista;
         ele = obj[cont].ObjE.Idaspelemento;
-        console.log(mod + vis + ele + "xxx");
+        console.log(mod + vis + ele + " desde pm");
         if (mod != "tm") {
             if (vis == "tv") {
                 document.getElementById(mod).style.display = "none";
