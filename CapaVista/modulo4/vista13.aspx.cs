@@ -15,7 +15,6 @@ namespace CapaVista.modulo4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
         [WebMethod]
         public static List<ClsTipoControl> MostrarTC()
@@ -31,19 +30,28 @@ namespace CapaVista.modulo4
             
             return OElem;
         }
-        [WebMethod]
-        public static bool ExisteTc(string tc)
-        {
-            bool ExisteTC = false;
-            ClsTipoControl objtc = new ClsTipoControl();
-            objtc.Tipocontrol = tc;
 
-            ExisteTC= new ClsTicoControlN().ExisteTC(objtc);
-            return ExisteTC;
+        [WebMethod]
+        public static List<ClsVista> FnRVist()
+        {
+            List<ClsVista> OVist = new ClsVistaN().FnRVist();
+            return OVist;
         }
 
         [WebMethod]
-        public bool FnEElemEl(string EIdEl, string EElem, string EIdTC, string EIdVi)
+        public static bool FnETicoTC(string id,string tc, string CUDE)
+        {
+            bool ExisteTCTC = false;
+            ClsTipoControl OTico = new ClsTipoControl();
+            OTico.Idtipocontrol = id;
+            OTico.Tipocontrol = tc;
+         
+            ExisteTCTC= new ClsTicoControlN().FnETicoTC(OTico,CUDE);
+            return ExisteTCTC;
+        }
+
+        [WebMethod]
+        public static bool FnEElemEl(string EIdEl, string EElem, string EIdTC, string EIdVi)
         {
             bool ExisteEE = false;
             ClsElemento OElem = new ClsElemento();
@@ -56,6 +64,22 @@ namespace CapaVista.modulo4
 
             return ExisteEE;
         }
+
+        [WebMethod]
+        public static bool FnEElemAE(string EIdEl, string EAspE, string EIdVi)
+        {
+            bool ExisteEA = false;
+            ClsElemento OElem = new ClsElemento();
+            OElem.Id_elemento = EIdEl;
+            OElem.Idaspelemento = EAspE;
+            OElem.ObjVista.Idvista = EIdVi;
+
+            ExisteEA = new ClsElementoN().FnEElemAE(OElem); // enviar a capa N
+
+            return ExisteEA;
+        }
+
+
 
     }
 }

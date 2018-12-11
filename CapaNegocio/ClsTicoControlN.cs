@@ -17,12 +17,39 @@ namespace CapaNegocio
             return OTC;
         }
 
-        public bool ExisteTC(ClsTipoControl TCpara)
+        public bool FnETicoTC(ClsTipoControl OTico, string CUDE)
         {
-            TCpara.Tipocontrol = TCpara.Tipocontrol.Trim();//quitar espacios en blanco
-           Boolean ExisteTc = new ClsTipoControlD().ExisteTC(TCpara); // instanciar de la capa datos con el parametro del obj
-            return ExisteTc; //retornar si existe
+
+            bool ExisteTCTC = false;
+            if (OTico.Idtipocontrol != "" && OTico.Idtipocontrol != null)
+            {
+                switch (CUDE)
+                {
+                    case "C":
+                        ExisteTCTC = new ClsTipoControlD().FnCTico(OTico);
+                        break;
+                    case "U":
+                        ExisteTCTC = new ClsTipoControlD().FnUTico(OTico);
+                        break;
+                    case "D":
+                        ExisteTCTC = new ClsTipoControlD().FnDTico(OTico);
+                        break;
+                    case "ETC":
+                        ExisteTCTC = new ClsTipoControlD().FnETicoTC(OTico); // instanciar de la capa datos con el parametro del obj
+                        break;
+                    default:
+                        ExisteTCTC = false;
+                        break;
+                }
+                
+                return ExisteTCTC; //retornar si no se pudo hacer la operación
+            }
+            else
+            {
+                return ExisteTCTC;
+            }
       
+
         }
     }
 }

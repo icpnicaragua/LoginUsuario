@@ -46,6 +46,7 @@
     <Compile Include="ClsUsuarioD.cs" />
     <Compile Include="mve\ClsElementoD.cs" />
     <Compile Include="mve\ClsTipoControlD.cs" />
+    <Compile Include="mve\ClsVistaD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,7 @@ namespace CapaVista
                     {
                         x = "Bienvenido " + Session["Usuario"].ToString() + "!!!";
                         lblWelcome.Text = x;
-
+                        
                         hfIDU.Value= Session["Id"].ToString();
                         hfEU.Value= Session["Estado"].ToString();
                         //ver los permisos

@@ -47,29 +47,121 @@ namespace CapaDato.mve
            
         }
 
-        public bool ExisteTC(ClsTipoControl TCpara)
+        public bool FnCTico (ClsTipoControl OTico)
         {
-            bool ExisteTC = false;
+            bool CreateTico = false;
+
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new SqlCommand("spCTico", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("@prmCTico", OTico.Tipocontrol);
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    CreateTico = Convert.ToBoolean(Dr_D[0]);
+                }
+                return CreateTico;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+
+        }
+
+        public bool FnUTico(ClsTipoControl OTico)
+        {
+            bool UpdateTIco = false;
+
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new SqlCommand("spUTico", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmUIdTC",Convert.ToInt16(OTico.Idtipocontrol));
+                Cmd_D.Parameters.AddWithValue("@prmUTico", OTico.Tipocontrol);
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    UpdateTIco = Convert.ToBoolean(Dr_D[0]);
+                }
+                return UpdateTIco;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+
+        }
+
+        public bool FnDTico(ClsTipoControl OTico)
+        {
+            bool DeleteTico = false;
+
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new SqlCommand("spDTico", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("@prmDIdTC", Convert.ToInt16(OTico.Idtipocontrol));
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    DeleteTico = Convert.ToBoolean(Dr_D[0]);
+                }
+                return DeleteTico;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+
+        }
+
+        public bool FnETicoTC(ClsTipoControl OTico)
+        {
+            bool ExisteTCTC = false;
             
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new SqlCommand("spExisteTC", ObjConexion.Con_D);
+                Cmd_D = new SqlCommand("spETicoTC", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("@prmTC", TCpara.Tipocontrol);
+                Cmd_D.Parameters.AddWithValue("@prmEIdTC", Convert.ToInt16(OTico.Idtipocontrol));
+                Cmd_D.Parameters.AddWithValue("@prmETCTC", OTico.Tipocontrol);
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
                 if (Dr_D.Read())
                 {
 
                    
-                    ExisteTC = Convert.ToBoolean(Dr_D[0]);
+                    ExisteTCTC = Convert.ToBoolean(Dr_D[0]);
                 }
-                return ExisteTC;
+                return ExisteTCTC;
             }
             catch (Exception ex)
             {
-                return false;
+                return true;
                 throw ex;
             }
             finally

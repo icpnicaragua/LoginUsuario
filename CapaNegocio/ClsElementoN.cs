@@ -31,5 +31,19 @@ namespace CapaNegocio
             }
            
         }
+
+        public bool FnEElemAE(ClsElemento OElem)
+        {
+            if (OElem.Id_elemento != "" && OElem.Id_elemento != null)
+            {
+               
+                Boolean ExisteEA = new ClsElementoD().FnEElemAE(OElem); // instanciar de la capa datos con el parametro del obj
+                return ExisteEA; // lo que venga de la bd
+            }
+            else
+            {
+                return true;// va a la gaver si quiere meter gol
+            }
+        }
     }
 }

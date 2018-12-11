@@ -45,6 +45,7 @@
     <Compile Include="ClsPermisosN.cs" />
     <Compile Include="ClsTicoControlN.cs" />
     <Compile Include="ClsUsuarioN.cs" />
+    <Compile Include="ClsVistaN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

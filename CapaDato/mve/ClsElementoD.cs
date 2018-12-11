@@ -61,8 +61,8 @@ namespace CapaDato.mve
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("@prmEIdEl",Convert.ToInt16(OElem.Id_elemento));
                 Cmd_D.Parameters.AddWithValue("@prmEElem",OElem.Elemento);// no se convierte pq viene como string
-                Cmd_D.Parameters.AddWithValue("@prmEIdTC", Convert.ToInt16(OElem.ObjVista.Idvista));
-                Cmd_D.Parameters.AddWithValue("@prmEIdVi", Convert.ToInt16(OElem.ObjTipo_control.Idtipocontrol));
+                Cmd_D.Parameters.AddWithValue("@prmEIdTC", Convert.ToInt16(OElem.ObjTipo_control.Idtipocontrol));
+                Cmd_D.Parameters.AddWithValue("@prmEIdVi", Convert.ToInt16(OElem.ObjVista.Idvista));
 
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
@@ -80,9 +80,38 @@ namespace CapaDato.mve
             finally
             {
                 ObjConexion.Cerrarcon();
-            }
-          
+            }  
         }
 
+        public bool FnEElemAE(ClsElemento OElem)
+        {
+            bool ExisteEA = false;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new SqlCommand("spEElemAE", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("@prmEIdEl", Convert.ToInt16(OElem.Id_elemento));
+                Cmd_D.Parameters.AddWithValue("@prmEAsEl",OElem.Idaspelemento);
+                Cmd_D.Parameters.AddWithValue("@prmEIdVi", Convert.ToInt16(OElem.ObjVista.Idvista));
+
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    ExisteEA = Convert.ToBoolean(Dr_D[0]);
+                }
+                return ExisteEA;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
     }
 }

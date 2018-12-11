@@ -622,6 +622,7 @@
     <Content Include="js\fontawesome.min.js" />
     <Content Include="js\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="js\icp\crudMVE.js" />
+    <Content Include="js\icp\globals.js" />
     <Content Include="js\icp\pm.js" />
     <Content Include="js\icp\usuario.js" />
     <Content Include="js\icp\vista_elemento.js" />
