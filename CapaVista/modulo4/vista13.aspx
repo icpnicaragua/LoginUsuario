@@ -189,8 +189,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-              
+        </div>   
         <%--fin modales tc--%>
 
         <%-- modales Elem--%>
@@ -241,7 +240,6 @@
                 </div>
             </div>
         </div>
-
         <%--fin modales Elem--%>
 
         <%--fin modales mve--%>
