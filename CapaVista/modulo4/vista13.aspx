@@ -27,13 +27,17 @@
             <%--tabla tc--%>
             <div id="TC" class="  col-lg-6 col-md-6 col-sm-12 collapse">
                 <div class="card bg-light mb-3">
-                    <h2 class="card-header">Tipo de Control</h2>
+                    <div class="card-header">                        
+                            <h2 class="d-inline-block">Tipo de Control</h2>
+                            <div class="d-inline-block pull-right">
+                                <asp:LinkButton ID="lbTCN" href="#modalNueTC" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>
+                                <asp:LinkButton ID="lbMostrarTC" href="#secciontblTC" runat="server" Text="Mostrar TC" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>
+                            </div>                        
+                    </div>
+                  
                     <div class="card-body">
                         <div class="form">
-                            <div class="form-group">
-                                <asp:LinkButton ID="lbTCN" href="#modalNueTC" data-toggle="modal" runat="server" CssClass="btn btn-success btn3d"><i class="fas fa-plus fa-2x"></i></asp:LinkButton>
-                                <asp:LinkButton ID="lbMostrarTC" href="#secciontblTC" runat="server" Text="Mostrar TC" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>
-                            </div>
+                           
                         </div>
                         <div id="secciontblTC" class="table-responsive collapse">
                             <table id="tblTC" class="table table-bordered table-hover">
@@ -56,13 +60,16 @@
             <%--tabla elemento--%>
             <div id="E" class=" col-lg-6 col-md-6 col-sm-12 collapse">
                 <div class="card bg-light mb-3">
-                    <h2 class="card-header">Elemento</h2>
+                    <div class="card-header">
+                        <h2 class="d-inline-block">Elemento</h2>
+                        <div class="d-inline-block pull-right">
+                            <asp:LinkButton ID="lbEN" href="#ModCElem" data-toggle="modal" runat="server" CssClass="btn btn-success btn3d"><i class="fas fa-plus fa-2x"></i></asp:LinkButton>
+                            <asp:LinkButton ID="lbMostrarE" href="#secciontblE" runat="server" Text="Mostrar TC" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="form">
-                            <div class="form-group">
-                                <asp:LinkButton ID="lbEN" href="#ModCElem" data-toggle="modal" runat="server" CssClass="btn btn-success btn3d"><i class="fas fa-plus fa-2x"></i></asp:LinkButton>
-                                <asp:LinkButton ID="lbMostrarE" href="#secciontblE" runat="server" Text="Mostrar TC" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>
-                            </div>
+                          
                         </div>
                         <div id="secciontblE" class="table-responsive collapse">
                             <table id="tblE" class="table table-bordered table-hover">
