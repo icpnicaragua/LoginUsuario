@@ -383,7 +383,6 @@ function FnJsAjaxCUDETico(CUDEAJAX) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-
             switch (CUDEAJAX) {
                 case "C":
                     if (data.d) {
