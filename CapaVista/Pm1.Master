@@ -70,17 +70,17 @@
                         </a>
                         <ul id="ulmdl1" class="collapse list-unstyled">
                             <li id="vst1">
-                                <a href="../modulo1/vista1.aspx">
+                                <a href="../modulo1/vst1.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista1</span>
                                 </a>
                             </li>
                             <li id="vst2">
-                                <a href="../modulo1/vista2.aspx">
+                                <a href="../modulo1/vst2.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista2</span>
                                 </a>
                             </li>
                             <li id="vst3">
-                                <a href="../modulo1/vista3.aspx">
+                                <a href="../modulo1/vst3.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista3</span>
                                 </a>
                             </li>
@@ -99,17 +99,17 @@
                         </a>
                         <ul id="ulmdl3" class="collapse list-unstyled">
                             <li id="vst4">
-                                <a href="../modulo3/vista4.aspx">
+                                <a href="../modulo3/vst4.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista4</span>
                                 </a>
                             </li>
                             <li id="vst5">
-                                <a href="../modulo3/vista5.aspx">
+                                <a href="../modulo3/vst5.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista5</span>
                                 </a>
                             </li>
                             <li id="vst11">
-                                <a href="../modulo3/vista11.aspx">
+                                <a href="../modulo3/vst11.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista11</span>
                                 </a>
                             </li>
@@ -122,22 +122,22 @@
                         </a>
                         <ul id="ulmdl4" class="collapse list-unstyled">
                             <li id="vst12">
-                                <a href="../modulo4/vista12.aspx">
+                                <a href="../modulo4/vst12.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista12</span>
                                 </a>
                             </li>
                             <li id="vst13">
-                                <a href="../modulo4/vista13.aspx">
+                                <a href="../modulo4/vst13.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista13</span>
                                 </a>
                             </li>
                             <li id="vst14">
-                                <a href="../modulo4/vista14.aspx">
+                                <a href="../modulo4/vst14.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista14</span>
                                 </a>
                             </li>
                             <li id="vst15">
-                                <a href="../modulo4/vista15.aspx">
+                                <a href="../modulo4/vst15.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista15</span>
                                 </a>
                             </li>
@@ -149,7 +149,6 @@
         </aside>
     </div>
     <%--fin barra lateral izquierda--%>
-
     <aside class="right-side strech">
         <%--strech--%>
         <section class=" content-header">
@@ -171,8 +170,6 @@
             <%-- contenido dinámico--%>
         </section>
     </aside>
-
-
     <!-- Footer -->
     <footer class="page-footer font-small special-color-dark pt-4">
 

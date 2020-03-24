@@ -1,32 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+using MySql;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace CapaDato
 {
     public class ClsConexion
     {
-        public readonly SqlConnection Con_D = new SqlConnection("Data Source=DESKTOP-HV5U89A\\ICPNICARAGUAPCEP;Initial Catalog=usuario;Integrated Security=True");
+       
+        public readonly   MySqlConnection Con_D = new MySqlConnection();
 
-        public SqlConnection Abrircon()
+        public MySql.Data.MySqlClient.MySqlConnection  Abrircon()
         {
+            try
+            {
+                Con_D.ConnectionString = "SERVER=127.0.0.1;DATABASE=icpprueba;UID=aplicacion;PWD=Aplicacion1;PORT=3306;pipe=mysql";
+                if (Con_D.State == ConnectionState.Closed)
+                    Con_D.Open();
 
-            if (Con_D.State == ConnectionState.Closed)
-                Con_D.Open();
-            return Con_D;
+                return Con_D;
+            }
 
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
         }
 
-        public SqlConnection Cerrarcon()
+        public MySqlConnection Cerrarcon()
         {
-
-            if (Con_D.State == ConnectionState.Open)
-                Con_D.Close();
+            try
+            {
+                if (Con_D.State == ConnectionState.Open)
+                    Con_D.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+               
+            }
             return Con_D;
+
 
         }
     }

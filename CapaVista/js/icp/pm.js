@@ -1,7 +1,10 @@
 ﻿
-
+var href = document.location.href;
+var lastPathSegment = href.substr(href.lastIndexOf('/') + 1);
+var NombreCadena = lastPathSegment.split(".");
 $(document).ready(function () {
-    modulosobj();    
+    modulosobj();   
+    window.console.log(NombreCadena[0]);    
 });
 
 function modulosobj() {
@@ -17,30 +20,31 @@ function modulosobj() {
         },
         success: function (data) {
             blockmodulosobj(data.d);
-        }
+            }
     });
-
 }
 
-function blockmodulosobj( obj) {
+
+  
+
+function blockmodulosobj(obj) {
     var mod;
     var vis;
     var ele;
-    for (var cont = 0; cont < obj.length ; cont ++ ){     
+    for (var cont = 0; cont < obj.length; cont++) {
         mod = (obj[cont].ObjM.Idaspmodulo);
         vis = obj[cont].ObjV.Idaspvista;
         ele = obj[cont].ObjE.Idaspelemento;
         console.log(mod + vis + ele + " desde pm");
+        //si se pueden ver módulos, que prosiga con:
         if (mod != "tm") {
-            if (vis == "tv") {
-                document.getElementById(mod).style.display = "none";
+            if (vis == "tv") { //si dentro del módulo, se bloquean todas las vistas, hacer desaparecer el módulo
+                document.getElementById(mod).remove();
             }
-            else if (ele == "te") {
-                document.getElementById(vis).style.display = "none";
+            else if (ele == "te") {//si todos los elementos de la vista están bloqueados, desaparecer la vista
+                document.getElementById(vis).remove();
             }
-        }   
+        }
     }
-  
 }
-
 

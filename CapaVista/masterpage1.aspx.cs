@@ -12,11 +12,14 @@ namespace CapaVista
 {
     public partial class masterpage1 : System.Web.UI.Page
     {
+       
+   
 
-     
+
         protected void Page_Load(object sender, EventArgs e)
         {
-        
+            
+
         }
 
         [System.Web.Services.WebMethod]
@@ -26,5 +29,8 @@ namespace CapaVista
             return objPermisos;
             
         }
+
+   
+       
     }
 }

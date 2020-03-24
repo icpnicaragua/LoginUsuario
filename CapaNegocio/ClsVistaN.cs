@@ -16,5 +16,69 @@ namespace CapaNegocio
             //por acá se recortarían los espacios
             return OVist;
         }
+
+        public bool FnEVistaN(ClsVista Ovista)
+        {
+            if (Ovista.Idvista != "" && Ovista.Idvista != null)
+            {
+                Boolean ExisteVista = new ClsVistaD().FnEVistaD(Ovista);
+            return ExisteVista;       
+        }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool FnEVistaAspN(ClsVista Ovista)
+        {
+            if (Ovista.Idvista != "" && Ovista.Idvista != null)
+            {
+                Boolean ExisteVistaAsp = new ClsVistaD().FnEVistaaspD(Ovista);
+                return ExisteVistaAsp;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool FnDVistaN(ClsVista OVista)
+        {
+            if (OVista.Idvista != "" && OVista.Idvista != null)
+            {
+                Boolean DeleteVista = new ClsVistaD().FnDVistaD(OVista);
+                return DeleteVista;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public bool FnCVistaN(ClsVista Ovista)
+        {
+            Boolean CreateVista = new ClsVistaD().FnCVistaD(Ovista);
+            return CreateVista;
+        }
+
+        public bool FnUVistaN(ClsVista OVista)
+        {
+            if (OVista.Idvista != "" && OVista.Idvista != null)
+            {
+       
+                Boolean UpdateVista = new ClsVistaD().FnUVistaD(OVista);
+                return UpdateVista;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+        }
+
     }
 }

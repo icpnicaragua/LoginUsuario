@@ -22,5 +22,15 @@ namespace CapaNegocio
             }
             return objPermisosN;
         }
+
+        public List<ClsPermisos> PermisosVista(string IDU, string IDASPVISTA)
+        {
+            List<ClsPermisos> _objPermisosVista = new ClsPermisosD().PermisoVIsta(IDU, IDASPVISTA);
+            foreach (ClsPermisos x in _objPermisosVista)
+            {
+                x.ObjV.Idaspvista = x.ObjV.Idaspvista.Trim();
+            }
+            return _objPermisosVista;
+        }
     }
 }

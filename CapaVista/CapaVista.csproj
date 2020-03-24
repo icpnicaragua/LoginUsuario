@@ -44,6 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -113,6 +114,7 @@
     <Content Include="css\fonts\svg-with-js.min.css" />
     <Content Include="css\fonts\v4-shims.css" />
     <Content Include="css\fonts\v4-shims.min.css" />
+    <Content Include="css\hummingbird-treeview.css" />
     <Content Include="css\iCheck\all.css" />
     <Content Include="css\iCheck\flat\aero%402x.png" />
     <Content Include="css\iCheck\flat\aero.css" />
@@ -621,8 +623,13 @@
     <Content Include="js\fontawesome.js" />
     <Content Include="js\fontawesome.min.js" />
     <Content Include="js\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="js\hummingbird-treeview.js" />
+    <Content Include="js\icp\admin_permisos.js" />
+    <Content Include="js\icp\CRUDE_Elemento.js" />
     <Content Include="js\icp\crudMVE.js" />
     <Content Include="js\icp\globals.js" />
+    <Content Include="js\icp\CRUDVista.js" />
+    <Content Include="js\icp\CRUDE_Modulo.js" />
     <Content Include="js\icp\pm.js" />
     <Content Include="js\icp\usuario.js" />
     <Content Include="js\icp\vista_elemento.js" />
@@ -762,16 +769,16 @@
     <Content Include="Login.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="masterpage1.aspx" />
-    <Content Include="modulo1\vista1.aspx" />
-    <Content Include="modulo1\vista2.aspx" />
-    <Content Include="modulo1\vista3.aspx" />
-    <Content Include="modulo3\vista4.aspx" />
-    <Content Include="modulo3\vista5.aspx" />
-    <Content Include="modulo3\vista11.aspx" />
-    <Content Include="modulo4\vista15.aspx" />
-    <Content Include="modulo4\vista12.aspx" />
-    <Content Include="modulo4\vista13.aspx" />
-    <Content Include="modulo4\vista14.aspx" />
+    <Content Include="modulo1\vst1.aspx" />
+    <Content Include="modulo1\vst2.aspx" />
+    <Content Include="modulo1\vst3.aspx" />
+    <Content Include="modulo3\vst4.aspx" />
+    <Content Include="modulo3\vst5.aspx" />
+    <Content Include="modulo3\vst11.aspx" />
+    <Content Include="modulo4\vst15.aspx" />
+    <Content Include="modulo4\vst12.aspx" />
+    <Content Include="modulo4\vst13.aspx" />
+    <Content Include="modulo4\vst14.aspx" />
     <Content Include="Pagina2.aspx" />
     <Content Include="Pagina3.aspx" />
     <Content Include="sprites\brands.svg" />
@@ -2193,6 +2200,7 @@
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="errores\NoJava.aspx.cs">
@@ -2230,75 +2238,75 @@
     <Compile Include="masterpage1.aspx.designer.cs">
       <DependentUpon>masterpage1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo1\vista1.aspx.cs">
-      <DependentUpon>vista1.aspx</DependentUpon>
+    <Compile Include="modulo1\vst1.aspx.cs">
+      <DependentUpon>vst1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo1\vista1.aspx.designer.cs">
-      <DependentUpon>vista1.aspx</DependentUpon>
+    <Compile Include="modulo1\vst1.aspx.designer.cs">
+      <DependentUpon>vst1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo1\vista2.aspx.cs">
-      <DependentUpon>vista2.aspx</DependentUpon>
+    <Compile Include="modulo1\vst2.aspx.cs">
+      <DependentUpon>vst2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo1\vista2.aspx.designer.cs">
-      <DependentUpon>vista2.aspx</DependentUpon>
+    <Compile Include="modulo1\vst2.aspx.designer.cs">
+      <DependentUpon>vst2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo1\vista3.aspx.cs">
-      <DependentUpon>vista3.aspx</DependentUpon>
+    <Compile Include="modulo1\vst3.aspx.cs">
+      <DependentUpon>vst3.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo1\vista3.aspx.designer.cs">
-      <DependentUpon>vista3.aspx</DependentUpon>
+    <Compile Include="modulo1\vst3.aspx.designer.cs">
+      <DependentUpon>vst3.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo3\vista4.aspx.cs">
-      <DependentUpon>vista4.aspx</DependentUpon>
+    <Compile Include="modulo3\vst4.aspx.cs">
+      <DependentUpon>vst4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo3\vista4.aspx.designer.cs">
-      <DependentUpon>vista4.aspx</DependentUpon>
+    <Compile Include="modulo3\vst4.aspx.designer.cs">
+      <DependentUpon>vst4.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo3\vista5.aspx.cs">
-      <DependentUpon>vista5.aspx</DependentUpon>
+    <Compile Include="modulo3\vst5.aspx.cs">
+      <DependentUpon>vst5.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo3\vista5.aspx.designer.cs">
-      <DependentUpon>vista5.aspx</DependentUpon>
+    <Compile Include="modulo3\vst5.aspx.designer.cs">
+      <DependentUpon>vst5.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo3\vista11.aspx.cs">
-      <DependentUpon>vista11.aspx</DependentUpon>
+    <Compile Include="modulo3\vst11.aspx.cs">
+      <DependentUpon>vst11.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo3\vista11.aspx.designer.cs">
-      <DependentUpon>vista11.aspx</DependentUpon>
+    <Compile Include="modulo3\vst11.aspx.designer.cs">
+      <DependentUpon>vst11.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo4\vista15.aspx.cs">
-      <DependentUpon>vista15.aspx</DependentUpon>
+    <Compile Include="modulo4\vst15.aspx.cs">
+      <DependentUpon>vst15.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo4\vista15.aspx.designer.cs">
-      <DependentUpon>vista15.aspx</DependentUpon>
+    <Compile Include="modulo4\vst15.aspx.designer.cs">
+      <DependentUpon>vst15.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo4\vista12.aspx.cs">
-      <DependentUpon>vista12.aspx</DependentUpon>
+    <Compile Include="modulo4\vst12.aspx.cs">
+      <DependentUpon>vst12.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo4\vista12.aspx.designer.cs">
-      <DependentUpon>vista12.aspx</DependentUpon>
+    <Compile Include="modulo4\vst12.aspx.designer.cs">
+      <DependentUpon>vst12.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo4\vista13.aspx.cs">
-      <DependentUpon>vista13.aspx</DependentUpon>
+    <Compile Include="modulo4\vst13.aspx.cs">
+      <DependentUpon>vst13.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo4\vista13.aspx.designer.cs">
-      <DependentUpon>vista13.aspx</DependentUpon>
+    <Compile Include="modulo4\vst13.aspx.designer.cs">
+      <DependentUpon>vst13.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo4\vista14.aspx.cs">
-      <DependentUpon>vista14.aspx</DependentUpon>
+    <Compile Include="modulo4\vst14.aspx.cs">
+      <DependentUpon>vst14.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo4\vista14.aspx.designer.cs">
-      <DependentUpon>vista14.aspx</DependentUpon>
+    <Compile Include="modulo4\vst14.aspx.designer.cs">
+      <DependentUpon>vst14.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pagina2.aspx.cs">
       <DependentUpon>Pagina2.aspx</DependentUpon>
@@ -2322,6 +2330,13 @@
       <DependentUpon>Pm1.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\.DS_Store" />
@@ -2446,7 +2461,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="modulo2\" />
-    <Folder Include="modulo5\" />
+    <Folder Include="modulo4\modulo5\" />
     <Folder Include="modulo6\" />
     <Folder Include="upload\" />
   </ItemGroup>

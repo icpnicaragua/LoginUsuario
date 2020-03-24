@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
+using CapaEntidad;
+using CapaNegocio;
 
 namespace CapaVista
 {
@@ -15,7 +17,10 @@ namespace CapaVista
             
             string x;
 
-            if(!Page.IsPostBack)
+            string PagActual;
+
+
+            if (!Page.IsPostBack)
             {
                 //asingar nombre de usuario
                 try
@@ -38,12 +43,19 @@ namespace CapaVista
                         Response.Write("<script language=javascript>alert('Primero hay que iniciar sessión.');</script>");
                         Response.Redirect("../Login.aspx");
                     }
+
+                    string[] PagActual01 = Request.FilePath.Split('/');
+
+                    string[] PagAcual02 = PagActual01.Last().Split('.');
+
+                    PagActual = PagAcual02.First();
+
+                    PermisosVista(hfIDU.Value, PagActual);
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
-
 
                 //en la maesta se va a bloquear todos los li ul
                 //try
@@ -71,7 +83,23 @@ namespace CapaVista
             Response.Redirect("Login.aspx?Cerrrarsesion=1");
         }
 
-     
+        public void PermisosVista(string idsu, string idaspvista)
+        {
+
+            List<ClsPermisos> objPermisosVista = new ClsPermisosN().PermisosVista(idsu, idaspvista);
+
+            foreach (ClsPermisos x in objPermisosVista)
+            {
+                if (x.ObjV.Idaspvista == idaspvista || x.ObjV.Idaspvista == "tv")
+                {
+                    Response.Redirect("../inicio.aspx");
+                }
+
+            }
+
+        }
+
+
 
     }
 

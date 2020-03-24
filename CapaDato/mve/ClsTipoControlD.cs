@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
+using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace CapaDato.mve
@@ -12,8 +12,8 @@ namespace CapaDato.mve
     public class ClsTipoControlD
     {
         private ClsConexion ObjConexion = null;
-        private SqlDataReader Dr_D; //para leer datos de latabla 
-        private SqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
+        private MySqlDataReader Dr_D; //para leer datos de latabla 
+        private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
         
         public List<ClsTipoControl> MostrarTC()
         {
@@ -21,7 +21,7 @@ namespace CapaDato.mve
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new SqlCommand("spVerTC", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spVerTC", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
@@ -54,15 +54,13 @@ namespace CapaDato.mve
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new SqlCommand("spCTico", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spCTico", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("@prmCTico", OTico.Tipocontrol);
+                Cmd_D.Parameters.AddWithValue("prmCTico", OTico.Tipocontrol);
                 ObjConexion.Abrircon();
-                Dr_D = Cmd_D.ExecuteReader();
-                if (Dr_D.Read())
-                {
-                    CreateTico = Convert.ToBoolean(Dr_D[0]);
-                }
+                int FilasCTiCo = Cmd_D.ExecuteNonQuery();
+                if (FilasCTiCo>0)CreateTico = true;
+                
                 return CreateTico;
             }
             catch (Exception ex)
@@ -84,16 +82,13 @@ namespace CapaDato.mve
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new SqlCommand("spUTico", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spUTico", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmUIdTC",Convert.ToInt16(OTico.Idtipocontrol));
-                Cmd_D.Parameters.AddWithValue("@prmUTico", OTico.Tipocontrol);
+                Cmd_D.Parameters.AddWithValue("prmUTico", OTico.Tipocontrol);
                 ObjConexion.Abrircon();
-                Dr_D = Cmd_D.ExecuteReader();
-                if (Dr_D.Read())
-                {
-                    UpdateTIco = Convert.ToBoolean(Dr_D[0]);
-                }
+                int FilasNTiCo = Cmd_D.ExecuteNonQuery();
+                if (FilasNTiCo > 0) UpdateTIco = true;
                 return UpdateTIco;
             }
             catch (Exception ex)
@@ -115,15 +110,12 @@ namespace CapaDato.mve
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new SqlCommand("spDTico", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spDTico", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("@prmDIdTC", Convert.ToInt16(OTico.Idtipocontrol));
+                Cmd_D.Parameters.AddWithValue("prmDIdTC", Convert.ToInt16(OTico.Idtipocontrol));
                 ObjConexion.Abrircon();
-                Dr_D = Cmd_D.ExecuteReader();
-                if (Dr_D.Read())
-                {
-                    DeleteTico = Convert.ToBoolean(Dr_D[0]);
-                }
+                int FilasDTiCo = Cmd_D.ExecuteNonQuery();
+                if (FilasDTiCo > 0) DeleteTico = true;
                 return DeleteTico;
             }
             catch (Exception ex)
@@ -145,16 +137,14 @@ namespace CapaDato.mve
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new SqlCommand("spETicoTC", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spETicoTC", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("@prmEIdTC", Convert.ToInt16(OTico.Idtipocontrol));
-                Cmd_D.Parameters.AddWithValue("@prmETCTC", OTico.Tipocontrol);
+                Cmd_D.Parameters.AddWithValue("prmEIdTC", Convert.ToInt16(OTico.Idtipocontrol));
+                Cmd_D.Parameters.AddWithValue("prmETCTC", OTico.Tipocontrol);
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
                 if (Dr_D.Read())
-                {
-
-                   
+                { 
                     ExisteTCTC = Convert.ToBoolean(Dr_D[0]);
                 }
                 return ExisteTCTC;
