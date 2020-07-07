@@ -71,7 +71,7 @@ namespace CapaDato
                     _objPermisoVista = new ClsPermisos();
                     _objPermisoVista.ObjV.Idaspvista = Dr_D["vistaasp"].ToString();
                     _objPermisoVista.ObjE.Idaspelemento = Dr_D["elementoasp"].ToString();
-                 /*ramas jodiendo */
+                 /*ramas jodiendo*/
                     LST.Add(_objPermisoVista);
                 }
                 return LST;
