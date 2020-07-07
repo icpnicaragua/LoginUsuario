@@ -13,48 +13,75 @@ namespace CapaVista.modulo4 {
     public partial class WebForm1 {
         
         /// <summary>
-        /// Control btnVerPermisos.
+        /// Control LbShowSeccionRol.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVerPermisos;
+        protected global::System.Web.UI.WebControls.LinkButton LbShowSeccionRol;
         
         /// <summary>
-        /// Control tvPermisos.
+        /// Control LbUPermisos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView tvPermisos;
+        protected global::System.Web.UI.WebControls.LinkButton LbUPermisos;
         
         /// <summary>
-        /// Control btntreejs1.
+        /// Control LbXPermisos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btntreejs1;
+        protected global::System.Web.UI.WebControls.LinkButton LbXPermisos;
         
         /// <summary>
-        /// Control prueba1.
+        /// Control LbCRUDENRol.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button prueba1;
+        protected global::System.Web.UI.WebControls.LinkButton LbCRUDENRol;
         
         /// <summary>
-        /// Control borrar.
+        /// Control LBShowRol.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button borrar;
+        protected global::System.Web.UI.WebControls.LinkButton LBShowRol;
+        
+        /// <summary>
+        /// Control frmnueRol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueRol;
+        
+        /// <summary>
+        /// Control lblExisteRol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblExisteRol;
+        
+        /// <summary>
+        /// Control TxtRol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtRol;
     }
 }

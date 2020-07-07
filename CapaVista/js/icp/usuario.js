@@ -79,9 +79,6 @@ function sendDataAjax() {
 }
 //crear función que pregunte crud
 
-
-
-
 $(document).on('click', '.btn-edit', function (e) {//en este docimento en un evento click de una clase btn-edit, agarra el evento e de una funcion
     e.preventDefault(); //evitar que haga postback
     //$(this).parent().parent().children().first().text;
@@ -105,9 +102,6 @@ function botondelete() {
                 window.console.log('soaz was here');
 
 }
-
-
- 
 
 sendDataAjax();
 botondelete();

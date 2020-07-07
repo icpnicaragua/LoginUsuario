@@ -19,6 +19,16 @@
     </asp:ContentPlaceHolder>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+    <style>
+.pie {
+     position: absolute; 
+     bottom: 0;
+     text-align: center;
+       display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
 </head>
 <body class="skin-blue">
     <noscript>
@@ -52,12 +62,12 @@
                     <div class="pull-left info">
                         <p>
                             <asp:Label ID="lblWelcome" runat="server" Text="Wellcome"></asp:Label>
-                            <%-- poner dinámico--%>
+                           
                         </p>
                         <div>
                             <a href="../Login.aspx?Cerrrarsesion=1" class="btn btn-danger">
                                 <i class="fas fa-ban"></i>
-                                <span>Cerrar Sessión  <%-- poner dinámico--%>
+                                <span>Cerrar Sessión  
                                 </span>
                             </a>
                         </div>
@@ -151,13 +161,13 @@
     <%--fin barra lateral izquierda--%>
     <aside class="right-side strech">
         <%--strech--%>
-        <section class=" content-header">
+        <section class=" content-header bg-aqua">
             <h1>
                 <asp:Label ID="lblNombrePag" runat="server"></asp:Label>
                 <%--esto es dinámico--%>
             </h1>
         </section>
-        <section class="content">
+        <section class="content bg-danger" >
             <%-- contenido dinámico--%>
             <form id="form1" runat="server">
                 <asp:HiddenField ID="hfIDU" runat="server" ClientIDMode="Static" Value="0" />
@@ -171,7 +181,7 @@
         </section>
     </aside>
     <!-- Footer -->
-    <footer class="page-footer font-small special-color-dark pt-4">
+    <footer class="font-small special-color-dark  pie">
 
         <!-- Footer Elements -->
         <div class="container">

@@ -44,6 +44,19 @@ function blockmodulosobj(obj) {
             else if (ele == "te") {//si todos los elementos de la vista están bloqueados, desaparecer la vista
                 document.getElementById(vis).remove();
             }
+            else {
+                if (document.getElementById(ele) != null) {
+                    document.getElementById(ele).remove();
+                }
+                else if (document.getElementsByClassName(ele)) {
+                    $("."+ele).remove();
+                   // document.getElementsByClassName(ele).remove();//esto se está probando
+                }
+                else {
+                    console.log("no hay id ni propiedad");
+                }
+               
+            }
         }
     }
 }

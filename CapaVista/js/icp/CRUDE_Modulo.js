@@ -288,8 +288,8 @@ function FnJsDModulo() { //nombe función xxxx
     $("#BtnCUDModulo i").removeAttr("class");
     $("#BtnCUDModulo i").attr("class", "fa fa-trash fa-2x");//ícono
     //bloquear elementos
-    $("#TxtModulo").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#TxtModuloAsp").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#TxtModulo").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#TxtModuloAsp").attr('disabled', true); //variables de los elementos del modal xxxx
     //vaciar elementos text de todo el modal
     $('#' + ModCModulo[0].id + ' :text').val(""); // variable del modal xxxx
 
@@ -326,7 +326,6 @@ $('#BtnCUDModulo').click(function (e) {//1 evento para mostrar contenido xxxx
                 console.log("Error en cud Módulo");
         }
     }
-    
 });
 
 //ajax CUD

@@ -41,7 +41,7 @@ namespace CapaVista
                         hfEU.Value = "0";
                        
                         Response.Write("<script language=javascript>alert('Primero hay que iniciar sessión.');</script>");
-                        Response.Redirect("../Login.aspx");
+                        Response.Redirect("Login.aspx");
                     }
 
                     string[] PagActual01 = Request.FilePath.Split('/');
@@ -56,22 +56,6 @@ namespace CapaVista
                 {
                     throw ex;
                 }
-
-                //en la maesta se va a bloquear todos los li ul
-                //try
-                //{
-                //    if (Session["Usuario"] != null)
-                //    {
-                //        if (Session["Usuario"].ToString() == "yolanda")
-                //        {
-                //            lipanel2.Visible = false;
-                //        }
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw ex;
-                //}
             }        
         }
 
@@ -85,22 +69,15 @@ namespace CapaVista
 
         public void PermisosVista(string idsu, string idaspvista)
         {
-
             List<ClsPermisos> objPermisosVista = new ClsPermisosN().PermisosVista(idsu, idaspvista);
-
+//aqui es donde se cierran las ventanas y redirecciona al inicio
             foreach (ClsPermisos x in objPermisosVista)
             {
-                if (x.ObjV.Idaspvista == idaspvista || x.ObjV.Idaspvista == "tv")
+                if ((x.ObjV.Idaspvista == idaspvista && x.ObjE.Idaspelemento=="te")|| x.ObjV.Idaspvista == "tv")
                 {
                     Response.Redirect("../inicio.aspx");
                 }
-
             }
-
         }
-
-
-
     }
-
 }

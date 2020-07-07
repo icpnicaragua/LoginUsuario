@@ -12,141 +12,106 @@ namespace CapaVista.modulo4
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-   
-        public  void FNRPermisos()
-        {
-            HiddenField HFIDUSER = (HiddenField)Master.FindControl("hfIDU");
-            tvPermisos.Nodes.Clear();
-           
-            List<ClsPermisos> Permisos = new ClsPermisosN().PermisosPM(HFIDUSER.Value);
-
-            List<ClsModulo> LM = new ClsModuloN().FnRModuloN();
-                    
-            List<ClsVista> LV = new ClsVistaN().FnRVist(); // List<ClsVista>();
-
-            List<ClsElemento> LE = new ClsElementoN().FnRElem(); //List<ClsElemento>();
-
-            bool EstadoVista;
-            bool EstadoElemento;
-            foreach (ClsModulo m in LM)//recorrer cada módulo
-            {   
-                TreeNode tnM = new TreeNode(); //declarar instancia de treenode para módulo
-                tnM.Text = m.Modulo; // asignar nombre de modulo
-                tnM.Checked = !(Permisos.Exists(Modulo => Modulo.ObjM.IdModulo == m.IdModulo)); // asignar estado
-                foreach (ClsVista v in LV) //recorrer las vistas por cada interacción de módulo
-                {
-                    EstadoVista = true;
-                    EstadoElemento = true;
-                    if (m.IdModulo == v.ObjModulo.IdModulo ) // si la vista pertenece al módulo
-                    {
-                        TreeNode tnV = new TreeNode();//se instncia un nodo para la vista
-                        tnV.Text = v.Vista;//se asigna el nombre de la vista
-                        foreach (ClsPermisos P in Permisos)
-                        {
-                            if (P.ObjM.IdModulo == m.IdModulo && P.ObjV.Idvista == "1")
-                            {
-                                EstadoVista = false;
-                                EstadoElemento = false;
-                            }
-                        }
-                        if ((Permisos.Exists(Vista => Vista.ObjV.Idvista == v.Idvista)))
-                        {
-                            EstadoVista = false;
-                            EstadoElemento = false;
-                        }
-                        tnV.Checked = EstadoVista;
-                        foreach (ClsElemento el in LE) // se recorre los elementos
-                        {                            
-                            TreeNode tnE = new TreeNode(); // se instancia un nodo para elementos
-                            if (v.Idvista == el.ObjVista.Idvista) // si el elemento pertenece a la vista
-                            {
-                                tnE.Text = el.Elemento;//asingar nombre del nodo elemento
-
-                                foreach (ClsPermisos PE in Permisos)
-                                {
-                                    if (PE.ObjV.Idvista==v.Idvista && PE.ObjE.Id_elemento=="1")
-                                    {
-                                        EstadoElemento = false;
-                                    }
-                                }
-                                if ((Permisos.Exists(Elemento => Elemento.ObjE.Id_elemento == el.Id_elemento)))
-                                {
-                                    EstadoElemento = false;
-                                }
-                                tnE.Checked = EstadoElemento; // estado del elemento
-                                tnE.SelectAction = TreeNodeSelectAction.None;
-                                tnV.ChildNodes.Add(tnE); //agregamos el elemento como hijo de vista
-                            }
-                        }
-                        if (v.Idvista != "1")//no agregar tm
-                        {
-                            tnV.SelectAction = TreeNodeSelectAction.None;
-                            tnM.ChildNodes.Add(tnV);//agregamos la vista como hijo de módulo
-                        }               
-                    }
-                }
-                if (m.IdModulo != "1")//no agregar tm
-                {
-                    tnM.SelectAction = TreeNodeSelectAction.None;
-                    tvPermisos.Nodes.Add(tnM); // agregamos el módulo al treeview
-                    int sdd = tnM.ChildNodes.Count;
-                   // Response.Write("<script language=javascript>alert('" + sdd + "');</script>"); //va a al verga esto
-                }
-            }
-            string NodoModulo = "";
-
-            string NodoVista = "";
-
-            string NodoElemento = "";
-
-            foreach (TreeNode Node in tvPermisos.Nodes)
-            {
-                if (!Node.Checked)
-                {
-                    NodoModulo += Node.Value + " ";
-                }
-
-                foreach(TreeNode NodeV in Node.ChildNodes)
-                {
-                    if (!NodeV.Checked)
-                    {
-                        NodoVista += NodeV.Value + " ";
-                    }
-                    foreach(TreeNode NodeE in NodeV.ChildNodes)
-                    {
-                        if (!NodeE.Checked)
-                        {
-                            NodoElemento += NodeE.Value + " ";
-                        }
-                    }
-                }
-            }
-           //Response.Write("<script language=javascript>alert('" + NodoModulo+ " " + NodoVista +" " + NodoElemento + "');</script>");
-        }
-
-        protected void btnVerPermisos_Click(object sender, EventArgs e)
-        {
-            FNRPermisos();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
            
         }
 
-      
 
-        protected void tvPermisos_CheckChanged(object sender, EventArgs e)
+        
+             [WebMethod]
+        public static List<ClsPermisos> FnRPermisosV(string IdRol)
         {
-            Response.Write("<script language=javascript>alert(' cambio ');</script>");
+            List<ClsPermisos> ObjPermisos = new ClsPermisosN().FnRPermisosN(IdRol);
+
+            return ObjPermisos;
         }
 
-        protected void tvPermisos_SelectedNodeChanged(object sender, EventArgs e)
+
+        [WebMethod]
+        public static bool FnUPermisos(List<ClsPermisos> OO,string IDR)
         {
-            Response.Write("<script language=javascript>alert('Selección cambió  ');</script>");
+
+            bool UpdatePermisos = false;
+            bool DeletePermisos = false;
+          
+            ClsPermisos Opermisos1 = new ClsPermisos();
+            Opermisos1.ObjR.Id_rol = IDR;
+            DeletePermisos = new ClsPermisosN().FnDPermisosN(Opermisos1);
+
+            foreach (ClsPermisos OO1 in OO)
+            {
+                ClsPermisos Opermisos = new ClsPermisos();
+                Opermisos.ObjM.IdModulo = OO1.ObjM.IdModulo;
+                Opermisos.ObjV.Idvista = OO1.ObjV.Idvista;
+                Opermisos.ObjE.Id_elemento = OO1.ObjE.Id_elemento;
+                Opermisos.ObjR.Id_rol = IDR;
+                UpdatePermisos = new ClsPermisosN().FnUPermisosN(Opermisos);
+            }
+
+            return DeletePermisos & UpdatePermisos;
         }
 
-    
+
+        [WebMethod]
+        public static bool FnCRolV(string Rol)
+        {
+            bool CreateRol = false;
+            ClsRol ORol = new ClsRol();
+            ORol.Rol = Rol;
+            CreateRol = new ClsRolN().FnCRolN(ORol);
+            return CreateRol;
+        }
+
+        [WebMethod]
+        public static List<ClsRol> FnRRolV()
+        {
+            List<ClsRol> ORol = new ClsRolN().FnRRolN();
+            return ORol;
+        }
+
+        [WebMethod]
+        public static bool FnURolV(string IdRol, string Rol)
+        {
+            bool UpdateRol = false;
+            ClsRol ORol = new ClsRol();
+            ORol.Id_rol = IdRol;
+            ORol.Rol = Rol;
+            UpdateRol = new ClsRolN().FnURolN(ORol);
+            return UpdateRol;
+        }
+
+        [WebMethod]
+        public static bool FnDRolV(string IdRol)
+        {
+            bool DeleteRol = false;
+            ClsRol ORol = new ClsRol();
+            ORol.Id_rol = IdRol;
+
+            DeleteRol = new ClsRolN().FnDRolN(ORol);
+            return DeleteRol;
+        }
+
+        [WebMethod]
+        public static bool FnERolV(string IdRol, string Rol)
+        {
+            bool ExistRol = false;
+            ClsRol ORol = new ClsRol();
+            ORol.Id_rol = IdRol;
+            ORol.Rol = Rol;
+            ExistRol = new ClsRolN().FnERolN(ORol);
+            return ExistRol;
+        }
+
+        [WebMethod]
+        public static bool FnNRolV(string IdRol)
+        {
+            bool CloneRol = false;
+            ClsRol ORol = new ClsRol();
+            ORol.Id_rol = IdRol;
+            CloneRol = new ClsRolN().FnNRolN(ORol);
+            return CloneRol;
+        }
 
     }
 }

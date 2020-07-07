@@ -49,15 +49,6 @@ namespace CapaVista.modulo4 {
         protected global::System.Web.UI.WebControls.LinkButton lbShoM;
         
         /// <summary>
-        /// Control lbprueba.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbprueba;
-        
-        /// <summary>
         /// Control lbTCN.
         /// </summary>
         /// <remarks>

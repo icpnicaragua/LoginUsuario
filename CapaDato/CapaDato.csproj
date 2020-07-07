@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="ClsConexion.cs" />
     <Compile Include="ClsPermisosD.cs" />
+    <Compile Include="ClsRolD.cs" />
     <Compile Include="ClsUsuarioD.cs" />
     <Compile Include="mve\ClsElementoD.cs" />
     <Compile Include="mve\ClsModuloD.cs" />

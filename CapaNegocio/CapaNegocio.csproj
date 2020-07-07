@@ -44,6 +44,7 @@
     <Compile Include="ClsElementoN.cs" />
     <Compile Include="ClsModuloN.cs" />
     <Compile Include="ClsPermisosN.cs" />
+    <Compile Include="ClsRolN.cs" />
     <Compile Include="ClsTicoControlN.cs" />
     <Compile Include="ClsUsuarioN.cs" />
     <Compile Include="ClsVistaN.cs" />

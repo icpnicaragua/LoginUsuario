@@ -32,5 +32,37 @@ namespace CapaNegocio
             }
             return _objPermisosVista;
         }
+
+        public bool FnDPermisosN(ClsPermisos ObjPermisos)
+        {
+            if(ObjPermisos.ObjR.Id_rol!="" && ObjPermisos.ObjR.Id_rol != null)
+            {
+                bool DeletePermisos = new ClsPermisosD().FnDPermisosD(ObjPermisos);
+                return DeletePermisos;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public List<ClsPermisos> FnRPermisosN(string IdRol)
+        {
+            List<ClsPermisos> ObjPermisos = new ClsPermisosD().FnRPermisosD(IdRol);
+            return ObjPermisos;
+        }
+
+        public bool FnUPermisosN(ClsPermisos ObjPermisos)
+        {
+            if (ObjPermisos.ObjR.Id_rol != "" && ObjPermisos.ObjR.Id_rol != null)
+            {
+                bool UpdatePermisos = new ClsPermisosD().FnUPermisosD(ObjPermisos);
+                return UpdatePermisos;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
