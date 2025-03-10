@@ -11,7 +11,7 @@ function modulosobj() {
     var idu = $("input[id=hfIDU]").val();
     console.log(idu);//quitar esto
     $.ajax({
-        url: "../masterpage1.aspx/Modulos", // nombre de página y nombre de función
+        url: "../masterpage1.aspx/Modulos", // nombre de página maestra y nombre de función Cvista
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({ idsu: idu}), /*parametro: valor*/
         method: 'post',

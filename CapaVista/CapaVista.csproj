@@ -2451,6 +2451,7 @@
     <Folder Include="modulo2\" />
     <Folder Include="modulo4\modulo5\" />
     <Folder Include="modulo6\" />
+    <Folder Include="modulo_configuracion\" />
     <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>

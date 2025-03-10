@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CapaEntidad
+{
+    public class ClsTipoTelefono
+    {
+        private string _IdTipoTelefono;
+        private string _TipoTelefono;
+        private string _estado;
+
+        public string IdTipoTelefono { get => _IdTipoTelefono; set => _IdTipoTelefono = value; }
+        public string TipoTelefono { get => _TipoTelefono; set => _TipoTelefono = value; }
+        public string estado { get => _estado; set => _estado = value; }
+
+        public ClsTipoTelefono() { }
+    }
+}
