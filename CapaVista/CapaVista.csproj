@@ -765,16 +765,45 @@
     <Content Include="Login.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="masterpage1.aspx" />
+    <Content Include="modulo10\VsFamilia.aspx" />
+    <Content Include="modulo10\VstPalabrasClave.aspx" />
+    <Content Include="modulo10\VstProductos.aspx" />
+    <Content Include="modulo10\VstPromo.aspx" />
+    <Content Include="modulo10\VstRangoPrecios.aspx" />
     <Content Include="modulo1\vst1.aspx" />
     <Content Include="modulo1\vst2.aspx" />
     <Content Include="modulo1\vst3.aspx" />
+    <Content Include="modulo1\VstCaja.aspx" />
+    <Content Include="modulo1\VstCuentasbanco.aspx" />
+    <Content Include="modulo1\VstFinCaja.aspx" />
+    <Content Include="modulo1\VstGastos.aspx" />
+    <Content Include="modulo1\VstInicioCaja.aspx" />
+    <Content Include="modulo1\VstInyeccion.aspx" />
+    <Content Include="modulo1\VstRetiros.aspx" />
+    <Content Include="modulo1\VstRoc.aspx" />
+    <Content Include="modulo1\VstTC.aspx" />
+    <Content Include="modulo2\VstCompras.aspx" />
+    <Content Include="modulo2\VstCxP.aspx" />
+    <Content Include="modulo2\VstProveedor.aspx" />
     <Content Include="modulo3\vst4.aspx" />
     <Content Include="modulo3\vst5.aspx" />
     <Content Include="modulo3\vst11.aspx" />
+    <Content Include="modulo3\VstBodega.aspx" />
+    <Content Include="modulo3\VstSucursal.aspx" />
+    <Content Include="modulo3\VstTraslados.aspx" />
+    <Content Include="modulo4\VsAjuste.aspx" />
+    <Content Include="modulo4\VsInventario.aspx" />
     <Content Include="modulo4\vst15.aspx" />
     <Content Include="modulo4\vst12.aspx" />
     <Content Include="modulo4\vst13.aspx" />
     <Content Include="modulo4\vst14.aspx" />
+    <Content Include="modulo4\Vstkardex.aspx" />
+    <Content Include="modulo8\VstDevolucion.aspx" />
+    <Content Include="modulo8\VstFacturar.aspx" />
+    <Content Include="modulo8\VstNotaCredito.aspx" />
+    <Content Include="modulo9\VstClientes.aspx" />
+    <Content Include="modulo9\VstCxC.aspx" />
+    <Content Include="modulo9\VstTipoCliente.aspx" />
     <Content Include="Pagina2.aspx" />
     <Content Include="Pagina3.aspx" />
     <Content Include="sprites\brands.svg" />
@@ -2234,6 +2263,41 @@
     <Compile Include="masterpage1.aspx.designer.cs">
       <DependentUpon>masterpage1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="modulo10\VsFamilia.aspx.cs">
+      <DependentUpon>VsFamilia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo10\VsFamilia.aspx.designer.cs">
+      <DependentUpon>VsFamilia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo10\VstPalabrasClave.aspx.cs">
+      <DependentUpon>VstPalabrasClave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo10\VstPalabrasClave.aspx.designer.cs">
+      <DependentUpon>VstPalabrasClave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo10\VstProductos.aspx.cs">
+      <DependentUpon>VstProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo10\VstProductos.aspx.designer.cs">
+      <DependentUpon>VstProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo10\VstPromo.aspx.cs">
+      <DependentUpon>VstPromo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo10\VstPromo.aspx.designer.cs">
+      <DependentUpon>VstPromo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo10\VstRangoPrecios.aspx.cs">
+      <DependentUpon>VstRangoPrecios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo10\VstRangoPrecios.aspx.designer.cs">
+      <DependentUpon>VstRangoPrecios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="modulo1\vst1.aspx.cs">
       <DependentUpon>vst1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2255,6 +2319,90 @@
     <Compile Include="modulo1\vst3.aspx.designer.cs">
       <DependentUpon>vst3.aspx</DependentUpon>
     </Compile>
+    <Compile Include="modulo1\VstCaja.aspx.cs">
+      <DependentUpon>VstCaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstCaja.aspx.designer.cs">
+      <DependentUpon>VstCaja.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo1\VstCuentasbanco.aspx.cs">
+      <DependentUpon>VstCuentasbanco.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstCuentasbanco.aspx.designer.cs">
+      <DependentUpon>VstCuentasbanco.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo1\VstFinCaja.aspx.cs">
+      <DependentUpon>VstFinCaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstFinCaja.aspx.designer.cs">
+      <DependentUpon>VstFinCaja.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo1\VstGastos.aspx.cs">
+      <DependentUpon>VstGastos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstGastos.aspx.designer.cs">
+      <DependentUpon>VstGastos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo1\VstInicioCaja.aspx.cs">
+      <DependentUpon>VstInicioCaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstInicioCaja.aspx.designer.cs">
+      <DependentUpon>VstInicioCaja.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo1\VstInyeccion.aspx.cs">
+      <DependentUpon>VstInyeccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstInyeccion.aspx.designer.cs">
+      <DependentUpon>VstInyeccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo1\VstRetiros.aspx.cs">
+      <DependentUpon>VstRetiros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstRetiros.aspx.designer.cs">
+      <DependentUpon>VstRetiros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo1\VstRoc.aspx.cs">
+      <DependentUpon>VstRoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstRoc.aspx.designer.cs">
+      <DependentUpon>VstRoc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo1\VstTC.aspx.cs">
+      <DependentUpon>VstTC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo1\VstTC.aspx.designer.cs">
+      <DependentUpon>VstTC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo2\VstCompras.aspx.cs">
+      <DependentUpon>VstCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo2\VstCompras.aspx.designer.cs">
+      <DependentUpon>VstCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo2\VstCxP.aspx.cs">
+      <DependentUpon>VstCxP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo2\VstCxP.aspx.designer.cs">
+      <DependentUpon>VstCxP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo2\VstProveedor.aspx.cs">
+      <DependentUpon>VstProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo2\VstProveedor.aspx.designer.cs">
+      <DependentUpon>VstProveedor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="modulo3\vst4.aspx.cs">
       <DependentUpon>vst4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2275,6 +2423,41 @@
     </Compile>
     <Compile Include="modulo3\vst11.aspx.designer.cs">
       <DependentUpon>vst11.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo3\VstBodega.aspx.cs">
+      <DependentUpon>VstBodega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo3\VstBodega.aspx.designer.cs">
+      <DependentUpon>VstBodega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo3\VstSucursal.aspx.cs">
+      <DependentUpon>VstSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo3\VstSucursal.aspx.designer.cs">
+      <DependentUpon>VstSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo3\VstTraslados.aspx.cs">
+      <DependentUpon>VstTraslados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo3\VstTraslados.aspx.designer.cs">
+      <DependentUpon>VstTraslados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo4\VsAjuste.aspx.cs">
+      <DependentUpon>VsAjuste.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo4\VsAjuste.aspx.designer.cs">
+      <DependentUpon>VsAjuste.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo4\VsInventario.aspx.cs">
+      <DependentUpon>VsInventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo4\VsInventario.aspx.designer.cs">
+      <DependentUpon>VsInventario.aspx</DependentUpon>
     </Compile>
     <Compile Include="modulo4\vst15.aspx.cs">
       <DependentUpon>vst15.aspx</DependentUpon>
@@ -2303,6 +2486,55 @@
     </Compile>
     <Compile Include="modulo4\vst14.aspx.designer.cs">
       <DependentUpon>vst14.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo4\Vstkardex.aspx.cs">
+      <DependentUpon>Vstkardex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo4\Vstkardex.aspx.designer.cs">
+      <DependentUpon>Vstkardex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo8\VstDevolucion.aspx.cs">
+      <DependentUpon>VstDevolucion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo8\VstDevolucion.aspx.designer.cs">
+      <DependentUpon>VstDevolucion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo8\VstFacturar.aspx.cs">
+      <DependentUpon>VstFacturar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo8\VstFacturar.aspx.designer.cs">
+      <DependentUpon>VstFacturar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo8\VstNotaCredito.aspx.cs">
+      <DependentUpon>VstNotaCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo8\VstNotaCredito.aspx.designer.cs">
+      <DependentUpon>VstNotaCredito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo9\VstClientes.aspx.cs">
+      <DependentUpon>VstClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo9\VstClientes.aspx.designer.cs">
+      <DependentUpon>VstClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo9\VstCxC.aspx.cs">
+      <DependentUpon>VstCxC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo9\VstCxC.aspx.designer.cs">
+      <DependentUpon>VstCxC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo9\VstTipoCliente.aspx.cs">
+      <DependentUpon>VstTipoCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo9\VstTipoCliente.aspx.designer.cs">
+      <DependentUpon>VstTipoCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pagina2.aspx.cs">
       <DependentUpon>Pagina2.aspx</DependentUpon>
@@ -2448,9 +2680,9 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="modulo2\" />
-    <Folder Include="modulo4\modulo5\" />
+    <Folder Include="modulo5\" />
     <Folder Include="modulo6\" />
+    <Folder Include="modulo7\" />
     <Folder Include="modulo_configuracion\" />
     <Folder Include="upload\" />
   </ItemGroup>

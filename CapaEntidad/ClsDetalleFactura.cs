@@ -10,7 +10,7 @@ namespace CapaEntidad
     {
         private string _IdDetalleFactura;
         private ClsFactura _ObjFactura;
-        private ClsFactura _ObjProducto;
+        private ClsProducto _ObjProducto;
         private string _Cantidad;
         private string _PrecioUnitario;
         private string _CostoUnitario;
