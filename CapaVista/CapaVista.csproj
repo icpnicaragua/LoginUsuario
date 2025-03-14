@@ -798,6 +798,12 @@
     <Content Include="modulo4\vst13.aspx" />
     <Content Include="modulo4\vst14.aspx" />
     <Content Include="modulo4\Vstkardex.aspx" />
+    <Content Include="modulo7\VstEmpleados.aspx" />
+    <Content Include="modulo7\VstGenerales.aspx" />
+    <Content Include="modulo7\VstPerfil.aspx" />
+    <Content Include="modulo7\VstPermisos.aspx" />
+    <Content Include="modulo7\VstSistema.aspx" />
+    <Content Include="modulo7\VstUsuarios.aspx" />
     <Content Include="modulo8\VstDevolucion.aspx" />
     <Content Include="modulo8\VstFacturar.aspx" />
     <Content Include="modulo8\VstNotaCredito.aspx" />
@@ -2494,6 +2500,48 @@
     <Compile Include="modulo4\Vstkardex.aspx.designer.cs">
       <DependentUpon>Vstkardex.aspx</DependentUpon>
     </Compile>
+    <Compile Include="modulo7\VstEmpleados.aspx.cs">
+      <DependentUpon>VstEmpleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo7\VstEmpleados.aspx.designer.cs">
+      <DependentUpon>VstEmpleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo7\VstGenerales.aspx.cs">
+      <DependentUpon>VstGenerales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo7\VstGenerales.aspx.designer.cs">
+      <DependentUpon>VstGenerales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo7\VstPerfil.aspx.cs">
+      <DependentUpon>VstPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo7\VstPerfil.aspx.designer.cs">
+      <DependentUpon>VstPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo7\VstPermisos.aspx.cs">
+      <DependentUpon>VstPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo7\VstPermisos.aspx.designer.cs">
+      <DependentUpon>VstPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo7\VstSistema.aspx.cs">
+      <DependentUpon>VstSistema.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo7\VstSistema.aspx.designer.cs">
+      <DependentUpon>VstSistema.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modulo7\VstUsuarios.aspx.cs">
+      <DependentUpon>VstUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulo7\VstUsuarios.aspx.designer.cs">
+      <DependentUpon>VstUsuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="modulo8\VstDevolucion.aspx.cs">
       <DependentUpon>VstDevolucion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2682,7 +2730,6 @@
   <ItemGroup>
     <Folder Include="modulo5\" />
     <Folder Include="modulo6\" />
-    <Folder Include="modulo7\" />
     <Folder Include="modulo_configuracion\" />
     <Folder Include="upload\" />
   </ItemGroup>

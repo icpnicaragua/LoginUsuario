@@ -27,7 +27,7 @@
                             <asp:LinkButton ID="LbXPermisos" href="#DivTVRol" runat="server" Text="Mostrar Rol" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye-slash fa-2x"></i></asp:LinkButton>
                         </div>
                     </div>
-                    <div id="treeview_container" class="hummingbird-treeview" style="height: 230px; overflow-y: scroll;">
+                    <div id="treeview_container" class="hummingbird-treeview" style="height: 350px; overflow-y: scroll;">
                         <ul id="treeview" class="hummingbird-base">
                             <li data-id="0">
                                 <i class="fa fa-plus"></i>

@@ -157,7 +157,7 @@
             <%--fin tabla modulos--%>
         </div>
     </div>
-<%--alertas--%>
+    <%--alertas--%>
     <div id="alerta" class="modal bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -260,7 +260,8 @@
                         <label id="lblCVista" for="txtCVista" class="text-warning"></label>
                         <%--id for xxxx--%>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtCVista" TabIndex="1" class="form-control" placeholder="Nueva Vista" data-required-error="dddd" pattern="^\w+(\s\w+)*$" MaxLength="30" runat="server"></asp:TextBox>
+                            <%--pattern="^\w+(\s\w+)*$"--%>
+                            <asp:TextBox ID="txtCVista" TabIndex="1" class="form-control" placeholder="Nueva Vista" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="30" runat="server"></asp:TextBox>
                             <%--id tabindex placeholder pattern maxleng xxxx--%>
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo1" data-container="body" data-toggle="popover" data-placement="top" data-content="">
@@ -271,7 +272,7 @@
                         <asp:Label ID="lblCAspVista" runat="server" for="txtCAspVista" CssClass="text-warning" Text=""></asp:Label>
                         <%--id for xxxx--%>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtCAspVista" TabIndex="2" class="form-control" placeholder="Nuevo IdAsp" data-required-error="dddd" pattern="^[_A-z0-9]{3,10}$" MaxLength="10" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtCAspVista" TabIndex="2" class="form-control" placeholder="Nuevo IdAsp" data-required-error="dddd" pattern="^[_A-z0-9]{3,30}$" MaxLength="30" runat="server"></asp:TextBox>
                             <%--id tabindex placeholder pattern maxleng xxxx--%>
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo2" data-container="body" data-toggle="popover" data-placement="top" data-content="">
@@ -343,7 +344,6 @@
     </div>
     <%--fin modal modulo--%>
     <%--fin modales mve--%>
-    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphJs" runat="server">
     <script src="/datatables/datatables.min.js"></script>
@@ -354,6 +354,6 @@
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDVista.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDE_Modulo.js" type="text/javascript"></script>
-     <script src="/js/icp/CRUDE_Elemento.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDE_Elemento.js" type="text/javascript"></script>
     <%----%>
 </asp:Content>

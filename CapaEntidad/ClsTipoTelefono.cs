@@ -10,11 +10,11 @@ namespace CapaEntidad
     {
         private string _IdTipoTelefono;
         private string _TipoTelefono;
-        private string _estado;
+        private string _Estado;
 
         public string IdTipoTelefono { get => _IdTipoTelefono; set => _IdTipoTelefono = value; }
         public string TipoTelefono { get => _TipoTelefono; set => _TipoTelefono = value; }
-        public string estado { get => _estado; set => _estado = value; }
+        public string Estado { get => _Estado; set => _Estado = value; }
 
         public ClsTipoTelefono() { }
     }

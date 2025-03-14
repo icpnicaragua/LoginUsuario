@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Pm1.master.cs" Inherits="CapaVista.Pm1" %>
+
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -53,7 +54,7 @@
                     <div class="pull-left info">
                         <p>
                             <asp:Label ID="lblWelcome" runat="server" Text="Wellcome"></asp:Label>
-                           
+
                         </p>
                         <div>
                             <a href="../Login.aspx?Cerrrarsesion=1" class="btn btn-danger">
@@ -65,11 +66,105 @@
                     </div>
                 </div>
                 <ul class="list-unstyled components">
+
+                    <li id="mdl8" >
+                        <a href="#ulmdl8" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-shopping-cart"></i><span> Facturación</span>
+                        </a>
+                        <ul id="ulmdl8" class="collapse list-unstyled">
+                            <li id="VstFacturar">
+                                <a href="../modulo8/VstFacturar.aspx">
+                                    <i class="fa fa-newspaper-o"></i><span> Facturar</span>
+                                </a>
+                            </li>
+                            <li id="VstDevolucion">
+                                <a href="../modulo8/VstDevolucion.aspx">
+                                    <i class="fa fa-reply-all"></i><span> Devolución</span>
+                                </a>
+                            </li>
+                            <li id="VstNotaCredito">
+                                <a href="../modulo8/VstNotaCredito.aspx">
+                                    <i class="fa fa-credit-card""></i><span> Nota de Crédito</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+
+                    <li id="mdl9">
+                        <a href="#ulmdl9" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-users"></i><span> Clientes</span>
+                        </a>
+                        <ul id="ulmdl9" class="collapse list-unstyled">
+                            <li id="VstClientes">
+                                <a href="../modulo9/VstClientes.aspx">
+                                    <i class="fa fa-user"></i><span> Clientes</span>
+                                </a>
+                            </li>
+                            <li id="VstCxC">
+                                <a href="../modulo9/VstCxC.aspx">
+                                    <i class="fa fa-flag"></i><span> CxC</span>
+                                </a>
+                            </li>
+                            <li id="VstTipoCliente">
+                                <a href="../modulo9/VstTipoCliente.aspx">
+                                    <i class="fa fa-info"></i><span> Tipo de Cliente</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+
                     <li id="mdl1" class="active">
                         <a href="#ulmdl1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                          <i class= "fa-solid fa-receipt"></i><span>Caja </span>
+                            <i class="fa fa-money"></i><span> Caja </span>
                         </a>
                         <ul id="ulmdl1" class="collapse list-unstyled">
+                            <li id="VstCaja">
+                                <a href="../modulo1/VstCaja.aspx">
+                                    <i class="fa fa-usd"></i><span> Caja</span>
+                                </a>
+                            </li>
+                            <li id="VstRoc">
+                                <a href="../modulo1/VstRoc.aspx">
+                                    <i class="fa fa-file-text"></i><span> ROC</span>
+                                </a>
+                            </li>
+                            <li id="VstGastos">
+                                <a href="../modulo1/VstGastos.aspx">
+                                    <i class="fa fa-tasks"></i><span> Gastos</span>
+                                </a>
+                            </li>
+                            <li id="VstInicioCaja">
+                                <a href="../modulo1/VstInicioCaja.aspx">
+                                    <i class="fa fa-hourglass-o"></i><span> Inicio de Caja</span>
+                                </a>
+                            </li>
+                            <li id="VstFinCaja">
+                                <a href="../modulo1/VstFinCaja.aspx">
+                                    <i class="fa fa-hourglass"></i><span> Fin de Caja</span>
+                                </a>
+                            </li>
+                            <li id="VstRetiros">
+                                <a href="../modulo1/VstRetiros.aspx">
+                                    <i class="fa fa-arrow-right"></i><span> Retiros</span>
+                                </a>
+                            </li>
+                            <li id="VstInyeccion">
+                                <a href="../modulo1/VstInyeccion.aspx">
+                                    <i class="fa fa-hand-o-left"></i><span> Inyección</span>
+                                </a>
+                            </li>
+                            <li id="VstCuentasBanco">
+                                <a href="../modulo1/VstCuentasBanco.aspx">
+                                    <i class="fa fa-university"></i><span> Cuentas de Banco</span>
+                                </a>
+                            </li>
+                            <li id="VstTC">
+                                <a href="../modulo1/VstTC.aspx">
+                                    <i class="fa fa-money"></i><span> T/C</span>
+                                </a>
+                            </li>
                             <li id="vst1">
                                 <a href="../modulo1/vst1.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista1</span>
@@ -89,29 +184,80 @@
                     </li>
                     <li class="dropdown-divider"></li>
                     <li id="mdl2">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i><span>Proveedor</span>
+                        <a href="#ulmdl2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-suitcase"></i><span> Proveedor</span>
                         </a>
+                        <ul id="ulmdl2" class="collapse list-unstyled">
+                            <li id="VstProveedor">
+                                <a href="../modulo2/VstProveedor.aspx">
+                                    <i class="fa fa-shopping-bag"></i><span> Proveedor</span>
+                                </a>
+                            </li>
+                            <li id="VstCompras">
+                                <a href="../modulo2/VstCompras.aspx">
+                                    <i class="fa fa-shopping-basket"></i><span> Compras</span>
+                                </a>
+                            </li>
+                            <li id="VstCxP">
+                                <a href="../modulo2/VstCxP.aspx">
+                                    <i class="fa fa-flag-o"></i><span> CxP</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+                    <li class="dropdown-divider"></li>
+                    <li id="mdl10">
+                        <a href="#ulmdl10" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-object-group"></i><span> Productos</span>
+                        </a>
+                        <ul id="ulmdl10" class="collapse list-unstyled">
+                            <li id="VstProductos">
+                                <a href="../modulo10/VstProductos.aspx">
+                                    <i class="fa fa-object-ungroup"></i><span> Productos</span>
+                                </a>
+                            </li>
+                            <li id="VstRangoPrecios">
+                                <a href="../modulo10/VstRangoPrecios.aspx">
+                                    <i class="fa fa-list"></i><span> Rango de Precios</span>
+                                </a>
+                            </li>
+                            <li id="VstPromo">
+                                <a href="../modulo10/VstPromo.aspx">
+                                    <i class="fa fa-percent"></i><span> Promociones</span>
+                                </a>
+                            </li>
+                            <li id="VsFamilia">
+                                <a href="../modulo10/VsFamilia.aspx">
+                                    <i class="fa fa-sitemap"></i><span> Familias</span>
+                                </a>
+                            </li>
+                            <li id="VstPalabrasClave">
+                                <a href="../modulo10/VstPalabrasClave.aspx">
+                                    <i class="fa fa-tags"></i><span> Palabras Claves</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="dropdown-divider"></li>
                     <li id="mdl3">
                         <a href="#ulmdl3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-th"></i><span>Sucursales</span>
+                            <i class="fa fa-home"></i><span> Sucursales</span>
                         </a>
                         <ul id="ulmdl3" class="collapse list-unstyled">
-                            <li id="vst4">
-                                <a href="../modulo3/vst4.aspx">
-                                    <i class="fa fa-dashboard"></i><span>Vista4</span>
+                            <li id="VstBodega">
+                                <a href="../modulo3/VstBodega.aspx">
+                                    <i class="fa fa-database"></i><span> Bodega</span>
                                 </a>
                             </li>
-                            <li id="vst5">
-                                <a href="../modulo3/vst5.aspx">
-                                    <i class="fa fa-dashboard"></i><span>Vista5</span>
+                            <li id="VstTraslados">
+                                <a href="../modulo3/VstTraslados.aspx">
+                                    <i class="fa fa-exchange"></i><span> Traslados</span>
                                 </a>
                             </li>
-                            <li id="vst11">
-                                <a href="../modulo3/vst11.aspx">
-                                    <i class="fa fa-dashboard"></i><span>Vista11</span>
+                            <li id="VstSucursal">
+                                <a href="../modulo3/VstSucursal.aspx">
+                                    <i class="fa fa-info"></i><span> Sucursales</span>
                                 </a>
                             </li>
                         </ul>
@@ -119,9 +265,24 @@
                     <li class="dropdown-divider"></li>
                     <li id="mdl4">
                         <a href="#ulmdl4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-th"></i><span>kardex</span>
+                            <i class="fa fa-th"></i><span> kardex</span>
                         </a>
                         <ul id="ulmdl4" class="collapse list-unstyled">
+                            <li id="Vstkardex">
+                                <a href="../modulo4/Vstkardex.aspx">
+                                    <i class="fa fa-table"></i><span> Kardex</span>
+                                </a>
+                            </li>
+                            <li id="VsInventario">
+                                <a href="../modulo4/VsInventario.aspx">
+                                    <i class="fa fa-list-ul"></i><span> Inventario</span>
+                                </a>
+                            </li>
+                            <li id="VsAjuste">
+                                <a href="../modulo4/VsAjuste.aspx">
+                                    <i class="fa fa-indent"></i><span> Ajustes</span>
+                                </a>
+                            </li>
                             <li id="vst12">
                                 <a href="../modulo4/vst12.aspx">
                                     <i class="fa fa-dashboard"></i><span>Vista12</span>
@@ -144,6 +305,46 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="dropdown-divider"></li>
+                    <li id="mdl7">
+                        <a href="#ulmdl7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-cog"></i><span> Configuración</span>
+                        </a>
+                        <ul id="ulmdl7" class="collapse list-unstyled">
+                            <li id="VstPerfil">
+                                <a href="../modulo7/VstPerfil.aspx">
+                                    <i class="fa fa-id-card-o"></i><span> Perfil</span>
+                                </a>
+                            </li>
+                            <li id="VstUsuarios">
+                                <a href="../modulo7/VstUsuarios.aspx">
+                                    <i class="fa fa-male"></i><span> Usuarios</span>
+                                </a>
+                            </li>
+                            <li id="VstPermisos">
+                                <a href="../modulo7/VstPermisos.aspx">
+                                    <i class="fa fa-key"></i><span>Permisos</span>
+                                </a>
+                            </li>
+                            <li id="VstEmpleados">
+                                <a href="../modulo7/VstEmpleados.aspx">
+                                    <i class="fa fa-child"></i><span> Empleados</span>
+                                </a>
+                            </li>
+                            <li id="VstGenerales">
+                                <a href="../modulo7/VstGenerales.aspx">
+                                    <i class="fa fa-wrench"></i><span> Generales</span>
+                                </a>
+                            </li>
+
+                            <li id="VstSistema">
+                                <a href="../modulo7/VstSistema.aspx">
+                                    <i class="fa fa-cogs fa-fw"></i><span> Sistema</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
                 </ul>
             </section>
         </aside>
@@ -157,7 +358,7 @@
                 <%--esto es dinámico--%>
             </h1>
         </section>
-        <section class="content bg-danger" >
+        <section class="content bg-secondary">
             <%-- contenido dinámico--%>
             <form id="form1" runat="server">
                 <asp:HiddenField ID="hfIDU" runat="server" ClientIDMode="Static" Value="0" />
@@ -174,7 +375,7 @@
 
     <script src="/js/jquery.js" type="text/javascript"></script>
     <script src="../js/jquery-ui.min.js"></script>
-   
+
     <script src="/js/poppers.js" type="text/javascript"></script>
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/js/velocity.min.js"></script>
