@@ -47,6 +47,10 @@
     <Compile Include="ClsPermisosN.cs" />
     <Compile Include="ClsRolN.cs" />
     <Compile Include="ClsTicoControlN.cs" />
+    <Compile Include="ClsTipoCorreoN.cs" />
+    <Compile Include="ClsTipoDireccionN.cs" />
+    <Compile Include="ClsTipoIdentificacionN.cs" />
+    <Compile Include="ClsTipoTelefonoN.cs" />
     <Compile Include="ClsUsuarioN.cs" />
     <Compile Include="ClsVistaN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

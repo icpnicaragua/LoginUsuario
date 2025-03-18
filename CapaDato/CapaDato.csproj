@@ -114,6 +114,10 @@
     <Compile Include="ClsConexion.cs" />
     <Compile Include="ClsPermisosD.cs" />
     <Compile Include="ClsRolD.cs" />
+    <Compile Include="ClsTipoCorreoD.cs" />
+    <Compile Include="ClsTipoDireccionD.cs" />
+    <Compile Include="ClsTipoIdentifiacionD.cs" />
+    <Compile Include="ClsTipoTelefonoD.cs" />
     <Compile Include="ClsUsuarioD.cs" />
     <Compile Include="mve\ClsElementoD.cs" />
     <Compile Include="mve\ClsModuloD.cs" />
