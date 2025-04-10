@@ -111,12 +111,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClsAreaD.cs" />
     <Compile Include="ClsConexion.cs" />
+    <Compile Include="ClsPalabraClaveD.cs" />
     <Compile Include="ClsPermisosD.cs" />
+    <Compile Include="ClsPromoD.cs" />
+    <Compile Include="ClsRangoPrecioD.cs" />
+    <Compile Include="ClsRegimenD.cs" />
     <Compile Include="ClsRolD.cs" />
+    <Compile Include="ClsTipoClienteD.cs" />
     <Compile Include="ClsTipoCorreoD.cs" />
     <Compile Include="ClsTipoDireccionD.cs" />
+    <Compile Include="ClsTipoGastoD.cs" />
     <Compile Include="ClsTipoIdentifiacionD.cs" />
+    <Compile Include="ClsTipoPagoD.cs" />
     <Compile Include="ClsTipoTelefonoD.cs" />
     <Compile Include="ClsUsuarioD.cs" />
     <Compile Include="mve\ClsElementoD.cs" />
