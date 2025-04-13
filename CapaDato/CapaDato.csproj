@@ -112,7 +112,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClsAreaD.cs" />
+    <Compile Include="ClsBancoD.cs" />
+    <Compile Include="ClsConceptoRocD.cs" />
     <Compile Include="ClsConexion.cs" />
+    <Compile Include="ClsEntradaD.cs" />
+    <Compile Include="ClsEstadoCivilD.cs" />
+    <Compile Include="ClsEstanteD.cs" />
+    <Compile Include="ClsFamiliaD.cs" />
+    <Compile Include="ClsPagoSobreD.cs" />
     <Compile Include="ClsPalabraClaveD.cs" />
     <Compile Include="ClsPermisosD.cs" />
     <Compile Include="ClsPromoD.cs" />
@@ -122,6 +129,7 @@
     <Compile Include="ClsTipoClienteD.cs" />
     <Compile Include="ClsTipoCorreoD.cs" />
     <Compile Include="ClsTipoDireccionD.cs" />
+    <Compile Include="ClsTipoEmpresaD.cs" />
     <Compile Include="ClsTipoGastoD.cs" />
     <Compile Include="ClsTipoIdentifiacionD.cs" />
     <Compile Include="ClsTipoPagoD.cs" />

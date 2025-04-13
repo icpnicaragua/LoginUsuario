@@ -9,27 +9,27 @@ using System.Data;
 
 namespace CapaDato
 {
-    public class ClsTipoPagoD
+    public class ClsConceptoRocD
     {
         private ClsConexion ObjConexion = null;
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
-        public bool FnCTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnCConceptoRocD(ClsConceptoRoc OConceptoRoc)
         {
-            bool CreateOTipoPago = false;
+            bool CreateOConceptoRoc = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spCTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spCConceptoRoc", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmCTipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmCConceptoRoc", OConceptoRoc.ConceptoRoc);
 
                 ObjConexion.Abrircon();
                 int FilasCRegime = Cmd_D.ExecuteNonQuery();
-                if (FilasCRegime > 0) CreateOTipoPago = true;
+                if (FilasCRegime > 0) CreateOConceptoRoc = true;
 
-                return CreateOTipoPago;
+                return CreateOConceptoRoc;
             }
             catch (Exception ex)
             {
@@ -42,25 +42,25 @@ namespace CapaDato
             }
         }
 
-        public List<ClsTipoPago> FnRTipoPagoD()
+        public List<ClsConceptoRoc> FnRConceptoRocD()
         {
-            ClsTipoPago OTipoPago = null;
+            ClsConceptoRoc OConceptoRoc = null;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spRTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spRConceptoRoc", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
-                List<ClsTipoPago> LstTipoPago = new List<ClsTipoPago>();
+                List<ClsConceptoRoc> LstConceptoRoc = new List<ClsConceptoRoc>();
                 while (Dr_D.Read())
                 {
-                    OTipoPago = new ClsTipoPago();
-                    OTipoPago.IdTipoPago = Dr_D[0].ToString();//id_TipoPago
-                    OTipoPago.TipoPago = Dr_D[1].ToString();  //TipoPago     
-                    LstTipoPago.Add(OTipoPago);
+                    OConceptoRoc = new ClsConceptoRoc();
+                    OConceptoRoc.IdConceptoRoc = Dr_D[0].ToString();//id_ConceptoRoc
+                    OConceptoRoc.ConceptoRoc = Dr_D[1].ToString();  //ConceptoRoc     
+                    LstConceptoRoc.Add(OConceptoRoc);
                 }
-                return LstTipoPago;
+                return LstConceptoRoc;
             }
             catch (Exception ex)
             {
@@ -73,22 +73,22 @@ namespace CapaDato
             }
         }
 
-        public bool FnUTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnUConceptoRocD(ClsConceptoRoc OConceptoRoc)
         {
-            bool UpdateTipoPago = false;
+            bool UpdateConceptoRoc = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spUTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spUConceptoRoc", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmUIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
-                Cmd_D.Parameters.AddWithValue("prmUTipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmUIdConceptoRoc", Convert.ToInt16(OConceptoRoc.IdConceptoRoc));
+                Cmd_D.Parameters.AddWithValue("prmUConceptoRoc", OConceptoRoc.ConceptoRoc);
 
                 ObjConexion.Abrircon();
-                int FilasUTipoPago = Cmd_D.ExecuteNonQuery();
-                if (FilasUTipoPago > 0) UpdateTipoPago = true;
+                int FilasUConceptoRoc = Cmd_D.ExecuteNonQuery();
+                if (FilasUConceptoRoc > 0) UpdateConceptoRoc = true;
 
-                return UpdateTipoPago;
+                return UpdateConceptoRoc;
             }
             catch (Exception ex)
             {
@@ -101,21 +101,21 @@ namespace CapaDato
             }
         }
 
-        public bool FnDTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnDConceptoRocD(ClsConceptoRoc OConceptoRoc)
         {
-            bool DeleteTipoPago = false;
+            bool DeleteConceptoRoc = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spDTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spDConceptoRoc", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmDIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
+                Cmd_D.Parameters.AddWithValue("prmDIdConceptoRoc", Convert.ToInt16(OConceptoRoc.IdConceptoRoc));
 
                 ObjConexion.Abrircon();
-                int FilasDTipoPago = Cmd_D.ExecuteNonQuery();
-                if (FilasDTipoPago > 0) DeleteTipoPago = true;
+                int FilasDConceptoRoc = Cmd_D.ExecuteNonQuery();
+                if (FilasDConceptoRoc > 0) DeleteConceptoRoc = true;
 
-                return DeleteTipoPago;
+                return DeleteConceptoRoc;
             }
             catch (Exception ex)
             {
@@ -128,23 +128,23 @@ namespace CapaDato
             }
         }
 
-        public bool FnETipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnEConceptoRocD(ClsConceptoRoc OConceptoRoc)
         {
-            bool ExisteTipoPago = true;
+            bool ExisteConceptoRoc = true;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spETipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spEConceptoRoc", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmEIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
-                Cmd_D.Parameters.AddWithValue("prmETipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmEIdConceptoRoc", Convert.ToInt16(OConceptoRoc.IdConceptoRoc));
+                Cmd_D.Parameters.AddWithValue("prmEConceptoRoc", OConceptoRoc.ConceptoRoc);
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
                 if (Dr_D.Read())
                 {
-                    ExisteTipoPago = Convert.ToBoolean(Dr_D[0]);
+                    ExisteConceptoRoc = Convert.ToBoolean(Dr_D[0]);
                 }
-                return ExisteTipoPago;
+                return ExisteConceptoRoc;
             }
             catch (Exception ex)
             {

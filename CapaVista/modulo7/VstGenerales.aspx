@@ -162,7 +162,7 @@
         </div>
     </div>
 
-    <div id="alertaxxxx" class="modal bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="alerta" class="modal bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
         <!-- id-->
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -190,9 +190,9 @@
                         <label id="lblexistenuevoTipoIdentificacion" for="txtNuevoTipoIdentificacion" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoTipoIdentificacion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Tipo de Identificación" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="30" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoTipoIdentificacion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Tipo de Identificación" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
-                                <button type="button" class="btn btn-secondary popinfo2" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                <button type="button" class="btn btn-secondary popinfo320NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <!-- class popinfoX-->
                                     <i class="fas fa-info"></i>
                                 </button>
@@ -225,9 +225,9 @@
                         <label id="lblexistenuevoTipoDireccion" for="txtNuevoTipoDireccion" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoTipoDireccion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Tipo de Dirección" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="30" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoTipoDireccion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Tipo de Dirección" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
-                                <button type="button" class="btn btn-secondary popinfo2" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                <button type="button" class="btn btn-secondary popinfo345NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <!-- class popinfoX-->
                                     <i class="fas fa-info"></i>
                                 </button>
@@ -260,9 +260,9 @@
                         <label id="lblexistenuevoTipoCorreo" for="txtNuevoTipoCorreo" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoTipoCorreo" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Tipo de Correo" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="30" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoTipoCorreo" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Tipo de Correo" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
-                                <button type="button" class="btn btn-secondary popinfo2" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                <button type="button" class="btn btn-secondary popinfo345NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <!-- class popinfoX-->
                                     <i class="fas fa-info"></i>
                                 </button>
@@ -295,9 +295,9 @@
                         <label id="lblexistenuevoTipoTelefono" for="txtNuevoTipoTelefono" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoTipoTelefono" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Tipo de Teléfono" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="30" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoTipoTelefono" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Tipo de Teléfono" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
-                                <button type="button" class="btn btn-secondary popinfo2" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                <button type="button" class="btn btn-secondary popinfo345NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <!-- class popinfoX-->
                                     <i class="fas fa-info"></i>
                                 </button>
@@ -321,5 +321,8 @@
     <script src="/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <!-- crear para cada tabla-->
-
+       <script src="/js/icp/CRUDETipoIdentificacion.js" type="text/javascript"></script>
+       <script src="/js/icp/CRUDETipoDireccion.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDETipoCorreo.js" type="text/javascript"></script>
+     <script src="/js/icp/CRUDETipoTelefono.js" type="text/javascript"></script>
 </asp:Content>

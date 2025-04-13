@@ -9,27 +9,27 @@ using System.Data;
 
 namespace CapaDato
 {
-    public class ClsTipoPagoD
+    public class ClsBancoD
     {
         private ClsConexion ObjConexion = null;
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
-        public bool FnCTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnCBancoD(ClsBanco OBanco)
         {
-            bool CreateOTipoPago = false;
+            bool CreateOBanco = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spCTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spCBanco", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmCTipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmCBanco", OBanco.Banco);
 
                 ObjConexion.Abrircon();
                 int FilasCRegime = Cmd_D.ExecuteNonQuery();
-                if (FilasCRegime > 0) CreateOTipoPago = true;
+                if (FilasCRegime > 0) CreateOBanco = true;
 
-                return CreateOTipoPago;
+                return CreateOBanco;
             }
             catch (Exception ex)
             {
@@ -42,25 +42,25 @@ namespace CapaDato
             }
         }
 
-        public List<ClsTipoPago> FnRTipoPagoD()
+        public List<ClsBanco> FnRBancoD()
         {
-            ClsTipoPago OTipoPago = null;
+            ClsBanco OBanco = null;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spRTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spRBanco", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
-                List<ClsTipoPago> LstTipoPago = new List<ClsTipoPago>();
+                List<ClsBanco> LstBanco = new List<ClsBanco>();
                 while (Dr_D.Read())
                 {
-                    OTipoPago = new ClsTipoPago();
-                    OTipoPago.IdTipoPago = Dr_D[0].ToString();//id_TipoPago
-                    OTipoPago.TipoPago = Dr_D[1].ToString();  //TipoPago     
-                    LstTipoPago.Add(OTipoPago);
+                    OBanco = new ClsBanco();
+                    OBanco.IdBanco = Dr_D[0].ToString();//id_Banco
+                    OBanco.Banco = Dr_D[1].ToString();  //Banco     
+                    LstBanco.Add(OBanco);
                 }
-                return LstTipoPago;
+                return LstBanco;
             }
             catch (Exception ex)
             {
@@ -73,22 +73,22 @@ namespace CapaDato
             }
         }
 
-        public bool FnUTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnUBancoD(ClsBanco OBanco)
         {
-            bool UpdateTipoPago = false;
+            bool UpdateBanco = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spUTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spUBanco", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmUIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
-                Cmd_D.Parameters.AddWithValue("prmUTipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmUIdBanco", Convert.ToInt16(OBanco.IdBanco));
+                Cmd_D.Parameters.AddWithValue("prmUBanco", OBanco.Banco);
 
                 ObjConexion.Abrircon();
-                int FilasUTipoPago = Cmd_D.ExecuteNonQuery();
-                if (FilasUTipoPago > 0) UpdateTipoPago = true;
+                int FilasUBanco = Cmd_D.ExecuteNonQuery();
+                if (FilasUBanco > 0) UpdateBanco = true;
 
-                return UpdateTipoPago;
+                return UpdateBanco;
             }
             catch (Exception ex)
             {
@@ -101,21 +101,21 @@ namespace CapaDato
             }
         }
 
-        public bool FnDTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnDBancoD(ClsBanco OBanco)
         {
-            bool DeleteTipoPago = false;
+            bool DeleteBanco = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spDTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spDBanco", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmDIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
+                Cmd_D.Parameters.AddWithValue("prmDIdBanco", Convert.ToInt16(OBanco.IdBanco));
 
                 ObjConexion.Abrircon();
-                int FilasDTipoPago = Cmd_D.ExecuteNonQuery();
-                if (FilasDTipoPago > 0) DeleteTipoPago = true;
+                int FilasDBanco = Cmd_D.ExecuteNonQuery();
+                if (FilasDBanco > 0) DeleteBanco = true;
 
-                return DeleteTipoPago;
+                return DeleteBanco;
             }
             catch (Exception ex)
             {
@@ -128,23 +128,23 @@ namespace CapaDato
             }
         }
 
-        public bool FnETipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnEBancoD(ClsBanco OBanco)
         {
-            bool ExisteTipoPago = true;
+            bool ExisteBanco = true;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spETipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spEBanco", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmEIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
-                Cmd_D.Parameters.AddWithValue("prmETipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmEIdBanco", Convert.ToInt16(OBanco.IdBanco));
+                Cmd_D.Parameters.AddWithValue("prmEBanco", OBanco.Banco);
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
                 if (Dr_D.Read())
                 {
-                    ExisteTipoPago = Convert.ToBoolean(Dr_D[0]);
+                    ExisteBanco = Convert.ToBoolean(Dr_D[0]);
                 }
-                return ExisteTipoPago;
+                return ExisteBanco;
             }
             catch (Exception ex)
             {

@@ -9,27 +9,27 @@ using System.Data;
 
 namespace CapaDato
 {
-    public class ClsTipoPagoD
+    public class ClsEstadoCivilD
     {
         private ClsConexion ObjConexion = null;
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
-        public bool FnCTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnCEstadoCivilD(ClsEstadoCivil OEstadoCivil)
         {
-            bool CreateOTipoPago = false;
+            bool CreateOEstadoCivil = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spCTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spCEstadoCivil", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmCTipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmCEstadoCivil", OEstadoCivil.EstadoCivil);
 
                 ObjConexion.Abrircon();
                 int FilasCRegime = Cmd_D.ExecuteNonQuery();
-                if (FilasCRegime > 0) CreateOTipoPago = true;
+                if (FilasCRegime > 0) CreateOEstadoCivil = true;
 
-                return CreateOTipoPago;
+                return CreateOEstadoCivil;
             }
             catch (Exception ex)
             {
@@ -42,25 +42,25 @@ namespace CapaDato
             }
         }
 
-        public List<ClsTipoPago> FnRTipoPagoD()
+        public List<ClsEstadoCivil> FnREstadoCivilD()
         {
-            ClsTipoPago OTipoPago = null;
+            ClsEstadoCivil OEstadoCivil = null;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spRTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spREstadoCivil", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
-                List<ClsTipoPago> LstTipoPago = new List<ClsTipoPago>();
+                List<ClsEstadoCivil> LstEstadoCivil = new List<ClsEstadoCivil>();
                 while (Dr_D.Read())
                 {
-                    OTipoPago = new ClsTipoPago();
-                    OTipoPago.IdTipoPago = Dr_D[0].ToString();//id_TipoPago
-                    OTipoPago.TipoPago = Dr_D[1].ToString();  //TipoPago     
-                    LstTipoPago.Add(OTipoPago);
+                    OEstadoCivil = new ClsEstadoCivil();
+                    OEstadoCivil.IdEstadoCivil = Dr_D[0].ToString();//id_EstadoCivil
+                    OEstadoCivil.EstadoCivil = Dr_D[1].ToString();  //EstadoCivil     
+                    LstEstadoCivil.Add(OEstadoCivil);
                 }
-                return LstTipoPago;
+                return LstEstadoCivil;
             }
             catch (Exception ex)
             {
@@ -73,22 +73,22 @@ namespace CapaDato
             }
         }
 
-        public bool FnUTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnUEstadoCivilD(ClsEstadoCivil OEstadoCivil)
         {
-            bool UpdateTipoPago = false;
+            bool UpdateEstadoCivil = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spUTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spUEstadoCivil", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmUIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
-                Cmd_D.Parameters.AddWithValue("prmUTipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmUIdEstadoCivil", Convert.ToInt16(OEstadoCivil.IdEstadoCivil));
+                Cmd_D.Parameters.AddWithValue("prmUEstadoCivil", OEstadoCivil.EstadoCivil);
 
                 ObjConexion.Abrircon();
-                int FilasUTipoPago = Cmd_D.ExecuteNonQuery();
-                if (FilasUTipoPago > 0) UpdateTipoPago = true;
+                int FilasUEstadoCivil = Cmd_D.ExecuteNonQuery();
+                if (FilasUEstadoCivil > 0) UpdateEstadoCivil = true;
 
-                return UpdateTipoPago;
+                return UpdateEstadoCivil;
             }
             catch (Exception ex)
             {
@@ -101,21 +101,21 @@ namespace CapaDato
             }
         }
 
-        public bool FnDTipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnDEstadoCivilD(ClsEstadoCivil OEstadoCivil)
         {
-            bool DeleteTipoPago = false;
+            bool DeleteEstadoCivil = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spDTipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spDEstadoCivil", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmDIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
+                Cmd_D.Parameters.AddWithValue("prmDIdEstadoCivil", Convert.ToInt16(OEstadoCivil.IdEstadoCivil));
 
                 ObjConexion.Abrircon();
-                int FilasDTipoPago = Cmd_D.ExecuteNonQuery();
-                if (FilasDTipoPago > 0) DeleteTipoPago = true;
+                int FilasDEstadoCivil = Cmd_D.ExecuteNonQuery();
+                if (FilasDEstadoCivil > 0) DeleteEstadoCivil = true;
 
-                return DeleteTipoPago;
+                return DeleteEstadoCivil;
             }
             catch (Exception ex)
             {
@@ -128,23 +128,23 @@ namespace CapaDato
             }
         }
 
-        public bool FnETipoPagoD(ClsTipoPago OTipoPago)
+        public bool FnEEstadoCivilD(ClsEstadoCivil OEstadoCivil)
         {
-            bool ExisteTipoPago = true;
+            bool ExisteEstadoCivil = true;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spETipoPago", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spEEstadoCivil", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmEIdTipoPago", Convert.ToInt16(OTipoPago.IdTipoPago));
-                Cmd_D.Parameters.AddWithValue("prmETipoPago", OTipoPago.TipoPago);
+                Cmd_D.Parameters.AddWithValue("prmEIdEstadoCivil", Convert.ToInt16(OEstadoCivil.IdEstadoCivil));
+                Cmd_D.Parameters.AddWithValue("prmEEstadoCivil", OEstadoCivil.EstadoCivil);
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
                 if (Dr_D.Read())
                 {
-                    ExisteTipoPago = Convert.ToBoolean(Dr_D[0]);
+                    ExisteEstadoCivil = Convert.ToBoolean(Dr_D[0]);
                 }
-                return ExisteTipoPago;
+                return ExisteEstadoCivil;
             }
             catch (Exception ex)
             {

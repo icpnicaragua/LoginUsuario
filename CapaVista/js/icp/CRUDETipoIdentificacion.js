@@ -1,49 +1,49 @@
 ﻿/*variable de tablas*/
-var tablaModulo;/*tabla mpodulo*/
-var ModCModulo = $('#ModModulo'); // modal módulo
+var tablaTipoIdentificacion;/*tabla mpodulo*/
+var ModCTipoIdentificacion = $('#modalNTipoIdentificacion'); // modal 
 //campos de tablas
-var VarJsModuloId = 0; 
-var VarJsModulo = "";
-var VarJSModuloAsp = "";
+var VarJsTipoIdentificacionId = 0;
+var VarJsTipoIdentificacion = "";
+
 
 //igual para todos
-var formModulo = document.querySelector('#form1');
+var formTipoIdentificacion = document.querySelector('#form1');
 
 //variables crud
-CRUDModulo = "";
+CRUDTipoIdentificacion = "";
 //variables alertas
-var VarJsColorAlertModulo = "";
-var VarJsTextoAlertModulo = "";
+var VarJsColorAlertTipoIdentificacion = "";
+var VarJsTextoAlertTipoIdentificacion = "";
 //variables existe
-var EMod = true;
-var EModAsp = true;
+var ETipoIdentificacion = true;
 
-$('#lbMostrarM').click(function (e) {//1 evento para mostrar contenido de módulo xxxx
+
+$('#lbMostrarTipoIdentificacion').click(function (e) {//1 evento para mostrar contenido  xxxx
     e.preventDefault();
-    FnJsAjaxRModulo(); //llama al ajax xxxx
+    FnJsAjaxRTipoIdentificacion(); //llama al ajax xxxx
 });
 
-function FnJsAjaxRModulo() { //2 pide los datos en bd de la tabla módulo xxxx
+function FnJsAjaxRTipoIdentificacion() { //2 pide los datos en bd de la tabla  xxxx
     $.ajax({
         type: "POST",
-        url: "/modulo4/vst13.aspx/FnRModuloV", // nombre de página y nombre de función xxxx
+        url: "/modulo7/VstGenerales.aspx/FnRTipoIdentificacionV", // nombre de página y nombre de función xxxx
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowModulo(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowTipoIdentificacion(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
         }
     }
     );
 }
 
-function AddrowModulo(data) {//3 llenar la tabla xxxx
+function AddrowTipoIdentificacion(data) {//3 llenar la tabla xxxx
 
-    $('#tblM').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
+    $('#tblTipoIdentificacion').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
 
-    tablaModulo = $("#tblM").DataTable({// variable nombre tabla xxxx
+    tablaTipoIdentificacion = $("#tblTipoIdentificacion").DataTable({// variable nombre tabla xxxx
 
         "retrieve": true,
         dom: 'Bfrtip',
@@ -58,7 +58,7 @@ function AddrowModulo(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colMod'//se añade el id para ocultar xxxx
+                    id: 'colTipoIdentificacion'//se añade el id para ocultar xxxx
                 },
                 text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
                 className: 'btn btn-info', //clase para mostrar
@@ -73,7 +73,7 @@ function AddrowModulo(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(4)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(2)):visible'] /// index de controles xxxx para no mostrar comienza en 0
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -86,10 +86,10 @@ function AddrowModulo(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(4)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(2)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
                 },
                 titleAttr: 'PDF',
-                filename: 'Módulo' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte xxxx
+                filename: 'Tipo de Identificacación' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -111,14 +111,14 @@ function AddrowModulo(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Soaz Módulo', //texto del reporte xxxx
+                                    text: 'Tipo de Identificación', //tttt
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte soaz Módulo' //superior derecha xxxx
+                                    text: 'Reporte Tipo de Identificación' //tttt
                                 }
                             ],
                             margin: 20
@@ -145,11 +145,11 @@ function AddrowModulo(data) {//3 llenar la tabla xxxx
             },
             {
                 extend: 'excel',
-                filename: 'Módulo' + "_" + FnJsDate() + "_" + FnJsHour(), // nombre de archivo xxxx
+                filename: 'Tipo de Identificación' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(4)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(2)):visible'] // index de controles xxxx para no mostrar inicia en 0
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -161,182 +161,176 @@ function AddrowModulo(data) {//3 llenar la tabla xxxx
         ],
         "language": FnJsEspTbl()
     });
-    tablaModulo.buttons().container().addClass('form-inline');///variable xxxx
+    tablaTipoIdentificacion.buttons().container().addClass('form-inline');///variable xxxx
 
-    for (var contModulo = 0; contModulo < data.length; contModulo++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaModulo.row.add([//sensitivecase:
-            data[contModulo].IdModulo,//campos
-            data[contModulo].Modulo,
-            data[contModulo].Fechainciomodulo,
-            data[contModulo].Idaspmodulo,
-            '<button value="editar" href="#ModModulo" data-toggle="modal" title="editar" class="btn btn-warning  btn-editM"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#ModModulo" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteM"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+    for (var contTipoIdentificacion = 0; contTipoIdentificacion < data.length; contTipoIdentificacion++) { // declarar variable de recorrido de arreglo data xxxx
+        tablaTipoIdentificacion.row.add([//sensitivecase:
+            data[contTipoIdentificacion].IdTipoIdentificacion,//campos
+            data[contTipoIdentificacion].TipoIdentificacion,
+            '<button value="editar" href="#modalNTipoIdentificacion" data-toggle="modal" title="editar" class="btn btn-warning  btn-editTipoIdentificacion"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
+            '<button value="eliminar" href="#modalNTipoIdentificacion" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteTipoIdentificacion"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
         ]
         ).draw(false);
     }
 }
 
 //acciones cud
-$('#lbMN').click(function (e) {//4 evento para mostrar modal de nuevo
+$('#lbNTipoIdentificacion').click(function (e) {//4 evento para mostrar modal de nuevo
     e.preventDefault();
-    FnJsCModulo(); // nombre función xxxx
-    EMod = true; // variable xxxx
-    EModAsp = true; // variable xxxx
-    FnJsBlockModulo(); // nombre función xxxx
+    FnJsCTipoIdentificacion(); // nombre función xxxx
+    ETipoIdentificacion = true; // variable xxxx
 
-    CRUDModulo = "C"; // nombre variable xxxx
+    FnJsBlockTipoIdentificacion(); // nombre función xxxx
 
-    VarJsModuloId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsModulo = ""; // cada campo tiene una variable, inicializar xxxx
-    VarJSModuloAsp = ""; // cada campo tiene una variable, inicializar xxxx
+    CRUDTipoIdentificacion = "C"; // nombre variable xxxx
+
+    //campos xxxx
+    VarJsTipoIdentificacionId = 0; // cada campo tiene una variable, inicializar xxxx
+    VarJsTipoIdentificacion = ""; // cada campo tiene una variable, inicializar xxxx
 
 });
-$(document).on('click', '.btn-editM', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editTipoIdentificacion', function (e) {//nombre de clase xxxx
     e.preventDefault();
-    FnJsUModulo();//nombre de función xxxx
-    var dataModulo = tablaModulo.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsModuloId = dataModulo[0]; //id de la fila seleccionada
-    $('#TxtModulo').val(dataModulo[1]);// [indice columna]  de la fila seleccionada xxxx
-    $('#TxtModuloAsp').val(dataModulo[3]);// [indice columna]  de la fila seleccionada xxxx
+    FnJsUTipoIdentificacion();//nombre de función xxxx
+    var dataTipoIdentificacion = tablaTipoIdentificacion.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
+    VarJsTipoIdentificacionId = dataTipoIdentificacion[0]; //id de la fila seleccionada
+    $('#txtNuevoTipoIdentificacion').val(dataTipoIdentificacion[1]);// [indice columna]  de la fila seleccionada xxxx
+    VarJsTipoIdentificacion = dataTipoIdentificacion[1]; // variable elemento, variable data, índice xxxx
 
-    VarJsModulo = dataModulo[1]; // variable elemento, variable data, índice xxxx
-    VarJSModuloAsp = dataModulo[3]; // variable elemento, variable data, índice xxxx
-
-    CRUDModulo = "U";// variable crud, estado crud xxxx
+    CRUDTipoIdentificacion = "U";// variable crud, estado crud xxxx
 });
-$(document).on('click', '.btn-deleteM', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteTipoIdentificacion', function (e) {//nombre de clase xxxx
     e.preventDefault();
-    FnJsDModulo();//nombre de función xxxx
-    EMod = false; // variable de existe xxxx
-    EModAsp = false;// variable de existe xxxx
+    FnJsDTipoIdentificacion();//nombre de función xxxx
+    ETipoIdentificacion = false; // variable de existe xxxx
 
-    FnJsBlockModulo();//función bloquear xxxx
-    var dataModulo = tablaModulo.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsModuloId = dataModulo[0]; //id de la fila seleccionada
-    $('#TxtModulo').val(dataModulo[1]);// [indice columna]  de la fila seleccionada xxxx
-    $('#TxtModuloAsp').val(dataModulo[3]);// [indice columna]  de la fila seleccionada xxxx
 
-    VarJsModulo = dataModulo[1]; // variable elemento, variable data, índice xxxx
-    VarJSModuloAsp = dataModulo[3]; // variable elemento, variable data, índice xxxx
+    FnJsBlockTipoIdentificacion();//función bloquear xxxx
+    var dataTipoIdentificacion = tablaTipoIdentificacion.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
+    VarJsTipoIdentificacionId = dataTipoIdentificacion[0]; //id de la fila seleccionada
+    $('#txtNuevoTipoIdentificacion').val(dataTipoIdentificacion[1]);// [indice columna]  de la fila seleccionada xxxx
 
-    CRUDModulo = "D";
+    VarJsTipoIdentificacion = dataTipoIdentificacion[1]; // variable elemento, variable data, índice xxxx
+
+    CRUDTipoIdentificacion = "D";
 });
 
 //pintar modal
-function FnJsCModulo() { //nombe función xxxx
+function FnJsCTipoIdentificacion() { //nombe función xxxx
+    //campos xxxx
+    $('#lblexistenuevoTipoIdentificacion').text(""); // id etiqueta texto etiqueta xxxx
 
-    $('#lblModulo').text(""); // id etiqueta texto etiqueta xxxx
-    $('#lblModuloAsp').text(""); // id etiqueta texto etiqueta xxxx
     //cambiar el color del modal borde
-    $("#DivModBorModulo").removeAttr("class");//quitar el atributo class
-    $("#DivModBorModulo").attr('class', 'modal-content border-success');//poner verde
+    $("#DivModBorTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#DivModBorTipoIdentificacion").attr('class', 'modal-content border-success');//poner verde
     //cambiar el color del modal header
-    $("#DivModHeadModulo").removeAttr("class");//quitar el atributo class
-    $("#DivModHeadModulo").attr('class', 'modal-header bg-success');//poner verde
+    $("#DivModHeaTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#DivModHeaTipoIdentificacion").attr('class', 'modal-header bg-success');//poner verde
     //cambiar el titulo del modal header
-    $('#H4ModTitModulo').text('Nuevo Módulo');
+    $('#H4ModTitTipoIdentificacion').text('Nuevo Tipo de identificación');//tttt
     //cambiar el color icono btn
-    $("#BtnCUDModulo").removeAttr("class");//quitar el atributo class
-    $("#BtnCUDModulo").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
-    $("#BtnCUDModulo i").removeAttr("class");
-    $("#BtnCUDModulo i").attr("class", "fa fa-save fa-2x");
+    $("#btnNueTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#btnNueTipoIdentificacion").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+    $("#btnNueTipoIdentificacion i").removeAttr("class");
+    $("#btnNueTipoIdentificacion i").attr("class", "fa fa-save fa-2x");
     //bloquear elementos
-    $("#TxtModulo").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#TxtModuloAsp").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoTipoIdentificacion").attr('disabled', false); //variables de los elementos del modal xxxx
+
     //vaciar elementos text de todo el modal
-    $('#' + ModCModulo[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCTipoIdentificacion[0].id + ' :text').val(""); // variable del modal xxxx
 
 }
-function FnJsUModulo() { //nombe función xxxx
-    $('#lblModulo').text(""); // id etiqueta texto etiqueta xxxx
-    $('#lblModuloAsp').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUTipoIdentificacion() { //nombe función xxxx
+    //campos xxx
+    $('#lblexistenuevoTipoIdentificacion').text(""); // id etiqueta texto etiqueta xxxx
+
     console.log("colorear nuevo");
     //cambiar el color del modal borde
-    $("#DivModBorModulo").removeAttr("class");//quitar el atributo class
-    $("#DivModBorModulo").attr('class', 'modal-content border-warning');//poner verde
+    $("#DivModBorTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#DivModBorTipoIdentificacion").attr('class', 'modal-content border-warning');//poner verde
     //cambiar el color del modal header
-    $("#DivModHeadModulo").removeAttr("class");//quitar el atributo class
-    $("#DivModHeadModulo").attr('class', 'modal-header bg-warning');//poner verde
+    $("#DivModHeaTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#DivModHeaTipoIdentificacion").attr('class', 'modal-header bg-warning');//poner verde
     //cambiar el titulo del modal header
-    $('#H4ModTitModulo').text('Editar Módulo');
+    $('#H4ModTitTipoIdentificacion').text('Editar Tipo de Identifiación');//tttt
     //cambiar el color icono btn
-    $("#BtnCUDModulo").removeAttr("class");//quitar el atributo class
-    $("#BtnCUDModulo").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
-    $("#BtnCUDModulo i").removeAttr("class");
-    $("#BtnCUDModulo i").attr("class", "fa fa-save fa-2x");
+    $("#btnNueTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#btnNueTipoIdentificacion").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#btnNueTipoIdentificacion i").removeAttr("class");
+    $("#btnNueTipoIdentificacion i").attr("class", "fa fa-save fa-2x");
     //bloquear elementos
-    $("#TxtModulo").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#TxtModuloAsp").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoTipoIdentificacion").attr('disabled', false); //variables de los elementos del modal xxxx
+
     //vaciar elementos text de todo el modal
-    $('#' + ModCModulo[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCTipoIdentificacion[0].id + ' :text').val(""); // variable del modal xxxx
 
 }
-function FnJsDModulo() { //nombe función xxxx
+function FnJsDTipoIdentificacion() { //nombe función xxxx
+    //campos xxxx
+    $('#lblexistenuevoTipoIdentificacion').text(""); // id etiqueta texto etiqueta xxxx
 
-    $('#lblModulo').text(""); // id etiqueta texto etiqueta xxxx
-    $('#lblModuloAsp').text(""); // id etiqueta texto etiqueta xxxx
     //cambiar el color del modal borde
-    $("#DivModBorModulo").removeAttr("class");//quitar el atributo class
-    $("#DivModBorModulo").attr('class', 'modal-content border-danger');//poner verde
+    $("#DivModBorTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#DivModBorTipoIdentificacion").attr('class', 'modal-content border-danger');//poner verde
     //cambiar el color del modal header
-    $("#DivModHeadModulo").removeAttr("class");//quitar el atributo class
-    $("#DivModHeadModulo").attr('class', 'modal-header bg-danger');//poner verde
+    $("#DivModHeaTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#DivModHeaTipoIdentificacion").attr('class', 'modal-header bg-danger');//poner verde
     //cambiar el titulo del modal header
-    $('#H4ModTitModulo').text('Eliminar Módulo');
+    $('#H4ModTitTipoIdentificacion').text('Eliminar Tipo de Identificación');//tttt
     //cambiar el color icono btn
-    $("#BtnCUDModulo").removeAttr("class");//quitar el atributo class
-    $("#BtnCUDModulo").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
-    $("#BtnCUDModulo i").removeAttr("class");
-    $("#BtnCUDModulo i").attr("class", "fa fa-trash fa-2x");//ícono
+    $("#btnNueTipoIdentificacion").removeAttr("class");//quitar el atributo class
+    $("#btnNueTipoIdentificacion").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#btnNueTipoIdentificacion i").removeAttr("class");
+    $("#btnNueTipoIdentificacion i").attr("class", "fa fa-trash fa-2x");//ícono
     //bloquear elementos
-    $("#TxtModulo").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#TxtModuloAsp").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoTipoIdentificacion").attr('disabled', true); //variables de los elementos del modal xxxx
+
     //vaciar elementos text de todo el modal
-    $('#' + ModCModulo[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCTipoIdentificacion[0].id + ' :text').val(""); // variable del modal xxxx
 
 }
 
 /*quitar btn CUD*/
-function FnJsBlockModulo() {// nombre función xxxx
+function FnJsBlockTipoIdentificacion() {// nombre función xxxx
 
-    if (EMod || EModAsp == true) {// variables xxxx
-        $("#BtnCUDModulo").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#BtnCUDModulo").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
+    if (ETipoIdentificacion == true) {// variables xxxx
+        $("#btnNueTipoIdentificacion").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
+        $("#btnNueTipoIdentificacion").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
     }
-    else if (EMod || EModAsp == false) {// variables xxxx
-        $("#BtnCUDModulo").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#BtnCUDModulo").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
+    else if (ETipoIdentificacion == false) {// variables xxxx
+        $("#btnNueTipoIdentificacion").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
+        $("#btnNueTipoIdentificacion").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
     }
 }
 
 //guardar CUD
-$('#BtnCUDModulo').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueTipoIdentificacion').click(function (e) {//1 evento para mostrar contenido xxxx
     e.preventDefault();
-    if (formModulo.checkValidity()) {
-        switch (CRUDModulo) { // variable crud xxxx
+    if (formTipoIdentificacion.checkValidity()) {
+        switch (CRUDTipoIdentificacion) { // variable crud xxxx
             case "C":
-                FnJsAjaxCModulo(); // función para crear xxxx
+                FnJsAjaxCTipoIdentificacion(); // función para crear xxxx
                 break;
             case "U":
-                FnJsAjaxUModulo();// función para crear xxxx
+                FnJsAjaxUTipoIdentificacion();// función para crear xxxx
                 break;
             case "D":
-                FnJsAjaxDModulo();// función para crear xxxx
+                FnJsAjaxDTipoIdentificacion();// función para crear xxxx
                 break;
             default:
-                console.log("Error en cud Módulo");
+                console.log("Error en cud Tipo Identificación");/////tttt
         }
     }
 });
 
 //ajax CUD
-function FnJsAjaxCModulo() {
+function FnJsAjaxCTipoIdentificacion() {
     $.ajax({
-        url: "/modulo4/vst13.aspx/FnCModuloV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstGenerales.aspx/FnCTipoIdentificacionV", // nombre de página y nombre de función cude xxxx
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({// los parámetros de la sig línea
-            Modulo: VarJsModulo,
-            ModuloAsp: VarJSModuloAsp
+            TipoIdentificacion: VarJsTipoIdentificacion,
+
         }), /*parametro: valor*/
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -345,25 +339,26 @@ function FnJsAjaxCModulo() {
         success: function (data) {
             if (data.d) {
                 //se creó
-                console.log("Módulo Agregado"); //texto xxxx            
+                console.log("Tipo de identificación Agregado"); ////tttt        
             }
             else {
                 //no se creó
-                CRUDModulo = "error"
-                console.log("No se pudo agregar Módulo");//
+                CRUDTipoIdentificacion = "error"
+                console.log("No se pudo agregar Tipo de indentificación");//
             }
-            FnAlertaModulo(); // nombre función alerta xxxx
+            FnAlertaTipoIdentificacion(); // nombre función alerta xxxx
         }
     });//ajax fin
 }
-function FnJsAjaxUModulo() {
+function FnJsAjaxUTipoIdentificacion() {
     $.ajax({
-        url: "/modulo4/vst13.aspx/FnUModuloV", // nombre de página y nombre de función cude
+        url: "/modulo7/VstGenerales.aspx/FnUTipoIdentificacionV", // nombre de página y nombre de función cude
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({// los parámetros de la sig línea
-            IdModulo: VarJsModuloId,
-            Modulo: VarJsModulo,
-            ModuloAsp: VarJSModuloAsp
+            IdTipoIdentificacion: VarJsTipoIdentificacionId,
+            TipoIdentificacion: VarJsTipoIdentificacion,
+
+
         }), /*parametro: valor*/
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -372,23 +367,23 @@ function FnJsAjaxUModulo() {
         success: function (data) {
             if (data.d) {
                 //se actualizó
-                console.log("Módulo Actualizado"); //
+                console.log("Tipo de Identificación Actualizado"); ////tttt
             }
             else {
                 //no se borró
-                CRUDModulo = "error"
+                CRUDTipoIdentificacion = "error"
                 console.log("no se pudo actualizar");//
             }
-            FnAlertaModulo();// nombre función alerta xxxx
+            FnAlertaTipoIdentificacion();// nombre función alerta xxxx
         }
     });//ajax fin
 }
-function FnJsAjaxDModulo() {
+function FnJsAjaxDTipoIdentificacion() {
     $.ajax({
-        url: "/modulo4/vst13.aspx/FnDModuloV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstGenerales.aspx/FnDTipoIdentificacionV", // nombre de página y nombre de función cude xxxx
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({// los parámetros de la sig línea
-            IdModulo: VarJsModuloId
+            IdTipoIdentificacion: VarJsTipoIdentificacionId
         }), /*parametro: valor*/
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -397,27 +392,27 @@ function FnJsAjaxDModulo() {
         success: function (data) {
             if (data.d) {
                 //se creó
-                console.log("Módulo Eliminado"); //texto xxxx
+                console.log("Tipo de identificación Eliminado"); ////tttt
             }
             else {
                 //no se creó
-                CRUDModulo = "error"
-                console.log("No se pudo Eliminar Módulo");//
+                CRUDTipoIdentificacion = "error"
+                console.log("No se pudo Eliminar Tipo de identificación");////tttt
             }
-            FnAlertaModulo(); // nombre función alerta xxxx
+            FnAlertaTipoIdentificacion(); // nombre función alerta xxxx
 
         }
     });//ajax fin
 }
 
 //Existe
-function FnJsAjaxEModulo() {// nombre de la función existe xxxx
+function FnJsAjaxETipoIdentificacion() {// nombre de la función existe xxxx
     $.ajax({
-        url: "/modulo4/vst13.aspx/FnEModuloV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo7/VstGenerales.aspx/FnETipoIdentificacionV", // nombre de página y nombre de función existe xxxx
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({//parámetros xxxx
-            IdModulo: VarJsModuloId,
-            Modulo: VarJsModulo
+            IdTipoIdentificacion: VarJsTipoIdentificacionId,
+            TipoIdentificacion: VarJsTipoIdentificacion
         }), /*parametro: valor*/
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -426,52 +421,24 @@ function FnJsAjaxEModulo() {// nombre de la función existe xxxx
         success: function (data) {
             if (data.d) {
                 //ocultar botón
-                EMod = true; // variable existe xxxx
-                $('#lblModulo').text("Existe Módulo");// id etiqueta texto etiqueta xxxx
-                FnJsBlockModulo();//nombre de función bloquear xxxx
+                ETipoIdentificacion = true; // variable existe xxxx
+                $('#lblexistenuevoTipoIdentificacion').text("Existe Tipo de identificación");// id etiqueta texto etiqueta //tttt
+                FnJsBlockTipoIdentificacion();//nombre de función bloquear xxxx
 
             }
             else {
                 //mostrar btn
-                EMod = false;// variable existe xxxx
-                $('#lblModulo').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockModulo(); //nombre de función bloquear xxxx
-            }
-        }
-    });//ajax fin
-}
-function FnJsAjaxEModuloAsp() {// nombre de la función existe xxxx
-    $.ajax({
-        url: "/modulo4/vst13.aspx/FnEModuloAspV", // nombre de página y nombre de función existe xxxx
-        contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
-            IdModulo: VarJsModuloId,
-            ModuloAsp: VarJSModuloAsp
-        }), /*parametro: valor*/
-        method: 'post',
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
-        },
-        success: function (data) {
-            if (data.d) {
-                //ocultar botón
-                EModAsp = true; // variable existe xxxx
-                $('#LblModuloAsp').text("Existe Módulo Asp");// id etiqueta texto etiqueta xxxx
-                FnJsBlockModulo();//nombre de función bloquear xxxx
-
-            }
-            else {
-                //mostrar btn
-                EModAsp = false;// variable existe xxxx
-                $('#LblModuloAsp').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockModulo(); //nombre de función bloquear xxxx
+                ETipoIdentificacion = false;// variable existe xxxx
+                $('#lblexistenuevoTipoIdentificacion').text(""); // id etiqueta texto etiqueta xxxx
+                FnJsBlockTipoIdentificacion(); //nombre de función bloquear xxxx
             }
         }
     });//ajax fin
 }
 
-function VerificarExisteModulo() {// nombre de función verificarexiste xxxx
-    if ($('#TxtModulo').val().length > 3 && $('#TxtModuloAsp').val().length > 3) { // id de objetos de entradas, cantidad mínima permitida xxxx
+
+function VerificarExisteTipoIdentificacion() {// nombre de función verificarexiste xxxx
+    if ($('#txtNuevoTipoIdentificacion').val().length > 3) { // id de objetos de entradas, cantidad mínima permitida xxxx
         return true;
     }
     else {
@@ -480,55 +447,49 @@ function VerificarExisteModulo() {// nombre de función verificarexiste xxxx
 }
 
 
-$('#TxtModulo').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsModulo = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteModulo()) {//nombre función verificar existe xxxx
-        FnJsAjaxEModulo(); // llamar todos los existes xxxx
-        FnJsAjaxEModuloAsp();// llamar todos los existes xxxx
-    }
-});
-$('#TxtModuloAsp').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJSModuloAsp = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteModulo()) {//nombre función verificar existe xxxx
-        FnJsAjaxEModulo(); // llamar todos los existes xxxx
-        FnJsAjaxEModuloAsp();// llamar todos los existes xxxx
+$('#txtNuevoTipoIdentificacion').keyup(function (e) {//id de cada elemento en el modal xxxx
+    VarJsTipoIdentificacion = $(this).val(); // variable de este elemento xxxx
+    if (VerificarExisteTipoIdentificacion()) {//nombre función verificar existe xxxx
+        FnJsAjaxETipoIdentificacion(); // llamar todos los existes xxxx
+
     }
 });
 
-function FnAlertaModulo() {//nombre de la función xxxx
 
-    switch (CRUDModulo) {//nombre de la variable cud xxxx
+function FnAlertaTipoIdentificacion() {//nombre de la función xxxx
+
+    switch (CRUDTipoIdentificacion) {//nombre de la variable cud xxxx
         case "C":
-            VarJsColorAlertModulo = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertModulo = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertTipoIdentificacion = "bg-success";//variable de color alerta xxxx
+            VarJsTextoAlertTipoIdentificacion = "Creado";//variable de texto alerta xxxx
             break;
         case "U":
-            VarJsColorAlertModulo = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertModulo = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertTipoIdentificacion = "bg-warning";//variable de color alerta xxxx
+            VarJsTextoAlertTipoIdentificacion = "Actualizado";//variable de texto alerta xxxx
             break;
-            VarJsColorAlertModulo = "bg-danger";//variable de color alerta xxxx
         case "D":
+            VarJsColorAlertTipoIdentificacion = "bg-danger";//variable de color alerta xxxx
+            VarJsTextoAlertTipoIdentificacion = "Eliminado";//variable de texto alerta xxxx
             break;
-            VarJsTextoAlertModulo = "Eliminado";//variable de texto alerta xxxx
         case "Error":
-            VarJsColorAlertModulo = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertModulo = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertTipoIdentificacion = "bg-secondary";//variable de color alerta xxxx
+            VarJsTextoAlertTipoIdentificacion = "No se pudo realizar la operación";//variable de texto alerta xxxx
             break;
         default:
-            console.log("Error CUD Módulo Alert")
+            console.log("Error CUD Tipo Identificación Alert")//tttt
     }
     //alerta
-    $('#alerta .modal-content').addClass(VarJsColorAlertModulo);//variable de color alerta xxxx
-    $('#alerta h5').text(VarJsTextoAlertModulo);//variable de texto alerta xxxx
+    $('#alerta .modal-content').addClass(VarJsColorAlertTipoIdentificacion);//variable de color alerta xxxx
+    $('#alerta h5').text(VarJsTextoAlertTipoIdentificacion);//variable de texto alerta xxxx
     $('#alerta').modal('show');
     setTimeout(function () {
         $('#alerta').modal('hide');
-        $('#alerta .modal-content').removeClass(VarJsColorAlertModulo);//variable de color alerta xxxx
+        $('#alerta .modal-content').removeClass(VarJsColorAlertTipoIdentificacion);//variable de color alerta xxxx
     }, 1500);// tiempo para que aparezca la alerta crear variable ms
 
-    if ($("#secciontblM.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRModulo();//función ajax de llenado de la tabla xxxx
+    if ($("#secciontblTipoIdentificacion.show").length > 0) {//seccion tabla xxxx
+        FnJsAjaxRTipoIdentificacion();//función ajax de llenado de la tabla xxxx
     }
     //cerrar modal
-    $("#ModModulo").modal("toggle");//nombre modal xxxx
+    $("#modalNTipoIdentificacion").modal("toggle");//nombre modal xxxx
 }

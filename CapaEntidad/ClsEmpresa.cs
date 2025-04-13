@@ -14,6 +14,7 @@ namespace CapaEntidad
         private string _Ruc;
         private string _Estado;
         private ClsTipoEmpresa _ObjTipoEmpresa;
+        private ClsRegimen _ObjRegimen;
 
         public string IdEmpresa { get => _IdEmpresa; set => _IdEmpresa = value; }
         public string NombreComercial { get => _NombreComercial; set => _NombreComercial = value; }
@@ -21,9 +22,12 @@ namespace CapaEntidad
         public string Ruc { get => _Ruc; set => _Ruc = value; }
         public string Estado { get => _Estado; set => _Estado = value; }
         public ClsTipoEmpresa ObjTipoEmpresa { get => _ObjTipoEmpresa; set => _ObjTipoEmpresa = value; }
+        public ClsRegimen ObjRegimen { get => _ObjRegimen; set => _ObjRegimen = value; }
 
         public ClsEmpresa() {
             this.ObjTipoEmpresa = new ClsTipoEmpresa();
+            this.ObjRegimen = new ClsRegimen();
         }
+        
     }
 }

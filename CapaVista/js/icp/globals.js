@@ -3,8 +3,12 @@
 });
 $('.popinfo1').attr('data-content', "Letras y números, uno y solo un espacio entre palabras, sin espacios al final o inicio. Mínimo 3, máximo 30 caracteres");
 $('.popinfo2').attr('data-content', "Letras y números, sin espacios entre palabras. Mínimo 3, máximo 10 caracteres");
-
-
+$('.popinfoNum').attr('data-content', "Números solamente");
+$('.popinfo45').attr('data-content', "Letras,mínimo 3, máximo 45 caracteres");
+$('.popinfo345NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 45 caracteres");
+$('.popinfo320NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 20 caracteres");
+$('.popinfoMAIL').attr('data-content', "Formato para correo electrónico");
+popinfoMAIL
 /* variable de fx*/
 var ModFx = [
         'fadeIn',

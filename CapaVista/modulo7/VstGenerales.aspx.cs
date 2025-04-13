@@ -18,14 +18,81 @@ namespace CapaVista.modulo7
 
         }
 
+        #region RegEstadoCivil
+        [WebMethod]
+        public static bool FnCEstadoCivilV(string EstadoCivil )
+        { 
+            bool CreateEstadoCivil = false;
+            ClsEstadoCivil OEstadoCivil = new ClsEstadoCivil();
+
+            OEstadoCivil.EstadoCivil=EstadoCivil;
+
+            CreateEstadoCivil = new ClsEstadoCivilN().FnCEstadoCivilN(OEstadoCivil);
+
+            return CreateEstadoCivil;
+
+        }
+
+        [WebMethod]
+        public static List<ClsEstadoCivil> FnREstadoCivilV()
+        {
+            List<ClsEstadoCivil> OEstadoCivil = new ClsEstadoCivilN().FnREstadoCivilN();
+            return OEstadoCivil;
+        }
+
+        [WebMethod]
+        public static bool FnUEstadoCivilV(string IdEstadoCivil, string EstadoCivil)
+        {
+            bool UpdateEstadoCivil = false;
+            ClsEstadoCivil OEstadoCivil = new ClsEstadoCivil();
+
+            OEstadoCivil.IdEstadoCivil = IdEstadoCivil;
+            OEstadoCivil.EstadoCivil = EstadoCivil;
+
+            UpdateEstadoCivil = new ClsEstadoCivilN().FnUEstadoCivilN(OEstadoCivil);
+
+            return UpdateEstadoCivil;
+
+        }
+
+        [WebMethod]
+        public static bool FnDEstadoCivilV(string IdEstadoCivil)
+        {
+            bool DeleteEstadoCivil = false;
+            ClsEstadoCivil OEstadoCivil = new ClsEstadoCivil();
+
+            OEstadoCivil.IdEstadoCivil = IdEstadoCivil;
+            
+            DeleteEstadoCivil = new ClsEstadoCivilN().FnDEstadoCivilN(OEstadoCivil);
+
+            return DeleteEstadoCivil;
+
+        }
+
+        [WebMethod]
+        public static bool FnEEstadoCivilV(string IdEstadoCivil, string EstadoCivil)
+        {
+            bool ExisteEstadoCivil = false;
+            ClsEstadoCivil OEstadoCivil = new ClsEstadoCivil();
+
+            OEstadoCivil.IdEstadoCivil = IdEstadoCivil;
+            OEstadoCivil.EstadoCivil = EstadoCivil;
+
+            ExisteEstadoCivil = new ClsEstadoCivilN().FnEEstadoCivilN(OEstadoCivil);
+
+            return ExisteEstadoCivil;
+
+        }
+        #endregion
+
         #region RegTipoDireccion
         [WebMethod]
-        public static bool FnCTipoDireccionV(string TipoDireccion )
-        { 
+        public static bool FnCTipoDireccionV(string TipoDireccion)
+        {
             bool CreateTipoDireccion = false;
             ClsTipoDireccion OTipoDireccion = new ClsTipoDireccion();
 
-            OTipoDireccion.TipoDireccion=TipoDireccion;
+            OTipoDireccion.TipoDireccion = TipoDireccion;
 
             CreateTipoDireccion = new ClsTipoDireccionN().FnCTipoDireccionN(OTipoDireccion);
 
@@ -62,7 +129,7 @@ namespace CapaVista.modulo7
             ClsTipoDireccion OTipoDireccion = new ClsTipoDireccion();
 
             OTipoDireccion.IdTipoDireccion = IdTipoDireccion;
-            
+
             DeleteTipoDireccion = new ClsTipoDireccionN().FnDTipoDireccionN(OTipoDireccion);
 
             return DeleteTipoDireccion;

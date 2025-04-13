@@ -42,14 +42,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClsAreaN.cs" />
+    <Compile Include="ClsBancoN.cs" />
+    <Compile Include="ClsConceptoRocN.cs" />
     <Compile Include="ClsElementoN.cs" />
+    <Compile Include="ClsEntradaN.cs" />
+    <Compile Include="ClsEstadoCivilN.cs" />
+    <Compile Include="ClsFamiliaN.cs" />
     <Compile Include="ClsModuloN.cs" />
+    <Compile Include="ClsPagoSobreN.cs" />
+    <Compile Include="ClsPalabraClaveN.cs" />
     <Compile Include="ClsPermisosN.cs" />
+    <Compile Include="ClsPromoN.cs" />
+    <Compile Include="ClsRangoPrecioN.cs" />
+    <Compile Include="ClsRegimenN.cs" />
     <Compile Include="ClsRolN.cs" />
     <Compile Include="ClsTicoControlN.cs" />
+    <Compile Include="ClsTipoClienteN.cs" />
     <Compile Include="ClsTipoCorreoN.cs" />
     <Compile Include="ClsTipoDireccionN.cs" />
+    <Compile Include="ClsTipoEmpresaN.cs" />
+    <Compile Include="ClsTipoGastoN.cs" />
     <Compile Include="ClsTipoIdentificacionN.cs" />
+    <Compile Include="ClsTipoPagoN.cs" />
     <Compile Include="ClsTipoTelefonoN.cs" />
     <Compile Include="ClsUsuarioN.cs" />
     <Compile Include="ClsVistaN.cs" />
