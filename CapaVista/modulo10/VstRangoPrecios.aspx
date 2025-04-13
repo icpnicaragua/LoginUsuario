@@ -83,15 +83,15 @@
                         <label id="lblexistenuevoRangoPrecio" for="txtNuevoRangoPrecio" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoRangoPrecio" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Rango de precio" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoRangoPrecio" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Rango de precio" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
-                                <button type="button" class="btn btn-secondary popinfo45" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                <button type="button" class="btn btn-secondary popinfo345NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <!-- class popinfoX-->
                                     <i class="fas fa-info"></i>
                                 </button>
                             </span>
                         </div>
-                        <label id="lblexistenuevolblexistenuevoValorMinimo" for="txtNuevoValorMinimo" runat="server" class="text-warning" text=""></label>
+                        <label id="lblexistenuevoValorMinimo" for="txtNuevoValorMinimo" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
                         <div class="input-group mb-3">
                             <asp:TextBox ID="txtNuevoValorMinimo" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Valor mínimo" data-required-error="dddd" pattern="[0-9]+" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
@@ -120,4 +120,5 @@
     <script src="/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <!-- crear para cada tabla-->
+    <script src="/js/icp/CRUDERangoPrecio.js" type="text/javascript"></script>
 </asp:Content>

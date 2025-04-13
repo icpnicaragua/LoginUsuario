@@ -110,7 +110,7 @@ function FnJsDate() {
 
 function FnJsHour() {
     var now = new Date();
-    var jsDate = now.getHours() + "-" + now.getMinutes() + "-" + now.getSeconds();
+    var jsDate = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
     return jsDate;
 }

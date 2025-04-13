@@ -21,7 +21,7 @@ namespace CapaDato
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spCPalabraClave", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spCPalabrasClave", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmCPalabrasClave", OPalabraClave.PalabraClave);
 

@@ -18,13 +18,13 @@ namespace CapaVista.modulo10
         }
         #region RegRangoPrecio
         [WebMethod]
-        public static bool FnCRangoPrecioV(string RangoPrecio, string Valor_Minimo)
+        public static bool FnCRangoPrecioV(string RangoPrecio, string ValorMinimo)
         {
             bool CreateRangoPrecio = false;
             ClsRangoPrecio ORangoPrecio = new ClsRangoPrecio();
 
             ORangoPrecio.Rango = RangoPrecio;
-            ORangoPrecio.ValorMinimo = Valor_Minimo;
+            ORangoPrecio.ValorMinimo = ValorMinimo;
 
             CreateRangoPrecio = new ClsRangoPrecioN().FnCRangoPrecioN(ORangoPrecio);
 
@@ -40,14 +40,14 @@ namespace CapaVista.modulo10
         }
 
         [WebMethod]
-        public static bool FnURangoPrecioV(string IdRangoPrecio, string RangoPrecio, string Valor_Minimo)
+        public static bool FnURangoPrecioV(string IdRangoPrecio, string RangoPrecio, string ValorMinimo)
         {
             bool UpdateRangoPrecio = false;
             ClsRangoPrecio ORangoPrecio = new ClsRangoPrecio();
 
             ORangoPrecio.IdRangoPrecio = IdRangoPrecio;
             ORangoPrecio.Rango = RangoPrecio;
-            ORangoPrecio.ValorMinimo = Valor_Minimo;
+            ORangoPrecio.ValorMinimo = ValorMinimo;
             UpdateRangoPrecio = new ClsRangoPrecioN().FnURangoPrecioN(ORangoPrecio);
 
             return UpdateRangoPrecio;
