@@ -226,8 +226,8 @@
                                     <i class="fa fa-percent"></i><span> Promociones</span>
                                 </a>
                             </li>
-                            <li id="VsFamilia">
-                                <a href="../modulo10/VsFamilia.aspx">
+                            <li id="VstFamilia">
+                                <a href="../modulo10/VstFamilia.aspx">
                                     <i class="fa fa-sitemap"></i><span> Familias</span>
                                 </a>
                             </li>

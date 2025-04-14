@@ -18,7 +18,9 @@
                     <asp:LinkButton ID="lbTDireccion" href="#TDireccion" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Tipo de Dirección</asp:LinkButton>
                     <asp:LinkButton ID="lbTCorreo" href="#TCorreo" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Tipo Correo</asp:LinkButton>
                     <asp:LinkButton ID="lbTTelefono" href="#TTelefono" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Tipo de Teléfono</asp:LinkButton>
-                </div>
+             <asp:LinkButton ID="lbEstadoCivil" href="#EstadoCivil" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Estado Civil</asp:LinkButton><!-- id href text-->
+            
+                    </div>
             </div>
         </div>
     </div>
@@ -159,6 +161,40 @@
                     </div>
                 </div>
             </div>
+<div id="EstadoCivil" class="  col-lg-6 col-md-6 col-sm-12 collapse">
+    <!-- id-->
+    <div class="card bg-light mb-3">
+        <div class="card-header">
+            <h2 class="d-inline-block">EstadoCivil</h2>
+            <!-- h2-->
+            <div class="d-inline-block pull-right">
+                <asp:LinkButton ID="lbNEstadoCivil" href="#modalNEstadoCivil" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                <asp:LinkButton ID="lbMostrarEstadoCivil" href="#secciontblEstadoCivil" runat="server" Text="Mostrar Estado Civil" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="secciontblEstadoCivil" class="table-responsive collapse">
+                <!-- id-->
+                <table id="tblEstadoCivil" class="table table-bordered table-hover">
+                    <!-- id-->
+                    <thead>
+                        <tr>
+                            <!-- campos-->
+                            <th>Id</th>
+                            <th>Estado Civil</th>
+                            <th>Ctrl</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblBodyEstadoCivil">
+                        <!-- id-->
+                        <!-- ajax-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 
@@ -312,6 +348,40 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="modalNEstadoCivil">
+    <!-- id-->
+    <div class="modal-dialog" role="document">
+        <div id="DivModBorEstadoCivil" class="modal-content border-success">
+            <!-- id-->
+            <div id="DivModHeaEstadoCivil" class="modal-header bg-success">
+                <!-- id-->
+                <h4 id="H4ModTitEstadoCivil">Editar Estado Civil</h4>
+                <!-- id h4-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div id="frmnueEstadoCivil" runat="server" data-toggle="validator" role="form">
+                    <!-- id-->
+                    <label id="lblexistenuevoEstadoCivil" for="txtNuevoEstadoCiviln" runat="server" class="text-warning" text=""></label>
+                    <!-- id for-->
+                    <div class="input-group mb-3">
+                        <asp:TextBox ID="txtNuevoEstadoCivil" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo EstadoCivil" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                        <span class="input-group-addon">
+                            <button type="button" class="btn btn-secondary popinfo320NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                <!-- class popinfoX-->
+                                <i class="fas fa-info"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <button id="btnNueEstadoCivil" tabindex="2" class="btn btn-success pull-right">
+                        <!-- id idex(si aplica)-->
+                        <i class="fas fa-save fa-2x"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphJs" runat="server">
     <script src="/datatables/datatables.min.js"></script>
@@ -325,4 +395,5 @@
        <script src="/js/icp/CRUDETipoDireccion.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDETipoCorreo.js" type="text/javascript"></script>
      <script src="/js/icp/CRUDETipoTelefono.js" type="text/javascript"></script>
+     <script src="/js/icp/CRUDEEstadoCivil.js" type="text/javascript"></script>
 </asp:Content>

@@ -7,65 +7,65 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace CapaVista.modulo2
+namespace CapaVista.modulo10
 {
 
 
-    public partial class VstCompras
+    public partial class VsFamilia
     {
 
         /// <summary>
-        /// Control lbEntrada.
+        /// Control lbFamilia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbEntrada;
+        protected global::System.Web.UI.WebControls.LinkButton lbFamilia;
 
         /// <summary>
-        /// Control lbNEntrada.
+        /// Control lbNFamilia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbNEntrada;
+        protected global::System.Web.UI.WebControls.LinkButton lbNFamilia;
 
         /// <summary>
-        /// Control lbMostrarEntrada.
+        /// Control lbMostrarFamilia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMostrarEntrada;
+        protected global::System.Web.UI.WebControls.LinkButton lbMostrarFamilia;
 
         /// <summary>
-        /// Control frmnueEntrada.
+        /// Control frmnueFamilia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueEntrada;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueFamilia;
 
         /// <summary>
-        /// Control lblexistenuevoEntrada.
+        /// Control lblexistenuevoFamilia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoEntrada;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoFamilia;
 
         /// <summary>
-        /// Control txtNuevoEntrada.
+        /// Control txtNuevoFamilia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNuevoEntrada;
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoFamilia;
     }
 }

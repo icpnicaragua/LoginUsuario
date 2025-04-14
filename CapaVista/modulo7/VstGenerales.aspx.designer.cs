@@ -51,6 +51,15 @@ namespace CapaVista.modulo7
         protected global::System.Web.UI.WebControls.LinkButton lbTTelefono;
 
         /// <summary>
+        /// Control lbEstadoCivil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbEstadoCivil;
+
+        /// <summary>
         /// Control lbNTipoIdentificacion.
         /// </summary>
         /// <remarks>
@@ -121,6 +130,24 @@ namespace CapaVista.modulo7
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbMostrarTipoTelefono;
+
+        /// <summary>
+        /// Control lbNEstadoCivil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbNEstadoCivil;
+
+        /// <summary>
+        /// Control lbMostrarEstadoCivil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbMostrarEstadoCivil;
 
         /// <summary>
         /// Control frmnueTipoIdentificacion.
@@ -229,5 +256,32 @@ namespace CapaVista.modulo7
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNuevoTipoTelefono;
+
+        /// <summary>
+        /// Control frmnueEstadoCivil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueEstadoCivil;
+
+        /// <summary>
+        /// Control lblexistenuevoEstadoCivil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoEstadoCivil;
+
+        /// <summary>
+        /// Control txtNuevoEstadoCivil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoEstadoCivil;
     }
 }

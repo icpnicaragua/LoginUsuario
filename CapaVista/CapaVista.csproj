@@ -623,6 +623,11 @@
     <Content Include="js\icp\admin_permisos.js" />
     <Content Include="js\icp\CRUDEArea.js" />
     <Content Include="js\icp\CRUDEBanco.js" />
+    <Content Include="js\icp\CRUDEConceptoRoc.js" />
+    <Content Include="js\icp\CRUDEEntrada.js" />
+    <Content Include="js\icp\CRUDEEstadoCivil.js" />
+    <Content Include="js\icp\CRUDEFamilia.js" />
+    <Content Include="js\icp\CRUDEPagoSobre.js" />
     <Content Include="js\icp\CRUDEPalabraClave.js" />
     <Content Include="js\icp\CRUDEPromo.js" />
     <Content Include="js\icp\CRUDERangoPrecio.js" />
@@ -778,7 +783,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="masterpage1.aspx" />
-    <Content Include="modulo10\VsFamilia.aspx" />
+    <Content Include="modulo10\VstFamilia.aspx" />
     <Content Include="modulo10\VstPalabrasClave.aspx" />
     <Content Include="modulo10\VstProductos.aspx" />
     <Content Include="modulo10\VstPromo.aspx" />
@@ -2282,12 +2287,12 @@
     <Compile Include="masterpage1.aspx.designer.cs">
       <DependentUpon>masterpage1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="modulo10\VsFamilia.aspx.cs">
-      <DependentUpon>VsFamilia.aspx</DependentUpon>
+    <Compile Include="modulo10\VstFamilia.aspx.cs">
+      <DependentUpon>VstFamilia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="modulo10\VsFamilia.aspx.designer.cs">
-      <DependentUpon>VsFamilia.aspx</DependentUpon>
+    <Compile Include="modulo10\VstFamilia.aspx.designer.cs">
+      <DependentUpon>VstFamilia.aspx</DependentUpon>
     </Compile>
     <Compile Include="modulo10\VstPalabrasClave.aspx.cs">
       <DependentUpon>VstPalabrasClave.aspx</DependentUpon>
