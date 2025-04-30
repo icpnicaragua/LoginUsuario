@@ -1,35 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
 using MySql.Data.MySqlClient;
-using System.Data;
 
 namespace CapaDato
 {
-    public class ClsBancoD
+    public class ClsGarantiaD
     {
         private ClsConexion ObjConexion = null;
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
-        public bool FnCBancoD(ClsBanco OBanco)
+        public bool FnCGarantiaD(ClsGarantia OGarantia)
         {
-            bool CreateOBanco = false;
+            bool CreateOGarantia = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spCBanco", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spCGarantia", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmCBanco", OBanco.Banco);
+                Cmd_D.Parameters.AddWithValue("prmCPlazo_Dias", OGarantia.Garantia);
 
                 ObjConexion.Abrircon();
-                int FilasBanco = Cmd_D.ExecuteNonQuery();
-                if (FilasBanco > 0) CreateOBanco = true;
+                int FilasCRegime = Cmd_D.ExecuteNonQuery();
+                if (FilasCRegime > 0) CreateOGarantia = true;
 
-                return CreateOBanco;
+                return CreateOGarantia;
             }
             catch (Exception ex)
             {
@@ -42,25 +42,25 @@ namespace CapaDato
             }
         }
 
-        public List<ClsBanco> FnRBancoD()
+        public List<ClsGarantia> FnRGarantiaD()
         {
-            ClsBanco OBanco = null;
+            ClsGarantia OGarantia = null;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spRBanco", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spRGarantia", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
-                List<ClsBanco> LstBanco = new List<ClsBanco>();
+                List<ClsGarantia> LstGarantia = new List<ClsGarantia>();
                 while (Dr_D.Read())
                 {
-                    OBanco = new ClsBanco();
-                    OBanco.IdBanco = Dr_D[0].ToString();//id_Banco
-                    OBanco.Banco = Dr_D[1].ToString();  //Banco     
-                    LstBanco.Add(OBanco);
+                    OGarantia = new ClsGarantia();
+                    OGarantia.IdGarantia = Dr_D[0].ToString();//id_Garantia
+                    OGarantia.Garantia = Dr_D[1].ToString();  //Garantia     
+                    LstGarantia.Add(OGarantia);
                 }
-                return LstBanco;
+                return LstGarantia;
             }
             catch (Exception ex)
             {
@@ -73,22 +73,22 @@ namespace CapaDato
             }
         }
 
-        public bool FnUBancoD(ClsBanco OBanco)
+        public bool FnUGarantiaD(ClsGarantia OGarantia)
         {
-            bool UpdateBanco = false;
+            bool UpdateGarantia = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spUBanco", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spUGarantia", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmUIdBanco", Convert.ToInt16(OBanco.IdBanco));
-                Cmd_D.Parameters.AddWithValue("prmUBanco", OBanco.Banco);
+                Cmd_D.Parameters.AddWithValue("prmUIdGarantia", Convert.ToInt16(OGarantia.IdGarantia));
+                Cmd_D.Parameters.AddWithValue("prmUPlazo_Dias", Convert.ToInt16(OGarantia.Garantia));
 
                 ObjConexion.Abrircon();
-                int FilasUBanco = Cmd_D.ExecuteNonQuery();
-                if (FilasUBanco > 0) UpdateBanco = true;
+                int FilasUGarantia = Cmd_D.ExecuteNonQuery();
+                if (FilasUGarantia > 0) UpdateGarantia = true;
 
-                return UpdateBanco;
+                return UpdateGarantia;
             }
             catch (Exception ex)
             {
@@ -101,21 +101,21 @@ namespace CapaDato
             }
         }
 
-        public bool FnDBancoD(ClsBanco OBanco)
+        public bool FnDGarantiaD(ClsGarantia OGarantia)
         {
-            bool DeleteBanco = false;
+            bool DeleteGarantia = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spDBanco", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spDGarantia", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmDIdBanco", Convert.ToInt16(OBanco.IdBanco));
+                Cmd_D.Parameters.AddWithValue("prmDIdGarantia", Convert.ToInt16(OGarantia.IdGarantia));
 
                 ObjConexion.Abrircon();
-                int FilasDBanco = Cmd_D.ExecuteNonQuery();
-                if (FilasDBanco > 0) DeleteBanco = true;
+                int FilasDGarantia = Cmd_D.ExecuteNonQuery();
+                if (FilasDGarantia > 0) DeleteGarantia = true;
 
-                return DeleteBanco;
+                return DeleteGarantia;
             }
             catch (Exception ex)
             {
@@ -128,23 +128,23 @@ namespace CapaDato
             }
         }
 
-        public bool FnEBancoD(ClsBanco OBanco)
+        public bool FnEGarantiaD(ClsGarantia OGarantia)
         {
-            bool ExisteBanco = true;
+            bool ExisteGarantia = true;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spEBanco", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spEGarantia", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmEIdBanco", Convert.ToInt16(OBanco.IdBanco));
-                Cmd_D.Parameters.AddWithValue("prmEBanco", OBanco.Banco);
+                Cmd_D.Parameters.AddWithValue("prmEIdGarantia", Convert.ToInt16(OGarantia.IdGarantia));
+                Cmd_D.Parameters.AddWithValue("prmEPlazo_Dias", Convert.ToInt16(OGarantia.Garantia));
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
                 if (Dr_D.Read())
                 {
-                    ExisteBanco = Convert.ToBoolean(Dr_D[0]);
+                    ExisteGarantia = Convert.ToBoolean(Dr_D[0]);
                 }
-                return ExisteBanco;
+                return ExisteGarantia;
             }
             catch (Exception ex)
             {

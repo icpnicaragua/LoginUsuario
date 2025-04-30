@@ -113,12 +113,14 @@
   <ItemGroup>
     <Compile Include="ClsAreaD.cs" />
     <Compile Include="ClsBancoD.cs" />
+    <Compile Include="ClsCategoriaD.cs" />
     <Compile Include="ClsConceptoRocD.cs" />
     <Compile Include="ClsConexion.cs" />
     <Compile Include="ClsEntradaD.cs" />
     <Compile Include="ClsEstadoCivilD.cs" />
     <Compile Include="ClsEstanteD.cs" />
     <Compile Include="ClsFamiliaD.cs" />
+    <Compile Include="ClsGarantiaD.cs" />
     <Compile Include="ClsPagoSobreD.cs" />
     <Compile Include="ClsPalabraClaveD.cs" />
     <Compile Include="ClsPermisosD.cs" />

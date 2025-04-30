@@ -44,11 +44,13 @@
   <ItemGroup>
     <Compile Include="ClsAreaN.cs" />
     <Compile Include="ClsBancoN.cs" />
+    <Compile Include="ClsCategoriaN.cs" />
     <Compile Include="ClsConceptoRocN.cs" />
     <Compile Include="ClsElementoN.cs" />
     <Compile Include="ClsEntradaN.cs" />
     <Compile Include="ClsEstadoCivilN.cs" />
     <Compile Include="ClsFamiliaN.cs" />
+    <Compile Include="ClsGarantiaN.cs" />
     <Compile Include="ClsModuloN.cs" />
     <Compile Include="ClsPagoSobreN.cs" />
     <Compile Include="ClsPalabraClaveN.cs" />

@@ -9,11 +9,11 @@ namespace CapaEntidad
     public class ClsGarantia
     {
         private string _IdGarantia;
-        private string _PlazoDias;
+        private string _Garantia;
         private string _Estado;
 
         public string IdGarantia { get => _IdGarantia; set => _IdGarantia = value; }
-        public string PlazoDias { get => _PlazoDias; set => _PlazoDias = value; }
+        public string Garantia { get => _Garantia; set => _Garantia = value; }
         public string Estado { get => _Estado; set => _Estado = value; }
 
         public ClsGarantia() { }
