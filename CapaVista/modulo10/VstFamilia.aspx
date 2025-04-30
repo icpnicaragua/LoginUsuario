@@ -73,6 +73,7 @@
                                 <thead>
                                     <tr>
                                         <!-- campos-->
+                                        <th>Id</th>
                                         <th>Categoria</th>
                                         <th>Familia</th>
                                         <th>Ctrl</th>

@@ -59,7 +59,7 @@ namespace CapaDato
                     OCategoria.IdCategoria = Dr_D[0].ToString();//id_Categoria
                     OCategoria.Categoria = Dr_D[1].ToString();  //Categoria
                     OCategoria.ObjFamilia.IdFamilia = Dr_D[2].ToString();//idfamilia
-                    OCategoria.ObjFamilia.Familia = Dr_D[2].ToString();//familia 
+                    OCategoria.ObjFamilia.Familia = Dr_D[3].ToString();//familia 
                     LstCategoria.Add(OCategoria);
                 }
                 return LstCategoria;
@@ -141,7 +141,7 @@ namespace CapaDato
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmEIdCategoria", Convert.ToInt16(OCategoria.IdCategoria));
                 Cmd_D.Parameters.AddWithValue("prmECategoria", OCategoria.Categoria);
-                Cmd_D.Parameters.AddWithValue("prmUIdFamilia", Convert.ToInt16(OCategoria.ObjFamilia.IdFamilia));
+                Cmd_D.Parameters.AddWithValue("prmEIdFamilia", Convert.ToInt16(OCategoria.ObjFamilia.IdFamilia));
 
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();

@@ -83,5 +83,74 @@ namespace CapaVista.modulo10
 
         }
         #endregion
+
+        #region RegCategoria
+        [WebMethod]
+        public static bool FnCCategoriaV(string Categoria, string IdFamilia)
+        {
+            bool CreateCategoria = false;
+            ClsCategoria OCategoria = new ClsCategoria();
+
+            OCategoria.Categoria = Categoria;
+            OCategoria.ObjFamilia.IdFamilia= IdFamilia;
+
+            CreateCategoria = new ClsCategoriaN().FnCCategoriaN(OCategoria);
+
+            return CreateCategoria;
+
+        }
+
+        [WebMethod]
+        public static List<ClsCategoria> FnRCategoriaV()
+        {
+            List<ClsCategoria> OCategoria = new ClsCategoriaN().FnRCategoriaN();
+            return OCategoria;
+        }
+
+        [WebMethod]
+        public static bool FnUCategoriaV(string IdCategoria, string Categoria, string IdFamilia)
+        {
+            bool UpdateCategoria = false;
+            ClsCategoria OCategoria = new ClsCategoria();
+
+            OCategoria.IdCategoria = IdCategoria;
+            OCategoria.Categoria = Categoria;
+            OCategoria.ObjFamilia.IdFamilia = IdFamilia;
+            UpdateCategoria = new ClsCategoriaN().FnUCategoriaN(OCategoria);
+
+            return UpdateCategoria;
+
+        }
+
+        [WebMethod]
+        public static bool FnDCategoriaV(string IdCategoria)
+        {
+            bool DeleteCategoria = false;
+            ClsCategoria OCategoria = new ClsCategoria();
+
+            OCategoria.IdCategoria = IdCategoria;
+
+            DeleteCategoria = new ClsCategoriaN().FnDCategoriaN(OCategoria);
+
+            return DeleteCategoria;
+
+        }
+
+        [WebMethod]
+        public static bool FnECategoriaV(string IdCategoria, string Categoria, string IdFamilia)
+        {
+            bool ExisteCategoria = false;
+            ClsCategoria OCategoria = new ClsCategoria();
+
+            OCategoria.IdCategoria = IdCategoria;
+            OCategoria.Categoria = Categoria;
+            OCategoria.ObjFamilia.IdFamilia = IdFamilia; 
+
+            ExisteCategoria = new ClsCategoriaN().FnECategoriaN(OCategoria);
+
+            return ExisteCategoria;
+
+        }
+        #endregion
     }
 }
