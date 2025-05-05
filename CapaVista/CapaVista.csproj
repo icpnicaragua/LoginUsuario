@@ -631,6 +631,7 @@
     <Content Include="js\icp\CRUDEGarantia.js" />
     <Content Include="js\icp\CRUDEPagoSobre.js" />
     <Content Include="js\icp\CRUDEPalabraClave.js" />
+    <Content Include="js\icp\CRUDEPersonajs.js" />
     <Content Include="js\icp\CRUDEPromo.js" />
     <Content Include="js\icp\CRUDERangoPrecio.js" />
     <Content Include="js\icp\CRUDERegimen.js" />

@@ -84,5 +84,84 @@ namespace CapaVista.modulo7
         }
         #endregion
 
+        #region RegPersona
+        [WebMethod]
+        public static bool FnCPersonaV(string Nombre1, string Nombre2, string Apellido1, string Apellido2, string IdGenero)
+        {
+            bool CreatePersona = false;
+            ClsPersona OPersona = new ClsPersona();
+
+            OPersona.Nombre1 = Nombre1;
+            OPersona.Nombre2 = Nombre2;
+            OPersona.Apellido1 = Apellido1;
+            OPersona.Apellido2 = Apellido2;
+            OPersona.ObjGenero.IdGenero = IdGenero;
+
+            CreatePersona = new ClsPersonaN().FnCPersonaN(OPersona);
+
+            return CreatePersona;
+
+        }
+
+        [WebMethod]
+        public static List<ClsPersona> FnRPersonaV()
+        {
+            List<ClsPersona> OPersona = new ClsPersonaN().FnRPersonaN();
+            return OPersona;
+        }
+
+        [WebMethod]
+        public static bool FnUPersonaV(string IdPersona, string Nombre1, string Nombre2, string Apellido1, string Apellido2, string IdGenero)
+        {
+            bool UpdatePersona = false;
+            ClsPersona OPersona = new ClsPersona();
+
+            OPersona.IdPersona = IdPersona;
+            OPersona.Nombre1 = Nombre1;
+            OPersona.Nombre2 = Nombre2;
+            OPersona.Apellido1 = Apellido1;
+            OPersona.Apellido2 = Apellido2;
+            OPersona.ObjGenero.IdGenero = IdGenero;
+            UpdatePersona = new ClsPersonaN().FnUPersonaN(OPersona);
+
+            return UpdatePersona;
+
+        }
+
+        [WebMethod]
+        public static bool FnDPersonaV(string IdPersona)
+        {
+            bool DeletePersona = false;
+            ClsPersona OPersona = new ClsPersona();
+
+            OPersona.IdPersona = IdPersona;
+
+            DeletePersona = new ClsPersonaN().FnDPersonaN(OPersona);
+
+            return DeletePersona;
+
+        }
+
+        [WebMethod]
+        public static bool FnEPersonaV(string IdPersona, string Nombre1, string Nombre2, string Apellido1, string Apellido2, string IdGenero)
+        {
+            bool ExistePersona = false;
+            ClsPersona OPersona = new ClsPersona();
+
+            OPersona.IdPersona = IdPersona;
+            OPersona.Nombre1 = Nombre1;
+            OPersona.Nombre2 = Nombre2;
+            OPersona.Apellido1 = Apellido1;
+            OPersona.Apellido2 = Apellido2;
+            OPersona.ObjGenero.IdGenero = IdGenero;
+
+            ExistePersona = new ClsPersonaN().FnEPersonaN(OPersona);
+
+            return ExistePersona;
+
+        }
+        #endregion
+
+
     }
 }

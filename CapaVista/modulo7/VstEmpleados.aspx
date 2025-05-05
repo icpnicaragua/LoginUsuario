@@ -13,6 +13,8 @@
                 <!-- h4-->
                 <div class="form-group">
                     <asp:LinkButton ID="lbArea" href="#Area" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Área</asp:LinkButton><!-- id href text-->
+                    <asp:LinkButton ID="lbPersona" href="#Persona" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Personas</asp:LinkButton><!-- id href text-->
+
                 </div>
             </div>
         </div>
@@ -52,6 +54,45 @@
                     </div>
                 </div>
             </div>
+
+            <div id="Persona" class="  col-lg-12 col-md-12 col-sm-12 collapse">
+                <!-- id-->
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <h2 class="d-inline-block">Personas</h2>
+                        <!-- h2-->
+                        <div class="d-inline-block pull-right">
+                            <asp:LinkButton ID="lbNPersona" href="#modalNPersona" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                            <asp:LinkButton ID="lbMostrarPersona" href="#secciontblPersona" runat="server" Text="Mostrar Personas" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="secciontblPersona" class="table-responsive collapse">
+                            <!-- id-->
+                            <table id="tblPersona" class="table table-bordered table-hover">
+                                <!-- id-->
+                                <thead>
+                                    <tr>
+                                        <!-- campos-->
+                                        <th>Id</th>
+                                        <th>Nombre1</th>
+                                        <th>Nombre2</th>
+                                        <th>Apellido1</th>
+                                        <th>Apellido2</th>
+                                        <th>Genero</th>
+                                        <th>Ctrl</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblBodyPersona">
+                                    <!-- id-->
+                                    <!-- ajax-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div id="alertaEmpleados" class="modal bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
@@ -99,6 +140,75 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="modalNPersona">
+        <!-- id-->
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorPersona" class="modal-content border-success">
+                <!-- id-->
+                <div id="DivModHeaPersona" class="modal-header bg-success">
+                    <!-- id-->
+                    <h4 id="H4ModTitPersona">Editar Persona</h4>
+                    <!-- id h4-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnuePersona" runat="server" data-toggle="validator" role="form">
+                        <!-- id-->
+                        <label id="lblexistenuevoPersona" for="txtNuevoPersona" runat="server" class="text-warning" text=""></label>
+                        <!-- id for-->
+
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoNombre1" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Nombre1" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo320S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoNombre2" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Nombre2" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo320S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoApellido1" runat="server" TabIndex="3" CssClass="form-control" placeholder="Nuevo Apellido1" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo320S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoApellido2" runat="server" TabIndex="4" CssClass="form-control" placeholder="Nuevo Apellido2" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo320S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCPersonaGenero" TabIndex="5" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+
+                        <button id="btnNuePersona" tabindex="6" class="btn btn-success pull-right">
+                            <!-- id idex(si aplica)-->
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphJs" runat="server">
     <script src="/datatables/datatables.min.js"></script>
@@ -109,4 +219,5 @@
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <!-- crear para cada tabla-->
     <script src="/js/icp/CRUDEArea.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDEPersonajs.js" type="text/javascript"></script>
 </asp:Content>

@@ -121,9 +121,11 @@
     <Compile Include="ClsEstanteD.cs" />
     <Compile Include="ClsFamiliaD.cs" />
     <Compile Include="ClsGarantiaD.cs" />
+    <Compile Include="ClsGeneroD.cs" />
     <Compile Include="ClsPagoSobreD.cs" />
     <Compile Include="ClsPalabraClaveD.cs" />
     <Compile Include="ClsPermisosD.cs" />
+    <Compile Include="ClsPersonaD.cs" />
     <Compile Include="ClsPromoD.cs" />
     <Compile Include="ClsRangoPrecioD.cs" />
     <Compile Include="ClsRegimenD.cs" />

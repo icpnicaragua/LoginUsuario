@@ -51,10 +51,12 @@
     <Compile Include="ClsEstadoCivilN.cs" />
     <Compile Include="ClsFamiliaN.cs" />
     <Compile Include="ClsGarantiaN.cs" />
+    <Compile Include="ClsGeneroN.cs" />
     <Compile Include="ClsModuloN.cs" />
     <Compile Include="ClsPagoSobreN.cs" />
     <Compile Include="ClsPalabraClaveN.cs" />
     <Compile Include="ClsPermisosN.cs" />
+    <Compile Include="ClsPersonaN.cs" />
     <Compile Include="ClsPromoN.cs" />
     <Compile Include="ClsRangoPrecioN.cs" />
     <Compile Include="ClsRegimenN.cs" />

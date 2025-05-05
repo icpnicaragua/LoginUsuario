@@ -18,6 +18,18 @@ namespace CapaVista.modulo7
 
         }
 
+        #region RegGenero
+        //Solo existe para Read para llenar los DDl del aspx
+        [WebMethod]
+        public static List<ClsGenero> FnRGeneroV()
+        {
+            List<ClsGenero> OGenero = new ClsGeneroN().FnRGeneroN();
+            return OGenero;
+        }
+
+        #endregion
+
+
         #region RegEstadoCivil
         [WebMethod]
         public static bool FnCEstadoCivilV(string EstadoCivil )
