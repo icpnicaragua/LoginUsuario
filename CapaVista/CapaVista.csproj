@@ -629,6 +629,7 @@
     <Content Include="js\icp\CRUDEEstadoCivil.js" />
     <Content Include="js\icp\CRUDEFamilia.js" />
     <Content Include="js\icp\CRUDEGarantia.js" />
+    <Content Include="js\icp\CRUDEIdentificacion.js" />
     <Content Include="js\icp\CRUDEPagoSobre.js" />
     <Content Include="js\icp\CRUDEPalabraClave.js" />
     <Content Include="js\icp\CRUDEPersonajs.js" />

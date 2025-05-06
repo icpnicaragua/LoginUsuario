@@ -54,7 +54,8 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div class="row">
             <div id="Persona" class="  col-lg-12 col-md-12 col-sm-12 collapse">
                 <!-- id-->
                 <div class="card bg-light mb-3">
@@ -79,8 +80,9 @@
                                         <th>Nombre2</th>
                                         <th>Apellido1</th>
                                         <th>Apellido2</th>
-                                        <th>Genero</th>
+                                        <th>Género</th>
                                         <th>Ctrl</th>
+
                                     </tr>
                                 </thead>
                                 <tbody id="tblBodyPersona">
@@ -91,8 +93,145 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div id="Identificacion" class="  col-lg-3 col-md-6 col-sm-12 ">
+                        <!-- id-->
+                        <div class="card bg-light mb-3">
+                            <div class="card-header">
+                                <h2 class="d-inline-block">Identificación</h2>
+                                <!-- h2-->
+                                <div class="d-inline-block pull-right">
+                                    <asp:LinkButton ID="lbNIdentificacion" href="#modalNIdentificacion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbMostrarIdentificacion" href="#secciontblIdentificacion" runat="server" Text="Mostrar Identificación" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="secciontblIdentificacion" class="table-responsive ">
+                                    <!-- id-->
+                                    <table id="tblIdentificacion" class="table table-bordered table-hover">
+                                        <!-- id-->
+                                        <thead>
+                                            <tr>
+                                                <!-- campos-->
+                                                <th>Id</th>
+                                                <th>Identificación</th>
+                                                <th>Tipo de Identificación</th>
+                                                <th>Ctrl</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblBodyIdentificacion">
+                                            <!-- id-->
+                                            <!-- ajax-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Telefono" class="  col-lg-3 col-md-6 col-sm-12 ">
+                        <!-- id-->
+                        <div class="card bg-light mb-3">
+                            <div class="card-header">
+                                <h2 class="d-inline-block">Teléfono</h2>
+                                <!-- h2-->
+                                <div class="d-inline-block pull-right">
+                                    <asp:LinkButton ID="lbNTelefono" href="#modalNTelefono" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbMostrarTelefono" href="#secciontblTelefono" runat="server" Text="Mostrar Teléfono" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="secciontblTelefono" class="table-responsive ">
+                                    <!-- id-->
+                                    <table id="tblTelefono" class="table table-bordered table-hover">
+                                        <!-- id-->
+                                        <thead>
+                                            <tr>
+                                                <!-- campos-->
+                                                <th>Id</th>
+                                                <th>Teléfono</th>
+                                                <th>Tipo de Teléfono</th>
+                                                <th>Ctrl</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblBodyTelefono">
+                                            <!-- id-->
+                                            <!-- ajax-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Direccion" class="  col-lg-3 col-md-6 col-sm-12 ">
+                        <!-- id-->
+                        <div class="card bg-light mb-3">
+                            <div class="card-header">
+                                <h2 class="d-inline-block">Direccion</h2>
+                                <!-- h2-->
+                                <div class="d-inline-block pull-right">
+                                    <asp:LinkButton ID="lbNDireccion" href="#modalNDireccion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbMostrarDireccion" href="#secciontblDireccion" runat="server" Text="Mostrar Dirección" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="secciontblDireccion" class="table-responsive ">
+                                    <!-- id-->
+                                    <table id="tblDireccion" class="table table-bordered table-hover">
+                                        <!-- id-->
+                                        <thead>
+                                            <tr>
+                                                <!-- campos-->
+                                                <th>Id</th>
+                                                <th>Dirección</th>
+                                                <th>Tipo de Dirección</th>
+                                                <th>Ctrl</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblBodyDireccion">
+                                            <!-- id-->
+                                            <!-- ajax-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Correo" class="  col-lg-3 col-md-6 col-sm-12 ">
+                        <!-- id-->
+                        <div class="card bg-light mb-3">
+                            <div class="card-header">
+                                <h2 class="d-inline-block">Correo</h2>
+                                <!-- h2-->
+                                <div class="d-inline-block pull-right">
+                                    <asp:LinkButton ID="lbNCorreo" href="#modalNCorreo" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbMostrarCorreo" href="#secciontblCorreo" runat="server" Text="Mostrar Correo" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="secciontblCorreo" class="table-responsive ">
+                                    <!-- id-->
+                                    <table id="tblCorreo" class="table table-bordered table-hover">
+                                        <!-- id-->
+                                        <thead>
+                                            <tr>
+                                                <!-- campos-->
+                                                <th>Id</th>
+                                                <th>Correo</th>
+                                                <th>Tipo de Correo</th>
+                                                <th>Ctrl</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblBodyCorreo">
+                                            <!-- id-->
+                                            <!-- ajax-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
     <div id="alertaEmpleados" class="modal bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
@@ -220,4 +359,5 @@
     <!-- crear para cada tabla-->
     <script src="/js/icp/CRUDEArea.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEPersonajs.js" type="text/javascript"></script>
+     <script src="/js/icp/CRUDEIdentificacion.js" type="text/javascript"></script>
 </asp:Content>

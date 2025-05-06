@@ -45,6 +45,7 @@ function FnJsAjaxRPersona() { //2 pide los datos en bd de la tabla  xxxx
     );
 }
 
+
 function AddrowPersona(data) {//3 llenar la tabla xxxx
 
     $('#tblPersona').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
@@ -53,7 +54,7 @@ function AddrowPersona(data) {//3 llenar la tabla xxxx
 
         "retrieve": true,
         dom: 'Bfrtip',
-
+        autoWidth: false,
         "order": [[2, 'asc'], [4, 'asc']],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
         "columnDefs": [
             { "targets": 3, "searchable": false },
@@ -203,6 +204,12 @@ $('#lbNPersona').click(function (e) {//4 evento para mostrar modal de nuevo
     VarJsIdGenero = 0;
 
 });
+
+$('#tblPersona tbody').on('click', 'tr', function () {
+    var tablaPersona = $('#tblPersona').DataTable();
+    console.log('clicked: ' + tablaPersona.row(this).data()[0]);
+})
+
 $(document).on('click', '.btn-editPersona', function (e) {//nombre de clase xxxx
     e.preventDefault();
     FnJsUPersona();//nombre de función xxxx

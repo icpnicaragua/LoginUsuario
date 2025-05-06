@@ -122,6 +122,7 @@
     <Compile Include="ClsFamiliaD.cs" />
     <Compile Include="ClsGarantiaD.cs" />
     <Compile Include="ClsGeneroD.cs" />
+    <Compile Include="ClsIdentificacionD.cs" />
     <Compile Include="ClsPagoSobreD.cs" />
     <Compile Include="ClsPalabraClaveD.cs" />
     <Compile Include="ClsPermisosD.cs" />

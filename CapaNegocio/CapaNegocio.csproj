@@ -52,6 +52,7 @@
     <Compile Include="ClsFamiliaN.cs" />
     <Compile Include="ClsGarantiaN.cs" />
     <Compile Include="ClsGeneroN.cs" />
+    <Compile Include="ClsIdentificacionN.cs" />
     <Compile Include="ClsModuloN.cs" />
     <Compile Include="ClsPagoSobreN.cs" />
     <Compile Include="ClsPalabraClaveN.cs" />

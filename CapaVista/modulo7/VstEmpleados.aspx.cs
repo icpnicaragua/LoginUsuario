@@ -162,6 +162,77 @@ namespace CapaVista.modulo7
         }
         #endregion
 
+        #region RegIdentificacion
+        [WebMethod]
+        public static bool FnCIdentificacionV(string Identificacion, string IdTipoIdentificacion, string IdPersona)
+        {
+            bool CreateIdentificacion = false;
+            ClsIdentificacion OIdentificacion = new ClsIdentificacion();
+
+            OIdentificacion.Identificacion = Identificacion;
+            OIdentificacion.ObjTipoIdentificacion.IdTipoIdentificacion = IdTipoIdentificacion;
+            OIdentificacion.ObjPersona.IdPersona= IdPersona;
+
+            CreateIdentificacion = new ClsIdentificacionN().FnCIdentificacionN(OIdentificacion);
+
+            return CreateIdentificacion;
+
+        }
+
+        [WebMethod]
+        public static List<ClsIdentificacion> FnRIdentificacionV(string IdPersona)
+        {
+            ClsIdentificacion OIdentificacionV = new ClsIdentificacion();
+            OIdentificacionV.ObjPersona.IdPersona = IdPersona;
+            List<ClsIdentificacion> OIdentificacion = new ClsIdentificacionN().FnRIdentificacionN(OIdentificacionV);
+            return OIdentificacion;
+        }
+
+        [WebMethod]
+        public static bool FnUIdentificacionV(string IdIdentificacion, string Identificacion, string IdTipoIdentificacion)
+        {
+            bool UpdateIdentificacion = false;
+            ClsIdentificacion OIdentificacion = new ClsIdentificacion();
+
+            OIdentificacion.IdIdentificacion = IdIdentificacion;
+            OIdentificacion.Identificacion = Identificacion;
+            OIdentificacion.ObjTipoIdentificacion.IdTipoIdentificacion = IdTipoIdentificacion;
+            UpdateIdentificacion = new ClsIdentificacionN().FnUIdentificacionN(OIdentificacion);
+
+            return UpdateIdentificacion;
+
+        }
+
+        [WebMethod]
+        public static bool FnDIdentificacionV(string IdIdentificacion)
+        {
+            bool DeleteIdentificacion = false;
+            ClsIdentificacion OIdentificacion = new ClsIdentificacion();
+
+            OIdentificacion.IdIdentificacion = IdIdentificacion;
+
+            DeleteIdentificacion = new ClsIdentificacionN().FnDIdentificacionN(OIdentificacion);
+
+            return DeleteIdentificacion;
+
+        }
+
+        [WebMethod]
+        public static bool FnEIdentificacionV(string IdIdentificacion, string Identificacion, string IdTipoIdentificacion)
+        {
+            bool ExisteIdentificacion = false;
+            ClsIdentificacion OIdentificacion = new ClsIdentificacion();
+
+            OIdentificacion.IdIdentificacion = IdIdentificacion;
+            OIdentificacion.Identificacion = Identificacion;
+            OIdentificacion.ObjTipoIdentificacion.IdTipoIdentificacion = IdTipoIdentificacion;
+
+            ExisteIdentificacion = new ClsIdentificacionN().FnEIdentificacionN(OIdentificacion);
+
+            return ExisteIdentificacion;
+
+        }
+        #endregion
 
     }
 }
