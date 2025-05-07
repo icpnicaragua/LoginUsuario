@@ -7,7 +7,7 @@ var VarJsIdentificacion = "";
 var VarJsIdTipoIdentificacion = 0;
 var VarJsIdPersona = 0;
 //dddlist TipoIdentificacion
-var VAlDDLIdentifiacionTipoIdentificacion = "null";// para guardar lo que está en la tabla y luego asignar al ddl
+var VAlDDLIdentificacionTipoIdentificacion = "null";// para guardar lo que está en la tabla y luego asignar al ddl
 
 //igual para todos
 var formIdentificacion = document.querySelector('#form1');
@@ -22,10 +22,10 @@ var EIdentificacion = true;
 
 $('#tblPersona tbody').on('click', 'tr', function () {
     var tablaPersona = $('#tblPersona').DataTable();
-    console.log('clicked: ' + tablaPersona.row(this).data()[0]);
+    //console.log('clicked: ' + tablaPersona.row(this).data()[0]);
     VarJsIdPersona = tablaPersona.row(this).data()[0];
     FnJsAjaxRIdentificacion(); //llama al ajax xxxx
-    FnJSFillDdlIdentifiacionTipoIdentificacion();//cargar ddl
+    FnJSFillDdlIdentificacionTipoIdentificacion();//cargar ddl
 })
 
 /*
@@ -159,7 +159,7 @@ function AddrowIdentificacion(data) {//3 llenar la tabla xxxx
             },
             {
                 extend: 'excel',
-                filename: 'Identificacion' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Identificación' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
@@ -196,7 +196,7 @@ $('#lbNIdentificacion').click(function (e) {//4 evento para mostrar modal de nue
     EIdentificacion = true; // variable xxxx
 
     FnJsBlockIdentificacion(); // nombre función xxxx
-    FnJSFillDdlIdentifiacionTipoIdentificacion();
+    FnJSFillDdlIdentificacionTipoIdentificacion();
     CRUDIdentificacion = "C"; // nombre variable xxxx
 
     //campos xxxx
@@ -213,9 +213,9 @@ $(document).on('click', '.btn-editIdentificacion', function (e) {//nombre de cla
     VarJsIdentificacionId = dataIdentificacion[0]; //id de la fila seleccionada
     $('#txtNuevoIdentificacion').val(dataIdentificacion[1]);// [indice columna]  de la fila seleccionada xxxx
     VarJsIdentificacion = dataIdentificacion[1]; // variable elemento, variable data, índice xxxx
-    VAlDDLIdentifiacionTipoIdentificacion = (dataIdentificacion[2]);
-    FnJSFillDdlIdentifiacionTipoIdentificacion();
-    VarJsIdTipoIdentificacion = $('#ddlCIdentifiacionTipoIdentificacion').val();
+    VAlDDLIdentificacionTipoIdentificacion = (dataIdentificacion[2]);
+    FnJSFillDdlIdentificacionTipoIdentificacion();
+    VarJsIdTipoIdentificacion = $('#ddlCIdentificacionTipoIdentificacion').val();
     //VarJsIdPersona = 0;
     CRUDIdentificacion = "U";// variable crud, estado crud xxxx
 });
@@ -230,8 +230,8 @@ $(document).on('click', '.btn-deleteIdentificacion', function (e) {//nombre de c
     VarJsIdentificacionId = dataIdentificacion[0]; //id de la fila seleccionada
     $('#txtNuevoIdentificacion').val(dataIdentificacion[1]);// [indice columna]  de la fila seleccionada xxxx
     VarJsIdentificacion = dataIdentificacion[1]; // variable elemento, variable data, índice xxxx
-    VAlDDLIdentifiacionTipoIdentificacion = (dataIdentificacion[2]);
-    FnJSFillDdlIdentifiacionTipoIdentificacion();
+    VAlDDLIdentificacionTipoIdentificacion = (dataIdentificacion[2]);
+    FnJSFillDdlIdentificacionTipoIdentificacion();
 
     CRUDIdentificacion = "D";
 });
@@ -248,18 +248,18 @@ function FnJsCIdentificacion() { //nombe función xxxx
     $("#DivModHeaIdentificacion").removeAttr("class");//quitar el atributo class
     $("#DivModHeaIdentificacion").attr('class', 'modal-header bg-success');//poner verde
     //cambiar el titulo del modal header
-    $('#H4ModTitIdentificacion').text('Nuevo Identificacion');//tttt
+    $('#H4ModTitIdentificacion').text('Nuevo Identificación');//tttt
     //cambiar el color icono btn
     $("#btnNueIdentificacion").removeAttr("class");//quitar el atributo class
     $("#btnNueIdentificacion").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
     $("#btnNueIdentificacion i").removeAttr("class");
     $("#btnNueIdentificacion i").attr("class", "fa fa-save fa-2x");
     //color ddl
-    $("#ddlCIdentifiacionTipoIdentificacion").removeAttr("class"); //uitar propiedades
-    $("#ddlCIdentifiacionTipoIdentificacion").attr("class", "form-control border-success");//pintr roo
+    $("#ddlCIdentificacionTipoIdentificacion").removeAttr("class"); //uitar propiedades
+    $("#ddlCIdentificacionTipoIdentificacion").attr("class", "form-control border-success");//pintr roo
     //bloquear elementos
     $("#txtNuevoIdentificacion").attr('disabled', false); //variables de los elementos del modal xxxx
-    $('#ddlCIdentifiacionTipoIdentificacion').attr('disabled', false);
+    $('#ddlCIdentificacionTipoIdentificacion').attr('disabled', false);
     //vaciar elementos text de todo el modal
     $('#' + ModCIdentificacion[0].id + ' :text').val(""); // variable del modal xxxx
 
@@ -276,18 +276,18 @@ function FnJsUIdentificacion() { //nombe función xxxx
     $("#DivModHeaIdentificacion").removeAttr("class");//quitar el atributo class
     $("#DivModHeaIdentificacion").attr('class', 'modal-header bg-warning');//poner verde
     //cambiar el titulo del modal header
-    $('#H4ModTitIdentificacion').text('Editar Identificacion');//tttt
+    $('#H4ModTitIdentificacion').text('Editar Identificación');//tttt
     //cambiar el color icono btn
     $("#btnNueIdentificacion").removeAttr("class");//quitar el atributo class
     $("#btnNueIdentificacion").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
     $("#btnNueIdentificacion i").removeAttr("class");
     $("#btnNueIdentificacion i").attr("class", "fa fa-save fa-2x");
     //color ddl
-    $("#ddlCIdentifiacionTipoIdentificacion").removeAttr("class"); //uitar propiedades
-    $("#ddlCIdentifiacionTipoIdentificacion").attr("class", "form-control border-warning");//pintr roo
+    $("#ddlCIdentificacionTipoIdentificacion").removeAttr("class"); //uitar propiedades
+    $("#ddlCIdentificacionTipoIdentificacion").attr("class", "form-control border-warning");//pintr roo
     //bloquear elementos
     $("#txtNuevoIdentificacion").attr('disabled', false); //variables de los elementos del modal xxxx
-    $('#ddlCIdentifiacionTipoIdentificacion').attr('disabled', false);
+    $('#ddlCIdentificacionTipoIdentificacion').attr('disabled', false);
     //vaciar elementos text de todo el modal
     $('#' + ModCIdentificacion[0].id + ' :text').val(""); // variable del modal xxxx
 
@@ -303,18 +303,18 @@ function FnJsDIdentificacion() { //nombe función xxxx
     $("#DivModHeaIdentificacion").removeAttr("class");//quitar el atributo class
     $("#DivModHeaIdentificacion").attr('class', 'modal-header bg-danger');//poner verde
     //cambiar el titulo del modal header
-    $('#H4ModTitIdentificacion').text('Eliminar Identificacion');//tttt
+    $('#H4ModTitIdentificacion').text('Eliminar Identificación');//tttt
     //cambiar el color icono btn
     $("#btnNueIdentificacion").removeAttr("class");//quitar el atributo class
     $("#btnNueIdentificacion").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
     $("#btnNueIdentificacion i").removeAttr("class");
     $("#btnNueIdentificacion i").attr("class", "fa fa-trash fa-2x");//ícono
     //color ddl
-    $("#ddlCIdentifiacionTipoIdentificacion").removeAttr("class"); //uitar propiedades
-    $("#ddlCIdentifiacionTipoIdentificacion").attr("class", "form-control border-danger");//pintr roo
+    $("#ddlCIdentificacionTipoIdentificacion").removeAttr("class"); //uitar propiedades
+    $("#ddlCIdentificacionTipoIdentificacion").attr("class", "form-control border-danger");//pintr roo
     //bloquear elementos
     $("#txtNuevoIdentificacion").attr('disabled', true); //variables de los elementos del modal xxxx
-    $('#ddlCIdentifiacionTipoIdentificacion').attr('disabled', true);
+    $('#ddlCIdentificacionTipoIdentificacion').attr('disabled', true);
     //vaciar elementos text de todo el modal
     $('#' + ModCIdentificacion[0].id + ' :text').val(""); // variable del modal xxxx
 
@@ -351,7 +351,7 @@ $('#btnNueIdentificacion').click(function (e) {//1 evento para mostrar contenido
                 FnJsAjaxDIdentificacion();// función para crear xxxx
                 break;
             default:
-                console.log("Error en cud Identificacion");/////tttt
+                console.log("Error en cud Identificación");/////tttt
         }
     }
     console.log(formIdentificacion.checkValidity());
@@ -402,7 +402,7 @@ function FnJsAjaxUIdentificacion() {
         success: function (data) {
             if (data.d) {
                 //se actualizó
-                console.log("Identificacion Actualizado"); ////tttt
+                console.log("Identificación Actualizado"); ////tttt
             }
             else {
                 //no se borró
@@ -427,12 +427,12 @@ function FnJsAjaxDIdentificacion() {
         success: function (data) {
             if (data.d) {
                 //se creó
-                console.log("Identificacion Eliminado"); ////tttt
+                console.log("Identificación Eliminado"); ////tttt
             }
             else {
                 //no se creó
                 CRUDIdentificacion = "error"
-                console.log("No se pudo Eliminar Identificacion");////tttt
+                console.log("No se pudo Eliminar Identificación");////tttt
             }
             FnAlertaIdentificacion(); // nombre función alerta xxxx
 
@@ -458,7 +458,7 @@ function FnJsAjaxEIdentificacion() {// nombre de la función existe xxxx
             if (data.d) {
                 //ocultar botón
                 EIdentificacion = true; // variable existe xxxx
-                $('#lblexistenuevoIdentificacion').text("Existe Identificacion");// id etiqueta texto etiqueta //tttt
+                $('#lblexistenuevoIdentificacion').text("Existe Identificación");// id etiqueta texto etiqueta //tttt
                 FnJsBlockIdentificacion();//nombre de función bloquear xxxx
 
             }
@@ -474,7 +474,7 @@ function FnJsAjaxEIdentificacion() {// nombre de la función existe xxxx
 
 
 function VerificarExisteIdentificacion() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoIdentificacion').val().length >= 3 && $('#ddlCIdentifiacionTipoIdentificacion').val() > 0) { // id de objetos de entradas, cantidad mínima permitida xxxx
+    if ($('#txtNuevoIdentificacion').val().length >= 3 && $('#ddlCIdentificacionTipoIdentificacion').val() > 0) { // id de objetos de entradas, cantidad mínima permitida xxxx
         return true;
     }
     else {
@@ -491,15 +491,15 @@ $('#txtNuevoIdentificacion').keyup(function (e) {//id de cada elemento en el mod
     }
 });
 
-$('#ddlCIdentifiacionTipoIdentificacion').change(function (e) {
-    VarJsIdTipoIdentificacion = $('#ddlCIdentifiacionTipoIdentificacion').val();
+$('#ddlCIdentificacionTipoIdentificacion').change(function (e) {
+    VarJsIdTipoIdentificacion = $('#ddlCIdentificacionTipoIdentificacion').val();
     if (VerificarExisteIdentificacion()) {
         FnJsAjaxEIdentificacion();
     }
 });
 
-function FnJSFillDdlIdentifiacionTipoIdentificacion() {
-    $('#ddlCIdentifiacionTipoIdentificacion').empty(); // xxxx id
+function FnJSFillDdlIdentificacionTipoIdentificacion() {
+    $('#ddlCIdentificacionTipoIdentificacion').empty(); // xxxx id
     $.ajax({
         type: "POST",
         url: "/modulo7/VstGenerales.aspx/FnRTipoIdentificacionV", // xxxx
@@ -509,21 +509,21 @@ function FnJSFillDdlIdentifiacionTipoIdentificacion() {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            if (VAlDDLIdentifiacionTipoIdentificacion == "null") {
-                $('#ddlCIdentifiacionTipoIdentificacion').append($("<option> </option>").val("0").html("Seleccionar TipoIdentificacion"));  // xxxx id val html            
+            if (VAlDDLIdentificacionTipoIdentificacion == "null") {
+                $('#ddlCIdentificacionTipoIdentificacion').append($("<option> </option>").val("0").html("Seleccionar Tipo Identificación"));  // xxxx id val html            
             }
             else {
                 $.each(data.d, function (data, value) {
-                    if (VAlDDLIdentifiacionTipoIdentificacion == value.TipoIdentificacion) {
-                        $('#ddlCIdentifiacionTipoIdentificacion').append($("<option> </option>").val(value.IdTipoIdentificacion).html(value.TipoIdentificacion));  // xxxx id texto
+                    if (VAlDDLIdentificacionTipoIdentificacion == value.TipoIdentificacion) {
+                        $('#ddlCIdentificacionTipoIdentificacion').append($("<option> </option>").val(value.IdTipoIdentificacion).html(value.TipoIdentificacion));  // xxxx id texto
                         VarJsIdTipoIdentificacion = value.IdTipoIdentificacion;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCIdentifiacionTipoIdentificacion').append($("<option> </option>").val(value.IdTipoIdentificacion).html(value.TipoIdentificacion)); // id en un val y en html el nombre
+                $('#ddlCIdentificacionTipoIdentificacion').append($("<option> </option>").val(value.IdTipoIdentificacion).html(value.TipoIdentificacion)); // id en un val y en html el nombre
             });
-            VAlDDLIdentifiacionTipoIdentificacion = "null";
+            VAlDDLIdentificacionTipoIdentificacion = "null";
         }
     });
 }

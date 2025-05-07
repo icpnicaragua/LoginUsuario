@@ -102,8 +102,7 @@
                                 <!-- h2-->
                                 <div class="d-inline-block pull-right">
                                     <asp:LinkButton ID="lbNIdentificacion" href="#modalNIdentificacion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
-                                    <asp:LinkButton ID="lbMostrarIdentificacion" href="#secciontblIdentificacion" runat="server" Text="Mostrar Identificación" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
-                                </div>
+                                      </div>
                             </div>
                             <div class="card-body">
                                 <div id="secciontblIdentificacion" class="table-responsive ">
@@ -340,6 +339,49 @@
                         </div>
 
                         <button id="btnNuePersona" tabindex="6" class="btn btn-success pull-right">
+                            <!-- id idex(si aplica)-->
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="modal" id="modalNIdentificacion">
+        <!-- id-->
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorIdentificacion" class="modal-content border-success">
+                <!-- id-->
+                <div id="DivModHeaIdentificacion" class="modal-header bg-success">
+                    <!-- id-->
+                    <h4 id="H4ModTitIdentificacion">Editar Identificación</h4>
+                    <!-- id h4-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnueIdentificacion" runat="server" data-toggle="validator" role="form">
+                        <!-- id-->
+                        <label id="lblexistenuevoIdentificacion" for="txtNuevoIdentificacion" runat="server" class="text-warning" text=""></label>
+                        <!-- id for-->
+
+                              <div class="input-group md-3">
+          <asp:DropDownList ID="ddlCIdentificacionTipoIdentificacion" TabIndex="2" CssClass="form-control border-success" runat="server">
+              <%--id tap xxxx--%>
+          </asp:DropDownList>
+      </div>
+
+
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoIdentificacion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Identifiación" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo320NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                  
+                        <button id="btnNueIdentificacion" tabindex="3" class="btn btn-success pull-right">
                             <!-- id idex(si aplica)-->
                             <i class="fas fa-save fa-2x"></i>
                         </button>

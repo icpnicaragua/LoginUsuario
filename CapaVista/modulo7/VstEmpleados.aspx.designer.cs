@@ -78,15 +78,6 @@ namespace CapaVista.modulo7
         protected global::System.Web.UI.WebControls.LinkButton lbNIdentificacion;
 
         /// <summary>
-        /// Control lbMostrarIdentificacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMostrarIdentificacion;
-
-        /// <summary>
         /// Control lbNTelefono.
         /// </summary>
         /// <remarks>
@@ -229,5 +220,41 @@ namespace CapaVista.modulo7
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCPersonaGenero;
+
+        /// <summary>
+        /// Control frmnueIdentificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueIdentificacion;
+
+        /// <summary>
+        /// Control lblexistenuevoIdentificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoIdentificacion;
+
+        /// <summary>
+        /// Control ddlCIdentificacionTipoIdentificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCIdentificacionTipoIdentificacion;
+
+        /// <summary>
+        /// Control txtNuevoIdentificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoIdentificacion;
     }
 }
