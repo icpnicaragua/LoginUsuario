@@ -26,6 +26,7 @@ $('#tblPersona tbody').on('click', 'tr', function () {
     VarJsIdPersona = tablaPersona.row(this).data()[0];
     FnJsAjaxRIdentificacion(); //llama al ajax xxxx
     FnJSFillDdlIdentificacionTipoIdentificacion();//cargar ddl
+    $("#secciontblIdentificacion").attr('class', 'table-responsive collapse show');//No hay btn de show table
 })
 
 /*
@@ -374,7 +375,7 @@ function FnJsAjaxCIdentificacion() {
         success: function (data) {
             if (data.d) {
                 //se creó
-                console.log("Identificacion Agregado"); ////tttt        
+                console.log("Identificación Agregado"); ////tttt        
             }
             else {
                 //no se creó
@@ -548,17 +549,17 @@ function FnAlertaIdentificacion() {//nombre de la función xxxx
             VarJsTextoAlertIdentificacion = "No se pudo realizar la operación";//variable de texto alerta xxxx
             break;
         default:
-            console.log("Error CUD Identificacion Alert")//tttt
+            console.log("Error CUD Identificación Alert")//tttt
     }
     //alerta
-    $('.modal bd-example-modal-sm .modal-content').addClass(VarJsColorAlertIdentificacion);//variable de color alerta xxxx
-    $('.modal bd-example-modal-sm h5').text(VarJsTextoAlertIdentificacion);//variable de texto alerta xxxx
-    $('.modal bd-example-modal-sm').modal('show');
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertIdentificacion);//variable de color alerta xxxx
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertIdentificacion);//variable de texto alerta xxxx
+    $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
-        $('.modal bd-example-modal-sm').modal('hide');
-        $('.modal bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertIdentificacion);//variable de color alerta xxxx
+        $('.bd-example-modal-sm').modal('hide');
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertIdentificacion);//variable de color alerta xxxx
     }, 1500);// tiempo para que aparezca la alerta crear variable ms
-
+    console.log($("#secciontblIdentificacion.show").length)//tttt
     if ($("#secciontblIdentificacion.show").length > 0) {//seccion tabla xxxx
         FnJsAjaxRIdentificacion();//función ajax de llenado de la tabla xxxx
     }
