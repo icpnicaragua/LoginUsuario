@@ -182,6 +182,9 @@
                                                 <th>Id</th>
                                                 <th>Dirección</th>
                                                 <th>Tipo de Dirección</th>
+                                                <th>Barrio</th>
+                                                <th>Municipio</th>
+                                                <th>Departamento</th>
                                                 <th>Ctrl</th>
                                             </tr>
                                         </thead>
@@ -344,6 +347,62 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="modalNDireccion">
+        <!-- id-->
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorDireccion" class="modal-content border-success">
+                <!-- id-->
+                <div id="DivModHeaDireccion" class="modal-header bg-success">
+                    <!-- id-->
+                    <h4 id="H4ModTitDireccion">Editar Dirección</h4>
+                    <!-- id h4-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnueDireccion" runat="server" data-toggle="validator" role="form">
+                        <!-- id-->
+                        <label id="lblexistenuevoDireccion" for="txtNuevoDireccion" runat="server" class="text-warning" text=""></label>
+                        <!-- id for-->
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoDireccion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Dirección" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="150" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo3150NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCDireccionTipoDireccion" TabIndex="2" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCDepartamento" TabIndex="3" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCMunicipio" TabIndex="4" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCBarrio" TabIndex="5" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+                        <button id="btnNueDireccion" tabindex="6" class="btn btn-success pull-right">
+                            <!-- id idex(si aplica)-->
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="modal" id="modalNIdentificacion">
         <!-- id-->
         <div class="modal-dialog" role="document">
@@ -477,4 +536,5 @@
     <script src="/js/icp/CRUDEIdentificacion.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDETelefono.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDECorreo.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDEDireccion.js" type="text/javascript"></script>
 </asp:Content>

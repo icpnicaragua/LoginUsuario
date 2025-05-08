@@ -15,9 +15,9 @@ namespace CapaNegocio
             Boolean CreateTelefono = new ClsTelefonoD().FnCTelefonoD(OTelefono);
             return CreateTelefono;
         }
-        public List<ClsTelefono> FnRTelefonoN(ClsTelefono OIdentifiacionN)
+        public List<ClsTelefono> FnRTelefonoN(ClsTelefono OTelefonoN)
         {
-            List<ClsTelefono> OTelefono = new ClsTelefonoD().FnRTelefonoD(OIdentifiacionN);
+            List<ClsTelefono> OTelefono = new ClsTelefonoD().FnRTelefonoD(OTelefonoN);
             return OTelefono;
         }
         public bool FnUTelefonoN(ClsTelefono OTelefono)

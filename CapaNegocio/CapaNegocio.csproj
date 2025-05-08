@@ -44,9 +44,12 @@
   <ItemGroup>
     <Compile Include="ClsAreaN.cs" />
     <Compile Include="ClsBancoN.cs" />
+    <Compile Include="ClsBarrioN.cs" />
     <Compile Include="ClsCategoriaN.cs" />
     <Compile Include="ClsConceptoRocN.cs" />
     <Compile Include="ClsCorreoN.cs" />
+    <Compile Include="ClsDepartamentoN.cs" />
+    <Compile Include="ClsDireccionN.cs" />
     <Compile Include="ClsElementoN.cs" />
     <Compile Include="ClsEntradaN.cs" />
     <Compile Include="ClsEstadoCivilN.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="ClsGeneroN.cs" />
     <Compile Include="ClsIdentificacionN.cs" />
     <Compile Include="ClsModuloN.cs" />
+    <Compile Include="ClsMunicipioN.cs" />
     <Compile Include="ClsPagoSobreN.cs" />
     <Compile Include="ClsPalabraClaveN.cs" />
     <Compile Include="ClsPermisosN.cs" />

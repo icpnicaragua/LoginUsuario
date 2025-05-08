@@ -113,10 +113,13 @@
   <ItemGroup>
     <Compile Include="ClsAreaD.cs" />
     <Compile Include="ClsBancoD.cs" />
+    <Compile Include="ClsBarrioD.cs" />
     <Compile Include="ClsCategoriaD.cs" />
     <Compile Include="ClsConceptoRocD.cs" />
     <Compile Include="ClsConexion.cs" />
     <Compile Include="ClsCorreoD.cs" />
+    <Compile Include="ClsDepartamentoD.cs" />
+    <Compile Include="ClsDireccionD.cs" />
     <Compile Include="ClsEntradaD.cs" />
     <Compile Include="ClsEstadoCivilD.cs" />
     <Compile Include="ClsEstanteD.cs" />
@@ -124,6 +127,7 @@
     <Compile Include="ClsGarantiaD.cs" />
     <Compile Include="ClsGeneroD.cs" />
     <Compile Include="ClsIdentificacionD.cs" />
+    <Compile Include="ClsMunicipioD.cs" />
     <Compile Include="ClsPagoSobreD.cs" />
     <Compile Include="ClsPalabraClaveD.cs" />
     <Compile Include="ClsPermisosD.cs" />

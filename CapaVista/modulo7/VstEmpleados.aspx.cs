@@ -379,5 +379,82 @@ namespace CapaVista.modulo7
 
         }
         #endregion
+
+        #region RegDireccion
+        [WebMethod]
+        public static bool FnCDireccionV(string Direccion, string IdTipoDireccion, string IdPersona, string IdBarrio)
+        {
+            bool CreateDireccion = false;
+            ClsDireccion ODireccion = new ClsDireccion();
+
+            ODireccion.Direccion = Direccion;
+            ODireccion.ObjTipoDireccion.IdTipoDireccion = IdTipoDireccion;
+            ODireccion.ObjPersona.IdPersona = IdPersona;
+            ODireccion.ObjBarrio.IdBarrio = IdBarrio;
+
+            CreateDireccion = new ClsDireccionN().FnCDireccionN(ODireccion);
+
+            return CreateDireccion;
+
+        }
+
+        [WebMethod]
+        public static List<ClsDireccion> FnRDireccionV(string IdPersona)
+        {
+            ClsDireccion ODireccionV = new ClsDireccion();
+            ODireccionV.ObjPersona.IdPersona = IdPersona;
+            List<ClsDireccion> ODireccion = new ClsDireccionN().FnRDireccionN(ODireccionV);
+            return ODireccion;
+        }
+
+        [WebMethod]
+        public static bool FnUDireccionV(string IdDireccion, string Direccion, string IdTipoDireccion, string IdBarrio)
+        {
+            bool UpdateDireccion = false;
+            ClsDireccion ODireccion = new ClsDireccion();
+
+            ODireccion.IdDireccion = IdDireccion;
+            ODireccion.Direccion = Direccion;
+            ODireccion.ObjTipoDireccion.IdTipoDireccion = IdTipoDireccion;
+            ODireccion.ObjBarrio.IdBarrio = IdBarrio;
+            UpdateDireccion = new ClsDireccionN().FnUDireccionN(ODireccion);
+
+            return UpdateDireccion;
+
+        }
+
+        [WebMethod]
+        public static bool FnDDireccionV(string IdDireccion)
+        {
+            bool DeleteDireccion = false;
+            ClsDireccion ODireccion = new ClsDireccion();
+
+            ODireccion.IdDireccion = IdDireccion;
+
+            DeleteDireccion = new ClsDireccionN().FnDDireccionN(ODireccion);
+
+            return DeleteDireccion;
+
+        }
+
+        [WebMethod]
+        public static bool FnEDireccionV(string IdDireccion, string Direccion, string IdTipoDireccion, string IdPersona)
+        {
+            bool ExisteDireccion = false;
+            ClsDireccion ODireccion = new ClsDireccion();
+
+            ODireccion.IdDireccion = IdDireccion;
+            ODireccion.Direccion = Direccion;
+            ODireccion.ObjTipoDireccion.IdTipoDireccion = IdTipoDireccion;
+            ODireccion.ObjPersona.IdPersona = IdPersona;
+
+            ExisteDireccion = new ClsDireccionN().FnEDireccionN(ODireccion);
+
+            return ExisteDireccion;
+
+        }
+        #endregion
+
+
     }
 }

@@ -365,6 +365,46 @@ namespace CapaVista.modulo7
         }
         #endregion
 
+        #region Departamento
+        //Solo existe para Read para llenar los DDl del aspx
+        [WebMethod]
+        public static List<ClsDepartamento> FnRDepartamentoV()
+        {
+            List<ClsDepartamento> ODepartamento = new ClsDepartamentoN().FnRDepartamentoN();
+            return ODepartamento;
+        }
+
+        #endregion
+
+        #region Municipio
+        //Solo existe para Read para llenar los DDl del aspx
+        [WebMethod]
+        public static List<ClsMunicipio> FnRMunicipioV(string IdDepartamento)
+        {
+            ClsMunicipio OMunicipioD = new ClsMunicipio();
+
+            OMunicipioD.ObjDepartamento.IdDepartamento = IdDepartamento;
+
+            List<ClsMunicipio> OMunicipio = new ClsMunicipioN().FnRMunicipioN(OMunicipioD);
+            return OMunicipio;
+        }
+
+        #endregion
+
+        #region Barrio
+        //Solo existe para Read para llenar los DDl del aspx
+        [WebMethod]
+        public static List<ClsBarrio> FnRBarrioV(string IdMunicipio)
+        {
+            ClsBarrio OBarrioD = new ClsBarrio();
+
+            OBarrioD.ObjMunicipio.IdMunicipio = IdMunicipio;
+
+            List<ClsBarrio> OBarrio = new ClsBarrioN().FnRBarrioN(OBarrioD);
+            return OBarrio;
+        }
+
+        #endregion
 
     }
 }
