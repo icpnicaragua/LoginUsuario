@@ -234,5 +234,150 @@ namespace CapaVista.modulo7
         }
         #endregion
 
+        #region RegTelefono
+        [WebMethod]
+        public static bool FnCTelefonoV(string Telefono, string IdTipoTelefono, string IdPersona)
+        {
+            bool CreateTelefono = false;
+            ClsTelefono OTelefono = new ClsTelefono();
+
+            OTelefono.Telefono = Telefono;
+            OTelefono.ObjTipoTelefono.IdTipoTelefono = IdTipoTelefono;
+            OTelefono.ObjPersona.IdPersona = IdPersona;
+
+            CreateTelefono = new ClsTelefonoN().FnCTelefonoN(OTelefono);
+
+            return CreateTelefono;
+
+        }
+
+        [WebMethod]
+        public static List<ClsTelefono> FnRTelefonoV(string IdPersona)
+        {
+            ClsTelefono OTelefonoV = new ClsTelefono();
+            OTelefonoV.ObjPersona.IdPersona = IdPersona;
+            List<ClsTelefono> OTelefono = new ClsTelefonoN().FnRTelefonoN(OTelefonoV);
+            return OTelefono;
+        }
+
+        [WebMethod]
+        public static bool FnUTelefonoV(string IdTelefono, string Telefono, string IdTipoTelefono)
+        {
+            bool UpdateTelefono = false;
+            ClsTelefono OTelefono = new ClsTelefono();
+
+            OTelefono.IdTelefono = IdTelefono;
+            OTelefono.Telefono = Telefono;
+            OTelefono.ObjTipoTelefono.IdTipoTelefono = IdTipoTelefono;
+            UpdateTelefono = new ClsTelefonoN().FnUTelefonoN(OTelefono);
+
+            return UpdateTelefono;
+
+        }
+
+        [WebMethod]
+        public static bool FnDTelefonoV(string IdTelefono)
+        {
+            bool DeleteTelefono = false;
+            ClsTelefono OTelefono = new ClsTelefono();
+
+            OTelefono.IdTelefono = IdTelefono;
+
+            DeleteTelefono = new ClsTelefonoN().FnDTelefonoN(OTelefono);
+
+            return DeleteTelefono;
+
+        }
+
+        [WebMethod]
+        public static bool FnETelefonoV(string IdTelefono, string Telefono, string IdTipoTelefono, string IdPersona)
+        {
+            bool ExisteTelefono = false;
+            ClsTelefono OTelefono = new ClsTelefono();
+
+            OTelefono.IdTelefono = IdTelefono;
+            OTelefono.Telefono = Telefono;
+            OTelefono.ObjTipoTelefono.IdTipoTelefono = IdTipoTelefono;
+            OTelefono.ObjPersona.IdPersona  = IdPersona;
+
+            ExisteTelefono = new ClsTelefonoN().FnETelefonoN(OTelefono);
+
+            return ExisteTelefono;
+
+        }
+        #endregion
+
+        #region RegCorreo
+        [WebMethod]
+        public static bool FnCCorreoV(string Correo, string IdTipoCorreo, string IdPersona)
+        {
+            bool CreateCorreo = false;
+            ClsCorreo OCorreo = new ClsCorreo();
+
+            OCorreo.Correo = Correo;
+            OCorreo.ObjTipoCorreo.IdTipoCorreo = IdTipoCorreo;
+            OCorreo.ObjPersona.IdPersona = IdPersona;
+
+            CreateCorreo = new ClsCorreoN().FnCCorreoN(OCorreo);
+
+            return CreateCorreo;
+
+        }
+
+        [WebMethod]
+        public static List<ClsCorreo> FnRCorreoV(string IdPersona)
+        {
+            ClsCorreo OCorreoV = new ClsCorreo();
+            OCorreoV.ObjPersona.IdPersona = IdPersona;
+            List<ClsCorreo> OCorreo = new ClsCorreoN().FnRCorreoN(OCorreoV);
+            return OCorreo;
+        }
+
+        [WebMethod]
+        public static bool FnUCorreoV(string IdCorreo, string Correo, string IdTipoCorreo)
+        {
+            bool UpdateCorreo = false;
+            ClsCorreo OCorreo = new ClsCorreo();
+
+            OCorreo.IdCorreo = IdCorreo;
+            OCorreo.Correo = Correo;
+            OCorreo.ObjTipoCorreo.IdTipoCorreo = IdTipoCorreo;
+            UpdateCorreo = new ClsCorreoN().FnUCorreoN(OCorreo);
+
+            return UpdateCorreo;
+
+        }
+
+        [WebMethod]
+        public static bool FnDCorreoV(string IdCorreo)
+        {
+            bool DeleteCorreo = false;
+            ClsCorreo OCorreo = new ClsCorreo();
+
+            OCorreo.IdCorreo = IdCorreo;
+
+            DeleteCorreo = new ClsCorreoN().FnDCorreoN(OCorreo);
+
+            return DeleteCorreo;
+
+        }
+
+        [WebMethod]
+        public static bool FnECorreoV(string IdCorreo, string Correo, string IdTipoCorreo, string IdPersona)
+        {
+            bool ExisteCorreo = false;
+            ClsCorreo OCorreo = new ClsCorreo();
+
+            OCorreo.IdCorreo = IdCorreo;
+            OCorreo.Correo = Correo;
+            OCorreo.ObjTipoCorreo.IdTipoCorreo = IdTipoCorreo;
+            OCorreo.ObjPersona.IdPersona = IdPersona;
+
+            ExisteCorreo = new ClsCorreoN().FnECorreoN(OCorreo);
+
+            return ExisteCorreo;
+
+        }
+        #endregion
     }
 }

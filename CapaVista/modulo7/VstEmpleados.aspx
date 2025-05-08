@@ -102,7 +102,7 @@
                                 <!-- h2-->
                                 <div class="d-inline-block pull-right">
                                     <asp:LinkButton ID="lbNIdentificacion" href="#modalNIdentificacion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
-                                      </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div id="secciontblIdentificacion" class="table-responsive ">
@@ -135,7 +135,6 @@
                                 <!-- h2-->
                                 <div class="d-inline-block pull-right">
                                     <asp:LinkButton ID="lbNTelefono" href="#modalNTelefono" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
-                                    <asp:LinkButton ID="lbMostrarTelefono" href="#secciontblTelefono" runat="server" Text="Mostrar Teléfono" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
                                 </div>
                             </div>
                             <div class="card-body">
@@ -203,7 +202,6 @@
                                 <!-- h2-->
                                 <div class="d-inline-block pull-right">
                                     <asp:LinkButton ID="lbNCorreo" href="#modalNCorreo" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
-                                    <asp:LinkButton ID="lbMostrarCorreo" href="#secciontblCorreo" runat="server" Text="Mostrar Correo" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
                                 </div>
                             </div>
                             <div class="card-body">
@@ -331,7 +329,6 @@
                                 </button>
                             </span>
                         </div>
-
                         <div class="input-group md-3">
                             <asp:DropDownList ID="ddlCPersonaGenero" TabIndex="5" CssClass="form-control border-success" runat="server">
                                 <%--id tap xxxx--%>
@@ -347,7 +344,7 @@
             </div>
         </div>
     </div>
-        <div class="modal" id="modalNIdentificacion">
+    <div class="modal" id="modalNIdentificacion">
         <!-- id-->
         <div class="modal-dialog" role="document">
             <div id="DivModBorIdentificacion" class="modal-content border-success">
@@ -363,14 +360,6 @@
                         <!-- id-->
                         <label id="lblexistenuevoIdentificacion" for="txtNuevoIdentificacion" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
-
-                              <div class="input-group md-3">
-          <asp:DropDownList ID="ddlCIdentificacionTipoIdentificacion" TabIndex="2" CssClass="form-control border-success" runat="server">
-              <%--id tap xxxx--%>
-          </asp:DropDownList>
-      </div>
-
-
                         <div class="input-group mb-3">
                             <asp:TextBox ID="txtNuevoIdentificacion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Identifiación" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
@@ -380,8 +369,92 @@
                                 </button>
                             </span>
                         </div>
-                  
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCIdentificacionTipoIdentificacion" TabIndex="2" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
                         <button id="btnNueIdentificacion" tabindex="3" class="btn btn-success pull-right">
+                            <!-- id idex(si aplica)-->
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modalNTelefono">
+        <!-- id-->
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorTelefono" class="modal-content border-success">
+                <!-- id-->
+                <div id="DivModHeaTelefono" class="modal-header bg-success">
+                    <!-- id-->
+                    <h4 id="H4ModTitTelefono">Editar Teléfono</h4>
+                    <!-- id h4-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnueTelefono" runat="server" data-toggle="validator" role="form">
+                        <!-- id-->
+                        <label id="lblexistenuevoTelefono" for="txtNuevoTelefono" runat="server" class="text-warning" text=""></label>
+                        <!-- id for-->
+
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCTelefonoTipoTelefono" TabIndex="2" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoTelefono" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Teléfono" data-required-error="dddd" pattern="[0-9\s]*$" MaxLength="15" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfoNum" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+
+                        <button id="btnNueTelefono" tabindex="3" class="btn btn-success pull-right">
+                            <!-- id idex(si aplica)-->
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modalNCorreo">
+        <!-- id-->
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorCorreo" class="modal-content border-success">
+                <!-- id-->
+                <div id="DivModHeaCorreo" class="modal-header bg-success">
+                    <!-- id-->
+                    <h4 id="H4ModTitCorreo">Editar Correo</h4>
+                    <!-- id h4-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnueCorreo" runat="server" data-toggle="validator" role="form">
+                        <!-- id-->
+                        <label id="lblexistenuevoCorreo" for="txtNuevoCorreo" runat="server" class="text-warning" text=""></label>
+                        <!-- id for-->
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoCorreo" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Correo" data-required-error="dddd" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" MaxLength="50" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfoMAIL" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCCorreoTipoCorreo" TabIndex="2" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+                        <button id="btnNueCorreo" tabindex="3" class="btn btn-success pull-right">
                             <!-- id idex(si aplica)-->
                             <i class="fas fa-save fa-2x"></i>
                         </button>
@@ -401,5 +474,7 @@
     <!-- crear para cada tabla-->
     <script src="/js/icp/CRUDEArea.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEPersonajs.js" type="text/javascript"></script>
-     <script src="/js/icp/CRUDEIdentificacion.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDEIdentificacion.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDETelefono.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDECorreo.js" type="text/javascript"></script>
 </asp:Content>

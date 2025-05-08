@@ -87,15 +87,6 @@ namespace CapaVista.modulo7
         protected global::System.Web.UI.WebControls.LinkButton lbNTelefono;
 
         /// <summary>
-        /// Control lbMostrarTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMostrarTelefono;
-
-        /// <summary>
         /// Control lbNDireccion.
         /// </summary>
         /// <remarks>
@@ -121,15 +112,6 @@ namespace CapaVista.modulo7
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbNCorreo;
-
-        /// <summary>
-        /// Control lbMostrarCorreo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMostrarCorreo;
 
         /// <summary>
         /// Control frmnueArea.
@@ -240,6 +222,15 @@ namespace CapaVista.modulo7
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoIdentificacion;
 
         /// <summary>
+        /// Control txtNuevoIdentificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoIdentificacion;
+
+        /// <summary>
         /// Control ddlCIdentificacionTipoIdentificacion.
         /// </summary>
         /// <remarks>
@@ -249,12 +240,75 @@ namespace CapaVista.modulo7
         protected global::System.Web.UI.WebControls.DropDownList ddlCIdentificacionTipoIdentificacion;
 
         /// <summary>
-        /// Control txtNuevoIdentificacion.
+        /// Control frmnueTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNuevoIdentificacion;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueTelefono;
+
+        /// <summary>
+        /// Control lblexistenuevoTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoTelefono;
+
+        /// <summary>
+        /// Control ddlCTelefonoTipoTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCTelefonoTipoTelefono;
+
+        /// <summary>
+        /// Control txtNuevoTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoTelefono;
+
+        /// <summary>
+        /// Control frmnueCorreo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueCorreo;
+
+        /// <summary>
+        /// Control lblexistenuevoCorreo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoCorreo;
+
+        /// <summary>
+        /// Control txtNuevoCorreo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoCorreo;
+
+        /// <summary>
+        /// Control ddlCCorreoTipoCorreo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCCorreoTipoCorreo;
     }
 }

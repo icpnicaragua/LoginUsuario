@@ -116,6 +116,7 @@
     <Compile Include="ClsCategoriaD.cs" />
     <Compile Include="ClsConceptoRocD.cs" />
     <Compile Include="ClsConexion.cs" />
+    <Compile Include="ClsCorreoD.cs" />
     <Compile Include="ClsEntradaD.cs" />
     <Compile Include="ClsEstadoCivilD.cs" />
     <Compile Include="ClsEstanteD.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="ClsRangoPrecioD.cs" />
     <Compile Include="ClsRegimenD.cs" />
     <Compile Include="ClsRolD.cs" />
+    <Compile Include="ClsTelefonoD.cs" />
     <Compile Include="ClsTipoClienteD.cs" />
     <Compile Include="ClsTipoCorreoD.cs" />
     <Compile Include="ClsTipoDireccionD.cs" />

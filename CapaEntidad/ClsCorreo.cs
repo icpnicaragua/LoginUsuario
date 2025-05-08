@@ -13,6 +13,7 @@ namespace CapaEntidad
         private string _Estado;
         private ClsPersona _ObjPersona;
         private ClsEmpresa _ObjEmpresa;
+        private ClsTipoCorreo _ObjTipoCorreo;
 
         public string IdCorreo { get => _IdCorreo; set => _IdCorreo = value; }
         public string Correo { get => _Correo; set => _Correo = value; }
@@ -20,10 +21,13 @@ namespace CapaEntidad
         public ClsPersona ObjPersona { get => _ObjPersona; set => _ObjPersona = value; }
         public ClsEmpresa ObjEmpresa { get => _ObjEmpresa; set => _ObjEmpresa = value; }
 
+        public ClsTipoCorreo ObjTipoCorreo { get => _ObjTipoCorreo; set => _ObjTipoCorreo = value; }
+
         public ClsCorreo()
         {
             this.ObjEmpresa = new ClsEmpresa();
             this.ObjPersona = new ClsPersona();
+            this.ObjTipoCorreo= new ClsTipoCorreo();
         }
 
     }
