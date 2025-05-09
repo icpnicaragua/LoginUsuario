@@ -23,7 +23,7 @@ namespace CapaDato
                 ObjConexion = new ClsConexion();
                 Cmd_D = new MySqlCommand("spRBarrio", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmRIdPersona", Convert.ToInt16(OBarrioD.ObjMunicipio.IdMunicipio));
+                Cmd_D.Parameters.AddWithValue("prmRIdMunicipio", Convert.ToInt16(OBarrioD.ObjMunicipio.IdMunicipio));
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
                 List<ClsBarrio> LstBarrio = new List<ClsBarrio>();

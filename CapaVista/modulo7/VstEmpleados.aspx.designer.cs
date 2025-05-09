@@ -96,15 +96,6 @@ namespace CapaVista.modulo7
         protected global::System.Web.UI.WebControls.LinkButton lbNDireccion;
 
         /// <summary>
-        /// Control lbMostrarDireccion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbMostrarDireccion;
-
-        /// <summary>
         /// Control lbNCorreo.
         /// </summary>
         /// <remarks>
@@ -321,15 +312,6 @@ namespace CapaVista.modulo7
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoTelefono;
 
         /// <summary>
-        /// Control ddlCTelefonoTipoTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCTelefonoTipoTelefono;
-
-        /// <summary>
         /// Control txtNuevoTelefono.
         /// </summary>
         /// <remarks>
@@ -337,6 +319,15 @@ namespace CapaVista.modulo7
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNuevoTelefono;
+
+        /// <summary>
+        /// Control ddlCTelefonoTipoTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCTelefonoTipoTelefono;
 
         /// <summary>
         /// Control frmnueCorreo.

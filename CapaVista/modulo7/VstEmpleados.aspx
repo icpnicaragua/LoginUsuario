@@ -63,12 +63,12 @@
                         <h2 class="d-inline-block">Personas</h2>
                         <!-- h2-->
                         <div class="d-inline-block pull-right">
-                            <asp:LinkButton ID="lbNPersona" href="#modalNPersona" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
-                            <asp:LinkButton ID="lbMostrarPersona" href="#secciontblPersona" runat="server" Text="Mostrar Personas" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                            <asp:LinkButton ID="lbNPersona" href="#modalNPersona" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x collapse MostrarPersona"></i></asp:LinkButton><!-- id href-->
+                            <asp:LinkButton ID="lbMostrarPersona" href="#secciontblPersona" runat="server" Text="Mostrar Personas" CssClass="btn btn-info btn3d" data-toggle="collapse" data-target=".MostrarPersona"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
                         </div>
                     </div>
                     <div class="card-body">
-                        <div id="secciontblPersona" class="table-responsive collapse">
+                        <div id="secciontblPersona" class="table-responsive collapse MostrarPersona">
                             <!-- id-->
                             <table id="tblPersona" class="table table-bordered table-hover">
                                 <!-- id-->
@@ -85,7 +85,7 @@
 
                                     </tr>
                                 </thead>
-                                <tbody id="tblBodyPersona">
+                                <tbody id="tblBodyPersona" data-toggle="collapse" data-target="#DatosPersona" >
                                     <!-- id-->
                                     <!-- ajax-->
                                 </tbody>
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row collapse" id="DatosPersona" >
                     <div id="Identificacion" class="  col-lg-3 col-md-6 col-sm-12 ">
                         <!-- id-->
                         <div class="card bg-light mb-3">
@@ -164,11 +164,10 @@
                         <!-- id-->
                         <div class="card bg-light mb-3">
                             <div class="card-header">
-                                <h2 class="d-inline-block">Direccion</h2>
+                                <h2 class="d-inline-block">Dirección</h2>
                                 <!-- h2-->
                                 <div class="d-inline-block pull-right">
                                     <asp:LinkButton ID="lbNDireccion" href="#modalNDireccion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
-                                    <asp:LinkButton ID="lbMostrarDireccion" href="#secciontblDireccion" runat="server" Text="Mostrar Dirección" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
                                 </div>
                             </div>
                             <div class="card-body">
@@ -373,15 +372,19 @@
                             </span>
                         </div>
                         <div class="input-group md-3">
+                         
                             <asp:DropDownList ID="ddlCDireccionTipoDireccion" TabIndex="2" CssClass="form-control border-success" runat="server">
                                 <%--id tap xxxx--%>
                             </asp:DropDownList>
+                               
+                               
                         </div>
                         <div class="input-group md-3">
+                              
                             <asp:DropDownList ID="ddlCDepartamento" TabIndex="3" CssClass="form-control border-success" runat="server">
                                 <%--id tap xxxx--%>
                             </asp:DropDownList>
-                        </div>
+                        </div> 
                         <div class="input-group md-3">
                             <asp:DropDownList ID="ddlCMunicipio" TabIndex="4" CssClass="form-control border-success" runat="server">
                                 <%--id tap xxxx--%>
@@ -458,12 +461,6 @@
                         <!-- id-->
                         <label id="lblexistenuevoTelefono" for="txtNuevoTelefono" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
-
-                        <div class="input-group md-3">
-                            <asp:DropDownList ID="ddlCTelefonoTipoTelefono" TabIndex="2" CssClass="form-control border-success" runat="server">
-                                <%--id tap xxxx--%>
-                            </asp:DropDownList>
-                        </div>
                         <div class="input-group mb-3">
                             <asp:TextBox ID="txtNuevoTelefono" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Teléfono" data-required-error="dddd" pattern="[0-9\s]*$" MaxLength="15" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
@@ -473,6 +470,12 @@
                                 </button>
                             </span>
                         </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCTelefonoTipoTelefono" TabIndex="2" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+
 
                         <button id="btnNueTelefono" tabindex="3" class="btn btn-success pull-right">
                             <!-- id idex(si aplica)-->

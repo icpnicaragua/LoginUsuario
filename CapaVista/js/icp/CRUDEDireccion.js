@@ -39,12 +39,7 @@ $('#tblPersona tbody').on('click', 'tr', function () {
     $("#secciontblDireccion").attr('class', 'table-responsive collapse show');//No hay btn de show table
 })
 
-/*
-$('#lbMostrarDireccion').click(function (e) {//1 evento para mostrar contenido  xxxx
-    e.preventDefault();
-    
-});
-*/
+
 
 function FnJsAjaxRDireccion() { //2 pide los datos en bd de la tabla  xxxx
     $.ajax({
@@ -212,6 +207,7 @@ $('#lbNDireccion').click(function (e) {//4 evento para mostrar modal de nuevo
     FnJsBlockDireccion(); // nombre función xxxx
     FnJSFillDdlDireccionTipoDireccion();
     CRUDDireccion = "C"; // nombre variable xxxx
+    FnJSFillDdlDepartamento();
 
     //campos xxxx
     VarJsDireccionId = 0; // cada campo tiene una variable, inicializar xxxx
@@ -235,13 +231,12 @@ $(document).on('click', '.btn-editDireccion', function (e) {//nombre de clase xx
     FnJSFillDdlDireccionTipoDireccion();
    
     VAlDDLDepartamento = (dataDireccion[5]);
-    FnJSFillDdlDepartamento();
-    
     VAlDDLMunicipio = (dataDireccion[4]);
-    FnJSFillDdlMunicipio();
-
     VAlDDLBarrio = (dataDireccion[3]);
-    FnJSFillDdlBarrio();
+    FnJSFillDdlDepartamento();
+
+    
+   
     
     VarJsIdTipoDireccion = $('#ddlCDireccionTipoDireccion').val();
     VarJsIdDepartamento = $('#ddlCDepartamento').val();
@@ -265,14 +260,10 @@ $(document).on('click', '.btn-deleteDireccion', function (e) {//nombre de clase 
     FnJSFillDdlDireccionTipoDireccion();
 
     VAlDDLDepartamento = (dataDireccion[5]);
-    FnJSFillDdlDepartamento();
-
     VAlDDLMunicipio = (dataDireccion[4]);
-    FnJSFillDdlMunicipio();
-
     VAlDDLBarrio = (dataDireccion[3]);
-    FnJSFillDdlBarrio();
-
+    FnJSFillDdlDepartamento();
+       
     CRUDDireccion = "D";
 });
 
@@ -301,6 +292,10 @@ function FnJsCDireccion() { //nombe función xxxx
     $("#ddlCDepartamento").attr("class", "form-control border-success");//pintr roo
     $("#ddlCMunicipio").removeAttr("class"); //uitar propiedades
     $("#ddlCMunicipio").attr("class", "form-control border-success");//pintr roo
+ 
+    $('#ddlCMunicipio').append($("<option> </option>").val("0").html("Seleccionar Departamento antes...")); 
+    $('#ddlCBarrio').append($("<option> </option>").val("0").html("Seleccionar Municipio antes...")); 
+
     $("#ddlCBarrio").removeAttr("class"); //uitar propiedades
     $("#ddlCBarrio").attr("class", "form-control border-success");//pintr roo
     //bloquear elementos
@@ -553,7 +548,7 @@ function VerificarExisteDireccion() {// nombre de función verificarexiste xxxx
 }
 
 
-$('#txtNuevoDireccion').change(function (e) {//id de cada elemento en el modal xxxx
+$('#txtNuevoDireccion').keyup(function (e) {//id de cada elemento en el modal xxxx
     VarJsDireccion = $(this).val(); // variable de este elemento xxxx
     if (VerificarExisteDireccion()) {//nombre función verificar existe xxxx
         FnJsAjaxEDireccion(); // llamar todos los existes xxxx
@@ -617,11 +612,82 @@ function FnJSFillDdlDireccionTipoDireccion() {
         }
     });
 }
+function FnJSFillDdlDepartamento() {
+    $('#ddlCDepartamento').empty(); // xxxx id
+    console.log("llenando departamento");
+    $.ajax({
+        type: "POST",
+        url: "/modulo7/VstGenerales.aspx/FnRDepartamentoV", // xxxx
+        async: false,
+        data: {}, /*{ data: jsonString }*/
+        contentType: 'application/json; charser=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
+        },
+        success: function (data) {
+            if (VAlDDLDepartamento == "null") {
+                $('#ddlCDepartamento').append($("<option> </option>").val("0").html("Seleccionar Departamento"));  // xxxx id val html            
+            }
+            else {
+                $.each(data.d, function (data, value) {
+                    if (VAlDDLDepartamento == value.Departamento) {
+                        $('#ddlCDepartamento').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento));  // xxxx id texto
+                        VarJsIdDepartamento = value.IdDepartamento;
+                    }
+                });
+            }
+            $.each(data.d, function (data, value) {
+                $('#ddlCDepartamento').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento)); // id en un val y en html el nombre
+            });
+            VAlDDLDepartamento = "null";
+        }
+    });
+
+    FnJSFillDdlMunicipio();
+
+}
+
+
+function FnJSFillDdlMunicipio() {
+    $('#ddlCMunicipio').empty(); // xxxx id
+    $.ajax({
+        url: "/modulo7/VstGenerales.aspx/FnRMunicipioV", // xxxx
+        async: false,
+        contentType: 'application/json; charser=utf-8',
+        data: JSON.stringify({
+            IdDepartamento: VarJsIdDepartamento
+        }),
+        method: 'post',
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
+        },
+        success: function (data) {
+            if (VAlDDLMunicipio == "null") {
+                $('#ddlCMunicipio').append($("<option> </option>").val("0").html("Seleccionar Municipio"));  // xxxx id val html            
+            }
+            else {
+                $.each(data.d, function (data, value) {
+                    if (VAlDDLMunicipio == value.Municipio) {
+                        $('#ddlCMunicipio').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio));  // xxxx id texto
+                        VarJsIdMunicipio = value.IdMunicipio;
+                    }
+                });
+            }
+            $.each(data.d, function (data, value) {
+                $('#ddlCMunicipio').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio)); // id en un val y en html el nombre
+            });
+            VAlDDLMunicipio = "null";
+        }
+    });
+
+    FnJSFillDdlBarrio();
+}
 
 function FnJSFillDdlBarrio() {
     $('#ddlCBarrio').empty(); // xxxx id
     $.ajax({
         url: "/modulo7/VstGenerales.aspx/FnRBarrioV", // xxxx
+        async: false,
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({
             IdMunicipio: VarJsIdMunicipio
@@ -650,67 +716,8 @@ function FnJSFillDdlBarrio() {
     });
 }
 
-function FnJSFillDdlMunicipio() {
-    $('#ddlCMunicipio').empty(); // xxxx id
-    $.ajax({
-        url: "/modulo7/VstGenerales.aspx/FnRMunicipioV", // xxxx
-        contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({
-            IdDepartmaneto: VarJsIdDepartamento
-        }),
-        method: 'post',
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
-        },
-        success: function (data) {
-            if (VAlDDLMunicipio == "null") {
-                $('#ddlCMunicipio').append($("<option> </option>").val("0").html("Seleccionar Municipio"));  // xxxx id val html            
-            }
-            else {
-                $.each(data.d, function (data, value) {
-                    if (VAlDDLMunicipio == value.Municipio) {
-                        $('#ddlCMunicipio').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio));  // xxxx id texto
-                        VarJsIdMunicipio = value.IdMunicipio;
-                    }
-                });
-            }
-            $.each(data.d, function (data, value) {
-                $('#ddlCMunicipio').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipioo)); // id en un val y en html el nombre
-            });
-            VAlDDLMunicipio = "null";
-        }
-    });
-}
 
-function FnJSFillDdlDepartamento() {
-    $('#ddlCDepartamento').empty(); // xxxx id
-    $.ajax({
-        type: "POST",
-        url: "/modulo7/VstGenerales.aspx/FnRDepartamentoV", // xxxx
-        data: {}, /*{ data: jsonString }*/
-        contentType: 'application/json; charser=utf-8',
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
-        },
-        success: function (data) {
-            if (VAlDDLDepartamento == "null") {
-                $('#ddlCDepartamento').append($("<option> </option>").val("0").html("Seleccionar Tipo Dirección"));  // xxxx id val html            
-            }
-            else {
-                $.each(data.d, function (data, value) {
-                    if (VAlDDLDepartamento == value.Departamento) {
-                        $('#ddlCDepartamento').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento));  // xxxx id texto
-                        VarJsIdDepartamento = value.IdDepartamento;
-                    }
-                });
-            }
-            $.each(data.d, function (data, value) {
-                $('#ddlCDepartamento').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento)); // id en un val y en html el nombre
-            });
-            VAlDDLDepartamento = "null";
-        }
-    });
-}
+
 function FnAlertaDireccion() {//nombre de la función xxxx
 
     switch (CRUDDireccion) {//nombre de la variable cud xxxx
