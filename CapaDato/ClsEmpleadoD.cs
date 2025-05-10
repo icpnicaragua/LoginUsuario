@@ -93,7 +93,7 @@ namespace CapaDato
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmUIdEmpleado", Convert.ToInt16(OEmpleado.IdEmpleado));
                 Cmd_D.Parameters.AddWithValue("prmUIdArea", Convert.ToInt16(OEmpleado.ObjArea.IdArea));
-                Cmd_D.Parameters.AddWithValue("prmUIdPersona", Convert.ToInt16(OEmpleado.ObjPerona.IdPersona));
+             
                 Cmd_D.Parameters.AddWithValue("prmUIdJefe", Convert.ToInt16(OEmpleado.ObjJefe.IdPersona));
                                     
                 ObjConexion.Abrircon();
@@ -170,5 +170,35 @@ namespace CapaDato
                 ObjConexion.Cerrarcon();
             }
         }
+                //`spEEmpleadoPersona`(in prmEEmpleadoIdPersona int)
+        public bool FnEEmpleadoPersonaD(ClsEmpleado OEmpleado)
+        {
+            bool ExisteEmpleado = true;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spEEmpleadoPersona", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmEEmpleadoIdPersona", Convert.ToInt16(OEmpleado.ObjPerona.IdPersona));
+               
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    ExisteEmpleado = Convert.ToBoolean(Dr_D[0]);
+                }
+                return ExisteEmpleado;
+            }
+            catch (Exception ex)
+            {
+                return true;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
     }
 }

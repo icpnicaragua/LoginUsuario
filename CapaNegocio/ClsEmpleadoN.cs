@@ -25,7 +25,6 @@ namespace CapaNegocio
         {
             if (OEmpleado.IdEmpleado != "" && OEmpleado.IdEmpleado != null
                 && OEmpleado.ObjArea.IdArea != "" && OEmpleado.ObjArea.IdArea != null
-                && OEmpleado.ObjPerona.IdPersona != "" && OEmpleado.ObjPerona.IdPersona != null
                 )
             {
                 Boolean UpdateEmpleado = new ClsEmpleadoD().FnUEmpleadoD(OEmpleado);
@@ -39,10 +38,7 @@ namespace CapaNegocio
         }
         public bool FnDEmpleadoN(ClsEmpleado OEmpleado)
         {
-            if (OEmpleado.IdEmpleado != "" && OEmpleado.IdEmpleado != null
-                 && OEmpleado.ObjArea.IdArea != "" && OEmpleado.ObjArea.IdArea != null
-                && OEmpleado.ObjPerona.IdPersona != "" && OEmpleado.ObjPerona.IdPersona != null
-                )
+            if (OEmpleado.IdEmpleado != "" && OEmpleado.IdEmpleado != null)
             {
                 Boolean DeleteEmpleado = new ClsEmpleadoD().FnDEmpleadoD(OEmpleado);
                 return DeleteEmpleado;
@@ -60,6 +56,19 @@ namespace CapaNegocio
                 )
             {
                 Boolean ExisteEmpleado = new ClsEmpleadoD().FnEEmpleadoD(OEmpleado);
+                return ExisteEmpleado;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool FnEEmpleadoPersonaN(ClsEmpleado OEmpleado)
+        {
+            if (OEmpleado.ObjPerona.IdPersona != "" && OEmpleado.ObjPerona.IdPersona != null)
+            {
+                Boolean ExisteEmpleado = new ClsEmpleadoD().FnEEmpleadoPersonaD(OEmpleado);
                 return ExisteEmpleado;
             }
             else

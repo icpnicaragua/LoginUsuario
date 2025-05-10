@@ -117,6 +117,7 @@
                                         <th>Apellido1</th>
                                         <th>Apellido2</th>
                                         <th>Género</th>
+                                         <th>Empleado</th>
                                         <th>Ctrl</th>
 
                                     </tr>

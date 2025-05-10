@@ -94,7 +94,7 @@ namespace CapaVista.modulo7
 
             OEmpleado.ObjArea.IdArea = IdArea;
             OEmpleado.ObjPerona.IdPersona = IdPersona;
-            OEmpleado.ObjJefe.IdPersona= IdJefe;
+            OEmpleado.ObjJefe.IdPersona = IdJefe;
 
             CreateEmpleado = new ClsEmpleadoN().FnCEmpleadoN(OEmpleado);
 
@@ -141,7 +141,7 @@ namespace CapaVista.modulo7
         }
 
         [WebMethod]
-        public static bool FnEEmpleadoV(string IdEmpleado,  string IdArea, string IdPersona)
+        public static bool FnEEmpleadoV(string IdEmpleado, string IdArea, string IdPersona)
         {
             bool ExisteEmpleado = false;
             ClsEmpleado OEmpleado = new ClsEmpleado();
@@ -149,12 +149,24 @@ namespace CapaVista.modulo7
             OEmpleado.IdEmpleado = IdEmpleado;
             OEmpleado.ObjArea.IdArea = IdArea;
             OEmpleado.ObjPerona.IdPersona = IdPersona;
-          
+
             ExisteEmpleado = new ClsEmpleadoN().FnEEmpleadoN(OEmpleado);
 
             return ExisteEmpleado;
 
         }
+        [WebMethod]
+        public static bool FnEEmpleadoPersonaV(string IdPersona)
+        {
+            bool ExisteEmpleado = false;
+            ClsEmpleado OEmpleado = new ClsEmpleado();
+            OEmpleado.ObjPerona.IdPersona = IdPersona;
+            ExisteEmpleado = new ClsEmpleadoN().FnEEmpleadoPersonaN(OEmpleado);
+
+            return ExisteEmpleado;
+
+        }
+
         #endregion
 
         #region RegPersona
@@ -244,7 +256,7 @@ namespace CapaVista.modulo7
 
             OIdentificacion.Identificacion = Identificacion;
             OIdentificacion.ObjTipoIdentificacion.IdTipoIdentificacion = IdTipoIdentificacion;
-            OIdentificacion.ObjPersona.IdPersona= IdPersona;
+            OIdentificacion.ObjPersona.IdPersona = IdPersona;
 
             CreateIdentificacion = new ClsIdentificacionN().FnCIdentificacionN(OIdentificacion);
 
@@ -371,7 +383,7 @@ namespace CapaVista.modulo7
             OTelefono.IdTelefono = IdTelefono;
             OTelefono.Telefono = Telefono;
             OTelefono.ObjTipoTelefono.IdTipoTelefono = IdTipoTelefono;
-            OTelefono.ObjPersona.IdPersona  = IdPersona;
+            OTelefono.ObjPersona.IdPersona = IdPersona;
 
             ExisteTelefono = new ClsTelefonoN().FnETelefonoN(OTelefono);
 
