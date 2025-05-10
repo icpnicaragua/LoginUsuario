@@ -26,8 +26,8 @@ namespace CapaDato
                 Cmd_D.Parameters.AddWithValue("prmCTipoPago", OTipoPago.TipoPago);
 
                 ObjConexion.Abrircon();
-                int FilasCRegime = Cmd_D.ExecuteNonQuery();
-                if (FilasCRegime > 0) CreateOTipoPago = true;
+                int FilasCTipoPago = Cmd_D.ExecuteNonQuery();
+                if (FilasCTipoPago > 0) CreateOTipoPago = true;
 
                 return CreateOTipoPago;
             }

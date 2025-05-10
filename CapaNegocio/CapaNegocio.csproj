@@ -48,6 +48,7 @@
     <Compile Include="ClsCategoriaN.cs" />
     <Compile Include="ClsConceptoRocN.cs" />
     <Compile Include="ClsCorreoN.cs" />
+    <Compile Include="ClsDenominacionesCSN.cs" />
     <Compile Include="ClsDepartamentoN.cs" />
     <Compile Include="ClsDireccionN.cs" />
     <Compile Include="ClsElementoN.cs" />
