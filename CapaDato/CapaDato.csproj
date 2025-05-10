@@ -121,6 +121,7 @@
     <Compile Include="ClsDenominacionesCSD.cs" />
     <Compile Include="ClsDepartamentoD.cs" />
     <Compile Include="ClsDireccionD.cs" />
+    <Compile Include="ClsEmpleadoD.cs" />
     <Compile Include="ClsEntradaD.cs" />
     <Compile Include="ClsEstadoCivilD.cs" />
     <Compile Include="ClsEstanteD.cs" />

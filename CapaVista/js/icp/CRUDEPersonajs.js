@@ -179,7 +179,8 @@ function AddrowPersona(data) {//3 llenar la tabla xxxx
             data[contPersona].Apellido2,//campos
             data[contPersona].ObjGenero.Genero,
             '<button value="editar" href="#modalNPersona" data-toggle="modal" title="editar" class="btn btn-warning  btn-editPersona"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNPersona" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deletePersona"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="eliminar" href="#modalNPersona" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deletePersona"><i class="fa fa-trash" ></i> </button>'+// modal eliminar y clase de botón xxxx
+            '<button value="add" href="#lbNEmpleado"  title="add" class="btn btn-success btn-addEmpleado"><i class="fa fa-plus" ></i> </button>'
         ]
         ).draw(false);
     }

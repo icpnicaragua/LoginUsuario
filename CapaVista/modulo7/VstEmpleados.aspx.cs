@@ -84,6 +84,79 @@ namespace CapaVista.modulo7
         }
         #endregion
 
+
+        #region RegEmpleado
+        [WebMethod]
+        public static bool FnCEmpleadoV(string IdArea, string IdPersona, string IdJefe)
+        {
+            bool CreateEmpleado = false;
+            ClsEmpleado OEmpleado = new ClsEmpleado();
+
+            OEmpleado.ObjArea.IdArea = IdArea;
+            OEmpleado.ObjPerona.IdPersona = IdPersona;
+            OEmpleado.ObjJefe.IdPersona= IdJefe;
+
+            CreateEmpleado = new ClsEmpleadoN().FnCEmpleadoN(OEmpleado);
+
+            return CreateEmpleado;
+
+        }
+
+        [WebMethod]
+        public static List<ClsEmpleado> FnREmpleadoV()
+        {
+            List<ClsEmpleado> OEmpleado = new ClsEmpleadoN().FnREmpleadoN();
+            return OEmpleado;
+        }
+
+        [WebMethod]
+        public static bool FnUEmpleadoV(string IdEmpleado, string IdArea, string IdPersona, string IdJefe)
+        {
+            bool UpdateEmpleado = false;
+            ClsEmpleado OEmpleado = new ClsEmpleado();
+
+            OEmpleado.IdEmpleado = IdEmpleado;
+            OEmpleado.ObjArea.IdArea = IdArea;
+            OEmpleado.ObjPerona.IdPersona = IdPersona;
+            OEmpleado.ObjJefe.IdPersona = IdJefe;
+
+            UpdateEmpleado = new ClsEmpleadoN().FnUEmpleadoN(OEmpleado);
+
+            return UpdateEmpleado;
+
+        }
+
+        [WebMethod]
+        public static bool FnDEmpleadoV(string IdEmpleado)
+        {
+            bool DeleteEmpleado = false;
+            ClsEmpleado OEmpleado = new ClsEmpleado();
+
+            OEmpleado.IdEmpleado = IdEmpleado;
+
+            DeleteEmpleado = new ClsEmpleadoN().FnDEmpleadoN(OEmpleado);
+
+            return DeleteEmpleado;
+
+        }
+
+        [WebMethod]
+        public static bool FnEEmpleadoV(string IdEmpleado,  string IdArea, string IdPersona)
+        {
+            bool ExisteEmpleado = false;
+            ClsEmpleado OEmpleado = new ClsEmpleado();
+
+            OEmpleado.IdEmpleado = IdEmpleado;
+            OEmpleado.ObjArea.IdArea = IdArea;
+            OEmpleado.ObjPerona.IdPersona = IdPersona;
+          
+            ExisteEmpleado = new ClsEmpleadoN().FnEEmpleadoN(OEmpleado);
+
+            return ExisteEmpleado;
+
+        }
+        #endregion
+
         #region RegPersona
         [WebMethod]
         public static bool FnCPersonaV(string Nombre1, string Nombre2, string Apellido1, string Apellido2, string IdGenero)

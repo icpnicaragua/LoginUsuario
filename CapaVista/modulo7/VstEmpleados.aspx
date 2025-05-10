@@ -13,8 +13,8 @@
                 <!-- h4-->
                 <div class="form-group">
                     <asp:LinkButton ID="lbArea" href="#Area" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Área</asp:LinkButton><!-- id href text-->
+                    <asp:LinkButton ID="lbEmpleado" href="#Empleado" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Empleados</asp:LinkButton><!-- id href text-->
                     <asp:LinkButton ID="lbPersona" href="#Persona" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Personas</asp:LinkButton><!-- id href text-->
-
                 </div>
             </div>
         </div>
@@ -54,6 +54,42 @@
                     </div>
                 </div>
             </div>
+            <div id="Empleado" class="  col-lg-6 col-md-6 col-sm-12 collapse">
+                <!-- id-->
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <h2 class="d-inline-block">Empleado</h2>
+                        <!-- h2-->
+                        <div class="d-inline-block pull-right">
+                            <asp:LinkButton ID="lbNEmpleado" href="#Persona" data-toggle="collapse" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                            <asp:LinkButton ID="lbMostrarEmpleado" href="#secciontblEmpleado" runat="server" Text="Mostrar Empleado" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="secciontblEmpleado" class="table-responsive collapse">
+                            <!-- id-->
+                            <table id="tblEmpleado" class="table table-bordered table-hover">
+                                <!-- id-->
+                                <thead>
+                                    <tr>
+                                        <!-- campos-->
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Área</th>
+                                        <th>Jefe</th>
+                                        <th>Ctrl</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblBodyEmpleado">
+                                    <!-- id-->
+                                    <!-- ajax-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div id="Persona" class="  col-lg-12 col-md-12 col-sm-12 collapse">
@@ -85,7 +121,7 @@
 
                                     </tr>
                                 </thead>
-                                <tbody id="tblBodyPersona" data-toggle="collapse" data-target="#DatosPersona" >
+                                <tbody id="tblBodyPersona" data-toggle="collapse" data-target="#DatosPersona">
                                     <!-- id-->
                                     <!-- ajax-->
                                 </tbody>
@@ -93,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row collapse" id="DatosPersona" >
+                <div class="row collapse" id="DatosPersona">
                     <div id="Identificacion" class="  col-lg-3 col-md-6 col-sm-12 ">
                         <!-- id-->
                         <div class="card bg-light mb-3">
@@ -278,6 +314,62 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="modalNEmpleado">
+        <!-- id-->
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorEmpleado" class="modal-content border-success">
+                <!-- id-->
+                <div id="DivModHeaEmpleado" class="modal-header bg-success">
+                    <!-- id-->
+                    <h4 id="H4ModTitEmpleado">Editar Empleado</h4>
+                    <!-- id h4-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnueEmpleado" runat="server" data-toggle="validator" role="form">
+                        <!-- id-->
+                        <label id="lblexistenuevoEmpleado" for="txtNuevoEmpleadoNombre1" runat="server" class="text-warning" text=""></label>
+                        <!-- id for-->
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoEmpleadoNombre1" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Nombre1" data-required-error="dddd" ClientIDMode="Static"></asp:TextBox><!-- id placeholder-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoEmpleadoApellido1" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Nombre1" data-required-error="dddd" ClientIDMode="Static"></asp:TextBox><!-- id placeholder-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCEmpleadoArea" TabIndex="3" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCEmpleadoJefe" TabIndex="4" CssClass="form-control border-success" runat="server">
+                                <%--id tap xxxx--%>
+                            </asp:DropDownList>
+                        </div>
+                        <button id="btnNueEmpleado" tabindex="5" class="btn btn-success pull-right">
+                            <!-- id idex(si aplica)-->
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="modal" id="modalNPersona">
         <!-- id-->
         <div class="modal-dialog" role="document">
@@ -372,19 +464,19 @@
                             </span>
                         </div>
                         <div class="input-group md-3">
-                         
+
                             <asp:DropDownList ID="ddlCDireccionTipoDireccion" TabIndex="2" CssClass="form-control border-success" runat="server">
                                 <%--id tap xxxx--%>
                             </asp:DropDownList>
-                               
-                               
+
+
                         </div>
                         <div class="input-group md-3">
-                              
+
                             <asp:DropDownList ID="ddlCDepartamento" TabIndex="3" CssClass="form-control border-success" runat="server">
                                 <%--id tap xxxx--%>
                             </asp:DropDownList>
-                        </div> 
+                        </div>
                         <div class="input-group md-3">
                             <asp:DropDownList ID="ddlCMunicipio" TabIndex="4" CssClass="form-control border-success" runat="server">
                                 <%--id tap xxxx--%>
@@ -540,4 +632,5 @@
     <script src="/js/icp/CRUDETelefono.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDECorreo.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEDireccion.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDEEmpleado.js" type="text/javascript"></script>
 </asp:Content>
