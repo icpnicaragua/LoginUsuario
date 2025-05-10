@@ -197,7 +197,7 @@ $(document).on('click', '.btn-addEmpleado', function (e) {//4 evento para mostra
     VarJsIdPersona = dataPersona[0];
     FnJsAjaxEEmpleadoPersona();
     if (EEmpleadoPersona) {
-        console.log('existe');       
+              
         $('#alertaEmpleados .modal-content').addClass("bg-warning");//variable de color alerta xxxx
         $('#alertaEmpleados h5').text("La persona ya existe como Empleado");//variable de texto alerta xxxx
         $('#alertaEmpleados').modal('show');
@@ -427,7 +427,7 @@ function FnJsAjaxCEmpleado() {
             else {
                 //no se creó
                 CRUDEmpleado = "error"
-                console.log("No se pudo agregar Tipo de indentificación");//
+                console.log("No se pudo agregar Empleado");//
             }
             FnAlertaEmpleado(); // nombre función alerta xxxx
         }
@@ -534,7 +534,7 @@ function FnJsAjaxEEmpleadoPersona() {// nombre de la función existe xxxx
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            console.log(data.d);//quitar
+           
             if (data.d) {
                 EEmpleadoPersona = true;
                 return true;

@@ -51,5 +51,147 @@ namespace CapaDato
             }
         }
 
+        public bool FnCUsuarioD(ClsUsuario OUsuario)
+        {
+            bool CreateOUsuario = false;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spCUsuario", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmCUsuario", OUsuario.Usuario);
+
+                ObjConexion.Abrircon();
+                int FilasUsuario = Cmd_D.ExecuteNonQuery();
+                if (FilasUsuario > 0) CreateOUsuario = true;
+
+                return CreateOUsuario;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public List<ClsUsuario> FnRUsuarioD()
+        {
+            ClsUsuario OUsuario = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spRUsuario", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsUsuario> LstUsuario = new List<ClsUsuario>();
+                while (Dr_D.Read())
+                {
+                    OUsuario = new ClsUsuario();
+                    OUsuario.ID_usuario = Dr_D[0].ToString();//id_Usuario
+                    OUsuario.Usuario = Dr_D[1].ToString();  //Usuario     
+                    LstUsuario.Add(OUsuario);
+                }
+                return LstUsuario;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public bool FnUUsuarioD(ClsUsuario OUsuario)
+        {
+            bool UpdateUsuario = false;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spUUsuario", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmUIdUsuario", Convert.ToInt16(OUsuario.ID_usuario));
+                Cmd_D.Parameters.AddWithValue("prmUUsuario", OUsuario.Usuario);
+
+                ObjConexion.Abrircon();
+                int FilasUUsuario = Cmd_D.ExecuteNonQuery();
+                if (FilasUUsuario > 0) UpdateUsuario = true;
+
+                return UpdateUsuario;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public bool FnDUsuarioD(ClsUsuario OUsuario)
+        {
+            bool DeleteUsuario = false;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spDUsuario", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmDIdUsuario", Convert.ToInt16(OUsuario.ID_usuario));
+
+                ObjConexion.Abrircon();
+                int FilasDUsuario = Cmd_D.ExecuteNonQuery();
+                if (FilasDUsuario > 0) DeleteUsuario = true;
+
+                return DeleteUsuario;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public bool FnEUsuarioD(ClsUsuario OUsuario)
+        {
+            bool ExisteUsuario = true;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spEUsuario", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmEIdUsuario", Convert.ToInt16(OUsuario.ID_usuario));
+                Cmd_D.Parameters.AddWithValue("prmEUsuario", OUsuario.Usuario);
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    ExisteUsuario = Convert.ToBoolean(Dr_D[0]);
+                }
+                return ExisteUsuario;
+            }
+            catch (Exception ex)
+            {
+                return true;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
     }
 }
