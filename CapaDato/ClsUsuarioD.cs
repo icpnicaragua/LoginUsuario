@@ -16,19 +16,20 @@ namespace CapaDato
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
-        public ClsUsuario Login (string Usuario, string Clave)
+        public ClsUsuario Login(string Usuario, string Clave)
         {
             ClsUsuario ObjUsuario = null;
             try
             {
-               
+
                 Cmd_D = new MySqlCommand("spLogin", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmUsuario", Usuario);
                 Cmd_D.Parameters.AddWithValue("prmClave", Clave);
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
-                if(Dr_D.Read()){
+                if (Dr_D.Read())
+                {
                     ObjUsuario = new ClsUsuario();
                     ObjUsuario.ID_usuario = Dr_D["id_usuario"].ToString();
                     ObjUsuario.Usuario = Dr_D["usuario"].ToString();
@@ -47,7 +48,7 @@ namespace CapaDato
             finally
             {
                 ObjConexion.Cerrarcon();
-                
+
             }
         }
 
@@ -60,6 +61,8 @@ namespace CapaDato
                 Cmd_D = new MySqlCommand("spCUsuario", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmCUsuario", OUsuario.Usuario);
+                Cmd_D.Parameters.AddWithValue("prmCPassword", OUsuario.Clave);
+                Cmd_D.Parameters.AddWithValue("prmCIdEmpleado", Convert.ToInt16(OUsuario.ObjEmpleado.IdEmpleado));
 
                 ObjConexion.Abrircon();
                 int FilasUsuario = Cmd_D.ExecuteNonQuery();
@@ -94,6 +97,10 @@ namespace CapaDato
                     OUsuario = new ClsUsuario();
                     OUsuario.ID_usuario = Dr_D[0].ToString();//id_Usuario
                     OUsuario.Usuario = Dr_D[1].ToString();  //Usuario     
+                    OUsuario.Clave = Dr_D[2].ToString();
+                    OUsuario.ObjEmpleado.IdEmpleado = Dr_D[3].ToString();
+                    OUsuario.ObjEmpleado.ObjPerona.Nombre1 = Dr_D[4].ToString();
+                    OUsuario.ObjEmpleado.ObjPerona.Apellido1 = Dr_D[5].ToString();
                     LstUsuario.Add(OUsuario);
                 }
                 return LstUsuario;
@@ -119,6 +126,7 @@ namespace CapaDato
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmUIdUsuario", Convert.ToInt16(OUsuario.ID_usuario));
                 Cmd_D.Parameters.AddWithValue("prmUUsuario", OUsuario.Usuario);
+                Cmd_D.Parameters.AddWithValue("prmUPassword", OUsuario.Clave);
 
                 ObjConexion.Abrircon();
                 int FilasUUsuario = Cmd_D.ExecuteNonQuery();
