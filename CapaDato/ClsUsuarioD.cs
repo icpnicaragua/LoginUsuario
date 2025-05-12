@@ -99,8 +99,8 @@ namespace CapaDato
                     OUsuario.Usuario = Dr_D[1].ToString();  //Usuario     
                     OUsuario.Clave = Dr_D[2].ToString();
                     OUsuario.ObjEmpleado.IdEmpleado = Dr_D[3].ToString();
-                    OUsuario.ObjEmpleado.ObjPerona.Nombre1 = Dr_D[4].ToString();
-                    OUsuario.ObjEmpleado.ObjPerona.Apellido1 = Dr_D[5].ToString();
+                    OUsuario.ObjEmpleado.ObjPersona.Nombre1 = Dr_D[4].ToString();
+                    OUsuario.ObjEmpleado.ObjPersona.Apellido1 = Dr_D[5].ToString();
                     LstUsuario.Add(OUsuario);
                 }
                 return LstUsuario;
@@ -201,5 +201,39 @@ namespace CapaDato
             }
         }
 
+
+
+        public List<ClsUsuario> FnRUsuarioNEmpleadoD()
+        {
+            ClsUsuario OUsuario = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spRUsuarioNEmpleado", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsUsuario> LstUsuario = new List<ClsUsuario>();
+                while (Dr_D.Read())
+                {
+                    OUsuario = new ClsUsuario();
+                    OUsuario.ObjEmpleado.IdEmpleado = Dr_D[0].ToString();
+                    OUsuario.ObjEmpleado.ObjPersona.Nombre1 = Dr_D[1].ToString();
+                    OUsuario.ObjEmpleado.ObjPersona.Apellido1 = Dr_D[2].ToString();
+                    OUsuario.ObjEmpleado.ObjArea.Area=Dr_D[3].ToString();
+                    LstUsuario.Add(OUsuario);
+                }
+                return LstUsuario;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
     }
 }

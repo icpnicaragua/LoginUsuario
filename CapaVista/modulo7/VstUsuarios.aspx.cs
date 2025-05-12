@@ -22,7 +22,7 @@ namespace CapaVista.modulo7
             ClsUsuario OUsuario = new ClsUsuario();
 
             OUsuario.Usuario = Usuario;
-            OUsuario.Clave= Clave;
+            OUsuario.Clave = Clave;
             OUsuario.ObjEmpleado.IdEmpleado = IdEmpleado;
 
             CreateUsuario = new ClsUsuarioN().FnCUsuarioN(OUsuario);
@@ -82,6 +82,15 @@ namespace CapaVista.modulo7
             return ExisteUsuario;
 
         }
+
+
+        [WebMethod]
+        public static List<ClsUsuario> FnRUsuarioNEmpleadoV()
+        {
+            List<ClsUsuario> OUsuario = new ClsUsuarioN().FnRUsuarioNEmpleadoN();
+            return OUsuario;
+        }
+
         #endregion
     }
 }

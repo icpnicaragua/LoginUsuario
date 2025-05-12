@@ -67,5 +67,13 @@ namespace CapaNegocio
                 return true;
             }
         }
+
+
+        public List<ClsUsuario> FnRUsuarioNEmpleadoN()
+        {
+            List<ClsUsuario> OUsuario = new ClsUsuarioD().FnRUsuarioNEmpleadoD();
+            return OUsuario;
+        }
+        
     }
 }

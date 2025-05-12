@@ -178,8 +178,8 @@ function AddrowEmpleado(data) {//3 llenar la tabla xxxx
     for (var contEmpleado = 0; contEmpleado < data.length; contEmpleado++) { // declarar variable de recorrido de arreglo data xxxx
         tablaEmpleado.row.add([//sensitivecase:
             data[contEmpleado].IdEmpleado,//campos
-            data[contEmpleado].ObjPerona.Nombre1,//campos
-            data[contEmpleado].ObjPerona.Apellido1,
+            data[contEmpleado].ObjPersona.Nombre1,//campos
+            data[contEmpleado].ObjPersona.Apellido1,
             data[contEmpleado].ObjArea.Area,
             data[contEmpleado].ObjJefe.Nombre1 + ' ' + data[contEmpleado].ObjJefe.Apellido1,
             '<button value="editar" href="#modalNEmpleado" data-toggle="modal" title="editar" class="btn btn-warning  btn-editEmpleado"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
@@ -617,14 +617,14 @@ function FnJSFillDdlEmpleadoJefe() {
             }
             else {
                 $.each(data.d, function (data, value) {
-                    if (VAlDDLEmpleadoJefe == (value.ObjPerona.Nombre1 + ' ' + value.ObjPerona.Apellido1)) {
-                        $('#ddlCEmpleadoJefe').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPerona.Nombre1 + ' ' + value.ObjPerona.Apellido1));  // xxxx id texto
+                    if (VAlDDLEmpleadoJefe == (value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1)) {
+                        $('#ddlCEmpleadoJefe').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1));  // xxxx id texto
                         VarJsIdJefe = value.IdEmpleado;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCEmpleadoJefe').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPerona.Nombre1 + ' ' + value.ObjPerona.Apellido1)); // id en un val y en html el nombre
+                $('#ddlCEmpleadoJefe').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1)); // id en un val y en html el nombre
             });
             VAlDDLEmpleadoJefe = "null";
         }

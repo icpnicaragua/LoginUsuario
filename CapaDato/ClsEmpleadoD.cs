@@ -24,7 +24,7 @@ namespace CapaDato
                 Cmd_D = new MySqlCommand("spCEmpleado", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmCIdArea",Convert.ToInt32( OEmpleado.ObjArea.IdArea));
-                Cmd_D.Parameters.AddWithValue("prmCIdPersona", Convert.ToInt32(OEmpleado.ObjPerona.IdPersona));
+                Cmd_D.Parameters.AddWithValue("prmCIdPersona", Convert.ToInt32(OEmpleado.ObjPersona.IdPersona));
                 Cmd_D.Parameters.AddWithValue("prmCIdJefe", Convert.ToInt32(OEmpleado.ObjJefe.IdPersona));
 
                 ObjConexion.Abrircon();
@@ -61,9 +61,9 @@ namespace CapaDato
                     OEmpleado.IdEmpleado = Dr_D[0].ToString();//id_Empleado
                     OEmpleado.ObjArea.IdArea = Dr_D[1].ToString();  //idarea
                     OEmpleado.ObjArea.Area = Dr_D[2].ToString();//area
-                    OEmpleado.ObjPerona.IdPersona = Dr_D[3].ToString();//
-                    OEmpleado.ObjPerona.Nombre1 = Dr_D[4].ToString();
-                    OEmpleado.ObjPerona.Apellido1 = Dr_D[5].ToString();
+                    OEmpleado.ObjPersona.IdPersona = Dr_D[3].ToString();//
+                    OEmpleado.ObjPersona.Nombre1 = Dr_D[4].ToString();
+                    OEmpleado.ObjPersona.Apellido1 = Dr_D[5].ToString();
                     OEmpleado.ObjJefe.IdPersona= Dr_D[6].ToString();
                     OEmpleado.ObjJefe.Nombre1= Dr_D[7].ToString();
                     OEmpleado.ObjJefe.Apellido1= Dr_D[8].ToString();
@@ -149,7 +149,7 @@ namespace CapaDato
                 Cmd_D = new MySqlCommand("spEEmpleado", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmEIdEmpleado", Convert.ToInt16(OEmpleado.IdEmpleado));
-                Cmd_D.Parameters.AddWithValue("prmEIdPersona", OEmpleado.ObjPerona.IdPersona);
+                Cmd_D.Parameters.AddWithValue("prmEIdPersona", OEmpleado.ObjPersona.IdPersona);
                 Cmd_D.Parameters.AddWithValue("prmEIdArea", OEmpleado.ObjArea.IdArea);
                 
                 ObjConexion.Abrircon();
@@ -179,7 +179,7 @@ namespace CapaDato
                 ObjConexion = new ClsConexion();
                 Cmd_D = new MySqlCommand("spEEmpleadoPersona", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmEEmpleadoIdPersona", Convert.ToInt16(OEmpleado.ObjPerona.IdPersona));
+                Cmd_D.Parameters.AddWithValue("prmEEmpleadoIdPersona", Convert.ToInt16(OEmpleado.ObjPersona.IdPersona));
                
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();

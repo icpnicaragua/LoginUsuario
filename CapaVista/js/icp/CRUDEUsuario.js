@@ -1,10 +1,14 @@
 ﻿/*variable de tablas*/
 var tablaUsuario;/*tabla mpodulo*/
+var tablaUsuarioNEmpleado;/*tabla mpodulo*/
 var ModCUsuario = $('#modalNUsuario'); // modal 
 //campos de tablas
 var VarJsUsuarioId = 0;
 var VarJsUsuario = "";
-
+var VarJsClave = "";
+var VarJsIdEmpleado = 0;
+var VarJsNombre1 = "";
+var VarJsApellido1 = "";
 
 //igual para todos
 var formUsuario = document.querySelector('#form1');
@@ -23,10 +27,15 @@ $('#lbMostrarUsuario').click(function (e) {//1 evento para mostrar contenido  xx
     FnJsAjaxRUsuario(); //llama al ajax xxxx
 });
 
+$('#lbNUsuario').click(function (e) {//1 evento para mostrar contenido  xxxx
+    e.preventDefault();
+    FnJsAjaxRUsuarioNEmpleado(); //llama al ajax xxxx
+});
+
 function FnJsAjaxRUsuario() { //2 pide los datos en bd de la tabla  xxxx
     $.ajax({
         type: "POST",
-        url: "/modulo1/VstCuentasbanco.aspx/FnRUsuarioV", // nombre de página y nombre de función xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnRUsuarioV", // nombre de página y nombre de función xxxx
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -48,10 +57,10 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [1, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [3, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
         "columnDefs": [
-            { "targets": 2, "searchable": false },
-            { "orderable": false, "targets": 2 }
+            { "targets": 5, "searchable": false },
+            { "orderable": false, "targets": 5 }
         ],
         "buttons": [
             {
@@ -73,7 +82,7 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(5)):visible'] /// index de controles xxxx para no mostrar comienza en 0
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -86,10 +95,10 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(5)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
                 },
                 titleAttr: 'PDF',
-                filename: 'Usuario' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Usuarios' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -111,7 +120,7 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Usuario', //tttt
+                                    text: 'Usuarios', //tttt
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
@@ -145,11 +154,11 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
             },
             {
                 extend: 'excel',
-                filename: 'Usuario' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Usuarios' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(5)):visible'] // index de controles xxxx para no mostrar inicia en 0
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -165,8 +174,11 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
 
     for (var contUsuario = 0; contUsuario < data.length; contUsuario++) { // declarar variable de recorrido de arreglo data xxxx
         tablaUsuario.row.add([//sensitivecase:
-            data[contUsuario].IdUsuario,//campos
+            data[contUsuario].ID_usuario,//campos
             data[contUsuario].Usuario,
+            data[contUsuario].Clave,
+            data[contUsuario].ObjEmpleado.ObjPersona.Nombre1,
+            data[contUsuario].ObjEmpleado.ObjPersona.Apellido1,
             '<button value="editar" href="#modalNUsuario" data-toggle="modal" title="editar" class="btn btn-warning  btn-editUsuario"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
             '<button value="eliminar" href="#modalNUsuario" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteUsuario"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
         ]
@@ -174,10 +186,94 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
     }
 }
 
+function FnJsAjaxRUsuarioNEmpleado() { //2 pide los datos en bd de la tabla  xxxx
+    $.ajax({
+        type: "POST",
+        url: "/modulo7/VstUsuarios.aspx/FnRUsuarioNEmpleadoV", // nombre de página y nombre de función xxxx
+        data: {},
+        contentType: 'application/json; charser=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
+        },
+        success: function (data) {
+            AddrowUsuarioNEmpleado(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+        }
+    }
+    );
+}
+
+function AddrowUsuarioNEmpleado(data) {//3 llenar la tabla xxxx
+
+    $('#tblEmpleadoNUsuario').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
+
+    tablaUsuarioNEmpleado = $("#tblEmpleadoNUsuario").DataTable({// variable nombre tabla xxxx
+
+        "retrieve": true,
+        dom: 'Bfrtip',
+
+        "order": [1, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "columnDefs": [
+            { "targets": 4, "searchable": false },
+            { "orderable": false, "targets": 4 }
+        ],
+        "buttons": [
+            {
+                extend: 'colvis',
+                collectionLayout: 'fixed',
+                attr: {
+                    id: 'colUsuario'//se añade el id para ocultar xxxx
+                },
+                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
+                className: 'btn btn-info', //clase para mostrar
+                titleAttr: 'Ocultar/Mostrar Columnas',
+                init: function (api, node, config) {
+                    $(node).removeClass('dt-button')
+                }
+
+            },
+            {
+                extend: 'copy',
+                text: '<i class="far fa-copy fa-2x"></i>',
+                className: 'btn btn-primary d-none d-lg-block',
+                exportOptions: {
+                    columns: [':not(:eq(4)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                },
+                titleAttr: 'Copiar',
+                init: function (api, node, config) {
+                    $(node).removeClass('dt-button')
+                }
+
+            }
+        ],
+        "language": FnJsEspTbl()
+    });
+    tablaUsuarioNEmpleado.buttons().container().addClass('form-inline');///variable xxxx
+
+    for (var contEmpleadoNUsuario = 0; contEmpleadoNUsuario < data.length; contEmpleadoNUsuario++) { // declarar variable de recorrido de arreglo data xxxx
+        tablaUsuarioNEmpleado.row.add([//sensitivecase:
+            data[contEmpleadoNUsuario].ObjEmpleado.IdEmpleado,//campos
+            data[contEmpleadoNUsuario].ObjEmpleado.ObjPersona.Nombre1,
+            data[contEmpleadoNUsuario].ObjEmpleado.ObjPersona.Apellido1,
+            data[contEmpleadoNUsuario].ObjEmpleado.ObjArea.Area,
+            '<button value="Add" href="#modalNUsuario" data-toggle="modal" title="Add" class="btn btn-success  btn-AddUsuario"><i class="fas fa-plus"></i> </button>' // modal editar y clase de botón xxxx
+        ]
+        ).draw(false);
+    }
+}
+
+
 //acciones cud
-$('#lbNUsuario').click(function (e) {//4 evento para mostrar modal de nuevo
+
+$(document).on('click', '.btn-AddUsuario', function (e) {//nombre de clase xxxx
     e.preventDefault();
     FnJsCUsuario(); // nombre función xxxx
+    var dataUsuarioNEmpleado = tablaUsuarioNEmpleado.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
+    VarJsIdEmpleado = dataUsuarioNEmpleado[0]; //id de la fila seleccionada
+    VarJsNombre1 = dataUsuarioNEmpleado[1];
+    $('#txtNuevoNombre1').val(dataUsuarioNEmpleado[1]);// [indice columna]  de la fila seleccionada xxxx
+    VarJsApellido1 = dataUsuarioNEmpleado[2];
+    $('#txtNuevoApellido1').val(dataUsuarioNEmpleado[2]);// [indice columna]  de la fila seleccionada xxxx
+
     EUsuario = true; // variable xxxx
 
     FnJsBlockUsuario(); // nombre función xxxx
@@ -187,6 +283,8 @@ $('#lbNUsuario').click(function (e) {//4 evento para mostrar modal de nuevo
     //campos xxxx
     VarJsUsuarioId = 0; // cada campo tiene una variable, inicializar xxxx
     VarJsUsuario = ""; // cada campo tiene una variable, inicializar xxxx
+    VarJsClave = "";
+
 
 });
 $(document).on('click', '.btn-editUsuario', function (e) {//nombre de clase xxxx
@@ -196,6 +294,12 @@ $(document).on('click', '.btn-editUsuario', function (e) {//nombre de clase xxxx
     VarJsUsuarioId = dataUsuario[0]; //id de la fila seleccionada
     $('#txtNuevoUsuario').val(dataUsuario[1]);// [indice columna]  de la fila seleccionada xxxx
     VarJsUsuario = dataUsuario[1]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoClave').val(dataUsuario[2]);// [indice columna]  de la fila seleccionada xxxx
+    VarJsClave = dataUsuario[2]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoNombre1').val(dataUsuario[3]);// [indice columna]  de la fila seleccionada xxxx
+    VarJsNombre1 = dataUsuario[3]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoApellido1').val(dataUsuario[4]);// [indice columna]  de la fila seleccionada xxxx
+    VarJsApellido1 = dataUsuario[4]; // variable elemento, variable data, índice xxxx
 
     CRUDUsuario = "U";// variable crud, estado crud xxxx
 });
@@ -209,8 +313,13 @@ $(document).on('click', '.btn-deleteUsuario', function (e) {//nombre de clase xx
     var dataUsuario = tablaUsuario.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
     VarJsUsuarioId = dataUsuario[0]; //id de la fila seleccionada
     $('#txtNuevoUsuario').val(dataUsuario[1]);// [indice columna]  de la fila seleccionada xxxx
-
     VarJsUsuario = dataUsuario[1]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoClave').val(dataUsuario[2]);// [indice columna]  de la fila seleccionada xxxx
+    VarJsClave = dataUsuario[2]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoNombre1').val(dataUsuario[3]);// [indice columna]  de la fila seleccionada xxxx
+    VarJsNombre1 = dataUsuario[3]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoApellido1').val(dataUsuario[4]);// [indice columna]  de la fila seleccionada xxxx
+    VarJsApellido1 = dataUsuario[4]; // variable elemento, variable data, índice xxxx
 
     CRUDUsuario = "D";
 });
@@ -235,6 +344,9 @@ function FnJsCUsuario() { //nombe función xxxx
     $("#btnNueUsuario i").attr("class", "fa fa-save fa-2x");
     //bloquear elementos
     $("#txtNuevoUsuario").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoClave").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
 
     //vaciar elementos text de todo el modal
     $('#' + ModCUsuario[0].id + ' :text').val(""); // variable del modal xxxx
@@ -259,7 +371,10 @@ function FnJsUUsuario() { //nombe función xxxx
     $("#btnNueUsuario i").removeAttr("class");
     $("#btnNueUsuario i").attr("class", "fa fa-save fa-2x");
     //bloquear elementos
-    $("#txtNuevoUsuario").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoUsuario").attr('disabled', false); //variables de los elementos del modal xxxx 
+    $("#txtNuevoClave").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
 
     //vaciar elementos text de todo el modal
     $('#' + ModCUsuario[0].id + ' :text').val(""); // variable del modal xxxx
@@ -284,6 +399,9 @@ function FnJsDUsuario() { //nombe función xxxx
     $("#btnNueUsuario i").attr("class", "fa fa-trash fa-2x");//ícono
     //bloquear elementos
     $("#txtNuevoUsuario").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoClave").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
 
     //vaciar elementos text de todo el modal
     $('#' + ModCUsuario[0].id + ' :text').val(""); // variable del modal xxxx
@@ -327,10 +445,12 @@ $('#btnNueUsuario').click(function (e) {//1 evento para mostrar contenido xxxx
 //ajax CUD
 function FnJsAjaxCUsuario() {
     $.ajax({
-        url: "/modulo1/VstCuentasbanco.aspx/FnCUsuarioV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnCUsuarioV", // nombre de página y nombre de función cude xxxx
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({// los parámetros de la sig línea
             Usuario: VarJsUsuario,
+            Clave: VarJsClave,
+            IdEmpleado: VarJsIdEmpleado
 
         }), /*parametro: valor*/
         method: 'post',
@@ -353,12 +473,12 @@ function FnJsAjaxCUsuario() {
 }
 function FnJsAjaxUUsuario() {
     $.ajax({
-        url: "/modulo1/VstCuentasbanco.aspx/FnUUsuarioV", // nombre de página y nombre de función cude
+        url: "/modulo7/VstUsuarios.aspx/FnUUsuarioV", // nombre de página y nombre de función cude
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({// los parámetros de la sig línea
             IdUsuario: VarJsUsuarioId,
             Usuario: VarJsUsuario,
-
+            Clave: VarJsClave
 
         }), /*parametro: valor*/
         method: 'post',
@@ -373,7 +493,7 @@ function FnJsAjaxUUsuario() {
             else {
                 //no se borró
                 CRUDUsuario = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar Usuario");//
             }
             FnAlertaUsuario();// nombre función alerta xxxx
         }
@@ -381,11 +501,11 @@ function FnJsAjaxUUsuario() {
 }
 function FnJsAjaxDUsuario() {
     $.ajax({
-        url: "/modulo1/VstCuentasbanco.aspx/FnDUsuarioV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnDUsuarioV", // nombre de página y nombre de función cude xxxx
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             IdUsuario: VarJsUsuarioId
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
@@ -409,12 +529,12 @@ function FnJsAjaxDUsuario() {
 //Existe
 function FnJsAjaxEUsuario() {// nombre de la función existe xxxx
     $.ajax({
-        url: "/modulo1/VstCuentasbanco.aspx/FnEUsuarioV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnEUsuarioV", // nombre de página y nombre de función existe xxxx
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({
             IdUsuario: VarJsUsuarioId,
             Usuario: VarJsUsuario
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
@@ -439,7 +559,7 @@ function FnJsAjaxEUsuario() {// nombre de la función existe xxxx
 
 
 function VerificarExisteUsuario() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoUsuario').val().length > 3) { // id de objetos de entradas, cantidad mínima permitida xxxx
+    if ($('#txtNuevoUsuario').val().length >= 3) { // id de objetos de entradas, cantidad mínima permitida xxxx
         return true;
     }
     else {
@@ -454,6 +574,10 @@ $('#txtNuevoUsuario').keyup(function (e) {//id de cada elemento en el modal xxxx
         FnJsAjaxEUsuario(); // llamar todos los existes xxxx
 
     }
+});
+
+$('#txtNuevoClave').keyup(function (e) {//id de cada elemento en el modal xxxx
+    VarJsClave = $(this).val(); // variable de este elemento xxxx    
 });
 
 
@@ -480,16 +604,18 @@ function FnAlertaUsuario() {//nombre de la función xxxx
             console.log("Error CUD Usuario Alert")//tttt
     }
     //alerta
-    $('#alertaCuentasUsuario .modal-content').addClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
-    $('#alertaCuentasUsuario h5').text(VarJsTextoAlertUsuario);//variable de texto alerta xxxx
-    $('#alertaCuentasUsuario').modal('show');
+    $('#alertaUsuarios .modal-content').addClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
+    $('#alertaUsuarios h5').text(VarJsTextoAlertUsuario);//variable de texto alerta xxxx
+    $('#alertaUsuarios').modal('show');
     setTimeout(function () {
-        $('#alertaCuentasUsuario').modal('hide');
-        $('#alertaCuentasUsuario .modal-content').removeClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
+        $('#alertaUsuarios').modal('hide');
+        $('#alertaUsuarios .modal-content').removeClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
     }, 1500);// tiempo para que aparezca la alerta crear variable ms
 
     if ($("#secciontblUsuario.show").length > 0) {//seccion tabla xxxx
         FnJsAjaxRUsuario();//función ajax de llenado de la tabla xxxx
+        FnJsAjaxRUsuarioNEmpleado();
+
     }
     //cerrar modal
     $("#modalNUsuario").modal("toggle");//nombre modal xxxx

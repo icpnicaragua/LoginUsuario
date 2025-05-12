@@ -19,14 +19,14 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div id="Usuario" class="  col-lg-6 col-md-6 col-sm-12 collapse">
+            <div id="Usuario" class="  col-lg-12 col-md-12 col-sm-12 collapse">
                 <!-- id-->
                 <div class="card bg-light mb-3">
                     <div class="card-header">
                         <h2 class="d-inline-block">Usuarios</h2>
                         <!-- h2-->
                         <div class="d-inline-block pull-right">
-                            <asp:LinkButton ID="lbNUsuario" href="#modalNUsuario" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                            <asp:LinkButton ID="lbNUsuario" href="#EmpleadoNUsuario" data-toggle="collapse" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
                             <asp:LinkButton ID="lbMostrarUsuario" href="#secciontblUsuario" runat="server" Text="Mostrar Usuarios" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
                         </div>
                     </div>
@@ -47,6 +47,39 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tblBodyUsuario">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="EmpleadoNUsuario" class="  col-lg-12 col-md-12 col-sm-12 collapse">
+                <!-- id-->
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <h2 class="d-inline-block">Empleados sin Usuario</h2>
+                        <!-- h2-->
+                        <div class="d-inline-block pull-right">
+                                      </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="secciontblEmpleadoNUsuario" class="table-responsive ">
+                            <!-- id-->
+                            <table id="tblEmpleadoNUsuario" class="table table-bordered table-hover">
+                                <!-- id-->
+                                <thead>
+                                    <tr>
+                                        <!-- campos-->
+                                        <th>Id Empleado</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Área</th>
+                                        <th>Ctrl</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblBodyEmpleadoNUsuario">
                                 </tbody>
                             </table>
                         </div>
@@ -79,10 +112,28 @@
                 <div class="modal-body">
                     <div id="frmnueUsuario" runat="server" data-toggle="validator" role="form">
                         <!-- id-->
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoNombre1" runat="server" CssClass="form-control" placeholder="Nombre" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoApellido1" runat="server" CssClass="form-control" placeholder="Apellido" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <!-- class popinfoX-->
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
                         <label id="lblexistenuevoUsuario" for="txtNuevoUsuarion" runat="server" class="text-warning" text=""></label>
                         <!-- id for-->
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoUsuario" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Usuario" data-required-error="dddd" pattern="^[a-zA-Z0-9_.-]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoUsuario" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Usuario" data-required-error="dddd" pattern="^[a-zA-Z0-9]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo345N" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <!-- class popinfoX-->
@@ -91,7 +142,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoClave" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Usuario" data-required-error="dddd" pattern="^[a-zA-Z0-9_.-]*$" MaxLength="8" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoClave" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Usuario" data-required-error="dddd" pattern="^[a-zA-Z0-9]*$" MaxLength="8" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo38N" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <!-- class popinfoX-->

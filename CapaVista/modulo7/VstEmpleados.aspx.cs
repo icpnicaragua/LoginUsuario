@@ -93,7 +93,7 @@ namespace CapaVista.modulo7
             ClsEmpleado OEmpleado = new ClsEmpleado();
 
             OEmpleado.ObjArea.IdArea = IdArea;
-            OEmpleado.ObjPerona.IdPersona = IdPersona;
+            OEmpleado.ObjPersona.IdPersona = IdPersona;
             OEmpleado.ObjJefe.IdPersona = IdJefe;
 
             CreateEmpleado = new ClsEmpleadoN().FnCEmpleadoN(OEmpleado);
@@ -117,7 +117,7 @@ namespace CapaVista.modulo7
 
             OEmpleado.IdEmpleado = IdEmpleado;
             OEmpleado.ObjArea.IdArea = IdArea;
-            OEmpleado.ObjPerona.IdPersona = IdPersona;
+            OEmpleado.ObjPersona.IdPersona = IdPersona;
             OEmpleado.ObjJefe.IdPersona = IdJefe;
 
             UpdateEmpleado = new ClsEmpleadoN().FnUEmpleadoN(OEmpleado);
@@ -148,7 +148,7 @@ namespace CapaVista.modulo7
 
             OEmpleado.IdEmpleado = IdEmpleado;
             OEmpleado.ObjArea.IdArea = IdArea;
-            OEmpleado.ObjPerona.IdPersona = IdPersona;
+            OEmpleado.ObjPersona.IdPersona = IdPersona;
 
             ExisteEmpleado = new ClsEmpleadoN().FnEEmpleadoN(OEmpleado);
 
@@ -160,7 +160,7 @@ namespace CapaVista.modulo7
         {
             bool ExisteEmpleado = false;
             ClsEmpleado OEmpleado = new ClsEmpleado();
-            OEmpleado.ObjPerona.IdPersona = IdPersona;
+            OEmpleado.ObjPersona.IdPersona = IdPersona;
             ExisteEmpleado = new ClsEmpleadoN().FnEEmpleadoPersonaN(OEmpleado);
 
             return ExisteEmpleado;

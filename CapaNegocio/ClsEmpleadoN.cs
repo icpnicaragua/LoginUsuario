@@ -52,7 +52,7 @@ namespace CapaNegocio
         {
             if (OEmpleado.IdEmpleado != "" && OEmpleado.IdEmpleado != null
                  && OEmpleado.ObjArea.IdArea != "" && OEmpleado.ObjArea.IdArea != null
-                && OEmpleado.ObjPerona.IdPersona != "" && OEmpleado.ObjPerona.IdPersona != null
+                && OEmpleado.ObjPersona.IdPersona != "" && OEmpleado.ObjPersona.IdPersona != null
                 )
             {
                 Boolean ExisteEmpleado = new ClsEmpleadoD().FnEEmpleadoD(OEmpleado);
@@ -66,7 +66,7 @@ namespace CapaNegocio
 
         public bool FnEEmpleadoPersonaN(ClsEmpleado OEmpleado)
         {
-            if (OEmpleado.ObjPerona.IdPersona != "" && OEmpleado.ObjPerona.IdPersona != null)
+            if (OEmpleado.ObjPersona.IdPersona != "" && OEmpleado.ObjPersona.IdPersona != null)
             {
                 Boolean ExisteEmpleado = new ClsEmpleadoD().FnEEmpleadoPersonaD(OEmpleado);
                 return ExisteEmpleado;

@@ -51,6 +51,24 @@ namespace CapaVista.modulo7
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueUsuario;
 
         /// <summary>
+        /// Control txtNuevoNombre1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoNombre1;
+
+        /// <summary>
+        /// Control txtNuevoApellido1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoApellido1;
+
+        /// <summary>
         /// Control lblexistenuevoUsuario.
         /// </summary>
         /// <remarks>
