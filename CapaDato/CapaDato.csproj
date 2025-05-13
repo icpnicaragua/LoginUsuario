@@ -136,9 +136,11 @@
     <Compile Include="ClsPermisosD.cs" />
     <Compile Include="ClsPersonaD.cs" />
     <Compile Include="ClsPromoD.cs" />
+    <Compile Include="ClsRackD.cs" />
     <Compile Include="ClsRangoPrecioD.cs" />
     <Compile Include="ClsRegimenD.cs" />
     <Compile Include="ClsRolD.cs" />
+    <Compile Include="ClsSeccionD.cs" />
     <Compile Include="ClsSucursalD.cs" />
     <Compile Include="ClsTelefonoD.cs" />
     <Compile Include="ClsTipoClienteD.cs" />

@@ -9,27 +9,27 @@ using System.Data;
 
 namespace CapaDato
 {
-    public class ClsEstanteD
+    public class ClsRackD
     {
         private ClsConexion ObjConexion = null;
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
-        public bool FnCEstanteD(ClsEstante OEstante)
+        public bool FnCRackD(ClsRack ORack)
         {
-            bool CreateOEstante = false;
+            bool CreateORack = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spCEstante", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spCRack", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmCEstante", OEstante.Estante);
-                Cmd_D.Parameters.AddWithValue("prmCIdRack", Convert.ToInt16(OEstante.ObjRack.IdRack));
+                Cmd_D.Parameters.AddWithValue("prmCRack", ORack.Rack);
+                Cmd_D.Parameters.AddWithValue("prmCIdSeccion", Convert.ToInt16(ORack.ObjSeccion.IdSeccion));
                 ObjConexion.Abrircon();
-                int FilasEstante = Cmd_D.ExecuteNonQuery();
-                if (FilasEstante > 0) CreateOEstante = true;
+                int FilasRack = Cmd_D.ExecuteNonQuery();
+                if (FilasRack > 0) CreateORack = true;
 
-                return CreateOEstante;
+                return CreateORack;
             }
             catch (Exception ex)
             {
@@ -42,27 +42,27 @@ namespace CapaDato
             }
         }
 
-        public List<ClsEstante> FnREstanteD()
+        public List<ClsRack> FnRRackD()
         {
-            ClsEstante OEstante = null;
+            ClsRack ORack = null;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spREstante", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spRRack", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
-                List<ClsEstante> LstEstante = new List<ClsEstante>();
+                List<ClsRack> LstRack = new List<ClsRack>();
                 while (Dr_D.Read())
                 {
-                    OEstante = new ClsEstante();
-                    OEstante.IdEstante = Dr_D[0].ToString();//id_Estante
-                    OEstante.Estante = Dr_D[1].ToString();  //Estante
-                    OEstante.ObjRack.IdRack = Dr_D[2].ToString();//idfamilia
-                    OEstante.ObjRack.Rack = Dr_D[3].ToString();//familia 
-                    LstEstante.Add(OEstante);
+                    ORack = new ClsRack();
+                    ORack.IdRack = Dr_D[0].ToString();//id_Rack
+                    ORack.Rack = Dr_D[1].ToString();  //Rack
+                    ORack.ObjSeccion.IdSeccion = Dr_D[2].ToString();//idfamilia
+                    ORack.ObjSeccion.Seccion = Dr_D[3].ToString();//familia 
+                    LstRack.Add(ORack);
                 }
-                return LstEstante;
+                return LstRack;
             }
             catch (Exception ex)
             {
@@ -75,23 +75,23 @@ namespace CapaDato
             }
         }
 
-        public bool FnUEstanteD(ClsEstante OEstante)
+        public bool FnURackD(ClsRack ORack)
         {
-            bool UpdateEstante = false;
+            bool UpdateRack = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spUEstante", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spURack", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmUIdEstante", Convert.ToInt16(OEstante.IdEstante));
-                Cmd_D.Parameters.AddWithValue("prmUEstante", OEstante.Estante);
-                Cmd_D.Parameters.AddWithValue("prmUIdRack", Convert.ToInt16(OEstante.ObjRack.IdRack));
+                Cmd_D.Parameters.AddWithValue("prmUIdRack", Convert.ToInt16(ORack.IdRack));
+                Cmd_D.Parameters.AddWithValue("prmURack", ORack.Rack);
+                Cmd_D.Parameters.AddWithValue("prmUIdSeccion", Convert.ToInt16(ORack.ObjSeccion.IdSeccion));
 
                 ObjConexion.Abrircon();
-                int FilasUEstante = Cmd_D.ExecuteNonQuery();
-                if (FilasUEstante > 0) UpdateEstante = true;
+                int FilasURack = Cmd_D.ExecuteNonQuery();
+                if (FilasURack > 0) UpdateRack = true;
 
-                return UpdateEstante;
+                return UpdateRack;
             }
             catch (Exception ex)
             {
@@ -104,21 +104,21 @@ namespace CapaDato
             }
         }
 
-        public bool FnDEstanteD(ClsEstante OEstante)
+        public bool FnDRackD(ClsRack ORack)
         {
-            bool DeleteEstante = false;
+            bool DeleteRack = false;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spDEstante", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spDRack", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmDIdEstante", Convert.ToInt16(OEstante.IdEstante));
+                Cmd_D.Parameters.AddWithValue("prmDIdRack", Convert.ToInt16(ORack.IdRack));
 
                 ObjConexion.Abrircon();
-                int FilasDEstante = Cmd_D.ExecuteNonQuery();
-                if (FilasDEstante > 0) DeleteEstante = true;
+                int FilasDRack = Cmd_D.ExecuteNonQuery();
+                if (FilasDRack > 0) DeleteRack = true;
 
-                return DeleteEstante;
+                return DeleteRack;
             }
             catch (Exception ex)
             {
@@ -131,25 +131,25 @@ namespace CapaDato
             }
         }
 
-        public bool FnEEstanteD(ClsEstante OEstante)
+        public bool FnERackD(ClsRack ORack)
         {
-            bool ExisteEstante = true;
+            bool ExisteRack = true;
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spEEstante", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spERack", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmEIdEstante", Convert.ToInt16(OEstante.IdEstante));
-                Cmd_D.Parameters.AddWithValue("prmEEstante", OEstante.Estante);
-                Cmd_D.Parameters.AddWithValue("prmEIdRack", Convert.ToInt16(OEstante.ObjRack.IdRack));
+                Cmd_D.Parameters.AddWithValue("prmEIdRack", Convert.ToInt16(ORack.IdRack));
+                Cmd_D.Parameters.AddWithValue("prmERack", ORack.Rack);
+                Cmd_D.Parameters.AddWithValue("prmEIdSeccion", Convert.ToInt16(ORack.ObjSeccion.IdSeccion));
 
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
                 if (Dr_D.Read())
                 {
-                    ExisteEstante = Convert.ToBoolean(Dr_D[0]);
+                    ExisteRack = Convert.ToBoolean(Dr_D[0]);
                 }
-                return ExisteEstante;
+                return ExisteRack;
             }
             catch (Exception ex)
             {

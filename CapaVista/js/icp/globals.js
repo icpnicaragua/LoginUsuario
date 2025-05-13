@@ -6,6 +6,7 @@ $('.popinfo2').attr('data-content', "Letras y números, sin espacios entre palab
 $('.popinfoNum').attr('data-content', "Números solamente");
 $('.popinfo45').attr('data-content', "Letras,mínimo 3, máximo 45 caracteres");
 $('.popinfo345NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 45 caracteres");
+$('.popinfo360NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 60 caracteres");
 $('.popinfo345N').attr('data-content', "Letras y números. Mínimo 3, máximo 45 caracteres");
 $('.popinfo38N').attr('data-content', "Letras y números. Mínimo 3, máximo 8 caracteres");
 $('.popinfo3150NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 150 caracteres");

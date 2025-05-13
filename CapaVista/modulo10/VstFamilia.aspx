@@ -143,7 +143,7 @@
                 <!-- id-->
                 <div id="DivModHeaCategoria" class="modal-header bg-success">
                     <!-- id-->
-                    <h4 id="H4ModTitCategoria">Editar Palabra Clave</h4>
+                    <h4 id="H4ModTitCategoria">Editar Categoría</h4>
                     <!-- id h4-->
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
                 </div>

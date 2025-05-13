@@ -365,7 +365,7 @@ function FnJsAjaxCCategoria() {
             else {
                 //no se creó
                 CRUDCategoria = "error"
-                console.log("No se pudo agregar Tipo de indentificación");//
+                console.log("No se pudo agregar Categoría");//
             }
             FnAlertaCategoria(); // nombre función alerta xxxx
         }

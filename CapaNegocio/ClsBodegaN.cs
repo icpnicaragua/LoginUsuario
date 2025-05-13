@@ -51,8 +51,7 @@ namespace CapaNegocio
         public bool FnEBodegaN(ClsBodega OBodega)
         {
             if (OBodega.IdBodega != "" && OBodega.IdBodega != null 
-                && OBodega.ObjSucursal.IdSucursal != "" && OBodega.ObjSucursal.IdSucursal != null
-                && OBodega.ObjResponsable.IdEmpleado != "" && OBodega.ObjResponsable.IdEmpleado != null
+                && OBodega.ObjSucursal.IdSucursal != "" && OBodega.ObjSucursal.IdSucursal != null               
                 )
             {
                 Boolean ExisteBodega = new ClsBodegaD().FnEBodegaD(OBodega);

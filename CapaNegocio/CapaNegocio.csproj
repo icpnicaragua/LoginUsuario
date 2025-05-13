@@ -56,6 +56,7 @@
     <Compile Include="ClsEmpleadoN.cs" />
     <Compile Include="ClsEntradaN.cs" />
     <Compile Include="ClsEstadoCivilN.cs" />
+    <Compile Include="ClsEstanteN.cs" />
     <Compile Include="ClsFamiliaN.cs" />
     <Compile Include="ClsGarantiaN.cs" />
     <Compile Include="ClsGeneroN.cs" />
@@ -67,9 +68,11 @@
     <Compile Include="ClsPermisosN.cs" />
     <Compile Include="ClsPersonaN.cs" />
     <Compile Include="ClsPromoN.cs" />
+    <Compile Include="ClsRackN.cs" />
     <Compile Include="ClsRangoPrecioN.cs" />
     <Compile Include="ClsRegimenN.cs" />
     <Compile Include="ClsRolN.cs" />
+    <Compile Include="ClsSeccionN.cs" />
     <Compile Include="ClsSucursalN.cs" />
     <Compile Include="ClsTelefonoN.cs" />
     <Compile Include="ClsTicoControlN.cs" />
