@@ -45,6 +45,7 @@
     <Compile Include="ClsAreaN.cs" />
     <Compile Include="ClsBancoN.cs" />
     <Compile Include="ClsBarrioN.cs" />
+    <Compile Include="ClsBodegaN.cs" />
     <Compile Include="ClsCategoriaN.cs" />
     <Compile Include="ClsConceptoRocN.cs" />
     <Compile Include="ClsCorreoN.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="ClsRangoPrecioN.cs" />
     <Compile Include="ClsRegimenN.cs" />
     <Compile Include="ClsRolN.cs" />
+    <Compile Include="ClsSucursalN.cs" />
     <Compile Include="ClsTelefonoN.cs" />
     <Compile Include="ClsTicoControlN.cs" />
     <Compile Include="ClsTipoClienteN.cs" />

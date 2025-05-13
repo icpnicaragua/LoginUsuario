@@ -114,6 +114,7 @@
     <Compile Include="ClsAreaD.cs" />
     <Compile Include="ClsBancoD.cs" />
     <Compile Include="ClsBarrioD.cs" />
+    <Compile Include="ClsBodegaD.cs" />
     <Compile Include="ClsCategoriaD.cs" />
     <Compile Include="ClsConceptoRocD.cs" />
     <Compile Include="ClsConexion.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="ClsRangoPrecioD.cs" />
     <Compile Include="ClsRegimenD.cs" />
     <Compile Include="ClsRolD.cs" />
+    <Compile Include="ClsSucursalD.cs" />
     <Compile Include="ClsTelefonoD.cs" />
     <Compile Include="ClsTipoClienteD.cs" />
     <Compile Include="ClsTipoCorreoD.cs" />
