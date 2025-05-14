@@ -10,6 +10,8 @@ namespace CapaNegocio
 {
     public class ClsTelefonoN
     {
+
+        #region RegPersona
         public bool FnCTelefonoN(ClsTelefono OTelefono)
         {
             Boolean CreateTelefono = new ClsTelefonoD().FnCTelefonoD(OTelefono);
@@ -57,6 +59,32 @@ namespace CapaNegocio
                 return true;
             }
         }
+        #endregion
 
+        #region RegEmpresa
+        public bool FnCTelefonoEmpresaN(ClsTelefono OTelefonoEmpresa)
+        {
+            Boolean CreateTelefonoEmpresa = new ClsTelefonoD().FnCTelefonoEmpresaD(OTelefonoEmpresa);
+            return CreateTelefonoEmpresa;
+        }
+        public List<ClsTelefono> FnRTelefonoEmpresaN(ClsTelefono OTelefonoEmpresaN)
+        {
+            List<ClsTelefono> OTelefonoEmpresa = new ClsTelefonoD().FnRTelefonoEmpresaD(OTelefonoEmpresaN);
+            return OTelefonoEmpresa;
+        }
+
+        public bool FnETelefonoEmpresaN(ClsTelefono OTelefonoEmpresa)
+        {
+            if (OTelefonoEmpresa.IdTelefono != "" && OTelefonoEmpresa.IdTelefono != null && OTelefonoEmpresa.ObjTipoTelefono.IdTipoTelefono != "" && OTelefonoEmpresa.ObjTipoTelefono.IdTipoTelefono != null)
+            {
+                Boolean ExisteTelefonoEmpresa = new ClsTelefonoD().FnETelefonoEmpresaD(OTelefonoEmpresa);
+                return ExisteTelefonoEmpresa;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
     }
 }

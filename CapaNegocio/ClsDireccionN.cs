@@ -10,6 +10,8 @@ namespace CapaNegocio
 {
     public class ClsDireccionN
     {
+
+        #region RegPersona
         public bool FnCDireccionN(ClsDireccion ODireccion)
         {
             Boolean CreateDireccion = new ClsDireccionD().FnCDireccionD(ODireccion);
@@ -57,5 +59,34 @@ namespace CapaNegocio
                 return true;
             }
         }
+        #endregion
+
+        #region RegEmpresa
+        public bool FnCDireccionEmpresaN(ClsDireccion ODireccionEmpresa)
+        {
+            Boolean CreateDireccionEmpresa = new ClsDireccionD().FnCDireccionEmpresaD(ODireccionEmpresa);
+            return CreateDireccionEmpresa;
+        }
+        public List<ClsDireccion> FnRDireccionEmpresaN(ClsDireccion OIdentifiacionEmpresaN)
+        {
+            List<ClsDireccion> ODireccionEmpresa = new ClsDireccionD().FnRDireccionEmpresaD(OIdentifiacionEmpresaN);
+            return ODireccionEmpresa;
+        }
+        public bool FnEDireccionEmpresaN(ClsDireccion ODireccionEmpresa)
+        {
+            if (ODireccionEmpresa.IdDireccion != "" && ODireccionEmpresa.IdDireccion != null && ODireccionEmpresa.ObjTipoDireccion.IdTipoDireccion != "" && ODireccionEmpresa.ObjTipoDireccion.IdTipoDireccion != null)
+            {
+                Boolean ExisteDireccionEmpresa = new ClsDireccionD().FnEDireccionEmpresaD(ODireccionEmpresa);
+                return ExisteDireccionEmpresa;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
+
+
+
     }
 }

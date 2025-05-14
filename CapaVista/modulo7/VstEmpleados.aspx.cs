@@ -465,6 +465,51 @@ namespace CapaVista.modulo7
         }
         #endregion
 
+        #region RegCorreoEmpresa
+        [WebMethod]
+        public static bool FnCCorreoEmpresaV(string Correo, string IdTipoCorreo, string IdEmpresa)
+        {
+            bool CreateCorreoEmpresa = false;
+            ClsCorreo OCorreoEmpresa = new ClsCorreo();
+
+            OCorreoEmpresa.Correo = Correo;
+            OCorreoEmpresa.ObjTipoCorreo.IdTipoCorreo = IdTipoCorreo;
+            OCorreoEmpresa.ObjEmpresa.IdEmpresa = IdEmpresa;
+
+            CreateCorreoEmpresa = new ClsCorreoN().FnCCorreoEmpresaN(OCorreoEmpresa);
+
+            return CreateCorreoEmpresa;
+
+        }
+
+        [WebMethod]
+        public static List<ClsCorreo> FnRCorreoEmpresaV(string IdEmpresa)
+        {
+            ClsCorreo OCorreoEmpresaV = new ClsCorreo();
+            OCorreoEmpresaV.ObjEmpresa.IdEmpresa = IdEmpresa;
+            List<ClsCorreo> OCorreoEmpresa = new ClsCorreoN().FnRCorreoEmpresaN(OCorreoEmpresaV);
+            return OCorreoEmpresa;
+        }
+        [WebMethod]
+        public static bool FnECorreoEmpresaV(string IdCorreo, string Correo, string IdTipoCorreo, string IdEmpresa)
+        {
+            bool ExisteCorreoEmpresa = false;
+            ClsCorreo OCorreoEmpresa = new ClsCorreo();
+
+            OCorreoEmpresa.IdCorreo = IdCorreo;
+            OCorreoEmpresa.Correo = Correo;
+            OCorreoEmpresa.ObjTipoCorreo.IdTipoCorreo = IdTipoCorreo;
+            OCorreoEmpresa.ObjEmpresa.IdEmpresa = IdEmpresa;
+
+            ExisteCorreoEmpresa = new ClsCorreoN().FnECorreoEmpresaN(OCorreoEmpresa);
+
+            return ExisteCorreoEmpresa;
+
+        }
+
+
+        #endregion
+
         #region RegDireccion
         [WebMethod]
         public static bool FnCDireccionV(string Direccion, string IdTipoDireccion, string IdPersona, string IdBarrio)
@@ -540,6 +585,92 @@ namespace CapaVista.modulo7
         }
         #endregion
 
+        #region RegDireccionEmpresa
+        [WebMethod]
+        public static bool FnCDireccionEmpresaV(string Direccion, string IdTipoDireccion, string IdEmpresa, string IdBarrio)
+        {
+            bool CreateDireccionEmpresa = false;
+            ClsDireccion ODireccionEmpresa = new ClsDireccion();
+
+            ODireccionEmpresa.Direccion = Direccion;
+            ODireccionEmpresa.ObjTipoDireccion.IdTipoDireccion = IdTipoDireccion;
+            ODireccionEmpresa.ObjEmpresa.IdEmpresa = IdEmpresa;
+            ODireccionEmpresa.ObjBarrio.IdBarrio = IdBarrio;
+
+            CreateDireccionEmpresa = new ClsDireccionN().FnCDireccionEmpresaN(ODireccionEmpresa);
+
+            return CreateDireccionEmpresa;
+
+        }
+
+        [WebMethod]
+        public static List<ClsDireccion> FnRDireccionEmpresaV(string IdEmpresa)
+        {
+            ClsDireccion ODireccionEmpresaV = new ClsDireccion();
+            ODireccionEmpresaV.ObjEmpresa.IdEmpresa = IdEmpresa;
+            List<ClsDireccion> ODireccionEmpresa = new ClsDireccionN().FnRDireccionEmpresaN(ODireccionEmpresaV);
+            return ODireccionEmpresa;
+        }
+        [WebMethod]
+        public static bool FnEDireccionEmpresaV(string IdDireccion, string Direccion, string IdTipoDireccion, string IdEmpresa)
+        {
+            bool ExisteDireccionEmpresa = false;
+            ClsDireccion ODireccionEmpresa = new ClsDireccion();
+
+            ODireccionEmpresa.IdDireccion = IdDireccion;
+            ODireccionEmpresa.Direccion = Direccion;
+            ODireccionEmpresa.ObjTipoDireccion.IdTipoDireccion = IdTipoDireccion;
+            ODireccionEmpresa.ObjEmpresa.IdEmpresa = IdEmpresa;
+
+            ExisteDireccionEmpresa = new ClsDireccionN().FnEDireccionEmpresaN(ODireccionEmpresa);
+
+            return ExisteDireccionEmpresa;
+
+        }
+        #endregion
+
+        #region TelefonoEmpresa
+        [WebMethod]
+        public static bool FnCTelefonoEmpresaV(string Telefono, string IdTipoTelefono, string IdEmpresa)
+        {
+            bool CreateTelefonoEmpresa = false;
+            ClsTelefono OTelefonoEmpresa = new ClsTelefono();
+
+            OTelefonoEmpresa.Telefono = Telefono;
+            OTelefonoEmpresa.ObjTipoTelefono.IdTipoTelefono = IdTipoTelefono;
+            OTelefonoEmpresa.ObjEmpresa.IdEmpresa = IdEmpresa;
+
+            CreateTelefonoEmpresa = new ClsTelefonoN().FnCTelefonoEmpresaN(OTelefonoEmpresa);
+
+            return CreateTelefonoEmpresa;
+
+        }
+
+        [WebMethod]
+        public static List<ClsTelefono> FnRTelefonoEmpresaV(string IdEmpresa)
+        {
+            ClsTelefono OTelefonoEmpresaV = new ClsTelefono();
+            OTelefonoEmpresaV.ObjEmpresa.IdEmpresa = IdEmpresa;
+            List<ClsTelefono> OTelefonoEmpresa = new ClsTelefonoN().FnRTelefonoEmpresaN(OTelefonoEmpresaV);
+            return OTelefonoEmpresa;
+        }
+        [WebMethod]
+        public static bool FnETelefonoEmpresaV(string IdTelefono, string Telefono, string IdTipoTelefono, string IdEmpresa)
+        {
+            bool ExisteTelefonoEmpresa = false;
+            ClsTelefono OTelefonoEmpresa = new ClsTelefono();
+
+            OTelefonoEmpresa.IdTelefono = IdTelefono;
+            OTelefonoEmpresa.Telefono = Telefono;
+            OTelefonoEmpresa.ObjTipoTelefono.IdTipoTelefono = IdTipoTelefono;
+            OTelefonoEmpresa.ObjEmpresa.IdEmpresa = IdEmpresa;
+
+            ExisteTelefonoEmpresa = new ClsTelefonoN().FnETelefonoEmpresaN(OTelefonoEmpresa);
+
+            return ExisteTelefonoEmpresa;
+
+        }
+        #endregion
 
     }
 }

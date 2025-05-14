@@ -10,6 +10,8 @@ namespace CapaNegocio
 {
     public class ClsCorreoN
     {
+
+        #region RegPersona
         public bool FnCCorreoN(ClsCorreo OCorreo)
         {
             Boolean CreateCorreo = new ClsCorreoD().FnCCorreoD(OCorreo);
@@ -57,5 +59,33 @@ namespace CapaNegocio
                 return true;
             }
         }
+        #endregion
+
+        #region RegEmpresa
+        public bool FnCCorreoEmpresaN(ClsCorreo OCorreoEmpresa)
+        {
+            Boolean CreateCorreoEmpresa = new ClsCorreoD().FnCCorreoEmpresaD(OCorreoEmpresa);
+            return CreateCorreoEmpresa;
+        }
+
+        public List<ClsCorreo> FnRCorreoEmpresaN(ClsCorreo OIdentifiacionEmpresaN)
+        {
+            List<ClsCorreo> OCorreoEmpresa = new ClsCorreoD().FnRCorreoEmpresaD(OIdentifiacionEmpresaN);
+            return OCorreoEmpresa;
+        }
+        public bool FnECorreoEmpresaN(ClsCorreo OCorreoEmpresa)
+        {
+            if (OCorreoEmpresa.IdCorreo != "" && OCorreoEmpresa.IdCorreo != null && OCorreoEmpresa.ObjTipoCorreo.IdTipoCorreo != "" && OCorreoEmpresa.ObjTipoCorreo.IdTipoCorreo != null)
+            {
+                Boolean ExisteCorreoEmpresa = new ClsCorreoD().FnECorreoEmpresaD(OCorreoEmpresa);
+                return ExisteCorreoEmpresa;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        #endregion
     }
 }

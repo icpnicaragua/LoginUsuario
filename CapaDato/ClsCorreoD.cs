@@ -16,6 +16,7 @@ namespace CapaDato
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
+        #region RegCorreoPersona
         public bool FnCCorreoD(ClsCorreo OCorreo)
         {
             bool CreateOCorreo = false;
@@ -166,5 +167,102 @@ namespace CapaDato
                 ObjConexion.Cerrarcon();
             }
         }
+        #endregion
+
+        #region RegCorreoEmpresa
+        public bool FnCCorreoEmpresaD(ClsCorreo OCorreoEmpresa)
+        {
+            bool CreateOCorreoEmpresa = false;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spCCorreoEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmCCorreo", OCorreoEmpresa.Correo);
+                Cmd_D.Parameters.AddWithValue("prmCIdTipoCorreo", Convert.ToInt16(OCorreoEmpresa.ObjTipoCorreo.IdTipoCorreo));
+                Cmd_D.Parameters.AddWithValue("prmCIdEmpresa", Convert.ToInt16(OCorreoEmpresa.ObjEmpresa.IdEmpresa));
+
+                ObjConexion.Abrircon();
+                int FilasCorreoEmpresa = Cmd_D.ExecuteNonQuery();
+                if (FilasCorreoEmpresa > 0) CreateOCorreoEmpresa = true;
+
+                return CreateOCorreoEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+        public List<ClsCorreo> FnRCorreoEmpresaD(ClsCorreo OCorreoEmpresaD)
+        {
+            ClsCorreo OCorreoEmpresa = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spRCorreoEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmRIdEmpresa", Convert.ToInt16(OCorreoEmpresaD.ObjEmpresa.IdEmpresa));
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsCorreo> LstCorreoEmpresa = new List<ClsCorreo>();
+                while (Dr_D.Read())
+                {
+                    OCorreoEmpresa = new ClsCorreo();
+                    OCorreoEmpresa.IdCorreo = Dr_D[0].ToString();//id_Correo
+                    OCorreoEmpresa.Correo = Dr_D[1].ToString();  //Correo
+                    OCorreoEmpresa.ObjTipoCorreo.IdTipoCorreo = Dr_D[2].ToString();//idTipoCorreo
+                    OCorreoEmpresa.ObjTipoCorreo.TipoCorreo = Dr_D[3].ToString();//Tipo de identificacion 
+                    LstCorreoEmpresa.Add(OCorreoEmpresa);
+                }
+                return LstCorreoEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+        public bool FnECorreoEmpresaD(ClsCorreo OCorreoEmpresa)
+        {
+            bool ExisteCorreoEmpresa = true;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spECorreoEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmEIdCorreo", Convert.ToInt16(OCorreoEmpresa.IdCorreo));
+                Cmd_D.Parameters.AddWithValue("prmECorreo", OCorreoEmpresa.Correo);
+                Cmd_D.Parameters.AddWithValue("prmEIdTipoCorreo", Convert.ToInt16(OCorreoEmpresa.ObjTipoCorreo.IdTipoCorreo));
+                Cmd_D.Parameters.AddWithValue("prmEIdEmpresa", Convert.ToInt16(OCorreoEmpresa.ObjEmpresa.IdEmpresa));
+
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    ExisteCorreoEmpresa = Convert.ToBoolean(Dr_D[0]);
+                }
+                return ExisteCorreoEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return true;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        #endregion
     }
 }

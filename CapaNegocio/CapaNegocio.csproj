@@ -54,6 +54,7 @@
     <Compile Include="ClsDireccionN.cs" />
     <Compile Include="ClsElementoN.cs" />
     <Compile Include="ClsEmpleadoN.cs" />
+    <Compile Include="ClsEmpresaN.cs" />
     <Compile Include="ClsEntradaN.cs" />
     <Compile Include="ClsEstadoCivilN.cs" />
     <Compile Include="ClsEstanteN.cs" />

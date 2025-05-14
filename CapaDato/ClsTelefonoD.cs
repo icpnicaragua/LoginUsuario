@@ -15,6 +15,7 @@ namespace CapaDato
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
+        #region RegPersona
         public bool FnCTelefonoD(ClsTelefono OTelefono)
         {
             bool CreateOTelefono = false;
@@ -165,5 +166,103 @@ namespace CapaDato
                 ObjConexion.Cerrarcon();
             }
         }
+        #endregion
+
+        #region RegEmpresa
+        public bool FnCTelefonoEmpresaD(ClsTelefono OTelefonoEmpresa)
+        {
+            bool CreateOTelefonoEmpresa = false;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spCTelefonoEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmCTelefono", OTelefonoEmpresa.Telefono);
+                Cmd_D.Parameters.AddWithValue("prmCIdTipoTelefono", Convert.ToInt16(OTelefonoEmpresa.ObjTipoTelefono.IdTipoTelefono));
+                Cmd_D.Parameters.AddWithValue("prmCIdEmpresa", Convert.ToInt16(OTelefonoEmpresa.ObjEmpresa.IdEmpresa));
+
+                ObjConexion.Abrircon();
+                int FilasTelefonoEmpresa = Cmd_D.ExecuteNonQuery();
+                if (FilasTelefonoEmpresa > 0) CreateOTelefonoEmpresa = true;
+
+                return CreateOTelefonoEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public List<ClsTelefono> FnRTelefonoEmpresaD(ClsTelefono OTelefonoEmpresaD)
+        {
+            ClsTelefono OTelefonoEmpresa = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spRTelefonoEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmRIdEmpresa", Convert.ToInt16(OTelefonoEmpresaD.ObjEmpresa.IdEmpresa));
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsTelefono> LstTelefonoEmpresa = new List<ClsTelefono>();
+                while (Dr_D.Read())
+                {
+                    OTelefonoEmpresa = new ClsTelefono();
+                    OTelefonoEmpresa.IdTelefono = Dr_D[0].ToString();//id_Telefono
+                    OTelefonoEmpresa.Telefono = Dr_D[1].ToString();  //Telefono
+                    OTelefonoEmpresa.ObjTipoTelefono.IdTipoTelefono = Dr_D[2].ToString();//idTipoTelefono
+                    OTelefonoEmpresa.ObjTipoTelefono.TipoTelefono = Dr_D[3].ToString();//Tipo de identificacion 
+                    LstTelefonoEmpresa.Add(OTelefonoEmpresa);
+                }
+                return LstTelefonoEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public bool FnETelefonoEmpresaD(ClsTelefono OTelefonoEmpresa)
+        {
+            bool ExisteTelefonoEmpresa = true;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spETelefonoEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmEIdTelefono", Convert.ToInt16(OTelefonoEmpresa.IdTelefono));
+                Cmd_D.Parameters.AddWithValue("prmETelefono", OTelefonoEmpresa.Telefono);
+                Cmd_D.Parameters.AddWithValue("prmEIdTipoTelefono", Convert.ToInt16(OTelefonoEmpresa.ObjTipoTelefono.IdTipoTelefono));
+                Cmd_D.Parameters.AddWithValue("prmEIdEmpresa", Convert.ToInt16(OTelefonoEmpresa.ObjEmpresa.IdEmpresa));
+
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    ExisteTelefonoEmpresa = Convert.ToBoolean(Dr_D[0]);
+                }
+                return ExisteTelefonoEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return true;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+        #endregion
     }
 }

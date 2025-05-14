@@ -613,8 +613,7 @@ function FnJSFillDdlDireccionTipoDireccion() {
     });
 }
 function FnJSFillDdlDepartamento() {
-    $('#ddlCDepartamento').empty(); // xxxx id
-    console.log("llenando departamento");
+    $('#ddlCDepartamento').empty(); // xxxx id    
     $.ajax({
         type: "POST",
         url: "/modulo7/VstGenerales.aspx/FnRDepartamentoV", // xxxx

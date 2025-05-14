@@ -15,6 +15,9 @@ namespace CapaDato
         private MySqlDataReader Dr_D; //para leer datos de latabla 
         private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
 
+
+        #region RegPersona
+
         public bool FnCDireccionD(ClsDireccion ODireccion)
         {
             bool CreateODireccion = false;
@@ -173,5 +176,112 @@ namespace CapaDato
                 ObjConexion.Cerrarcon();
             }
         }
+
+        #endregion
+        #region RegEmpresa
+        public bool FnCDireccionEmpresaD(ClsDireccion ODireccionEmpresa)
+        {
+            bool CreateODireccionEmpresa = false;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spCDireccionEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmCDireccion", ODireccionEmpresa.Direccion);
+                Cmd_D.Parameters.AddWithValue("prmCIdTipoDireccion", Convert.ToInt16(ODireccionEmpresa.ObjTipoDireccion.IdTipoDireccion));
+                Cmd_D.Parameters.AddWithValue("prmCIdEmpresa", Convert.ToInt16(ODireccionEmpresa.ObjEmpresa.IdEmpresa));
+                Cmd_D.Parameters.AddWithValue("prmCIdBarrio", Convert.ToInt16(ODireccionEmpresa.ObjBarrio.IdBarrio));
+
+                ObjConexion.Abrircon();
+                int FilasDireccionEmpresa = Cmd_D.ExecuteNonQuery();
+                if (FilasDireccionEmpresa > 0) CreateODireccionEmpresa = true;
+
+                return CreateODireccionEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public List<ClsDireccion> FnRDireccionEmpresaD(ClsDireccion ODireccionEmpresaD)
+        {
+            ClsDireccion ODireccionEmpresa = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spRDireccionEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmRIdEmpresa", Convert.ToInt16(ODireccionEmpresaD.ObjEmpresa.IdEmpresa));
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsDireccion> LstDireccionEmpresa = new List<ClsDireccion>();
+                while (Dr_D.Read())
+                {
+                    ODireccionEmpresa = new ClsDireccion();
+                    ODireccionEmpresa.IdDireccion = Dr_D[0].ToString();//id_Direccion
+                    ODireccionEmpresa.Direccion = Dr_D[1].ToString();  //Direccion
+                    ODireccionEmpresa.ObjTipoDireccion.IdTipoDireccion = Dr_D[2].ToString();//idTipoDireccion
+                    ODireccionEmpresa.ObjTipoDireccion.TipoDireccion = Dr_D[3].ToString();//Tipo de dirección 
+                    ODireccionEmpresa.ObjBarrio.IdBarrio = Dr_D[4].ToString();//idbarrio
+                    ODireccionEmpresa.ObjBarrio.Barrio = Dr_D[5].ToString();//barrio
+                    ODireccionEmpresa.ObjBarrio.ObjMunicipio.IdMunicipio = Dr_D[6].ToString();//id municipio
+                    ODireccionEmpresa.ObjBarrio.ObjMunicipio.Municipio = Dr_D[7].ToString();//municipío
+                    ODireccionEmpresa.ObjBarrio.ObjMunicipio.ObjDepartamento.IdDepartamento = Dr_D[8].ToString();//id departamento
+                    ODireccionEmpresa.ObjBarrio.ObjMunicipio.ObjDepartamento.Departamento = Dr_D[9].ToString();//departamento
+                    LstDireccionEmpresa.Add(ODireccionEmpresa);
+                }
+                return LstDireccionEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public bool FnEDireccionEmpresaD(ClsDireccion ODireccionEmpresa)
+        {
+            bool ExisteDireccionEmpresa = true;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spEDireccionEmpresa", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmEIdDireccion", Convert.ToInt16(ODireccionEmpresa.IdDireccion));
+                Cmd_D.Parameters.AddWithValue("prmEDireccion", ODireccionEmpresa.Direccion);
+                Cmd_D.Parameters.AddWithValue("prmEIdTipoDireccion", Convert.ToInt16(ODireccionEmpresa.ObjTipoDireccion.IdTipoDireccion));
+                Cmd_D.Parameters.AddWithValue("prmEIdEmpresa", Convert.ToInt16(ODireccionEmpresa.ObjEmpresa.IdEmpresa));
+
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                if (Dr_D.Read())
+                {
+                    ExisteDireccionEmpresa = Convert.ToBoolean(Dr_D[0]);
+                }
+                return ExisteDireccionEmpresa;
+            }
+            catch (Exception ex)
+            {
+                return true;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+        #endregion
+
+
     }
 }
