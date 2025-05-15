@@ -1,74 +1,64 @@
-﻿/*variable de tablas*/
-var tablaDireccion;/*tabla mpodulo*/
-var ModCDireccion = $('#modalNDireccion'); // modal 
-//campos de tablas
+﻿var tablaDireccion;
+var ModCDireccion = $('#modalNDireccion');
 var VarJsDireccionId = 0;
 var VarJsDireccion = "";
 var VarJsIdTipoDireccion = 0;
 var VarJsIdPersona = 0;
 var VarJsDepartamento = "";
-var VarJsIdDepartamento = 0;//VarJsIdDepartamento VarJsIdMunicipio VarJsIdBarrio
+var VarJsIdDepartamento = 0;
 var VarJsMunicipio = "";
 var VarJsIdMunicipio = 0;
 var VarJsBarrio = "";
 var VarJsIdBarrio = 0;
 
-//dddlist TipoDireccion
-var VAlDDLDireccionTipoDireccion = "null";// para guardar lo que está en la tabla y luego asignar al ddl
-var VAlDDLDepartamento = "null";//VAlDDLDepartamento VAlDDLMunicipio VAlDDLBarrio
+var VAlDDLDireccionTipoDireccion = "null";
+var VAlDDLDepartamento = "null";
 var VAlDDLMunicipio = "null";
 var VAlDDLBarrio = "null";
-//igual para todos
-
 var formDireccion = document.querySelector('#form1');
 
-//variables crud
 CRUDDireccion = "";
-//variables alertas
 var VarJsColorAlertDireccion = "";
 var VarJsTextoAlertDireccion = "";
-//variables existe
 var EDireccion = true;
 
 $('#tblPersona tbody').on('click', 'tr', function () {
     var tablaPersona = $('#tblPersona').DataTable();
-    //console.log('clicked: ' + tablaPersona.row(this).data()[0]);
+    console.log('dire : ' + tablaPersona.row(this).data()[0]);
     VarJsIdPersona = tablaPersona.row(this).data()[0];
-    FnJsAjaxRDireccion(); //llama al ajax xxxx
-    FnJSFillDdlDireccionTipoDireccion();//cargar ddl
-    $("#secciontblDireccion").attr('class', 'table-responsive collapse show');//No hay btn de show table
+    FnJsAjaxRDireccion();
+    FnJSFillDdlDireccionTipoDireccion();
+    $("#DatosPersona").attr('class', 'row collapse show');
+
 })
 
-
-
-function FnJsAjaxRDireccion() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRDireccion() {
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstEmpleados.aspx/FnRDireccionV", // nombre de página y nombre de función xxxx
-        data: JSON.stringify({// los parámetros de la sig línea
+        url: "/modulo7/VstEmpleados.aspx/FnRDireccionV",
+        data: JSON.stringify({
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowDireccion(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowDireccion(data.d);
         }
     }
     );
 }
 
-function AddrowDireccion(data) {//3 llenar la tabla xxxx
+function AddrowDireccion(data) {
+    $('#tblDireccion').DataTable().clear().destroy();
 
-    $('#tblDireccion').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
-
-    tablaDireccion = $("#tblDireccion").DataTable({// variable nombre tabla xxxx
+    tablaDireccion = $("#tblDireccion").DataTable({
 
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [[2, 'asc'], [1, 'asc']],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [[2, 'asc'], [1, 'asc']],
         "columnDefs": [
             { "targets": 6, "searchable": false },
             { "orderable": false, "targets": 3 }
@@ -78,38 +68,36 @@ function AddrowDireccion(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colDireccion'//se añade el id para ocultar xxxx
+                    id: 'colDireccion'
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',
+                className: 'btn btn-info',
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'copy',
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(6)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(6)):visible']
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'pdf',
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(6)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(6)):visible']
                 },
                 titleAttr: 'PDF',
-                filename: 'Direccion' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Direccion' + "_" + FnJsDate() + "_" + FnJsHour(),
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -117,7 +105,7 @@ function AddrowDireccion(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64();
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -131,14 +119,14 @@ function AddrowDireccion(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Direccion', //tttt
+                                    text: 'Direccion',
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Direccion' //tttt
+                                    text: 'Reporte Direccion'
                                 }
                             ],
                             margin: 20
@@ -159,103 +147,91 @@ function AddrowDireccion(data) {//3 llenar la tabla xxxx
                             margin: 20
                         }
                     });
-
                 }
-
             },
             {
                 extend: 'excel',
-                filename: 'Dirección' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Dirección' + "_" + FnJsDate() + "_" + FnJsHour(),
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(6)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(6)):visible']
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
-
                 }
-
             }
         ],
         "language": FnJsEspTbl()
     });
-    tablaDireccion.buttons().container().addClass('form-inline');///variable xxxx
+    tablaDireccion.buttons().container().addClass('form-inline');
 
-    for (var contDireccion = 0; contDireccion < data.length; contDireccion++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaDireccion.row.add([//sensitivecase:
-            data[contDireccion].IdDireccion,//campos
-            data[contDireccion].Direccion,//campos
+    for (var contDireccion = 0; contDireccion < data.length; contDireccion++) {
+        tablaDireccion.row.add([
+            data[contDireccion].IdDireccion,
+            data[contDireccion].Direccion,
             data[contDireccion].ObjTipoDireccion.TipoDireccion,
             data[contDireccion].ObjBarrio.Barrio,
             data[contDireccion].ObjBarrio.ObjMunicipio.Municipio,
             data[contDireccion].ObjBarrio.ObjMunicipio.ObjDepartamento.Departamento,
-            '<button value="editar" href="#modalNDireccion" data-toggle="modal" title="editar" class="btn btn-warning  btn-editDireccion"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNDireccion" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteDireccion"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNDireccion" data-toggle="modal" title="editar" class="btn btn-warning  btn-editDireccion"><i class="fas fa-pencil-alt"></i> </button>' +
+            '<button value="eliminar" href="#modalNDireccion" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteDireccion"><i class="fa fa-trash" ></i> </button>'
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$('#lbNDireccion').click(function (e) {//4 evento para mostrar modal de nuevo
+$('#lbNDireccion').click(function (e) {
     e.preventDefault();
-    FnJsCDireccion(); // nombre función xxxx
-    EDireccion = true; // variable xxxx
+    FnJsCDireccion();
+    EDireccion = true;
 
-    FnJsBlockDireccion(); // nombre función xxxx
+    FnJsBlockDireccion();
     FnJSFillDdlDireccionTipoDireccion();
-    CRUDDireccion = "C"; // nombre variable xxxx
+    CRUDDireccion = "C";
     FnJSFillDdlDepartamento();
 
-    //campos xxxx
-    VarJsDireccionId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsDireccion = ""; // cada campo tiene una variable, inicializar xxxx
+    VarJsDireccionId = 0;
+    VarJsDireccion = "";
     VarJsIdTipoDireccion = 0;
     VarJsIdDepartamento = 0;
     VarJsIdMunicipio = 0;
     VarJsIdBarrio = 0;
 
-    // VarJsIdPersona = 0;
-
 });
-$(document).on('click', '.btn-editDireccion', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editDireccion', function (e) {
     e.preventDefault();
-    FnJsUDireccion();//nombre de función xxxx
-    var dataDireccion = tablaDireccion.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsDireccionId = dataDireccion[0]; //id de la fila seleccionada
-    $('#txtNuevoDireccion').val(dataDireccion[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsDireccion = dataDireccion[1]; // variable elemento, variable data, índice xxxx
+    FnJsUDireccion();
+    var dataDireccion = tablaDireccion.row($(this).parents("tr")).data();
+    VarJsDireccionId = dataDireccion[0];
+    $('#txtNuevoDireccion').val(dataDireccion[1]);
+    VarJsDireccion = dataDireccion[1];
     VAlDDLDireccionTipoDireccion = (dataDireccion[2]);
     FnJSFillDdlDireccionTipoDireccion();
-   
+
     VAlDDLDepartamento = (dataDireccion[5]);
     VAlDDLMunicipio = (dataDireccion[4]);
     VAlDDLBarrio = (dataDireccion[3]);
     FnJSFillDdlDepartamento();
 
-    
-   
-    
     VarJsIdTipoDireccion = $('#ddlCDireccionTipoDireccion').val();
     VarJsIdDepartamento = $('#ddlCDepartamento').val();
     VarJsIdMunicipio = $('#ddlCMunicipio').val();
     VarJsIdBarrio = $('#ddlCBarrio').val();
-    //VarJsIdPersona = 0;
-    CRUDDireccion = "U";// variable crud, estado crud xxxx
+    CRUDDireccion = "U";
 });
-$(document).on('click', '.btn-deleteDireccion', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteDireccion', function (e) {
     e.preventDefault();
-    FnJsDDireccion();//nombre de función xxxx
-    EDireccion = false; // variable de existe xxxx
+    FnJsDDireccion();
+    EDireccion = false;
 
 
-    FnJsBlockDireccion();//función bloquear xxxx
-    var dataDireccion = tablaDireccion.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsDireccionId = dataDireccion[0]; //id de la fila seleccionada
-    $('#txtNuevoDireccion').val(dataDireccion[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsDireccion = dataDireccion[1]; // variable elemento, variable data, índice xxxx
+    FnJsBlockDireccion();
+    var dataDireccion = tablaDireccion.row($(this).parents("tr")).data();
+    VarJsDireccionId = dataDireccion[0];
+    $('#txtNuevoDireccion').val(dataDireccion[1]);
+    VarJsDireccion = dataDireccion[1];
     VAlDDLDireccionTipoDireccion = (dataDireccion[2]);
     FnJSFillDdlDireccionTipoDireccion();
 
@@ -263,283 +239,253 @@ $(document).on('click', '.btn-deleteDireccion', function (e) {//nombre de clase 
     VAlDDLMunicipio = (dataDireccion[4]);
     VAlDDLBarrio = (dataDireccion[3]);
     FnJSFillDdlDepartamento();
-       
+
     CRUDDireccion = "D";
 });
 
-//pintar modal
-function FnJsCDireccion() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoDireccion').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsCDireccion() {
+    $('#lblexistenuevoDireccion').text("");
 
-    //cambiar el color del modal borde
-    $("#DivModBorDireccion").removeAttr("class");//quitar el atributo class
-    $("#DivModBorDireccion").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaDireccion").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaDireccion").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitDireccion').text('Nuevo Direccion');//tttt
-    //cambiar el color icono btn
-    $("#btnNueDireccion").removeAttr("class");//quitar el atributo class
-    $("#btnNueDireccion").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+    $("#DivModBorDireccion").removeAttr("class");
+    $("#DivModBorDireccion").attr('class', 'modal-content border-success');
+
+    $("#DivModHeaDireccion").removeAttr("class");
+    $("#DivModHeaDireccion").attr('class', 'modal-header bg-success');
+
+    $('#H4ModTitDireccion').text('Nuevo Direccion');
+
+    $("#btnNueDireccion").removeAttr("class");
+    $("#btnNueDireccion").attr('class', 'btn btn-success pull-right');
     $("#btnNueDireccion i").removeAttr("class");
     $("#btnNueDireccion i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCDireccionTipoDireccion").removeAttr("class"); //uitar propiedades
-    $("#ddlCDireccionTipoDireccion").attr("class", "form-control border-success");//pintr roo
-    $("#ddlCDepartamento").removeAttr("class"); //uitar propiedades
-    $("#ddlCDepartamento").attr("class", "form-control border-success");//pintr roo
-    $("#ddlCMunicipio").removeAttr("class"); //uitar propiedades
-    $("#ddlCMunicipio").attr("class", "form-control border-success");//pintr roo
- 
-    $('#ddlCMunicipio').append($("<option> </option>").val("0").html("Seleccionar Departamento antes...")); 
-    $('#ddlCBarrio').append($("<option> </option>").val("0").html("Seleccionar Municipio antes...")); 
 
-    $("#ddlCBarrio").removeAttr("class"); //uitar propiedades
-    $("#ddlCBarrio").attr("class", "form-control border-success");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoDireccion").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#ddlCDireccionTipoDireccion").removeAttr("class");
+    $("#ddlCDireccionTipoDireccion").attr("class", "form-control border-success");
+    $("#ddlCDepartamento").removeAttr("class");
+    $("#ddlCDepartamento").attr("class", "form-control border-success");
+    $("#ddlCMunicipio").removeAttr("class");
+    $("#ddlCMunicipio").attr("class", "form-control border-success");
+
+    $('#ddlCMunicipio').append($("<option> </option>").val("0").html("Seleccionar Departamento antes..."));
+    $('#ddlCBarrio').append($("<option> </option>").val("0").html("Seleccionar Municipio antes..."));
+
+    $("#ddlCBarrio").removeAttr("class");
+    $("#ddlCBarrio").attr("class", "form-control border-success");
+    $("#txtNuevoDireccion").attr('disabled', false);
     $('#ddlCDireccionTipoDireccion').attr('disabled', false);
     $("#ddlCDepartamento").attr('disabled', false);
     $("#ddlCMunicipio").attr('disabled', false);
     $("#ddlCBarrio").attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCDireccion[0].id + ' :text').val(""); // variable del modal xxxx
 
+    $('#' + ModCDireccion[0].id + ' :text').val("");
 }
-function FnJsUDireccion() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoDireccion').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUDireccion() {
+    $('#lblexistenuevoDireccion').text("");
 
-    console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorDireccion").removeAttr("class");//quitar el atributo class
-    $("#DivModBorDireccion").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaDireccion").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaDireccion").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitDireccion').text('Editar Direccion');//tttt
-    //cambiar el color icono btn
-    $("#btnNueDireccion").removeAttr("class");//quitar el atributo class
-    $("#btnNueDireccion").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#DivModBorDireccion").removeAttr("class");
+    $("#DivModBorDireccion").attr('class', 'modal-content border-warning');
+
+    $("#DivModHeaDireccion").removeAttr("class");
+    $("#DivModHeaDireccion").attr('class', 'modal-header bg-warning');
+
+    $('#H4ModTitDireccion').text('Editar Direccion');
+
+    $("#btnNueDireccion").removeAttr("class");
+    $("#btnNueDireccion").attr('class', 'btn btn-warning pull-right');
     $("#btnNueDireccion i").removeAttr("class");
     $("#btnNueDireccion i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCDireccionTipoDireccion").removeAttr("class"); //uitar propiedades
-    $("#ddlCDireccionTipoDireccion").attr("class", "form-control border-warning");//pintr roo
-    $("#ddlCDepartamento").removeAttr("class"); //uitar propiedades
-    $("#ddlCDepartamento").attr("class", "form-control border-warning");//pintr roo
-    $("#ddlCMunicipio").removeAttr("class"); //uitar propiedades
-    $("#ddlCMunicipio").attr("class", "form-control border-warning");//pintr roo
-    $("#ddlCBarrio").removeAttr("class"); //uitar propiedades
-    $("#ddlCBarrio").attr("class", "form-control border-warning");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoDireccion").attr('disabled', false); //variables de los elementos del modal xxxx
+
+    $("#ddlCDireccionTipoDireccion").removeAttr("class");
+    $("#ddlCDireccionTipoDireccion").attr("class", "form-control border-warning");
+    $("#ddlCDepartamento").removeAttr("class");
+    $("#ddlCDepartamento").attr("class", "form-control border-warning");
+    $("#ddlCMunicipio").removeAttr("class");
+    $("#ddlCMunicipio").attr("class", "form-control border-warning");
+    $("#ddlCBarrio").removeAttr("class");
+    $("#ddlCBarrio").attr("class", "form-control border-warning");
+    $("#txtNuevoDireccion").attr('disabled', false);
     $('#ddlCDireccionTipoDireccion').attr('disabled', false);
     $("#ddlCDepartamento").attr('disabled', false);
     $("#ddlCMunicipio").attr('disabled', false);
     $("#ddlCBarrio").attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCDireccion[0].id + ' :text').val(""); // variable del modal xxxx
 
+    $('#' + ModCDireccion[0].id + ' :text').val("");
 }
-function FnJsDDireccion() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoDireccion').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDDireccion() {
+    $('#lblexistenuevoDireccion').text("");
 
-    //cambiar el color del modal borde
-    $("#DivModBorDireccion").removeAttr("class");//quitar el atributo class
-    $("#DivModBorDireccion").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaDireccion").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaDireccion").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitDireccion').text('Eliminar Direccion');//tttt
-    //cambiar el color icono btn
-    $("#btnNueDireccion").removeAttr("class");//quitar el atributo class
-    $("#btnNueDireccion").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#DivModBorDireccion").removeAttr("class");
+
+    $("#DivModBorDireccion").attr('class', 'modal-content border-danger');
+
+    $("#DivModHeaDireccion").removeAttr("class");
+    $("#DivModHeaDireccion").attr('class', 'modal-header bg-danger');
+
+    $('#H4ModTitDireccion').text('Eliminar Direccion');
+
+    $("#btnNueDireccion").removeAttr("class");
+    $("#btnNueDireccion").attr('class', 'btn btn-danger pull-right');
     $("#btnNueDireccion i").removeAttr("class");
-    $("#btnNueDireccion i").attr("class", "fa fa-trash fa-2x");//ícono
-    //color ddl
-    $("#ddlCDireccionTipoDireccion").removeAttr("class"); //uitar propiedades
-    $("#ddlCDireccionTipoDireccion").attr("class", "form-control border-danger");//pintr roo
-    $("#ddlCDepartamento").removeAttr("class"); //uitar propiedades
-    $("#ddlCDepartamento").attr("class", "form-control border-danger");//pintr roo
-    $("#ddlCMunicipio").removeAttr("class"); //uitar propiedades
-    $("#ddlCMunicipio").attr("class", "form-control border-danger");//pintr roo
-    $("#ddlCBarrio").removeAttr("class"); //uitar propiedades
-    $("#ddlCBarrio").attr("class", "form-control border-danger");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoDireccion").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#btnNueDireccion i").attr("class", "fa fa-trash fa-2x");
+
+    $("#ddlCDireccionTipoDireccion").removeAttr("class");
+    $("#ddlCDireccionTipoDireccion").attr("class", "form-control border-danger");
+    $("#ddlCDepartamento").removeAttr("class");
+    $("#ddlCDepartamento").attr("class", "form-control border-danger");
+    $("#ddlCMunicipio").removeAttr("class");
+    $("#ddlCMunicipio").attr("class", "form-control border-danger");
+    $("#ddlCBarrio").removeAttr("class");
+    $("#ddlCBarrio").attr("class", "form-control border-danger");
+    $("#txtNuevoDireccion").attr('disabled', true);
     $('#ddlCDireccionTipoDireccion').attr('disabled', true);
     $('#ddlCDepartamento').attr('disabled', true);
     $('#ddlCMunicipio').attr('disabled', true);
     $('#ddlCBarrio').attr('disabled', true);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCDireccion[0].id + ' :text').val(""); // variable del modal xxxx
 
+    $('#' + ModCDireccion[0].id + ' :text').val("");
 }
 
-/*quitar btn CUD*/
-function FnJsBlockDireccion() {// nombre función xxxx
 
-    if (EDireccion == true) {// variables xxxx
-        $("#btnNueDireccion").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueDireccion").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
+function FnJsBlockDireccion() {
 
+    if (EDireccion == true) {
+        $("#btnNueDireccion").fadeOut("fast");
+        $("#btnNueDireccion").attr('disabled', true);
     }
-    else if (EDireccion == false) {// variables xxxx
-        $("#btnNueDireccion").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueDireccion").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
-
-
+    else if (EDireccion == false) {
+        $("#btnNueDireccion").fadeIn("slow");
+        $("#btnNueDireccion").attr('disabled', false);
     }
 }
 
-//guardar CUD
-$('#btnNueDireccion').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueDireccion').click(function (e) {
     e.preventDefault();
     if (formDireccion.checkValidity()) {
-        switch (CRUDDireccion) { // variable crud xxxx
+        switch (CRUDDireccion) {
             case "C":
-                FnJsAjaxCDireccion(); // función para crear xxxx
+                FnJsAjaxCDireccion();
                 break;
             case "U":
-                FnJsAjaxUDireccion();// función para crear xxxx
+                FnJsAjaxUDireccion();
                 break;
             case "D":
-                FnJsAjaxDDireccion();// función para crear xxxx
+                FnJsAjaxDDireccion();
                 break;
             default:
-                console.log("Error en cud Direccion");/////tttt
+                console.log("Error en cud Direccion");
         }
     }
-    console.log(formDireccion.checkValidity());
 });
 
-//ajax CUD
 function FnJsAjaxCDireccion() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnCDireccionV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnCDireccionV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             Direccion: VarJsDireccion,
             IdTipoDireccion: VarJsIdTipoDireccion,
             IdPersona: VarJsIdPersona,
-            IdBarrio:   VarJsIdBarrio
-        }), /*parametro: valor*/
+            IdBarrio: VarJsIdBarrio
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Direccion Agregado"); ////tttt        
+                console.log("Direccion Agregado");
             }
             else {
-                //no se creó
                 CRUDDireccion = "error"
-                console.log("No se pudo agregar Tipo de indentificación");//
+                console.log("No se pudo agregar Tipo de indentificación");
             }
-            FnAlertaDireccion(); // nombre función alerta xxxx
+            FnAlertaDireccion();
         }
-    });//ajax fin
+    });
 }
 function FnJsAjaxUDireccion() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnUDireccionV", // nombre de página y nombre de función cude
+        url: "/modulo7/VstEmpleados.aspx/FnUDireccionV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             IdDireccion: VarJsDireccionId,
             Direccion: VarJsDireccion,
             IdTipoDireccion: VarJsIdTipoDireccion,
-            IdBarrio:   VarJsIdBarrio
+            IdBarrio: VarJsIdBarrio
 
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Direccion Actualizado"); ////tttt
+                console.log("Direccion Actualizado");
             }
             else {
-                //no se borró
                 CRUDDireccion = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaDireccion();// nombre función alerta xxxx
+            FnAlertaDireccion();
         }
-    });//ajax fin
+    });
 }
 function FnJsAjaxDDireccion() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnDDireccionV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnDDireccionV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             IdDireccion: VarJsDireccionId
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Dirección Eliminado"); ////tttt
+                console.log("Dirección Eliminado");
             }
             else {
-                //no se creó
                 CRUDDireccion = "error"
-                console.log("No se pudo Eliminar Dirección");////tttt
+                console.log("No se pudo Eliminar Dirección");
             }
-            FnAlertaDireccion(); // nombre función alerta xxxx
-
+            FnAlertaDireccion();
         }
-    });//ajax fin
+    });
 }
 
-//Existe
-function FnJsAjaxEDireccion() {// nombre de la función existe xxxx
+function FnJsAjaxEDireccion() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnEDireccionV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnEDireccionV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({
             IdDireccion: VarJsDireccionId,
             Direccion: VarJsDireccion,
             IdTipoDireccion: VarJsIdTipoDireccion,
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                EDireccion = true; // variable existe xxxx
-                $('#lblexistenuevoDireccion').text("Existe Dirección");// id etiqueta texto etiqueta //tttt
-                FnJsBlockDireccion();//nombre de función bloquear xxxx
+                EDireccion = true;
+                $('#lblexistenuevoDireccion').text("Existe Dirección");
+                FnJsBlockDireccion();
 
             }
             else {
-                //mostrar btn
-                EDireccion = false;// variable existe xxxx
-                $('#lblexistenuevoDireccion').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockDireccion(); //nombre de función bloquear xxxx
+                EDireccion = false;
+                $('#lblexistenuevoDireccion').text("");
+                FnJsBlockDireccion();
             }
         }
-    });//ajax fin
+    });
 }
 
-
-function VerificarExisteDireccion() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoDireccion').val().length >= 3 && $('#ddlCDireccionTipoDireccion').val() > 0 && $('#ddlCBarrio').val() > 0) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteDireccion() {
+    if ($('#txtNuevoDireccion').val().length >= 3 && $('#ddlCDireccionTipoDireccion').val() > 0 && $('#ddlCBarrio').val() > 0) {
         return true;
     }
     else {
@@ -547,12 +493,10 @@ function VerificarExisteDireccion() {// nombre de función verificarexiste xxxx
     }
 }
 
-
-$('#txtNuevoDireccion').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsDireccion = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteDireccion()) {//nombre función verificar existe xxxx
-        FnJsAjaxEDireccion(); // llamar todos los existes xxxx
-
+$('#txtNuevoDireccion').keyup(function (e) {
+    VarJsDireccion = $(this).val();
+    if (VerificarExisteDireccion()) {
+        FnJsAjaxEDireccion();
     }
 });
 
@@ -564,79 +508,76 @@ $('#ddlCDireccionTipoDireccion').change(function (e) {
 });
 
 $('#ddlCDepartamento').change(function (e) {
-    VarJsIdDepartamento = $('#ddlCDepartamento').val();//
+    VarJsIdDepartamento = $('#ddlCDepartamento').val();
     FnJSFillDdlMunicipio();
-   //pppp
 });
 
 $('#ddlCMunicipio').change(function (e) {
-    VarJsIdMunicipio = $('#ddlCMunicipio').val();//
+    VarJsIdMunicipio = $('#ddlCMunicipio').val();
     FnJSFillDdlBarrio();
-    //pppp
 });
 
 $('#ddlCBarrio').change(function (e) {
-    VarJsIdBarrio = $('#ddlCBarrio').val();//
+    VarJsIdBarrio = $('#ddlCBarrio').val();
     if (VerificarExisteDireccion()) {
         FnJsAjaxEDireccion();
     }
-    //pppp
 });
 
 function FnJSFillDdlDireccionTipoDireccion() {
-    $('#ddlCDireccionTipoDireccion').empty(); // xxxx id
+    $('#ddlCDireccionTipoDireccion').empty();
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstGenerales.aspx/FnRTipoDireccionV", // xxxx
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo7/VstGenerales.aspx/FnRTipoDireccionV",
+        data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLDireccionTipoDireccion == "null") {
-                $('#ddlCDireccionTipoDireccion').append($("<option> </option>").val("0").html("Seleccionar Tipo Dirección"));  // xxxx id val html            
+                $('#ddlCDireccionTipoDireccion').append($("<option> </option>").val("0").html("Seleccionar Tipo Dirección"));
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLDireccionTipoDireccion == value.TipoDireccion) {
-                        $('#ddlCDireccionTipoDireccion').append($("<option> </option>").val(value.IdTipoDireccion).html(value.TipoDireccion));  // xxxx id texto
+                        $('#ddlCDireccionTipoDireccion').append($("<option> </option>").val(value.IdTipoDireccion).html(value.TipoDireccion));
                         VarJsIdTipoDireccion = value.IdTipoDireccion;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCDireccionTipoDireccion').append($("<option> </option>").val(value.IdTipoDireccion).html(value.TipoDireccion)); // id en un val y en html el nombre
+                $('#ddlCDireccionTipoDireccion').append($("<option> </option>").val(value.IdTipoDireccion).html(value.TipoDireccion));
             });
             VAlDDLDireccionTipoDireccion = "null";
         }
     });
 }
 function FnJSFillDdlDepartamento() {
-    $('#ddlCDepartamento').empty(); // xxxx id    
+    $('#ddlCDepartamento').empty();
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstGenerales.aspx/FnRDepartamentoV", // xxxx
+        url: "/modulo7/VstGenerales.aspx/FnRDepartamentoV",
         async: false,
-        data: {}, /*{ data: jsonString }*/
+        data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLDepartamento == "null") {
-                $('#ddlCDepartamento').append($("<option> </option>").val("0").html("Seleccionar Departamento"));  // xxxx id val html            
+                $('#ddlCDepartamento').append($("<option> </option>").val("0").html("Seleccionar Departamento"));
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLDepartamento == value.Departamento) {
-                        $('#ddlCDepartamento').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento));  // xxxx id texto
+                        $('#ddlCDepartamento').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento));
                         VarJsIdDepartamento = value.IdDepartamento;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCDepartamento').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento)); // id en un val y en html el nombre
+                $('#ddlCDepartamento').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento));
             });
             VAlDDLDepartamento = "null";
         }
@@ -648,9 +589,9 @@ function FnJSFillDdlDepartamento() {
 
 
 function FnJSFillDdlMunicipio() {
-    $('#ddlCMunicipio').empty(); // xxxx id
+    $('#ddlCMunicipio').empty();
     $.ajax({
-        url: "/modulo7/VstGenerales.aspx/FnRMunicipioV", // xxxx
+        url: "/modulo7/VstGenerales.aspx/FnRMunicipioV",
         async: false,
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({
@@ -662,18 +603,18 @@ function FnJSFillDdlMunicipio() {
         },
         success: function (data) {
             if (VAlDDLMunicipio == "null") {
-                $('#ddlCMunicipio').append($("<option> </option>").val("0").html("Seleccionar Municipio"));  // xxxx id val html            
+                $('#ddlCMunicipio').append($("<option> </option>").val("0").html("Seleccionar Municipio"));
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLMunicipio == value.Municipio) {
-                        $('#ddlCMunicipio').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio));  // xxxx id texto
+                        $('#ddlCMunicipio').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio));
                         VarJsIdMunicipio = value.IdMunicipio;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCMunicipio').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio)); // id en un val y en html el nombre
+                $('#ddlCMunicipio').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio));
             });
             VAlDDLMunicipio = "null";
         }
@@ -683,9 +624,9 @@ function FnJSFillDdlMunicipio() {
 }
 
 function FnJSFillDdlBarrio() {
-    $('#ddlCBarrio').empty(); // xxxx id
+    $('#ddlCBarrio').empty();
     $.ajax({
-        url: "/modulo7/VstGenerales.aspx/FnRBarrioV", // xxxx
+        url: "/modulo7/VstGenerales.aspx/FnRBarrioV",
         async: false,
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({
@@ -697,60 +638,57 @@ function FnJSFillDdlBarrio() {
         },
         success: function (data) {
             if (VAlDDLBarrio == "null") {
-                $('#ddlCBarrio').append($("<option> </option>").val("0").html("Seleccionar Barrio"));  // xxxx id val html            
+                $('#ddlCBarrio').append($("<option> </option>").val("0").html("Seleccionar Barrio"));
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLBarrio == value.Barrio) {
-                        $('#ddlCBarrio').append($("<option> </option>").val(value.IdBarrio).html(value.Barrio));  // xxxx id texto
+                        $('#ddlCBarrio').append($("<option> </option>").val(value.IdBarrio).html(value.Barrio));
                         VarJsIdBarrio = value.IdBarrio;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCBarrio').append($("<option> </option>").val(value.IdBarrio).html(value.Barrio)); // id en un val y en html el nombre
+                $('#ddlCBarrio').append($("<option> </option>").val(value.IdBarrio).html(value.Barrio));
             });
             VAlDDLBarrio = "null";
         }
     });
 }
 
+function FnAlertaDireccion() {
 
-
-function FnAlertaDireccion() {//nombre de la función xxxx
-
-    switch (CRUDDireccion) {//nombre de la variable cud xxxx
+    switch (CRUDDireccion) {
         case "C":
-            VarJsColorAlertDireccion = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertDireccion = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertDireccion = "bg-success";
+            VarJsTextoAlertDireccion = "Creado";
             break;
         case "U":
-            VarJsColorAlertDireccion = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertDireccion = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertDireccion = "bg-warning";
+            VarJsTextoAlertDireccion = "Actualizado";
             break;
         case "D":
-            VarJsColorAlertDireccion = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertDireccion = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertDireccion = "bg-danger";
+            VarJsTextoAlertDireccion = "Eliminado";
             break;
         case "Error":
-            VarJsColorAlertDireccion = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertDireccion = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertDireccion = "bg-secondary";
+            VarJsTextoAlertDireccion = "No se pudo realizar la operación";
             break;
         default:
-            console.log("Error CUD Dirección Alert")//tttt
+            console.log("Error CUD Dirección Alert");
     }
-    //alerta
-    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertDireccion);//variable de color alerta xxxx
-    $('.bd-example-modal-sm h5').text(VarJsTextoAlertDireccion);//variable de texto alerta xxxx
+
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertDireccion);
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertDireccion);
     $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
         $('.bd-example-modal-sm').modal('hide');
-        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertDireccion);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
-    console.log($("#secciontblDireccion.show").length)//tttt
-    if ($("#secciontblDireccion.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRDireccion();//función ajax de llenado de la tabla xxxx
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertDireccion);
+    }, 1500);
+    console.log($("#secciontblDireccion.show").length)
+    if ($("#secciontblDireccion.show").length > 0) {
+        FnJsAjaxRDireccion();
     }
-    //cerrar modal
-    $("#modalNDireccion").modal("toggle");//nombre modal xxxx
+    $("#modalNDireccion").modal("toggle");
 }

@@ -27,16 +27,16 @@
         </div>
     </div>
 
-    <div class="container-fluid  " style="background-color: #bb39d7">
+    <div class="container-fluid" >
         <div class="row">
             <div id="Cliente" class=" col-lg-12 col-md-12 col-sm-12 collapse">
                 <div class="card bg-light mb-3">
                     <div class="card-header">
                         <h2 class="d-inline-block">Cliente</h2>
                         <div class="d-inline-block pull-right">
-                            <asp:LinkButton ID="lbNClientePersona" href="#ClienteNPersona" data-toggle="collapse" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-user fa-2x"></i></asp:LinkButton><!-- id href-->
-                            <asp:LinkButton ID="lbNClienteEmpresa" href="#ClienteNEmpresa" data-toggle="collapse" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-suitcase fa-2x"></i></asp:LinkButton><!-- id href-->
-                            <asp:LinkButton ID="lbMostrarCliente" href="#secciontblCliente" runat="server" Text="Mostrar Cliente" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                            <asp:LinkButton ID="lbNClientePersona" href="#ClienteNPersona" data-toggle="collapse" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-user fa-2x"></i></asp:LinkButton>  
+                            <asp:LinkButton ID="lbNClienteEmpresa" href="#ClienteNEmpresa" data-toggle="collapse" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-suitcase fa-2x"></i></asp:LinkButton>  
+                            <asp:LinkButton ID="lbMostrarCliente" href="#secciontblCliente" runat="server" Text="Mostrar Cliente" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>   
                         </div>
                     </div>
                     <div class="card-body">
@@ -73,10 +73,8 @@
                     <div class="card-body">
                         <div id="secciontblClienteNPersona" class="table-responsive ">
                             <table id="tblClienteNPersona" class="table table-bordered table-hover">
-                                <!-- id-->
                                 <thead>
                                     <tr>
-                                        <!-- campos-->
                                         <th>Id Persona</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
@@ -100,10 +98,8 @@
                     <div class="card-body">
                         <div id="secciontblClienteNEmpresa" class="table-responsive ">
                             <table id="tblClienteNEmpresa" class="table table-bordered table-hover">
-                                <!-- id-->
                                 <thead>
                                     <tr>
-                                        <!-- campos-->
                                         <th>Id Persona</th>
                                         <th>Nombre Comercial</th>
                                         <th>Razón Social</th>
@@ -128,8 +124,8 @@
                     <div class="card-header">
                         <h2 class="d-inline-block">Información General de  Empresas</h2>
                         <div class="d-inline-block pull-right">
-                            <asp:LinkButton ID="lbNEmpresa" href="#modalNEmpresa" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
-                            <asp:LinkButton ID="lbMostrarEmpresa" href="#secciontblEmpresa" runat="server" Text="Mostrar Empresa" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                            <asp:LinkButton ID="lbNEmpresa" href="#modalNEmpresa" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
+                            <asp:LinkButton ID="lbMostrarEmpresa" href="#secciontblEmpresa" runat="server" Text="Mostrar Empresa" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>   
                         </div>
                     </div>
                     <div class="card-body">
@@ -159,7 +155,7 @@
                             <div class="card-header">
                                 <h2 class="d-inline-block">Teléfono</h2>
                                 <div class="d-inline-block pull-right">
-                                    <asp:LinkButton ID="lbNTelefonoEmpresa" href="#modalNTelefonoEmpresa" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbNTelefonoEmpresa" href="#modalNTelefonoEmpresa" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
                                 </div>
                             </div>
                             <div class="card-body">
@@ -185,7 +181,7 @@
                             <div class="card-header">
                                 <h2 class="d-inline-block">Dirección</h2>
                                 <div class="d-inline-block pull-right">
-                                    <asp:LinkButton ID="lbNDireccionEmpresa" href="#modalNDireccionEmpresa" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbNDireccionEmpresa" href="#modalNDireccionEmpresa" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
                                 </div>
                             </div>
                             <div class="card-body">
@@ -214,7 +210,7 @@
                             <div class="card-header">
                                 <h2 class="d-inline-block">Correo</h2>
                                 <div class="d-inline-block pull-right">
-                                    <asp:LinkButton ID="lbNCorreoEmpresa" href="#modalNCorreoEmpresa" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbNCorreoEmpresa" href="#modalNCorreoEmpresa" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
                                 </div>
                             </div>
                             <div class="card-body">
@@ -247,8 +243,8 @@
                     <div class="card-header">
                         <h2 class="d-inline-block">Información General de Personas</h2>
                         <div class="d-inline-block pull-right">
-                            <asp:LinkButton ID="lbNPersona" href="#modalNPersona" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
-                            <asp:LinkButton ID="lbMostrarPersona" href="#secciontblPersona" runat="server" Text="Mostrar Personas" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                            <asp:LinkButton ID="lbNPersona" href="#modalNPersona" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
+                            <asp:LinkButton ID="lbMostrarPersona" href="#secciontblPersona" runat="server" Text="Mostrar Personas" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>   
                         </div>
                     </div>
                     <div class="card-body">
@@ -265,7 +261,7 @@
                                         <th>Ctrl</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tblBodyPersona" data-toggle="collapse" data-target="#DatosPersona">
+                                <tbody id="tblBodyPersona" ">
                                 </tbody>
                             </table>
                         </div>
@@ -278,7 +274,7 @@
                             <div class="card-header">
                                 <h2 class="d-inline-block">Identificación</h2>
                                 <div class="d-inline-block pull-right">
-                                    <asp:LinkButton ID="lbNIdentificacion" href="#modalNIdentificacion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbNIdentificacion" href="#modalNIdentificacion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
                                 </div>
                             </div>
                             <div class="card-body">
@@ -304,7 +300,7 @@
                             <div class="card-header">
                                 <h2 class="d-inline-block">Teléfono</h2>
                                 <div class="d-inline-block pull-right">
-                                    <asp:LinkButton ID="lbNTelefono" href="#modalNTelefono" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbNTelefono" href="#modalNTelefono" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
                                 </div>
                             </div>
                             <div class="card-body">
@@ -330,7 +326,7 @@
                             <div class="card-header">
                                 <h2 class="d-inline-block">Dirección</h2>
                                 <div class="d-inline-block pull-right">
-                                    <asp:LinkButton ID="lbNDireccion" href="#modalNDireccion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbNDireccion" href="#modalNDireccion" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
                                 </div>
                             </div>
                             <div class="card-body">
@@ -359,7 +355,7 @@
                             <div class="card-header">
                                 <h2 class="d-inline-block">Correo</h2>
                                 <div class="d-inline-block pull-right">
-                                    <asp:LinkButton ID="lbNCorreo" href="#modalNCorreo" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                                    <asp:LinkButton ID="lbNCorreo" href="#modalNCorreo" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>  
                                 </div>
                             </div>
                             <div class="card-body">
@@ -406,7 +402,7 @@
                     <div id="frmnueCliente" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoCliente" for="txtNuevoNombre" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoNombre" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Cliente" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoNombre" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Cliente" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -414,7 +410,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoPlazoCredito" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Plazo Cédito" data-required-error="dddd" pattern="[0-9]+" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoPlazoCredito" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Plazo Cédito" data-required-error="dddd" pattern="[0-9]+" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfoNum" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -422,7 +418,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoLimiteCredito" runat="server" TabIndex="3" CssClass="form-control" placeholder="Nuevo Plazo Cédito" data-required-error="dddd" pattern="[0-9]+([,\.][0-9]+)?$" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoLimiteCredito" runat="server" TabIndex="3" CssClass="form-control" placeholder="Nuevo Plazo Cédito" data-required-error="dddd" pattern="[0-9]+([,\.][0-9]+)?$" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfoDecimal2" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -453,7 +449,7 @@
                     <div id="frmnueEmpresa" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoEmpresa" for="txtNuevoEmpresa" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoEmpresa" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Nombre comercial" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoEmpresa" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Nombre comercial" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo345NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -461,7 +457,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoRazonSocial" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Razón Social" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoRazonSocial" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Razón Social" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo345NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -469,7 +465,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoRuc" runat="server" TabIndex="3" CssClass="form-control" placeholder="Nuevo RUC" data-required-error="dddd" pattern="[a-zA-Z0-9\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoRuc" runat="server" TabIndex="3" CssClass="form-control" placeholder="Nuevo RUC" data-required-error="dddd" pattern="[a-zA-Z0-9\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo345NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -504,7 +500,7 @@
                     <div id="frmnueDireccionEmpresa" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoDireccionEmpresa" for="txtNuevoDireccionEmpresa" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoDireccionEmpresa" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Dirección" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="150" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoDireccionEmpresa" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Dirección" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="150" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo3150NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -546,7 +542,7 @@
                     <div id="frmnueTelefonoEmpresa" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoTelefonoEmpresa" for="txtNuevoTelefonoEmpresa" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoTelefonoEmpresa" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Teléfono" data-required-error="dddd" pattern="[0-9\s]*$" MaxLength="15" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoTelefonoEmpresa" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Teléfono" data-required-error="dddd" pattern="[0-9\s]*$" MaxLength="15" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfoNum" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -576,7 +572,7 @@
                     <div id="frmnueCorreoEmpresa" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoCorreoEmpresa" for="txtNuevoCorreoEmpresa" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoCorreoEmpresa" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Correo" data-required-error="dddd" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" MaxLength="50" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoCorreoEmpresa" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Correo" data-required-error="dddd" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" MaxLength="50" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfoMAIL" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -607,7 +603,7 @@
                     <div id="frmnuePersona" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoPersona" for="txtNuevoPersona" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoNombre1" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Nombre1" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoNombre1" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Nombre1" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo320S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -615,7 +611,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoNombre2" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Nombre2" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoNombre2" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Nombre2" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo320S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -623,7 +619,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoApellido1" runat="server" TabIndex="3" CssClass="form-control" placeholder="Nuevo Apellido1" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoApellido1" runat="server" TabIndex="3" CssClass="form-control" placeholder="Nuevo Apellido1" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo320S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -631,7 +627,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoApellido2" runat="server" TabIndex="4" CssClass="form-control" placeholder="Nuevo Apellido2" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoApellido2" runat="server" TabIndex="4" CssClass="form-control" placeholder="Nuevo Apellido2" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo320S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -662,7 +658,7 @@
                     <div id="frmnueIdentificacion" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoIdentificacion" for="txtNuevoIdentificacion" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoIdentificacion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Identifiación" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoIdentificacion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Identifiación" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo320NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -693,7 +689,7 @@
                     <div id="frmnueDireccion" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoDireccion" for="txtNuevoDireccion" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoDireccion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Dirección" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="150" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoDireccion" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Dirección" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑ\s]*$" MaxLength="150" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo3150NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -735,7 +731,7 @@
                     <div id="frmnueTelefono" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoTelefono" for="txtNuevoTelefono" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoTelefono" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Teléfono" data-required-error="dddd" pattern="[0-9\s]*$" MaxLength="15" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoTelefono" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Teléfono" data-required-error="dddd" pattern="[0-9\s]*$" MaxLength="15" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfoNum" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
@@ -765,7 +761,7 @@
                     <div id="frmnueCorreo" runat="server" data-toggle="validator" role="form">
                         <label id="lblexistenuevoCorreo" for="txtNuevoCorreo" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoCorreo" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Correo" data-required-error="dddd" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" MaxLength="50" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoCorreo" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Correo" data-required-error="dddd" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" MaxLength="50" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfoMAIL" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>

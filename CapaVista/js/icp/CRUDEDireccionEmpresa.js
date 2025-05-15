@@ -1,5 +1,4 @@
-﻿
-var tablaDireccionEmpresa;
+﻿var tablaDireccionEmpresa;
 var ModCDireccionEmpresa = $('#modalNDireccionEmpresa');
 
 var VarJsDireccionEmpresaId = 0;
@@ -50,7 +49,6 @@ function FnJsAjaxRDireccionEmpresa() {
     );
 }
 function AddrowDireccionEmpresa(data) {
-
     $('#tblDireccionEmpresa').DataTable().clear().destroy();
 
     tablaDireccionEmpresa = $("#tblDireccionEmpresa").DataTable({
@@ -117,14 +115,14 @@ function AddrowDireccionEmpresa(data) {
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Dirección', //tttt
+                                    text: 'Dirección', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Dirección' //tttt
+                                    text: 'Reporte Dirección' 
                                 }
                             ],
                             margin: 20
@@ -145,24 +143,20 @@ function AddrowDireccionEmpresa(data) {
                             margin: 20
                         }
                     });
-
                 }
-
             },
             {
                 extend: 'excel',
-                filename: 'Dirección' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Dirección' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(6)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(6)):visible'] 
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
-
                 }
-
             }
         ],
         "language": FnJsEspTbl()
@@ -424,7 +418,7 @@ function FnJsAjaxCDireccionEmpresa() {
             }
             FnAlertaDireccionEmpresa();
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUDireccionEmpresa() {
     $.ajax({
@@ -446,7 +440,7 @@ function FnJsAjaxUDireccionEmpresa() {
             }
             else {
                 CRUDDireccionEmpresa = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
             FnAlertaDireccionEmpresa();
         }
@@ -585,18 +579,18 @@ function FnJSFillDdlDepartamentoEmpresa() {
         },
         success: function (data) {
             if (VAlDDLDepartamentoEmpresa == "null") {
-                $('#ddlCDepartamentoEmpresa').append($("<option> </option>").val("0").html("Seleccionar Departamento"));  // xxxx id val html            
+                $('#ddlCDepartamentoEmpresa').append($("<option> </option>").val("0").html("Seleccionar Departamento"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLDepartamentoEmpresa == value.Departamento) {
-                        $('#ddlCDepartamentoEmpresa').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento));  // xxxx id texto
+                        $('#ddlCDepartamentoEmpresa').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento));           
                         VarJsIdDepartamentoEmpresa = value.IdDepartamento;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCDepartamentoEmpresa').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento)); // id en un val y en html el nombre
+                $('#ddlCDepartamentoEmpresa').append($("<option> </option>").val(value.IdDepartamento).html(value.Departamento));                            
             });
             VAlDDLDepartamentoEmpresa = "null";
         }
@@ -607,9 +601,9 @@ function FnJSFillDdlDepartamentoEmpresa() {
 }
 
 function FnJSFillDdlMunicipioEmpresa() {
-    $('#ddlCMunicipioEmpresa').empty(); // xxxx id
+    $('#ddlCMunicipioEmpresa').empty();       
     $.ajax({
-        url: "/modulo7/VstGenerales.aspx/FnRMunicipioV", // xxxx
+        url: "/modulo7/VstGenerales.aspx/FnRMunicipioV",    
         async: false,
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({
@@ -621,18 +615,18 @@ function FnJSFillDdlMunicipioEmpresa() {
         },
         success: function (data) {
             if (VAlDDLMunicipioEmpresa == "null") {
-                $('#ddlCMunicipioEmpresa').append($("<option> </option>").val("0").html("Seleccionar Municipio"));  // xxxx id val html            
+                $('#ddlCMunicipioEmpresa').append($("<option> </option>").val("0").html("Seleccionar Municipio"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLMunicipioEmpresa == value.Municipio) {
-                        $('#ddlCMunicipioEmpresa').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio));  // xxxx id texto
+                        $('#ddlCMunicipioEmpresa').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio));           
                         VarJsIdMunicipioEmpresa = value.IdMunicipio;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCMunicipioEmpresa').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio)); // id en un val y en html el nombre
+                $('#ddlCMunicipioEmpresa').append($("<option> </option>").val(value.IdMunicipio).html(value.Municipio));                            
             });
             VAlDDLMunicipioEmpresa = "null";
         }
@@ -642,9 +636,9 @@ function FnJSFillDdlMunicipioEmpresa() {
 }
 
 function FnJSFillDdlBarrioEmpresa() {
-    $('#ddlCBarrioEmpresa').empty(); // xxxx id
+    $('#ddlCBarrioEmpresa').empty();       
     $.ajax({
-        url: "/modulo7/VstGenerales.aspx/FnRBarrioV", // xxxx
+        url: "/modulo7/VstGenerales.aspx/FnRBarrioV",    
         async: false,
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({
@@ -656,27 +650,25 @@ function FnJSFillDdlBarrioEmpresa() {
         },
         success: function (data) {
             if (VAlDDLBarrioEmpresa == "null") {
-                $('#ddlCBarrioEmpresa').append($("<option> </option>").val("0").html("Seleccionar Barrio"));  // xxxx id val html            
+                $('#ddlCBarrioEmpresa').append($("<option> </option>").val("0").html("Seleccionar Barrio"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLBarrioEmpresa == value.Barrio) {
-                        $('#ddlCBarrioEmpresa').append($("<option> </option>").val(value.IdBarrio).html(value.Barrio));  // xxxx id texto
+                        $('#ddlCBarrioEmpresa').append($("<option> </option>").val(value.IdBarrio).html(value.Barrio));           
                         VarJsIdBarrioEmpresa = value.IdBarrio;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCBarrioEmpresa').append($("<option> </option>").val(value.IdBarrio).html(value.Barrio)); // id en un val y en html el nombre
+                $('#ddlCBarrioEmpresa').append($("<option> </option>").val(value.IdBarrio).html(value.Barrio));                            
             });
             VAlDDLBarrioEmpresa = "null";
         }
     });
 }
 
-
 function FnAlertaDireccionEmpresa() {
-
     switch (CRUDDireccionEmpresa) {
         case "C":
             VarJsColorAlertDireccionEmpresa = "bg-success";
@@ -695,9 +687,8 @@ function FnAlertaDireccionEmpresa() {
             VarJsTextoAlertDireccionEmpresa = "No se pudo realizar la operación";
             break;
         default:
-            console.log("Error CUD Dirección Alert")
-    }
-    //alerta
+            console.log("Error CUD Dirección Alert");
+    }  
     $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertDireccionEmpresa);
     $('.bd-example-modal-sm h5').text(VarJsTextoAlertDireccionEmpresa);
     $('.bd-example-modal-sm').modal('show');

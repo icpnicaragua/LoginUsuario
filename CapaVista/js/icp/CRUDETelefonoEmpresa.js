@@ -110,14 +110,14 @@ function AddrowTelefonoEmpresa(data) {
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Teléfono', //tttt
+                                    text: 'Teléfono', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Teléfono' //tttt
+                                    text: 'Reporte Teléfono' 
                                 }
                             ],
                             margin: 20
@@ -144,11 +144,11 @@ function AddrowTelefonoEmpresa(data) {
             },
             {
                 extend: 'excel',
-                filename: 'Teléfono' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Teléfono' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(3)):visible'] 
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -345,7 +345,7 @@ function FnJsAjaxCTelefonoEmpresa() {
             }
             FnAlertaTelefonoEmpresa(); 
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUTelefonoEmpresa() {
     $.ajax({
@@ -366,7 +366,7 @@ function FnJsAjaxUTelefonoEmpresa() {
             }
             else {                
                 CRUDTelefonoEmpresa = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
             FnAlertaTelefonoEmpresa();
         }
@@ -498,9 +498,9 @@ function FnAlertaTelefonoEmpresa() {
             VarJsTextoAlertTelefonoEmpresa = "No se pudo realizar la operación";
             break;
         default:
-            console.log("Error CUD Teléfono Alert")
+            console.log("Error CUD Teléfono Alert");
     }
-    //alerta
+  
     $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertTelefonoEmpresa);
     $('.bd-example-modal-sm h5').text(VarJsTextoAlertTelefonoEmpresa);
     $('.bd-example-modal-sm').modal('show');

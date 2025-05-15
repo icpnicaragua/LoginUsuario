@@ -1,69 +1,56 @@
-﻿/*variable de tablas*/
-var tablaTelefono;/*tabla mpodulo*/
-var ModCTelefono = $('#modalNTelefono'); // modal 
-//campos de tablas
+﻿var tablaTelefono;
+var ModCTelefono = $('#modalNTelefono'); 
+
 var VarJsTelefonoId = 0;
 var VarJsTelefono = "";
 var VarJsIdTipoTelefono = 0;
 var VarJsIdPersona = 0;
-//dddlist TipoTelefono
-var VAlDDLTelefonoTipoTelefono = "null";// para guardar lo que está en la tabla y luego asignar al ddl
 
-//igual para todos
+var VAlDDLTelefonoTipoTelefono = "null";
+
 var formTelefono = document.querySelector('#form1');
 
-//variables crud
 CRUDTelefono = "";
-//variables alertas
+
 var VarJsColorAlertTelefono = "";
 var VarJsTextoAlertTelefono = "";
-//variables existe
+
 var ETelefono = true;
 
 $('#tblPersona tbody').on('click', 'tr', function () {
     var tablaPersona = $('#tblPersona').DataTable();
-    //console.log('clicked: ' + tablaPersona.row(this).data()[0]);
+    console.log('desde tele: ' + tablaPersona.row(this).data()[0]);
     VarJsIdPersona = tablaPersona.row(this).data()[0];
-    FnJsAjaxRTelefono(); //llama al ajax xxxx
-    FnJSFillDdlTelefonoTipoTelefono();//cargar ddl
-    $("#secciontblTelefono").attr('class', 'table-responsive collapse show');//No hay btn de show table
+    FnJsAjaxRTelefono(); 
+    FnJSFillDdlTelefonoTipoTelefono();
+    $("#DatosPersona").attr('class', 'row collapse show');
+
 })
 
-/*
-$('#lbMostrarTelefono').click(function (e) {//1 evento para mostrar contenido  xxxx
-    e.preventDefault();
-    
-});
-*/
-
-function FnJsAjaxRTelefono() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRTelefono() {                               
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstEmpleados.aspx/FnRTelefonoV", // nombre de página y nombre de función xxxx
-        data: JSON.stringify({// los parámetros de la sig línea
+        url: "/modulo7/VstEmpleados.aspx/FnRTelefonoV",                         
+        data: JSON.stringify({                  
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),    
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowTelefono(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowTelefono(data.d);                                        
         }
     }
     );
 }
 
-function AddrowTelefono(data) {//3 llenar la tabla xxxx
-
-    $('#tblTelefono').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
-
-    tablaTelefono = $("#tblTelefono").DataTable({// variable nombre tabla xxxx
-
+function AddrowTelefono(data) {
+    $('#tblTelefono').DataTable().clear().destroy(); 
+    tablaTelefono = $("#tblTelefono").DataTable({
         "retrieve": true,
         dom: 'Bfrtip',
-
-        "order": [[2, 'asc'], [1, 'asc']],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [[2, 'asc'], [1, 'asc']],
         "columnDefs": [
             { "targets": 3, "searchable": false },
             { "orderable": false, "targets": 3 }
@@ -73,38 +60,36 @@ function AddrowTelefono(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colTelefono'//se añade el id para ocultar xxxx
+                    id: 'colTelefono'
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',
+                className: 'btn btn-info', 
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'copy',
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(3)):visible'] 
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'pdf',
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(3)):visible'] 
                 },
                 titleAttr: 'PDF',
-                filename: 'Teléfono' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Teléfono' + "_" + FnJsDate() + "_" + FnJsHour(),
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -112,7 +97,7 @@ function AddrowTelefono(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64(); 
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -126,14 +111,14 @@ function AddrowTelefono(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Teléfono', //tttt
+                                    text: 'Teléfono', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Teléfono' //tttt
+                                    text: 'Reporte Teléfono' 
                                 }
                             ],
                             margin: 20
@@ -154,329 +139,289 @@ function AddrowTelefono(data) {//3 llenar la tabla xxxx
                             margin: 20
                         }
                     });
-
                 }
-
             },
             {
                 extend: 'excel',
-                filename: 'Teléfono' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Teléfono' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(3)):visible'] 
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
 
                 }
-
             }
         ],
         "language": FnJsEspTbl()
     });
-    tablaTelefono.buttons().container().addClass('form-inline');///variable xxxx
-
-    for (var contTelefono = 0; contTelefono < data.length; contTelefono++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaTelefono.row.add([//sensitivecase:
-            data[contTelefono].IdTelefono,//campos
-            data[contTelefono].Telefono,//campos
+    tablaTelefono.buttons().container().addClass('form-inline');
+    for (var contTelefono = 0; contTelefono < data.length; contTelefono++) { 
+        tablaTelefono.row.add([
+            data[contTelefono].IdTelefono,
+            data[contTelefono].Telefono,
             data[contTelefono].ObjTipoTelefono.TipoTelefono,
-            '<button value="editar" href="#modalNTelefono" data-toggle="modal" title="editar" class="btn btn-warning  btn-editTelefono"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNTelefono" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteTelefono"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNTelefono" data-toggle="modal" title="editar" class="btn btn-warning  btn-editTelefono"><i class="fas fa-pencil-alt"></i> </button>' +                     
+            '<button value="eliminar" href="#modalNTelefono" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteTelefono"><i class="fa fa-trash" ></i> </button>'                     
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$('#lbNTelefono').click(function (e) {//4 evento para mostrar modal de nuevo
-    e.preventDefault();
-    FnJsCTelefono(); // nombre función xxxx
-    ETelefono = true; // variable xxxx
 
-    FnJsBlockTelefono(); // nombre función xxxx
+$('#lbNTelefono').click(function (e) {
+    e.preventDefault();
+    FnJsCTelefono(); 
+    ETelefono = true; 
+
+    FnJsBlockTelefono(); 
     FnJSFillDdlTelefonoTipoTelefono();
-    CRUDTelefono = "C"; // nombre variable xxxx
-
-    //campos xxxx
-    VarJsTelefonoId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsTelefono = ""; // cada campo tiene una variable, inicializar xxxx
+    CRUDTelefono = "C"; 
+       
+    VarJsTelefonoId = 0; 
+    VarJsTelefono = ""; 
     VarJsIdTipoTelefono = 0;
-    // VarJsIdPersona = 0;
-
 });
-$(document).on('click', '.btn-editTelefono', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editTelefono', function (e) {         
     e.preventDefault();
-    FnJsUTelefono();//nombre de función xxxx
-    var dataTelefono = tablaTelefono.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsTelefonoId = dataTelefono[0]; //id de la fila seleccionada
-    $('#txtNuevoTelefono').val(dataTelefono[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsTelefono = dataTelefono[1]; // variable elemento, variable data, índice xxxx
+    FnJsUTelefono();         
+    var dataTelefono = tablaTelefono.row($(this).parents("tr")).data();                                                
+    VarJsTelefonoId = dataTelefono[0];             
+    $('#txtNuevoTelefono').val(dataTelefono[1]);                        
+    VarJsTelefono = dataTelefono[1];                   
     VAlDDLTelefonoTipoTelefono = (dataTelefono[2]);
     FnJSFillDdlTelefonoTipoTelefono();
     VarJsIdTipoTelefono = $('#ddlCTelefonoTipoTelefono').val();
-    //VarJsIdPersona = 0;
-    CRUDTelefono = "U";// variable crud, estado crud xxxx
+    CRUDTelefono = "U";               
 });
-$(document).on('click', '.btn-deleteTelefono', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteTelefono', function (e) {         
     e.preventDefault();
-    FnJsDTelefono();//nombre de función xxxx
-    ETelefono = false; // variable de existe xxxx
+    FnJsDTelefono();         
+    ETelefono = false;             
 
 
-    FnJsBlockTelefono();//función bloquear xxxx
-    var dataTelefono = tablaTelefono.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsTelefonoId = dataTelefono[0]; //id de la fila seleccionada
-    $('#txtNuevoTelefono').val(dataTelefono[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsTelefono = dataTelefono[1]; // variable elemento, variable data, índice xxxx
+    FnJsBlockTelefono();      
+    var dataTelefono = tablaTelefono.row($(this).parents("tr")).data();                                                
+    VarJsTelefonoId = dataTelefono[0];             
+    $('#txtNuevoTelefono').val(dataTelefono[1]);                        
+    VarJsTelefono = dataTelefono[1];                   
     VAlDDLTelefonoTipoTelefono = (dataTelefono[2]);
     FnJSFillDdlTelefonoTipoTelefono();
 
     CRUDTelefono = "D";
 });
 
-//pintar modal
-function FnJsCTelefono() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoTelefono').text(""); // id etiqueta texto etiqueta xxxx
 
-    //cambiar el color del modal borde
-    $("#DivModBorTelefono").removeAttr("class");//quitar el atributo class
-    $("#DivModBorTelefono").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaTelefono").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaTelefono").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitTelefono').text('Nuevo Teléfono');//tttt
-    //cambiar el color icono btn
-    $("#btnNueTelefono").removeAttr("class");//quitar el atributo class
-    $("#btnNueTelefono").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+function FnJsCTelefono() {    
+    $('#lblexistenuevoTelefono').text("");    
+    $("#DivModBorTelefono").removeAttr("class");
+    $("#DivModBorTelefono").attr('class', 'modal-content border-success');
+
+    $("#DivModHeaTelefono").removeAttr("class");
+    $("#DivModHeaTelefono").attr('class', 'modal-header bg-success');
+   
+    $('#H4ModTitTelefono').text('Nuevo Teléfono');
+
+    $("#btnNueTelefono").removeAttr("class");
+    $("#btnNueTelefono").attr('class', 'btn btn-success pull-right'); 
+
     $("#btnNueTelefono i").removeAttr("class");
     $("#btnNueTelefono i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCTelefonoTipoTelefono").removeAttr("class"); //uitar propiedades
-    $("#ddlCTelefonoTipoTelefono").attr("class", "form-control border-success");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoTelefono").attr('disabled', false); //variables de los elementos del modal xxxx
+
+    $("#ddlCTelefonoTipoTelefono").removeAttr("class"); 
+    $("#ddlCTelefonoTipoTelefono").attr("class", "form-control border-success");
+    $("#txtNuevoTelefono").attr('disabled', false); 
     $('#ddlCTelefonoTipoTelefono').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCTelefono[0].id + ' :text').val(""); // variable del modal xxxx
-
+   
+    $('#' + ModCTelefono[0].id + ' :text').val(""); 
 }
-function FnJsUTelefono() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoTelefono').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUTelefono() {    
+    $('#lblexistenuevoTelefono').text(""); 
+        
+    $("#DivModBorTelefono").removeAttr("class");
+    $("#DivModBorTelefono").attr('class', 'modal-content border-warning');
+   
+    $("#DivModHeaTelefono").removeAttr("class");
+    $("#DivModHeaTelefono").attr('class', 'modal-header bg-warning');
+   
+    $('#H4ModTitTelefono').text('Editar Teléfono');
 
-    console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorTelefono").removeAttr("class");//quitar el atributo class
-    $("#DivModBorTelefono").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaTelefono").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaTelefono").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitTelefono').text('Editar Teléfono');//tttt
-    //cambiar el color icono btn
-    $("#btnNueTelefono").removeAttr("class");//quitar el atributo class
-    $("#btnNueTelefono").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#btnNueTelefono").removeAttr("class");
+    $("#btnNueTelefono").attr('class', 'btn btn-warning pull-right'); 
     $("#btnNueTelefono i").removeAttr("class");
     $("#btnNueTelefono i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCTelefonoTipoTelefono").removeAttr("class"); //uitar propiedades
-    $("#ddlCTelefonoTipoTelefono").attr("class", "form-control border-warning");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoTelefono").attr('disabled', false); //variables de los elementos del modal xxxx
+
+    $("#ddlCTelefonoTipoTelefono").removeAttr("class"); 
+    $("#ddlCTelefonoTipoTelefono").attr("class", "form-control border-warning");
+    $("#txtNuevoTelefono").attr('disabled', false); 
     $('#ddlCTelefonoTipoTelefono').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCTelefono[0].id + ' :text').val(""); // variable del modal xxxx
-
+   
+    $('#' + ModCTelefono[0].id + ' :text').val(""); 
 }
-function FnJsDTelefono() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoTelefono').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDTelefono() {    
+    $('#lblexistenuevoTelefono').text(""); 
+        
+    $("#DivModBorTelefono").removeAttr("class");
+    $("#DivModBorTelefono").attr('class', 'modal-content border-danger');
+   
+    $("#DivModHeaTelefono").removeAttr("class");
+    $("#DivModHeaTelefono").attr('class', 'modal-header bg-danger');
 
-    //cambiar el color del modal borde
-    $("#DivModBorTelefono").removeAttr("class");//quitar el atributo class
-    $("#DivModBorTelefono").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaTelefono").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaTelefono").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitTelefono').text('Eliminar Teléfono');//tttt
-    //cambiar el color icono btn
-    $("#btnNueTelefono").removeAttr("class");//quitar el atributo class
-    $("#btnNueTelefono").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $('#H4ModTitTelefono').text('Eliminar Teléfono');
+
+    $("#btnNueTelefono").removeAttr("class");
+    $("#btnNueTelefono").attr('class', 'btn btn-danger pull-right');
+         
     $("#btnNueTelefono i").removeAttr("class");
-    $("#btnNueTelefono i").attr("class", "fa fa-trash fa-2x");//ícono
-    //color ddl
-    $("#ddlCTelefonoTipoTelefono").removeAttr("class"); //uitar propiedades
-    $("#ddlCTelefonoTipoTelefono").attr("class", "form-control border-danger");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoTelefono").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#btnNueTelefono i").attr("class", "fa fa-trash fa-2x");
+
+    $("#ddlCTelefonoTipoTelefono").removeAttr("class"); 
+    $("#ddlCTelefonoTipoTelefono").attr("class", "form-control border-danger");
+    $("#txtNuevoTelefono").attr('disabled', true); 
     $('#ddlCTelefonoTipoTelefono').attr('disabled', true);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCTelefono[0].id + ' :text').val(""); // variable del modal xxxx
-
+   
+    $('#' + ModCTelefono[0].id + ' :text').val(""); 
 }
 
-/*quitar btn CUD*/
-function FnJsBlockTelefono() {// nombre función xxxx
 
-    if (ETelefono == true) {// variables xxxx
-        $("#btnNueTelefono").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueTelefono").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
-
+function FnJsBlockTelefono() {
+    if (ETelefono == true) {      
+        $("#btnNueTelefono").fadeOut("fast");                      
+        $("#btnNueTelefono").attr('disabled', true);
     }
-    else if (ETelefono == false) {// variables xxxx
-        $("#btnNueTelefono").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueTelefono").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
-
-
+    else if (ETelefono == false) {      
+        $("#btnNueTelefono").fadeIn("slow");                      
+        $("#btnNueTelefono").attr('disabled', false);
     }
 }
 
-//guardar CUD
-$('#btnNueTelefono').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueTelefono').click(function (e) {               
     e.preventDefault();
     if (formTelefono.checkValidity()) {
-        switch (CRUDTelefono) { // variable crud xxxx
+        switch (CRUDTelefono) {          
             case "C":
-                FnJsAjaxCTelefono(); // función para crear xxxx
+                FnJsAjaxCTelefono();             
                 break;
             case "U":
-                FnJsAjaxUTelefono();// función para crear xxxx
+                FnJsAjaxUTelefono();            
                 break;
             case "D":
-                FnJsAjaxDTelefono();// función para crear xxxx
+                FnJsAjaxDTelefono();            
                 break;
             default:
-                console.log("Error en cud Teléfono");/////tttt
+                console.log("Error en cud Teléfono");
         }
-    }
-    console.log(formTelefono.checkValidity());
+    } 
 });
 
-//ajax CUD
 function FnJsAjaxCTelefono() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnCTelefonoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnCTelefonoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             Telefono: VarJsTelefono,
             IdTipoTelefono: VarJsIdTipoTelefono,
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Teléfono Agregado"); ////tttt        
+                console.log("Teléfono Agregado");                         
             }
             else {
-                //no se creó
                 CRUDTelefono = "error"
-                console.log("No se pudo agregar Tipo de indentificación");//
+                console.log("No se pudo agregar Tipo de indentificación");
             }
-            FnAlertaTelefono(); // nombre función alerta xxxx
+            FnAlertaTelefono();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUTelefono() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnUTelefonoV", // nombre de página y nombre de función cude
+        url: "/modulo7/VstEmpleados.aspx/FnUTelefonoV",                         
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdTelefono: VarJsTelefonoId,
             Telefono: VarJsTelefono,
             IdTipoTelefono: VarJsIdTipoTelefono
-
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Teléfono Actualizado"); ////tttt
+                console.log("Teléfono Actualizado"); 
             }
             else {
-                //no se borró
                 CRUDTelefono = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaTelefono();// nombre función alerta xxxx
+            FnAlertaTelefono();            
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxDTelefono() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnDTelefonoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnDTelefonoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdTelefono: VarJsTelefonoId
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Teléfono Eliminado"); ////tttt
+                console.log("Teléfono Eliminado"); 
             }
             else {
-                //no se creó
                 CRUDTelefono = "error"
-                console.log("No se pudo Eliminar Teléfono");////tttt
+                console.log("No se pudo Eliminar Teléfono");
             }
-            FnAlertaTelefono(); // nombre función alerta xxxx
-
+            FnAlertaTelefono();
         }
-    });//ajax fin
+    });   
 }
 
-//Existe
-function FnJsAjaxETelefono() {// nombre de la función existe xxxx
+function FnJsAjaxETelefono() {                  
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnETelefonoV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnETelefonoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({   
             IdTelefono: VarJsTelefonoId,
             Telefono: VarJsTelefono,
             IdTipoTelefono: VarJsIdTipoTelefono,
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                ETelefono = true; // variable existe xxxx
-                $('#lblexistenuevoTelefono').text("Existe Teléfono");// id etiqueta texto etiqueta //tttt
-                FnJsBlockTelefono();//nombre de función bloquear xxxx
-
+                ETelefono = true;          
+                $('#lblexistenuevoTelefono').text("Existe Teléfono");               
+                FnJsBlockTelefono();
             }
             else {
-                //mostrar btn
-                ETelefono = false;// variable existe xxxx
-                $('#lblexistenuevoTelefono').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockTelefono(); //nombre de función bloquear xxxx
+                ETelefono = false;         
+                $('#lblexistenuevoTelefono').text(""); 
+                FnJsBlockTelefono();             
             }
         }
-    });//ajax fin
+    });   
 }
 
-
-function VerificarExisteTelefono() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoTelefono').val().length >= 3 && $('#ddlCTelefonoTipoTelefono').val() > 0) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteTelefono() {               
+    if ($('#txtNuevoTelefono').val().length >= 3 && $('#ddlCTelefonoTipoTelefono').val() > 0) {                            
         return true;
     }
     else {
@@ -484,12 +429,10 @@ function VerificarExisteTelefono() {// nombre de función verificarexiste xxxx
     }
 }
 
-
-$('#txtNuevoTelefono').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsTelefono = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteTelefono()) {//nombre función verificar existe xxxx
-        FnJsAjaxETelefono(); // llamar todos los existes xxxx
-
+$('#txtNuevoTelefono').keyup(function (e) {                     
+    VarJsTelefono = $(this).val();                
+    if (VerificarExisteTelefono()) {            
+        FnJsAjaxETelefono();
     }
 });
 
@@ -501,69 +444,66 @@ $('#ddlCTelefonoTipoTelefono').change(function (e) {
 });
 
 function FnJSFillDdlTelefonoTipoTelefono() {
-    $('#ddlCTelefonoTipoTelefono').empty(); // xxxx id
+    $('#ddlCTelefonoTipoTelefono').empty();       
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstGenerales.aspx/FnRTipoTelefonoV", // xxxx
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo7/VstGenerales.aspx/FnRTipoTelefonoV",    
+        data: {},          
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLTelefonoTipoTelefono == "null") {
-                $('#ddlCTelefonoTipoTelefono').append($("<option> </option>").val("0").html("Seleccionar Tipo Teléfono"));  // xxxx id val html            
+                $('#ddlCTelefonoTipoTelefono').append($("<option> </option>").val("0").html("Seleccionar Tipo Teléfono"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLTelefonoTipoTelefono == value.TipoTelefono) {
-                        $('#ddlCTelefonoTipoTelefono').append($("<option> </option>").val(value.IdTipoTelefono).html(value.TipoTelefono));  // xxxx id texto
+                        $('#ddlCTelefonoTipoTelefono').append($("<option> </option>").val(value.IdTipoTelefono).html(value.TipoTelefono));           
                         VarJsIdTipoTelefono = value.IdTipoTelefono;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCTelefonoTipoTelefono').append($("<option> </option>").val(value.IdTipoTelefono).html(value.TipoTelefono)); // id en un val y en html el nombre
+                $('#ddlCTelefonoTipoTelefono').append($("<option> </option>").val(value.IdTipoTelefono).html(value.TipoTelefono));                            
             });
             VAlDDLTelefonoTipoTelefono = "null";
         }
     });
 }
 
-function FnAlertaTelefono() {//nombre de la función xxxx
-
-    switch (CRUDTelefono) {//nombre de la variable cud xxxx
+function FnAlertaTelefono() {
+    switch (CRUDTelefono) {
         case "C":
-            VarJsColorAlertTelefono = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertTelefono = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertTelefono = "bg-success";
+            VarJsTextoAlertTelefono = "Creado";            
             break;
         case "U":
-            VarJsColorAlertTelefono = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertTelefono = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertTelefono = "bg-warning";
+            VarJsTextoAlertTelefono = "Actualizado";            
             break;
         case "D":
-            VarJsColorAlertTelefono = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertTelefono = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertTelefono = "bg-danger";
+            VarJsTextoAlertTelefono = "Eliminado";            
             break;
         case "Error":
-            VarJsColorAlertTelefono = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertTelefono = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertTelefono = "bg-secondary";
+            VarJsTextoAlertTelefono = "No se pudo realizar la operación";            
             break;
         default:
-            console.log("Error CUD Teléfono Alert")//tttt
-    }
-    //alerta
-    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertTelefono);//variable de color alerta xxxx
-    $('.bd-example-modal-sm h5').text(VarJsTextoAlertTelefono);//variable de texto alerta xxxx
+            console.log("Error CUD Teléfono Alert")
+    }  
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertTelefono);
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertTelefono);            
     $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
         $('.bd-example-modal-sm').modal('hide');
-        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertTelefono);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
-    console.log($("#secciontblTelefono.show").length)//tttt
-    if ($("#secciontblTelefono.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRTelefono();//función ajax de llenado de la tabla xxxx
-    }
-    //cerrar modal
-    $("#modalNTelefono").modal("toggle");//nombre modal xxxx
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertTelefono);
+    }, 1500);                           
+    console.log($("#secciontblTelefono.show").length)
+    if ($("#secciontblTelefono.show").length > 0) {
+        FnJsAjaxRTelefono();
+    }   
+    $("#modalNTelefono").modal("toggle");      
 }

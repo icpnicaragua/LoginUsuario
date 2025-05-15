@@ -1,68 +1,60 @@
-﻿/*variable de tablas*/
-var tablaCorreo;/*tabla mpodulo*/
-var ModCCorreo = $('#modalNCorreo'); // modal 
-//campos de tablas
+﻿
+var tablaCorreo;
+var ModCCorreo = $('#modalNCorreo'); 
+
 var VarJsCorreoId = 0;
 var VarJsCorreo = "";
 var VarJsIdTipoCorreo = 0;
 var VarJsIdPersona = 0;
-//dddlist TipoCorreo
-var VAlDDLCorreoTipoCorreo = "null";// para guardar lo que está en la tabla y luego asignar al ddl
 
-//igual para todos
+var VAlDDLCorreoTipoCorreo = "null";
+
 var formCorreo = document.querySelector('#form1');
 
-//variables crud
 CRUDCorreo = "";
-//variables alertas
+
 var VarJsColorAlertCorreo = "";
 var VarJsTextoAlertCorreo = "";
-//variables existe
+
 var ECorreo = true;
 
 $('#tblPersona tbody').on('click', 'tr', function () {
-    var tablaPersona = $('#tblPersona').DataTable(); 
+    var tablaPersona = $('#tblPersona').DataTable();  
     VarJsIdPersona = tablaPersona.row(this).data()[0];
-    FnJsAjaxRCorreo(); //llama al ajax xxxx
-    FnJSFillDdlCorreoTipoCorreo();//cargar ddl
-    $("#secciontblCorreo").attr('class', 'table-responsive collapse show');//No hay btn de show table
+    FnJsAjaxRCorreo(); 
+    FnJSFillDdlCorreoTipoCorreo();
+    $("#DatosPersona").attr('class', 'row collapse show');
+   
 })
 
-/*
-$('#lbMostrarCorreo').click(function (e) {//1 evento para mostrar contenido  xxxx
-    e.preventDefault();
-    
-});
-*/
-
-function FnJsAjaxRCorreo() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRCorreo() { 
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstEmpleados.aspx/FnRCorreoV", // nombre de página y nombre de función xxxx
-        data: JSON.stringify({// los parámetros de la sig línea
+        url: "/modulo7/VstEmpleados.aspx/FnRCorreoV",
+        data: JSON.stringify({
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowCorreo(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowCorreo(data.d); 
         }
     }
     );
 }
 
-function AddrowCorreo(data) {//3 llenar la tabla xxxx
+function AddrowCorreo(data) {
 
-    $('#tblCorreo').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
+    $('#tblCorreo').DataTable().clear().destroy(); 
 
-    tablaCorreo = $("#tblCorreo").DataTable({// variable nombre tabla xxxx
+    tablaCorreo = $("#tblCorreo").DataTable({
 
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [[2, 'asc'], [1, 'asc']],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [[2, 'asc'], [1, 'asc']],
         "columnDefs": [
             { "targets": 3, "searchable": false },
             { "orderable": false, "targets": 3 }
@@ -72,10 +64,10 @@ function AddrowCorreo(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colCorreo'//se añade el id para ocultar xxxx
+                    id: 'colCorreo'
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',
+                className: 'btn btn-info', 
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -87,7 +79,7 @@ function AddrowCorreo(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(3)):visible'] 
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -100,10 +92,10 @@ function AddrowCorreo(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(3)):visible'] 
                 },
                 titleAttr: 'PDF',
-                filename: 'Correo' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Correo' + "_" + FnJsDate() + "_" + FnJsHour(),
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -111,7 +103,7 @@ function AddrowCorreo(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64(); 
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -125,14 +117,14 @@ function AddrowCorreo(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Correo', //tttt
+                                    text: 'Correo', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Correo' //tttt
+                                    text: 'Reporte Correo' 
                                 }
                             ],
                             margin: 20
@@ -159,11 +151,11 @@ function AddrowCorreo(data) {//3 llenar la tabla xxxx
             },
             {
                 extend: 'excel',
-                filename: 'Correo' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Correo' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(3)):visible'] 
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -175,307 +167,281 @@ function AddrowCorreo(data) {//3 llenar la tabla xxxx
         ],
         "language": FnJsEspTbl()
     });
-    tablaCorreo.buttons().container().addClass('form-inline');///variable xxxx
+    tablaCorreo.buttons().container().addClass('form-inline');
 
-    for (var contCorreo = 0; contCorreo < data.length; contCorreo++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaCorreo.row.add([//sensitivecase:
-            data[contCorreo].IdCorreo,//campos
-            data[contCorreo].Correo,//campos
+    for (var contCorreo = 0; contCorreo < data.length; contCorreo++) { 
+        tablaCorreo.row.add([
+            data[contCorreo].IdCorreo,
+            data[contCorreo].Correo,
             data[contCorreo].ObjTipoCorreo.TipoCorreo,
-            '<button value="editar" href="#modalNCorreo" data-toggle="modal" title="editar" class="btn btn-warning  btn-editCorreo"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNCorreo" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteCorreo"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNCorreo" data-toggle="modal" title="editar" class="btn btn-warning  btn-editCorreo"><i class="fas fa-pencil-alt"></i> </button>' +                     
+            '<button value="eliminar" href="#modalNCorreo" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteCorreo"><i class="fa fa-trash" ></i> </button>'                     
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$('#lbNCorreo').click(function (e) {//4 evento para mostrar modal de nuevo
-    e.preventDefault();
-    FnJsCCorreo(); // nombre función xxxx
-    ECorreo = true; // variable xxxx
 
-    FnJsBlockCorreo(); // nombre función xxxx
+$('#lbNCorreo').click(function (e) {
+    e.preventDefault();
+    FnJsCCorreo(); 
+    ECorreo = true; 
+
+    FnJsBlockCorreo(); 
     FnJSFillDdlCorreoTipoCorreo();
-    CRUDCorreo = "C"; // nombre variable xxxx
+    CRUDCorreo = "C"; 
 
-    //campos xxxx
-    VarJsCorreoId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsCorreo = ""; // cada campo tiene una variable, inicializar xxxx
+     
+    VarJsCorreoId = 0; 
+    VarJsCorreo = ""; 
     VarJsIdTipoCorreo = 0;
-    // VarJsIdPersona = 0;
-
 });
-$(document).on('click', '.btn-editCorreo', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editCorreo', function (e) {         
     e.preventDefault();
-    FnJsUCorreo();//nombre de función xxxx
-    var dataCorreo = tablaCorreo.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsCorreoId = dataCorreo[0]; //id de la fila seleccionada
-    $('#txtNuevoCorreo').val(dataCorreo[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsCorreo = dataCorreo[1]; // variable elemento, variable data, índice xxxx
+    FnJsUCorreo();         
+    var dataCorreo = tablaCorreo.row($(this).parents("tr")).data();                                                
+    VarJsCorreoId = dataCorreo[0];             
+    $('#txtNuevoCorreo').val(dataCorreo[1]);                        
+    VarJsCorreo = dataCorreo[1];                   
     VAlDDLCorreoTipoCorreo = (dataCorreo[2]);
     FnJSFillDdlCorreoTipoCorreo();
     VarJsIdTipoCorreo = $('#ddlCCorreoTipoCorreo').val();
-    //VarJsIdPersona = 0;
-    CRUDCorreo = "U";// variable crud, estado crud xxxx
+    CRUDCorreo = "U";               
 });
-$(document).on('click', '.btn-deleteCorreo', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteCorreo', function (e) {         
     e.preventDefault();
-    FnJsDCorreo();//nombre de función xxxx
-    ECorreo = false; // variable de existe xxxx
+    FnJsDCorreo();         
+    ECorreo = false;             
 
 
-    FnJsBlockCorreo();//función bloquear xxxx
-    var dataCorreo = tablaCorreo.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsCorreoId = dataCorreo[0]; //id de la fila seleccionada
-    $('#txtNuevoCorreo').val(dataCorreo[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsCorreo = dataCorreo[1]; // variable elemento, variable data, índice xxxx
+    FnJsBlockCorreo();      
+    var dataCorreo = tablaCorreo.row($(this).parents("tr")).data();                                                
+    VarJsCorreoId = dataCorreo[0];             
+    $('#txtNuevoCorreo').val(dataCorreo[1]);                        
+    VarJsCorreo = dataCorreo[1];                   
     VAlDDLCorreoTipoCorreo = (dataCorreo[2]);
     FnJSFillDdlCorreoTipoCorreo();
 
     CRUDCorreo = "D";
 });
 
-//pintar modal
-function FnJsCCorreo() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoCorreo').text(""); // id etiqueta texto etiqueta xxxx
 
-    //cambiar el color del modal borde
-    $("#DivModBorCorreo").removeAttr("class");//quitar el atributo class
-    $("#DivModBorCorreo").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaCorreo").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaCorreo").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitCorreo').text('Nuevo Correo');//tttt
-    //cambiar el color icono btn
-    $("#btnNueCorreo").removeAttr("class");//quitar el atributo class
-    $("#btnNueCorreo").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+function FnJsCCorreo() { 
+   
+    $('#lblexistenuevoCorreo').text(""); 
+
+    
+    $("#DivModBorCorreo").removeAttr("class");
+    $("#DivModBorCorreo").attr('class', 'modal-content border-success');
+   
+    $("#DivModHeaCorreo").removeAttr("class");
+    $("#DivModHeaCorreo").attr('class', 'modal-header bg-success');
+   
+    $('#H4ModTitCorreo').text('Nuevo Correo');
+
+    $("#btnNueCorreo").removeAttr("class");
+    $("#btnNueCorreo").attr('class', 'btn btn-success pull-right'); 
     $("#btnNueCorreo i").removeAttr("class");
     $("#btnNueCorreo i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCCorreoTipoCorreo").removeAttr("class"); //uitar propiedades
-    $("#ddlCCorreoTipoCorreo").attr("class", "form-control border-success");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoCorreo").attr('disabled', false); //variables de los elementos del modal xxxx
+
+    $("#ddlCCorreoTipoCorreo").removeAttr("class"); 
+    $("#ddlCCorreoTipoCorreo").attr("class", "form-control border-success");
+    
+    $("#txtNuevoCorreo").attr('disabled', false); 
     $('#ddlCCorreoTipoCorreo').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCCorreo[0].id + ' :text').val(""); // variable del modal xxxx
+   
+    $('#' + ModCCorreo[0].id + ' :text').val(""); 
 
 }
-function FnJsUCorreo() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoCorreo').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUCorreo() { 
+   
+    $('#lblexistenuevoCorreo').text(""); 
 
-    console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorCorreo").removeAttr("class");//quitar el atributo class
-    $("#DivModBorCorreo").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaCorreo").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaCorreo").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitCorreo').text('Editar Correo');//tttt
-    //cambiar el color icono btn
-    $("#btnNueCorreo").removeAttr("class");//quitar el atributo class
-    $("#btnNueCorreo").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    
+    $("#DivModBorCorreo").removeAttr("class");
+    $("#DivModBorCorreo").attr('class', 'modal-content border-warning');
+   
+    $("#DivModHeaCorreo").removeAttr("class");
+    $("#DivModHeaCorreo").attr('class', 'modal-header bg-warning');
+   
+    $('#H4ModTitCorreo').text('Editar Correo');
+
+    $("#btnNueCorreo").removeAttr("class");
+    $("#btnNueCorreo").attr('class', 'btn btn-warning pull-right'); 
     $("#btnNueCorreo i").removeAttr("class");
     $("#btnNueCorreo i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCCorreoTipoCorreo").removeAttr("class"); //uitar propiedades
-    $("#ddlCCorreoTipoCorreo").attr("class", "form-control border-warning");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoCorreo").attr('disabled', false); //variables de los elementos del modal xxxx
+
+    $("#ddlCCorreoTipoCorreo").removeAttr("class"); 
+    $("#ddlCCorreoTipoCorreo").attr("class", "form-control border-warning");
+    
+    $("#txtNuevoCorreo").attr('disabled', false); 
     $('#ddlCCorreoTipoCorreo').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCCorreo[0].id + ' :text').val(""); // variable del modal xxxx
+   
+    $('#' + ModCCorreo[0].id + ' :text').val(""); 
 
 }
-function FnJsDCorreo() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoCorreo').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDCorreo() {    
+    $('#lblexistenuevoCorreo').text(""); 
+    
+    $("#DivModBorCorreo").removeAttr("class");
+    $("#DivModBorCorreo").attr('class', 'modal-content border-danger');
+   
+    $("#DivModHeaCorreo").removeAttr("class");
+    $("#DivModHeaCorreo").attr('class', 'modal-header bg-danger');
+   
+    $('#H4ModTitCorreo').text('Eliminar Correo');
 
-    //cambiar el color del modal borde
-    $("#DivModBorCorreo").removeAttr("class");//quitar el atributo class
-    $("#DivModBorCorreo").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaCorreo").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaCorreo").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitCorreo').text('Eliminar Correo');//tttt
-    //cambiar el color icono btn
-    $("#btnNueCorreo").removeAttr("class");//quitar el atributo class
-    $("#btnNueCorreo").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#btnNueCorreo").removeAttr("class");
+    $("#btnNueCorreo").attr('class', 'btn btn-danger pull-right');
+    
     $("#btnNueCorreo i").removeAttr("class");
-    $("#btnNueCorreo i").attr("class", "fa fa-trash fa-2x");//ícono
-    //color ddl
-    $("#ddlCCorreoTipoCorreo").removeAttr("class"); //uitar propiedades
-    $("#ddlCCorreoTipoCorreo").attr("class", "form-control border-danger");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoCorreo").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#btnNueCorreo i").attr("class", "fa fa-trash fa-2x");
+
+    $("#ddlCCorreoTipoCorreo").removeAttr("class"); 
+    $("#ddlCCorreoTipoCorreo").attr("class", "form-control border-danger");
+    
+    $("#txtNuevoCorreo").attr('disabled', true); 
     $('#ddlCCorreoTipoCorreo').attr('disabled', true);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCCorreo[0].id + ' :text').val(""); // variable del modal xxxx
-
+   
+    $('#' + ModCCorreo[0].id + ' :text').val(""); 
 }
 
-/*quitar btn CUD*/
-function FnJsBlockCorreo() {// nombre función xxxx
-
-    if (ECorreo == true) {// variables xxxx
-        $("#btnNueCorreo").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueCorreo").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
-
+function FnJsBlockCorreo() {
+    if (ECorreo == true) {      
+        $("#btnNueCorreo").fadeOut("fast");                      
+        $("#btnNueCorreo").attr('disabled', true);
     }
-    else if (ECorreo == false) {// variables xxxx
-        $("#btnNueCorreo").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueCorreo").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
-
-
+    else if (ECorreo == false) {      
+        $("#btnNueCorreo").fadeIn("slow");                      
+        $("#btnNueCorreo").attr('disabled', false);
     }
 }
 
-//guardar CUD
-$('#btnNueCorreo').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueCorreo').click(function (e) {               
     e.preventDefault();
     if (formCorreo.checkValidity()) {
-        switch (CRUDCorreo) { // variable crud xxxx
+        switch (CRUDCorreo) {          
             case "C":
-                FnJsAjaxCCorreo(); // función para crear xxxx
+                FnJsAjaxCCorreo();             
                 break;
             case "U":
-                FnJsAjaxUCorreo();// función para crear xxxx
+                FnJsAjaxUCorreo();            
                 break;
             case "D":
-                FnJsAjaxDCorreo();// función para crear xxxx
+                FnJsAjaxDCorreo();            
                 break;
             default:
-                console.log("Error en cud Correo");/////tttt
+                console.log("Error en cud Correo");
         }
     }
-    console.log(formCorreo.checkValidity());
 });
 
-//ajax CUD
 function FnJsAjaxCCorreo() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnCCorreoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnCCorreoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             Correo: VarJsCorreo,
             IdTipoCorreo: VarJsIdTipoCorreo,
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Correo Agregado"); ////tttt        
+                console.log("Correo Agregado");                         
             }
             else {
-                //no se creó
                 CRUDCorreo = "error"
-                console.log("No se pudo agregar Tipo de indentificación");//
+                console.log("No se pudo agregar Tipo de indentificación");
             }
-            FnAlertaCorreo(); // nombre función alerta xxxx
+            FnAlertaCorreo();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUCorreo() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnUCorreoV", // nombre de página y nombre de función cude
+        url: "/modulo7/VstEmpleados.aspx/FnUCorreoV",                         
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdCorreo: VarJsCorreoId,
             Correo: VarJsCorreo,
             IdTipoCorreo: VarJsIdTipoCorreo
-
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Correo Actualizado"); ////tttt
+                console.log("Correo Actualizado"); 
             }
             else {
-                //no se borró
                 CRUDCorreo = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaCorreo();// nombre función alerta xxxx
+            FnAlertaCorreo();            
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxDCorreo() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnDCorreoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnDCorreoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdCorreo: VarJsCorreoId
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Correo Eliminado"); ////tttt
+                console.log("Correo Eliminado"); 
             }
             else {
-                //no se creó
                 CRUDCorreo = "error"
-                console.log("No se pudo Eliminar Correo");////tttt
+                console.log("No se pudo Eliminar Correo");
             }
-            FnAlertaCorreo(); // nombre función alerta xxxx
-
+            FnAlertaCorreo();
         }
-    });//ajax fin
+    });   
 }
 
-//Existe
-function FnJsAjaxECorreo() {// nombre de la función existe xxxx
+function FnJsAjaxECorreo() {                  
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnECorreoV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnECorreoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({   
             IdCorreo: VarJsCorreoId,
             Correo: VarJsCorreo,
             IdTipoCorreo: VarJsIdTipoCorreo,
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                ECorreo = true; // variable existe xxxx
-                $('#lblexistenuevoCorreo').text("Existe Correo");// id etiqueta texto etiqueta //tttt
-                FnJsBlockCorreo();//nombre de función bloquear xxxx
-
+                ECorreo = true;          
+                $('#lblexistenuevoCorreo').text("Existe Correo");               
+                FnJsBlockCorreo();
             }
             else {
-                //mostrar btn
-                ECorreo = false;// variable existe xxxx
-                $('#lblexistenuevoCorreo').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockCorreo(); //nombre de función bloquear xxxx
+                ECorreo = false;         
+                $('#lblexistenuevoCorreo').text(""); 
+                FnJsBlockCorreo();             
             }
         }
-    });//ajax fin
+    });   
 }
 
 
-function VerificarExisteCorreo() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoCorreo').val().length >= 3 && $('#ddlCCorreoTipoCorreo').val() > 0) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteCorreo() {               
+    if ($('#txtNuevoCorreo').val().length >= 3 && $('#ddlCCorreoTipoCorreo').val() > 0) {                            
         return true;
     }
     else {
@@ -484,11 +450,10 @@ function VerificarExisteCorreo() {// nombre de función verificarexiste xxxx
 }
 
 
-$('#txtNuevoCorreo').change(function (e) {//id de cada elemento en el modal xxxx
-    VarJsCorreo = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteCorreo()) {//nombre función verificar existe xxxx
-        FnJsAjaxECorreo(); // llamar todos los existes xxxx
-
+$('#txtNuevoCorreo').change(function (e) {                     
+    VarJsCorreo = $(this).val();                
+    if (VerificarExisteCorreo()) {            
+        FnJsAjaxECorreo();
     }
 });
 
@@ -500,69 +465,66 @@ $('#ddlCCorreoTipoCorreo').change(function (e) {
 });
 
 function FnJSFillDdlCorreoTipoCorreo() {
-    $('#ddlCCorreoTipoCorreo').empty(); // xxxx id
+    $('#ddlCCorreoTipoCorreo').empty();       
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstGenerales.aspx/FnRTipoCorreoV", // xxxx
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo7/VstGenerales.aspx/FnRTipoCorreoV",    
+        data: {},          
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLCorreoTipoCorreo == "null") {
-                $('#ddlCCorreoTipoCorreo').append($("<option> </option>").val("0").html("Seleccionar Tipo Correo"));  // xxxx id val html            
+                $('#ddlCCorreoTipoCorreo').append($("<option> </option>").val("0").html("Seleccionar Tipo Correo"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLCorreoTipoCorreo == value.TipoCorreo) {
-                        $('#ddlCCorreoTipoCorreo').append($("<option> </option>").val(value.IdTipoCorreo).html(value.TipoCorreo));  // xxxx id texto
+                        $('#ddlCCorreoTipoCorreo').append($("<option> </option>").val(value.IdTipoCorreo).html(value.TipoCorreo));           
                         VarJsIdTipoCorreo = value.IdTipoCorreo;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCCorreoTipoCorreo').append($("<option> </option>").val(value.IdTipoCorreo).html(value.TipoCorreo)); // id en un val y en html el nombre
+                $('#ddlCCorreoTipoCorreo').append($("<option> </option>").val(value.IdTipoCorreo).html(value.TipoCorreo));                            
             });
             VAlDDLCorreoTipoCorreo = "null";
         }
     });
 }
 
-function FnAlertaCorreo() {//nombre de la función xxxx
-
-    switch (CRUDCorreo) {//nombre de la variable cud xxxx
+function FnAlertaCorreo() {
+    switch (CRUDCorreo) {
         case "C":
-            VarJsColorAlertCorreo = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertCorreo = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertCorreo = "bg-success";
+            VarJsTextoAlertCorreo = "Creado";            
             break;
         case "U":
-            VarJsColorAlertCorreo = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertCorreo = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertCorreo = "bg-warning";
+            VarJsTextoAlertCorreo = "Actualizado";            
             break;
         case "D":
-            VarJsColorAlertCorreo = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertCorreo = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertCorreo = "bg-danger";
+            VarJsTextoAlertCorreo = "Eliminado";            
             break;
         case "Error":
-            VarJsColorAlertCorreo = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertCorreo = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertCorreo = "bg-secondary";
+            VarJsTextoAlertCorreo = "No se pudo realizar la operación";            
             break;
         default:
-            console.log("Error CUD Correo Alert")//tttt
+            console.log("Error CUD Correo Alert");
     }
-    //alerta
-    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertCorreo);//variable de color alerta xxxx
-    $('.bd-example-modal-sm h5').text(VarJsTextoAlertCorreo);//variable de texto alerta xxxx
+  
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertCorreo);
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertCorreo);            
     $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
         $('.bd-example-modal-sm').modal('hide');
-        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertCorreo);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
-    console.log($("#secciontblCorreo.show").length)//tttt
-    if ($("#secciontblCorreo.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRCorreo();//función ajax de llenado de la tabla xxxx
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertCorreo);
+    }, 1500);                                 
+    if ($("#secciontblCorreo.show").length > 0) {
+        FnJsAjaxRCorreo();
     }
-    //cerrar modal
-    $("#modalNCorreo").modal("toggle");//nombre modal xxxx
+    $("#modalNCorreo").modal("toggle");      
 }

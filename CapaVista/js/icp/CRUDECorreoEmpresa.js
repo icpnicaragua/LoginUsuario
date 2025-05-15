@@ -110,14 +110,14 @@ function AddrowCorreoEmpresa(data) {
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Correo', //tttt
+                                    text: 'Correo', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Correo' //tttt
+                                    text: 'Reporte Correo' 
                                 }
                             ],
                             margin: 20
@@ -144,11 +144,11 @@ function AddrowCorreoEmpresa(data) {
             },
             {
                 extend: 'excel',
-                filename: 'Correo' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Correo' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(3)):visible'] 
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -345,7 +345,7 @@ function FnJsAjaxCCorreoEmpresa() {
             }
             FnAlertaCorreoEmpresa();
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUCorreoEmpresa() {
     $.ajax({
@@ -366,7 +366,7 @@ function FnJsAjaxUCorreoEmpresa() {
             }
             else {
                 CRUDCorreoEmpresa = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
             FnAlertaCorreoEmpresa();
         }
@@ -395,7 +395,6 @@ function FnJsAjaxDCorreoEmpresa() {
         }
     });
 }
-
 
 function FnJsAjaxECorreoEmpresa() {
     $.ajax({
@@ -497,9 +496,9 @@ function FnAlertaCorreoEmpresa() {
             VarJsTextoAlertCorreoEmpresa = "No se pudo realizar la operación";
             break;
         default:
-            console.log("Error CUD Correo Alert")
+            console.log("Error CUD Correo Alert");
     }
-    //alerta
+  
     $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertCorreoEmpresa);
     $('.bd-example-modal-sm h5').text(VarJsTextoAlertCorreoEmpresa);
     $('.bd-example-modal-sm').modal('show');
