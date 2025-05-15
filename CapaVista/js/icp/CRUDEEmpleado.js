@@ -1,7 +1,6 @@
-﻿/*variable de tablas*/
-var tablaEmpleado;/*tabla mpodulo*/
-var ModCEmpleado = $('#modalNEmpleado'); // modal 
-//campos de tablas
+﻿var tablaEmpleado;   
+var tablaEmpleadoNPersona;
+var ModCEmpleado = $('#modalNEmpleado');       
 var VarJsEmpleadoId = 0;
 var VarJsIdPersona = 0;
 var VarJsEmpleadoNom1 = "";
@@ -12,55 +11,51 @@ var VarJsIdJefe = 0;
 var VarJsJefeNom1 = "";
 var VarJsJefeApe1 = "";
 
-//dddlist EmpleadoArea
-var VAlDDLEmpleadoArea = "null";// para guardar lo que está en la tabla y luego asignar al ddl
+var VAlDDLEmpleadoArea = "null";                                       
 var VAlDDLEmpleadoJefe = "null";
-//igual para todos
 var formEmpleado = document.querySelector('#form1');
 
-//variables crud
 CRUDEmpleado = "";
-//variables alertas
 var VarJsColorAlertEmpleado = "";
 var VarJsTextoAlertEmpleado = "";
-//variables existe
 var EEmpleado = true;
 var EEmpleadoPersona = true;
 
-
-$('#lbMostrarEmpleado').click(function (e) {//1 evento para mostrar contenido  xxxx
+$('#lbMostrarEmpleado').click(function (e) {                  
     e.preventDefault();
-    FnJsAjaxREmpleado(); //llama al ajax xxxx
-    FnJSFillDdlEmpleadoArea();//cargar ddl
-    FnJSFillDdlEmpleadoJefe();//cargar ddl
+    FnJsAjaxREmpleado();          
+    FnJSFillDdlEmpleadoArea();   
+    FnJSFillDdlEmpleadoJefe();   
 });
 
-function FnJsAjaxREmpleado() { //2 pide los datos en bd de la tabla  xxxx
+$('#lbNEmpleado').click(function (e) {
+    e.preventDefault();
+    FnJsAjaxREmpleadoNPersona();
+});
+
+function FnJsAjaxREmpleado() {                               
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstEmpleados.aspx/FnREmpleadoV", // nombre de página y nombre de función xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnREmpleadoV",                         
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowEmpleado(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowEmpleado(data.d);                                        
         }
     }
     );
 }
 
-function AddrowEmpleado(data) {//3 llenar la tabla xxxx
+function AddrowEmpleado(data) {
+    $('#tblEmpleado').DataTable().clear().destroy();                            
 
-    $('#tblEmpleado').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
-
-    tablaEmpleado = $("#tblEmpleado").DataTable({// variable nombre tabla xxxx
-
+    tablaEmpleado = $("#tblEmpleado").DataTable({
         "retrieve": true,
         dom: 'Bfrtip',
-
-        "order": [[2, 'asc'], [1, 'asc']],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [[2, 'asc'], [1, 'asc']],                                             
         "columnDefs": [
             { "targets": 3, "searchable": false },
             { "orderable": false, "targets": 5 }
@@ -70,38 +65,36 @@ function AddrowEmpleado(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colEmpleado'//se añade el id para ocultar xxxx
+                    id: 'colEmpleado'                  
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',             
+                className: 'btn btn-info',       
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'copy',
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(5)):visible']                               
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'pdf',
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(5)):visible']                                  
                 },
                 titleAttr: 'PDF',
-                filename: 'Empleado' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Empleado' + "_" + FnJsDate() + "_" + FnJsHour(),         
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -109,7 +102,7 @@ function AddrowEmpleado(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64();          
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -123,14 +116,14 @@ function AddrowEmpleado(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Empleado', //tttt
+                                    text: 'Empleado', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Empleado' //tttt
+                                    text: 'Reporte Empleado' 
                                 }
                             ],
                             margin: 20
@@ -151,97 +144,137 @@ function AddrowEmpleado(data) {//3 llenar la tabla xxxx
                             margin: 20
                         }
                     });
-
                 }
-
             },
             {
                 extend: 'excel',
-                filename: 'Empleado' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Empleado' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(5)):visible']                               
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
-
                 }
-
             }
         ],
         "language": FnJsEspTbl()
     });
-    tablaEmpleado.buttons().container().addClass('form-inline');///variable xxxx
+    tablaEmpleado.buttons().container().addClass('form-inline');   
 
-    for (var contEmpleado = 0; contEmpleado < data.length; contEmpleado++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaEmpleado.row.add([//sensitivecase:
-            data[contEmpleado].IdEmpleado,//campos
-            data[contEmpleado].ObjPersona.Nombre1,//campos
+    for (var contEmpleado = 0; contEmpleado < data.length; contEmpleado++) {                         
+        tablaEmpleado.row.add([
+            data[contEmpleado].IdEmpleado,
+            data[contEmpleado].ObjPersona.Nombre1,
             data[contEmpleado].ObjPersona.Apellido1,
             data[contEmpleado].ObjArea.Area,
             data[contEmpleado].ObjJefe.Nombre1 + ' ' + data[contEmpleado].ObjJefe.Apellido1,
-            '<button value="editar" href="#modalNEmpleado" data-toggle="modal" title="editar" class="btn btn-warning  btn-editEmpleado"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNEmpleado" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteEmpleado"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNEmpleado" data-toggle="modal" title="editar" class="btn btn-warning  btn-editEmpleado"><i class="fas fa-pencil-alt"></i> </button>' +                     
+            '<button value="eliminar" href="#modalNEmpleado" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteEmpleado"><i class="fa fa-trash" ></i> </button>'                     
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$(document).on('click', '.btn-addEmpleado', function (e) {//4 evento para mostrar modal de nuevo
+function FnJsAjaxREmpleadoNPersona() {
+    $.ajax({
+        type: "POST",
+        url: "/modulo7/VstEmpleados.aspx/FnREmpleadoNPersonaV",
+        data: {},
+        contentType: 'application/json; charser=utf-8',
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
+        },
+        success: function (data) {
+            AddrowEmpleadoNPersona(data.d);
+        }
+    }
+    );
+}
+function AddrowEmpleadoNPersona(data) {
+    $('#tblEmpleadoNPersona').DataTable().clear().destroy();
+    tablaEmpleadoNPersona = $("#tblEmpleadoNPersona").DataTable({
+        "retrieve": true,
+        dom: 'Bfrtip',
+        "order": [1, 'asc'],
+        "columnDefs": [
+            { "targets": 3, "searchable": false },
+            { "orderable": false, "targets": 3 }
+        ],
+        "buttons": [
+            {
+                extend: 'colvis',
+                collectionLayout: 'fixed',
+                attr: {
+                    id: 'colUsuario'
+                },
+                text: '<i class="fas fa-columns fa-2x"></i>',
+                className: 'btn btn-info',
+                titleAttr: 'Ocultar/Mostrar Columnas',
+                init: function (api, node, config) {
+                    $(node).removeClass('dt-button')
+                }
+            },
+            {
+                extend: 'copy',
+                text: '<i class="far fa-copy fa-2x"></i>',
+                className: 'btn btn-primary d-none d-lg-block',
+                exportOptions: {
+                    columns: [':not(:eq(3)):visible']
+                },
+                titleAttr: 'Copiar',
+                init: function (api, node, config) {
+                    $(node).removeClass('dt-button')
+                }
+            }
+        ],
+        "language": FnJsEspTbl()
+    });
+    tablaEmpleadoNPersona.buttons().container().addClass('form-inline');
+
+    for (var contEmpleadoNPersona = 0; contEmpleadoNPersona < data.length; contEmpleadoNPersona++) {
+        tablaEmpleadoNPersona.row.add([
+            data[contEmpleadoNPersona].ObjPersona.IdPersona,
+            data[contEmpleadoNPersona].ObjPersona.Nombre1,
+            data[contEmpleadoNPersona].ObjPersona.Apellido1,       
+            '<button value="Add" href="#modalNEmpleado" data-toggle="modal" title="Add" class="btn btn-success  btn-AddEmpleado"><i class="fas fa-plus"></i> </button>'
+        ]
+        ).draw(false);
+    }
+}
+
+$(document).on('click', '.btn-AddEmpleado', function (e) {                  
     e.preventDefault();
-    var tablaPersona = $('#tblPersona').DataTable();
-    var dataPersona = tablaPersona.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsIdPersona = dataPersona[0];
-    FnJsAjaxEEmpleadoPersona();
-    if (EEmpleadoPersona) {
-              
-        $('#alertaEmpleados .modal-content').addClass("bg-warning");//variable de color alerta xxxx
-        $('#alertaEmpleados h5').text("La persona ya existe como Empleado");//variable de texto alerta xxxx
-        $('#alertaEmpleados').modal('show');
-        setTimeout(function () {
-            $('#alertaEmpleados').modal('hide');
-            $('#alertaEmpleados .modal-content').removeClass("bg-warning");//variable de color alerta xxxx
-        }, 1800);
-    }
-    else {
-
-        FnJsCEmpleado(); // nombre función xxxx
-        EEmpleado = true; // variable xxxx
-
-        FnJsBlockEmpleado(); // nombre función xxxx
-        FnJSFillDdlEmpleadoArea();
-        FnJSFillDdlEmpleadoJefe();
-        CRUDEmpleado = "C"; // nombre variable xxxx
-        //campos xxxx
-        VarJsEmpleadoId = 0; // cada campo tiene una variable, inicializar xxxx
-        $('#txtNuevoEmpleadoNombre1').val(dataPersona[1]);// [indice columna]  de la fila seleccionada xxxx
-        $('#txtNuevoEmpleadoApellido1').val(dataPersona[3]);
-        VarJsEmpleadoNom1 = dataPersona[1]; // cada campo tiene una variable, inicializar xxxx
-        VarJsEmpleadoApe1 = dataPersona[3];
-        VarJsIdArea = 0;
-        VarJsArea = "";
-        VarJsIdJefe = 0;
-        VarJsJefeNom1 = "";
-        VarJsJefeApe1 = "";
-        $("#modalNEmpleado").modal("toggle");
-    }
-
-
-
-
+    FnJsCEmpleado();   
+    var dataEmpleadoNPersona = tablaEmpleadoNPersona.row($(this).parents("tr")).data();                                                
+    VarJsIdPersona = dataEmpleadoNPersona[0];
+    VarJsEmpleadoNom1 = dataEmpleadoNPersona[1];
+    $('#txtNuevoEmpleadoNombre1').val(dataEmpleadoNPersona[1]);
+    VarJsEmpleadoApe1 = dataEmpleadoNPersona[2];
+    $('#txtNuevoEmpleadoApellido1').val(dataEmpleadoNPersona[2]);
+    EEmpleado = true;  
+    FnJsBlockEmpleado(); 
+    FnJSFillDdlEmpleadoArea();
+    FnJSFillDdlEmpleadoJefe();
+    CRUDEmpleado = "C"; 
+    VarJsEmpleadoId = 0; 
+    VarJsIdArea = 0;
+    VarJsArea = "";
+    VarJsIdJefe = 0;
+    VarJsJefeNom1 = "";
+    VarJsJefeApe1 = "";   
 });
 
-$(document).on('click', '.btn-editEmpleado', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editEmpleado', function (e) {         
     e.preventDefault();
-    FnJsUEmpleado();//nombre de función xxxx
-    var dataEmpleado = tablaEmpleado.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsEmpleadoId = dataEmpleado[0]; //id de la fila seleccionada
-    $('#txtNuevoEmpleadoNombre1').val(dataEmpleado[1]);// [indice columna]  de la fila seleccionada xxxx
+    FnJsUEmpleado();         
+    var dataEmpleado = tablaEmpleado.row($(this).parents("tr")).data();                                                
+    VarJsEmpleadoId = dataEmpleado[0];             
+    $('#txtNuevoEmpleadoNombre1').val(dataEmpleado[1]);                        
     $('#txtNuevoEmpleadoApellido1').val(dataEmpleado[2]);
-    VarJsEmpleadoNom1 = dataEmpleado[1]; // variable elemento, variable data, índice xxxx
+    VarJsEmpleadoNom1 = dataEmpleado[1];                   
     VarJsEmpleadoApe1 = dataEmpleado[2];
     VAlDDLEmpleadoArea = (dataEmpleado[3]);
     VAlDDLEmpleadoJefe = (dataEmpleado[4]);
@@ -250,19 +283,19 @@ $(document).on('click', '.btn-editEmpleado', function (e) {//nombre de clase xxx
     FnJSFillDdlEmpleadoJefe();
     VarJsIdJefe = $('#ddlCEmpleadoJefe').val();
 
-    CRUDEmpleado = "U";// variable crud, estado crud xxxx
+    CRUDEmpleado = "U";               
 });
-$(document).on('click', '.btn-deleteEmpleado', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteEmpleado', function (e) {         
     e.preventDefault();
-    FnJsDEmpleado();//nombre de función xxxx
-    EEmpleado = false; // variable de existe xxxx
+    FnJsDEmpleado();         
+    EEmpleado = false;             
 
-    FnJsBlockEmpleado();//función bloquear xxxx
-    var dataEmpleado = tablaEmpleado.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsEmpleadoId = dataEmpleado[0]; //id de la fila seleccionada
-    $('#txtNuevoEmpleadoNombre1').val(dataEmpleado[1]);// [indice columna]  de la fila seleccionada xxxx
+    FnJsBlockEmpleado();      
+    var dataEmpleado = tablaEmpleado.row($(this).parents("tr")).data();                                                
+    VarJsEmpleadoId = dataEmpleado[0];             
+    $('#txtNuevoEmpleadoNombre1').val(dataEmpleado[1]);                        
     $('#txtNuevoEmpleadoApellido1').val(dataEmpleado[2]);
-    VarJsEmpleadoNom1 = dataEmpleado[1]; // variable elemento, variable data, índice xxxx
+    VarJsEmpleadoNom1 = dataEmpleado[1];                   
     VarJsEmpleadoApe1 = dataEmpleado[2];
     VAlDDLEmpleadoArea = (dataEmpleado[3]);
     VAlDDLEmpleadoJefe = (dataEmpleado[4]);
@@ -272,290 +305,216 @@ $(document).on('click', '.btn-deleteEmpleado', function (e) {//nombre de clase x
     CRUDEmpleado = "D";
 });
 
-//pintar modal
-function FnJsCEmpleado() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoEmpleado').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsCEmpleado() {       
+    $('#lblexistenuevoEmpleado').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorEmpleado").removeAttr("class");//quitar el atributo class
-    $("#DivModBorEmpleado").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaEmpleado").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaEmpleado").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitEmpleado').text('Nuevo Empleado');//tttt
-    //cambiar el color icono btn
-    $("#btnNueEmpleado").removeAttr("class");//quitar el atributo class
-    $("#btnNueEmpleado").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+    $("#DivModBorEmpleado").removeAttr("class");         
+    $("#DivModBorEmpleado").attr('class', 'modal-content border-success');   
+    $("#DivModHeaEmpleado").removeAttr("class");         
+    $("#DivModHeaEmpleado").attr('class', 'modal-header bg-success');   
+    $('#H4ModTitEmpleado').text('Nuevo Empleado');
+    $("#btnNueEmpleado").removeAttr("class");         
+    $("#btnNueEmpleado").attr('class', 'btn btn-success pull-right');               
     $("#btnNueEmpleado i").removeAttr("class");
     $("#btnNueEmpleado i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCEmpleadoArea").removeAttr("class"); //uitar propiedades
-    $("#ddlCEmpleadoArea").attr("class", "form-control border-success");//pintr roo
-    $("#ddlCEmpleadoJefe").removeAttr("class"); //uitar propiedades
-    $("#ddlCEmpleadoJefe").attr("class", "form-control border-success");//pintr roo
+    $("#ddlCEmpleadoArea").removeAttr("class");    
+    $("#ddlCEmpleadoArea").attr("class", "form-control border-success");   
+    $("#ddlCEmpleadoJefe").removeAttr("class");    
+    $("#ddlCEmpleadoJefe").attr("class", "form-control border-success");   
 
-    //bloquear elementos
-    $("#txtNuevoEmpleadoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoEmpleadoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoEmpleadoNombre1").attr('disabled', true);                   
+    $("#txtNuevoEmpleadoApellido1").attr('disabled', true);                   
     $('#ddlCEmpleadoArea').attr('disabled', false);
     $('#ddlCEmpleadoJefe').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCEmpleado[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $('#' + ModCEmpleado[0].id + ' :text').val("");
 }
-function FnJsUEmpleado() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoEmpleado').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUEmpleado() {       
+    $('#lblexistenuevoEmpleado').text("");                
 
-    console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorEmpleado").removeAttr("class");//quitar el atributo class
-    $("#DivModBorEmpleado").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaEmpleado").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaEmpleado").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitEmpleado').text('Editar Empleado');//tttt
-    //cambiar el color icono btn
-    $("#btnNueEmpleado").removeAttr("class");//quitar el atributo class
-    $("#btnNueEmpleado").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#DivModBorEmpleado").removeAttr("class");         
+    $("#DivModBorEmpleado").attr('class', 'modal-content border-warning');   
+    $("#DivModHeaEmpleado").removeAttr("class");         
+    $("#DivModHeaEmpleado").attr('class', 'modal-header bg-warning');   
+    $('#H4ModTitEmpleado').text('Editar Empleado');
+    $("#btnNueEmpleado").removeAttr("class");         
+    $("#btnNueEmpleado").attr('class', 'btn btn-warning pull-right');               
     $("#btnNueEmpleado i").removeAttr("class");
     $("#btnNueEmpleado i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCEmpleadoArea").removeAttr("class"); //uitar propiedades
-    $("#ddlCEmpleadoArea").attr("class", "form-control border-warning");//pintr roo
-    $("#ddlCEmpleadoJefe").removeAttr("class"); //uitar propiedades
-    $("#ddlCEmpleadoJefe").attr("class", "form-control border-warning");//pintr roo
+    $("#ddlCEmpleadoArea").removeAttr("class");    
+    $("#ddlCEmpleadoArea").attr("class", "form-control border-warning");   
+    $("#ddlCEmpleadoJefe").removeAttr("class");    
+    $("#ddlCEmpleadoJefe").attr("class", "form-control border-warning");   
 
-    //bloquear elementos
-    $("#txtNuevoEmpleadoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoEmpleadoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoEmpleadoNombre1").attr('disabled', true);                   
+    $("#txtNuevoEmpleadoApellido1").attr('disabled', true);                   
     $('#ddlCEmpleadoArea').attr('disabled', false);
     $('#ddlCEmpleadoJefe').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCEmpleado[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $('#' + ModCEmpleado[0].id + ' :text').val("");
 }
-function FnJsDEmpleado() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoEmpleado').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDEmpleado() {       
+    $('#lblexistenuevoEmpleado').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorEmpleado").removeAttr("class");//quitar el atributo class
-    $("#DivModBorEmpleado").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaEmpleado").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaEmpleado").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitEmpleado').text('Eliminar Empleado');//tttt
-    //cambiar el color icono btn
-    $("#btnNueEmpleado").removeAttr("class");//quitar el atributo class
-    $("#btnNueEmpleado").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#DivModBorEmpleado").removeAttr("class");         
+    $("#DivModBorEmpleado").attr('class', 'modal-content border-danger');   
+    $("#DivModHeaEmpleado").removeAttr("class");         
+    $("#DivModHeaEmpleado").attr('class', 'modal-header bg-danger');   
+    $('#H4ModTitEmpleado').text('Eliminar Empleado');
+    $("#btnNueEmpleado").removeAttr("class");         
+    $("#btnNueEmpleado").attr('class', 'btn btn-danger pull-right');               
     $("#btnNueEmpleado i").removeAttr("class");
-    $("#btnNueEmpleado i").attr("class", "fa fa-trash fa-2x");//ícono
-    //color ddl
-    $("#ddlCEmpleadoArea").removeAttr("class"); //uitar propiedades
-    $("#ddlCEmpleadoArea").attr("class", "form-control border-danger");//pintr roo
-    $("#ddlCEmpleadoJefe").removeAttr("class"); //uitar propiedades
-    $("#ddlCEmpleadoJefe").attr("class", "form-control border-danger");//pintr roo
+    $("#btnNueEmpleado i").attr("class", "fa fa-trash fa-2x");
+    $("#ddlCEmpleadoArea").removeAttr("class");    
+    $("#ddlCEmpleadoArea").attr("class", "form-control border-danger");   
+    $("#ddlCEmpleadoJefe").removeAttr("class");    
+    $("#ddlCEmpleadoJefe").attr("class", "form-control border-danger");   
 
-    //bloquear elementos
-    $("#txtNuevoEmpleadoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoEmpleadoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoEmpleadoNombre1").attr('disabled', true);                   
+    $("#txtNuevoEmpleadoApellido1").attr('disabled', true);                   
     $('#ddlCEmpleadoArea').attr('disabled', true);
     $('#ddlCEmpleadoJefe').attr('disabled', true);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCEmpleado[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $('#' + ModCEmpleado[0].id + ' :text').val("");
 }
 
-/*quitar btn CUD*/
-function FnJsBlockEmpleado() {// nombre función xxxx
-
-    if (EEmpleado == true) {// variables xxxx
-        $("#btnNueEmpleado").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueEmpleado").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
+function FnJsBlockEmpleado() {
+    if (EEmpleado == true) {      
+        $("#btnNueEmpleado").fadeOut("fast");                      
+        $("#btnNueEmpleado").attr('disabled', true);                                         
     }
-    else if (EEmpleado == false) {// variables xxxx
-        $("#btnNueEmpleado").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueEmpleado").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
+    else if (EEmpleado == false) {      
+        $("#btnNueEmpleado").fadeIn("slow");                      
+        $("#btnNueEmpleado").attr('disabled', false);                                         
     }
 }
 
-//guardar CUD
-$('#btnNueEmpleado').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueEmpleado').click(function (e) {               
     e.preventDefault();
     if (formEmpleado.checkValidity()) {
-        switch (CRUDEmpleado) { // variable crud xxxx
+        switch (CRUDEmpleado) {          
             case "C":
-                FnJsAjaxCEmpleado(); // función para crear xxxx
+                FnJsAjaxCEmpleado();             
                 break;
             case "U":
-                FnJsAjaxUEmpleado();// función para crear xxxx
+                FnJsAjaxUEmpleado();            
                 break;
             case "D":
-                FnJsAjaxDEmpleado();// función para crear xxxx
+                FnJsAjaxDEmpleado();            
                 break;
             default:
-                console.log("Error en cud Empleado");/////tttt
+                console.log("Error en cud Empleado");
         }
     }
-    console.log(formEmpleado.checkValidity());
 });
-
-//ajax CUD
 function FnJsAjaxCEmpleado() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnCEmpleadoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnCEmpleadoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdArea: VarJsIdArea,
             IdPersona: VarJsIdPersona,
             IdJefe: VarJsIdJefe
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Empleado Agregado"); ////tttt        
+                console.log("Empleado Agregado");                         
             }
             else {
-                //no se creó
                 CRUDEmpleado = "error"
-                console.log("No se pudo agregar Empleado");//
+                console.log("No se pudo agregar Empleado");
             }
-            FnAlertaEmpleado(); // nombre función alerta xxxx
+            FnAlertaEmpleado();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUEmpleado() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnUEmpleadoV", // nombre de página y nombre de función cude
+        url: "/modulo7/VstEmpleados.aspx/FnUEmpleadoV",                         
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdEmpleado: VarJsEmpleadoId,
             IdArea: VarJsIdArea,
             IdPersona: VarJsIdPersona,
             IdJefe: VarJsIdJefe
 
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Empleado Actualizado"); ////tttt
+                console.log("Empleado Actualizado"); 
             }
             else {
-                //no se borró
                 CRUDEmpleado = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaEmpleado();// nombre función alerta xxxx
+            FnAlertaEmpleado();            
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxDEmpleado() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnDEmpleadoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnDEmpleadoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdEmpleado: VarJsEmpleadoId
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Empleado Eliminado"); ////tttt
+                console.log("Empleado Eliminado"); 
             }
             else {
-                //no se creó
                 CRUDEmpleado = "error"
-                console.log("No se pudo Eliminar Empleado");////tttt
+                console.log("No se pudo Eliminar Empleado");
             }
-            FnAlertaEmpleado(); // nombre función alerta xxxx
-
+            FnAlertaEmpleado();
         }
-    });//ajax fin
+    });   
 }
-
-//Existe
-function FnJsAjaxEEmpleado() {// nombre de la función existe xxxx
+function FnJsAjaxEEmpleado() {                  
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnEEmpleadoV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnEEmpleadoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({   
             IdEmpleado: VarJsEmpleadoId,
             IdArea: VarJsIdArea,
             IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                EEmpleado = true; // variable existe xxxx
-                $('#lblexistenuevoEmpleado').text("Existe Empleado");// id etiqueta texto etiqueta //tttt
-                FnJsBlockEmpleado();//nombre de función bloquear xxxx
-
+                EEmpleado = true;          
+                $('#lblexistenuevoEmpleado').text("Existe Empleado");               
+                FnJsBlockEmpleado();
             }
             else {
-                //mostrar btn
-                EEmpleado = false;// variable existe xxxx
-                $('#lblexistenuevoEmpleado').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockEmpleado(); //nombre de función bloquear xxxx
+                EEmpleado = false;         
+                $('#lblexistenuevoEmpleado').text("");                
+                FnJsBlockEmpleado();             
             }
         }
-    });//ajax fin
+    });   
 }
 
-function FnJsAjaxEEmpleadoPersona() {// nombre de la función existe xxxx
-    $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnEEmpleadopersonaV", // nombre de página y nombre de función existe xxxx
-        contentType: 'application/json; charser=utf-8',
-        async: false,
-        data: JSON.stringify({//parámetros xxxx
-            IdPersona: VarJsIdPersona
-        }), /*parametro: valor*/
-        method: 'post',
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
-        },
-        success: function (data) {
-           
-            if (data.d) {
-                EEmpleadoPersona = true;
-                return true;
-            }
-            else {
-                EEmpleadoPersona = false;
-                return false;
-            }
-        }
-    });//ajax fin
-}
-
-function VerificarExisteEmpleado() {// nombre de función verificarexiste xxxx
-    if ($('#ddlCEmpleadoJefe').val() > 0 && $('#ddlCEmpleadoArea').val() > 0) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteEmpleado() {               
+    if ($('#ddlCEmpleadoJefe').val() > 0 && $('#ddlCEmpleadoArea').val() > 0) {                            
         return true;
     }
     else {
         return false;
     }
 }
-
 
 $('#ddlCEmpleadoArea').change(function (e) {
     VarJsIdArea = $('#ddlCEmpleadoArea').val();
@@ -572,10 +531,10 @@ $('#ddlCEmpleadoJefe').change(function (e) {
 });
 
 function FnJSFillDdlEmpleadoArea() {
-    $('#ddlCEmpleadoArea').empty(); // xxxx id
+    $('#ddlCEmpleadoArea').empty();       
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstEmpleados.aspx/FnRAreaV", // xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnRAreaV",    
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -583,18 +542,18 @@ function FnJSFillDdlEmpleadoArea() {
         },
         success: function (data) {
             if (VAlDDLEmpleadoArea == "null") {
-                $('#ddlCEmpleadoArea').append($("<option> </option>").val("0").html("Seleccionar Área"));  // xxxx id val html            
+                $('#ddlCEmpleadoArea').append($("<option> </option>").val("0").html("Seleccionar Área"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLEmpleadoArea == value.Area) {
-                        $('#ddlCEmpleadoArea').append($("<option> </option>").val(value.IdArea).html(value.Area));  // xxxx id texto
+                        $('#ddlCEmpleadoArea').append($("<option> </option>").val(value.IdArea).html(value.Area));           
                         VarJsIdArea = value.IdArea;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCEmpleadoArea').append($("<option> </option>").val(value.IdArea).html(value.Area)); // id en un val y en html el nombre
+                $('#ddlCEmpleadoArea').append($("<option> </option>").val(value.IdArea).html(value.Area));                            
             });
             VAlDDLEmpleadoArea = "null";
         }
@@ -602,70 +561,65 @@ function FnJSFillDdlEmpleadoArea() {
 }
 
 function FnJSFillDdlEmpleadoJefe() {
-    $('#ddlCEmpleadoJefe').empty(); // xxxx id
+    $('#ddlCEmpleadoJefe').empty();       
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstEmpleados.aspx/FnREmpleadoV", // xxxx
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo7/VstEmpleados.aspx/FnREmpleadoV",    
+        data: {},          
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLEmpleadoJefe == "null") {
-                $('#ddlCEmpleadoJefe').append($("<option> </option>").val("0").html("Seleccionar Jefe"));  // xxxx id val html            
+                $('#ddlCEmpleadoJefe').append($("<option> </option>").val("0").html("Seleccionar Jefe"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLEmpleadoJefe == (value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1)) {
-                        $('#ddlCEmpleadoJefe').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1));  // xxxx id texto
+                        $('#ddlCEmpleadoJefe').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1));           
                         VarJsIdJefe = value.IdEmpleado;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCEmpleadoJefe').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1)); // id en un val y en html el nombre
+                $('#ddlCEmpleadoJefe').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1));                            
             });
             VAlDDLEmpleadoJefe = "null";
         }
     });
 }
-
-
-function FnAlertaEmpleado() {//nombre de la función xxxx
-
-    switch (CRUDEmpleado) {//nombre de la variable cud xxxx
+function FnAlertaEmpleado() {
+    switch (CRUDEmpleado) {               
         case "C":
-            VarJsColorAlertEmpleado = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertEmpleado = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertEmpleado = "bg-success";            
+            VarJsTextoAlertEmpleado = "Creado";            
             break;
         case "U":
-            VarJsColorAlertEmpleado = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertEmpleado = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertEmpleado = "bg-warning";            
+            VarJsTextoAlertEmpleado = "Actualizado";            
             break; 
         case "D":
-            VarJsColorAlertEmpleado = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertEmpleado = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertEmpleado = "bg-danger";            
+            VarJsTextoAlertEmpleado = "Eliminado";            
             break;
         case "Error":
-            VarJsColorAlertEmpleado = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertEmpleado = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertEmpleado = "bg-secondary";            
+            VarJsTextoAlertEmpleado = "No se pudo realizar la operación";            
             break;
         default:
-            console.log("Error CUD Empleado Alert")//tttt
+            console.log("Error CUD Empleado Alert");
     }
-    //alerta
-    $('#alertaEmpleados .modal-content').addClass(VarJsColorAlertEmpleado);//variable de color alerta xxxx
-    $('#alertaEmpleados h5').text(VarJsTextoAlertEmpleado);//variable de texto alerta xxxx
-    $('#alertaEmpleados').modal('show');
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertEmpleado);            
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertEmpleado);            
+    $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
-        $('#alertaEmpleados').modal('hide');
-        $('#alertaEmpleados .modal-content').removeClass(VarJsColorAlertEmpleado);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
-
-    if ($("#secciontblEmpleado.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxREmpleado();//función ajax de llenado de la tabla xxxx
+        $('.bd-example-modal-sm').modal('hide');
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertEmpleado);            
+    }, 1500);
+    if ($("#secciontblEmpleado.show").length > 0) {      
+        FnJsAjaxREmpleado();  
+        FnJsAjaxREmpleadoNPersona();
     }
-    //cerrar modal
-    $("#modalNEmpleado").modal("toggle");//nombre modal xxxx
+    $("#modalNEmpleado").modal("toggle");      
 }

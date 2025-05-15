@@ -170,7 +170,7 @@ namespace CapaDato
                 ObjConexion.Cerrarcon();
             }
         }
-                //`spEEmpleadoPersona`(in prmEEmpleadoIdPersona int)
+              
         public bool FnEEmpleadoPersonaD(ClsEmpleado OEmpleado)
         {
             bool ExisteEmpleado = true;
@@ -192,6 +192,39 @@ namespace CapaDato
             catch (Exception ex)
             {
                 return true;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
+        public List<ClsEmpleado> FnREmpleadoNPersonaD()
+        {
+            ClsEmpleado OEmpleado = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spREmpleadoNPersona", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsEmpleado> LstEmpleado = new List<ClsEmpleado>();
+                while (Dr_D.Read())
+                {
+                    OEmpleado = new ClsEmpleado();                   
+                    OEmpleado.ObjPersona.IdPersona = Dr_D[0].ToString();
+                    OEmpleado.ObjPersona.Nombre1 = Dr_D[1].ToString();
+                    OEmpleado.ObjPersona.Apellido1 = Dr_D[2].ToString();
+
+                    LstEmpleado.Add(OEmpleado);
+                }
+                return LstEmpleado;
+            }
+            catch (Exception ex)
+            {
+                return null;
                 throw ex;
             }
             finally

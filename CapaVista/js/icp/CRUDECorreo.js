@@ -522,9 +522,7 @@ function FnAlertaCorreo() {
     setTimeout(function () {
         $('.bd-example-modal-sm').modal('hide');
         $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertCorreo);
-    }, 1500);                                 
-    if ($("#secciontblCorreo.show").length > 0) {
+    }, 1500);  
         FnJsAjaxRCorreo();
-    }
     $("#modalNCorreo").modal("toggle");      
 }

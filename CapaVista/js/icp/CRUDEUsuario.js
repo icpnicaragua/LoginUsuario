@@ -21,9 +21,9 @@ var VarJsTextoAlertUsuario = "";
 var EUsuario = true;
 
 
-$('#lbMostrarUsuario').click(function (e) {//1 evento para mostrar contenido  xxxx
+$('#lbMostrarUsuario').click(function (e) {                  
     e.preventDefault();
-    FnJsAjaxRUsuario(); //llama al ajax xxxx
+    FnJsAjaxRUsuario();          
 });
 
 $('#lbNUsuario').click(function (e) {
@@ -31,32 +31,32 @@ $('#lbNUsuario').click(function (e) {
     FnJsAjaxRUsuarioNEmpleado();
 });
 
-function FnJsAjaxRUsuario() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRUsuario() {                               
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstUsuarios.aspx/FnRUsuarioV", // nombre de página y nombre de función xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnRUsuarioV",                         
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowUsuario(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowUsuario(data.d);                                        
         }
     }
     );
 }
 
-function AddrowUsuario(data) {//3 llenar la tabla xxxx
+function AddrowUsuario(data) {            
 
-    $('#tblUsuario').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
+    $('#tblUsuario').DataTable().clear().destroy();                            
 
-    tablaUsuario = $("#tblUsuario").DataTable({// variable nombre tabla xxxx
+    tablaUsuario = $("#tblUsuario").DataTable({            
 
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [3, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [3, 'asc'],                                             
         "columnDefs": [
             { "targets": 5, "searchable": false },
             { "orderable": false, "targets": 5 }
@@ -66,10 +66,10 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colUsuario'//se añade el id para ocultar xxxx
+                    id: 'colUsuario'                  
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',             
+                className: 'btn btn-info',       
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -81,7 +81,7 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(5)):visible']                               
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -94,10 +94,10 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(5)):visible']                                  
                 },
                 titleAttr: 'PDF',
-                filename: 'Usuarios' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Usuarios' + "_" + FnJsDate() + "_" + FnJsHour(),         
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -105,7 +105,7 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64();          
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -119,14 +119,14 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Usuarios', //tttt
+                                    text: 'Usuarios', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Usuario' //tttt
+                                    text: 'Reporte Usuario' 
                                 }
                             ],
                             margin: 20
@@ -153,11 +153,11 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
             },
             {
                 extend: 'excel',
-                filename: 'Usuarios' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Usuarios' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(5)):visible']                               
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -169,48 +169,48 @@ function AddrowUsuario(data) {//3 llenar la tabla xxxx
         ],
         "language": FnJsEspTbl()
     });
-    tablaUsuario.buttons().container().addClass('form-inline');///variable xxxx
+    tablaUsuario.buttons().container().addClass('form-inline');   
 
-    for (var contUsuario = 0; contUsuario < data.length; contUsuario++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaUsuario.row.add([//sensitivecase:
-            data[contUsuario].ID_usuario,//campos
+    for (var contUsuario = 0; contUsuario < data.length; contUsuario++) {                         
+        tablaUsuario.row.add([
+            data[contUsuario].ID_usuario,
             data[contUsuario].Usuario,
             data[contUsuario].Clave,
             data[contUsuario].ObjEmpleado.ObjPersona.Nombre1,
             data[contUsuario].ObjEmpleado.ObjPersona.Apellido1,
-            '<button value="editar" href="#modalNUsuario" data-toggle="modal" title="editar" class="btn btn-warning  btn-editUsuario"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNUsuario" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteUsuario"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNUsuario" data-toggle="modal" title="editar" class="btn btn-warning  btn-editUsuario"><i class="fas fa-pencil-alt"></i> </button>' +                     
+            '<button value="eliminar" href="#modalNUsuario" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteUsuario"><i class="fa fa-trash" ></i> </button>'                     
         ]
         ).draw(false);
     }
 }
 
-function FnJsAjaxRUsuarioNEmpleado() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRUsuarioNEmpleado() {                               
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstUsuarios.aspx/FnRUsuarioNEmpleadoV", // nombre de página y nombre de función xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnRUsuarioNEmpleadoV",                         
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowUsuarioNEmpleado(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowUsuarioNEmpleado(data.d);                                        
         }
     }
     );
 }
 
-function AddrowUsuarioNEmpleado(data) {//3 llenar la tabla xxxx
+function AddrowUsuarioNEmpleado(data) {            
 
-    $('#tblEmpleadoNUsuario').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
+    $('#tblEmpleadoNUsuario').DataTable().clear().destroy();                            
 
-    tablaUsuarioNEmpleado = $("#tblEmpleadoNUsuario").DataTable({// variable nombre tabla xxxx
+    tablaUsuarioNEmpleado = $("#tblEmpleadoNUsuario").DataTable({            
 
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [1, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [1, 'asc'],                                             
         "columnDefs": [
             { "targets": 4, "searchable": false },
             { "orderable": false, "targets": 4 }
@@ -220,10 +220,10 @@ function AddrowUsuarioNEmpleado(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colUsuario'//se añade el id para ocultar xxxx
+                    id: 'colUsuario'                  
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',             
+                className: 'btn btn-info',       
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -235,7 +235,7 @@ function AddrowUsuarioNEmpleado(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(4)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(4)):visible']                               
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -246,15 +246,15 @@ function AddrowUsuarioNEmpleado(data) {//3 llenar la tabla xxxx
         ],
         "language": FnJsEspTbl()
     });
-    tablaUsuarioNEmpleado.buttons().container().addClass('form-inline');///variable xxxx
+    tablaUsuarioNEmpleado.buttons().container().addClass('form-inline');   
 
-    for (var contEmpleadoNUsuario = 0; contEmpleadoNUsuario < data.length; contEmpleadoNUsuario++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaUsuarioNEmpleado.row.add([//sensitivecase:
-            data[contEmpleadoNUsuario].ObjEmpleado.IdEmpleado,//campos
+    for (var contEmpleadoNUsuario = 0; contEmpleadoNUsuario < data.length; contEmpleadoNUsuario++) {                         
+        tablaUsuarioNEmpleado.row.add([
+            data[contEmpleadoNUsuario].ObjEmpleado.IdEmpleado,
             data[contEmpleadoNUsuario].ObjEmpleado.ObjPersona.Nombre1,
             data[contEmpleadoNUsuario].ObjEmpleado.ObjPersona.Apellido1,
             data[contEmpleadoNUsuario].ObjEmpleado.ObjArea.Area,
-            '<button value="Add" href="#modalNUsuario" data-toggle="modal" title="Add" class="btn btn-success  btn-AddUsuario"><i class="fas fa-plus"></i> </button>' // modal editar y clase de botón xxxx
+            '<button value="Add" href="#modalNUsuario" data-toggle="modal" title="Add" class="btn btn-success  btn-AddUsuario"><i class="fas fa-plus"></i> </button>'                      
         ]
         ).draw(false);
     }
@@ -282,219 +282,191 @@ $(document).on('click', '.btn-AddUsuario', function (e) {
     VarJsClave = "";
 
 });
-$(document).on('click', '.btn-editUsuario', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editUsuario', function (e) {         
     e.preventDefault();
-    FnJsUUsuario();//nombre de función xxxx
-    var dataUsuario = tablaUsuario.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsUsuarioId = dataUsuario[0]; //id de la fila seleccionada
-    $('#txtNuevoUsuario').val(dataUsuario[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsUsuario = dataUsuario[1]; // variable elemento, variable data, índice xxxx
-    $('#txtNuevoClave').val(dataUsuario[2]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsClave = dataUsuario[2]; // variable elemento, variable data, índice xxxx
-    $('#txtNuevoNombre1').val(dataUsuario[3]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsNombre1 = dataUsuario[3]; // variable elemento, variable data, índice xxxx
-    $('#txtNuevoApellido1').val(dataUsuario[4]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsApellido1 = dataUsuario[4]; // variable elemento, variable data, índice xxxx
+    FnJsUUsuario();         
+    var dataUsuario = tablaUsuario.row($(this).parents("tr")).data();                                                
+    VarJsUsuarioId = dataUsuario[0];             
+    $('#txtNuevoUsuario').val(dataUsuario[1]);                        
+    VarJsUsuario = dataUsuario[1];                   
+    $('#txtNuevoClave').val(dataUsuario[2]);                        
+    VarJsClave = dataUsuario[2];                   
+    $('#txtNuevoNombre1').val(dataUsuario[3]);                        
+    VarJsNombre1 = dataUsuario[3];                   
+    $('#txtNuevoApellido1').val(dataUsuario[4]);                        
+    VarJsApellido1 = dataUsuario[4];                   
 
-    CRUDUsuario = "U";// variable crud, estado crud xxxx
+    CRUDUsuario = "U";               
 });
-$(document).on('click', '.btn-deleteUsuario', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteUsuario', function (e) {         
     e.preventDefault();
     FnJsDUsuario();
     EUsuario = false; 
 
-    FnJsBlockUsuario();//función bloquear xxxx
-    var dataUsuario = tablaUsuario.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsUsuarioId = dataUsuario[0]; //id de la fila seleccionada
-    $('#txtNuevoUsuario').val(dataUsuario[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsUsuario = dataUsuario[1]; // variable elemento, variable data, índice xxxx
-    $('#txtNuevoClave').val(dataUsuario[2]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsClave = dataUsuario[2]; // variable elemento, variable data, índice xxxx
-    $('#txtNuevoNombre1').val(dataUsuario[3]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsNombre1 = dataUsuario[3]; // variable elemento, variable data, índice xxxx
-    $('#txtNuevoApellido1').val(dataUsuario[4]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsApellido1 = dataUsuario[4]; // variable elemento, variable data, índice xxxx
+    FnJsBlockUsuario();      
+    var dataUsuario = tablaUsuario.row($(this).parents("tr")).data();                                                
+    VarJsUsuarioId = dataUsuario[0];             
+    $('#txtNuevoUsuario').val(dataUsuario[1]);                        
+    VarJsUsuario = dataUsuario[1];                   
+    $('#txtNuevoClave').val(dataUsuario[2]);                        
+    VarJsClave = dataUsuario[2];                   
+    $('#txtNuevoNombre1').val(dataUsuario[3]);                        
+    VarJsNombre1 = dataUsuario[3];                   
+    $('#txtNuevoApellido1').val(dataUsuario[4]);                        
+    VarJsApellido1 = dataUsuario[4];                   
 
     CRUDUsuario = "D";
 });
 
-function FnJsCUsuario() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoUsuario').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsCUsuario() {       
+    $('#lblexistenuevoUsuario').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorUsuario").removeAttr("class");//quitar el atributo class
-    $("#DivModBorUsuario").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaUsuario").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaUsuario").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitUsuario').text('Nuevo Usuario');//tttt
-    //cambiar el color icono btn
-    $("#btnNueUsuario").removeAttr("class");//quitar el atributo class
-    $("#btnNueUsuario").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+    $("#DivModBorUsuario").removeAttr("class");         
+    $("#DivModBorUsuario").attr('class', 'modal-content border-success');   
+    $("#DivModHeaUsuario").removeAttr("class");         
+    $("#DivModHeaUsuario").attr('class', 'modal-header bg-success');   
+    $('#H4ModTitUsuario').text('Nuevo Usuario');
+    $("#btnNueUsuario").removeAttr("class");         
+    $("#btnNueUsuario").attr('class', 'btn btn-success pull-right');               
     $("#btnNueUsuario i").removeAttr("class");
     $("#btnNueUsuario i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtNuevoUsuario").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#txtNuevoClave").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#txtNuevoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoUsuario").attr('disabled', false);                   
+    $("#txtNuevoClave").attr('disabled', false);                   
+    $("#txtNuevoNombre1").attr('disabled', true);                   
+    $("#txtNuevoApellido1").attr('disabled', true);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCUsuario[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCUsuario[0].id + ' :text').val("");             
 
 }
-function FnJsUUsuario() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoUsuario').text(""); // id etiqueta texto etiqueta xxxx
-
-    console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorUsuario").removeAttr("class");//quitar el atributo class
-    $("#DivModBorUsuario").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaUsuario").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaUsuario").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitUsuario').text('Editar Usuario');//tttt
-    //cambiar el color icono btn
-    $("#btnNueUsuario").removeAttr("class");//quitar el atributo class
-    $("#btnNueUsuario").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+function FnJsUUsuario() {       
+    $('#lblexistenuevoUsuario').text("");                
+      
+    $("#DivModBorUsuario").removeAttr("class");         
+    $("#DivModBorUsuario").attr('class', 'modal-content border-warning');   
+    $("#DivModHeaUsuario").removeAttr("class");         
+    $("#DivModHeaUsuario").attr('class', 'modal-header bg-warning');   
+    $('#H4ModTitUsuario').text('Editar Usuario');
+    $("#btnNueUsuario").removeAttr("class");         
+    $("#btnNueUsuario").attr('class', 'btn btn-warning pull-right');               
     $("#btnNueUsuario i").removeAttr("class");
     $("#btnNueUsuario i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtNuevoUsuario").attr('disabled', false); //variables de los elementos del modal xxxx 
-    $("#txtNuevoClave").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#txtNuevoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoUsuario").attr('disabled', false);                      
+    $("#txtNuevoClave").attr('disabled', false);                   
+    $("#txtNuevoNombre1").attr('disabled', true);                   
+    $("#txtNuevoApellido1").attr('disabled', true);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCUsuario[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCUsuario[0].id + ' :text').val("");             
 
 }
-function FnJsDUsuario() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoUsuario').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDUsuario() {       
+    $('#lblexistenuevoUsuario').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorUsuario").removeAttr("class");//quitar el atributo class
-    $("#DivModBorUsuario").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaUsuario").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaUsuario").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitUsuario').text('Eliminar Usuario');//tttt
-    //cambiar el color icono btn
-    $("#btnNueUsuario").removeAttr("class");//quitar el atributo class
-    $("#btnNueUsuario").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#DivModBorUsuario").removeAttr("class");         
+    $("#DivModBorUsuario").attr('class', 'modal-content border-danger');   
+    $("#DivModHeaUsuario").removeAttr("class");         
+    $("#DivModHeaUsuario").attr('class', 'modal-header bg-danger');   
+    $('#H4ModTitUsuario').text('Eliminar Usuario');
+    $("#btnNueUsuario").removeAttr("class");         
+    $("#btnNueUsuario").attr('class', 'btn btn-danger pull-right');               
     $("#btnNueUsuario i").removeAttr("class");
-    $("#btnNueUsuario i").attr("class", "fa fa-trash fa-2x");//ícono
-    //bloquear elementos
-    $("#txtNuevoUsuario").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoClave").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoNombre1").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoApellido1").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#btnNueUsuario i").attr("class", "fa fa-trash fa-2x");
+    $("#txtNuevoUsuario").attr('disabled', true);                   
+    $("#txtNuevoClave").attr('disabled', true);                   
+    $("#txtNuevoNombre1").attr('disabled', true);                   
+    $("#txtNuevoApellido1").attr('disabled', true);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCUsuario[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCUsuario[0].id + ' :text').val("");             
 
 }
 
 
-function FnJsBlockUsuario() {// nombre función xxxx
+function FnJsBlockUsuario() {         
 
-    if (EUsuario == true) {// variables xxxx
-        $("#btnNueUsuario").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueUsuario").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
+    if (EUsuario == true) {      
+        $("#btnNueUsuario").fadeOut("fast");                      
+        $("#btnNueUsuario").attr('disabled', true);                                         
     }
-    else if (EUsuario == false) {// variables xxxx
-        $("#btnNueUsuario").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueUsuario").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
+    else if (EUsuario == false) {      
+        $("#btnNueUsuario").fadeIn("slow");                      
+        $("#btnNueUsuario").attr('disabled', false);                                         
     }
 }
 
 
-$('#btnNueUsuario').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueUsuario').click(function (e) {               
     e.preventDefault();
     if (formUsuario.checkValidity()) {
-        switch (CRUDUsuario) { // variable crud xxxx
+        switch (CRUDUsuario) {          
             case "C":
-                FnJsAjaxCUsuario(); // función para crear xxxx
+                FnJsAjaxCUsuario();             
                 break;
             case "U":
-                FnJsAjaxUUsuario();// función para crear xxxx
+                FnJsAjaxUUsuario();            
                 break;
             case "D":
-                FnJsAjaxDUsuario();// función para crear xxxx
+                FnJsAjaxDUsuario();            
                 break;
             default:
-                console.log("Error en cud Usuario");/////tttt
+                console.log("Error en cud Usuario");
         }
-    }
-    console.log(formUsuario.checkValidity());
+    }   
 });
 
-//ajax CUD
 function FnJsAjaxCUsuario() {
     $.ajax({
-        url: "/modulo7/VstUsuarios.aspx/FnCUsuarioV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnCUsuarioV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             Usuario: VarJsUsuario,
             Clave: VarJsClave,
             IdEmpleado: VarJsIdEmpleado
 
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Usuario Agregado"); ////tttt        
+                console.log("Usuario Agregado");                         
             }
             else {
-                //no se creó
                 CRUDUsuario = "error"
-                console.log("No se pudo agregar Tipo de indentificación");//
+                console.log("No se pudo agregar Tipo de indentificación");
             }
-            FnAlertaUsuario(); // nombre función alerta xxxx
+            FnAlertaUsuario();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUUsuario() {
     $.ajax({
-        url: "/modulo7/VstUsuarios.aspx/FnUUsuarioV", // nombre de página y nombre de función cude
+        url: "/modulo7/VstUsuarios.aspx/FnUUsuarioV",                         
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdUsuario: VarJsUsuarioId,
             Usuario: VarJsUsuario,
             Clave: VarJsClave
 
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Usuario Actualizado"); ////tttt
+                console.log("Usuario Actualizado"); 
             }
             else {
-                //no se borró
                 CRUDUsuario = "error"
-                console.log("no se pudo actualizar Usuario");//
+                console.log("no se pudo actualizar Usuario");
             }
-            FnAlertaUsuario();// nombre función alerta xxxx
+            FnAlertaUsuario();            
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxDUsuario() {
     $.ajax({
-        url: "/modulo7/VstUsuarios.aspx/FnDUsuarioV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnDUsuarioV",                            
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({
             IdUsuario: VarJsUsuarioId
@@ -505,24 +477,21 @@ function FnJsAjaxDUsuario() {
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Usuario Eliminado"); ////tttt
+                console.log("Usuario Eliminado"); 
             }
             else {
-                //no se creó
                 CRUDUsuario = "error"
-                console.log("No se pudo Eliminar Usuario");////tttt
+                console.log("No se pudo Eliminar Usuario");
             }
-            FnAlertaUsuario(); // nombre función alerta xxxx
+            FnAlertaUsuario();             
 
         }
-    });//ajax fin
+    });   
 }
 
-//Existe
-function FnJsAjaxEUsuario() {// nombre de la función existe xxxx
+function FnJsAjaxEUsuario() {                  
     $.ajax({
-        url: "/modulo7/VstUsuarios.aspx/FnEUsuarioV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo7/VstUsuarios.aspx/FnEUsuarioV",                            
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({
             IdUsuario: VarJsUsuarioId,
@@ -534,25 +503,22 @@ function FnJsAjaxEUsuario() {// nombre de la función existe xxxx
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                EUsuario = true; // variable existe xxxx
-                $('#lblexistenuevoUsuario').text("Existe Usuario");// id etiqueta texto etiqueta //tttt
-                FnJsBlockUsuario();//nombre de función bloquear xxxx
+                EUsuario = true;          
+                $('#lblexistenuevoUsuario').text("Existe Usuario");               
+                FnJsBlockUsuario();            
 
             }
             else {
-                //mostrar btn
-                EUsuario = false;// variable existe xxxx
-                $('#lblexistenuevoUsuario').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockUsuario(); //nombre de función bloquear xxxx
+                EUsuario = false;         
+                $('#lblexistenuevoUsuario').text("");                
+                FnJsBlockUsuario();             
             }
         }
-    });//ajax fin
+    });   
 }
 
-
-function VerificarExisteUsuario() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoUsuario').val().length >= 3) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteUsuario() {               
+    if ($('#txtNuevoUsuario').val().length >= 3) {                            
         return true;
     }
     else {
@@ -560,56 +526,52 @@ function VerificarExisteUsuario() {// nombre de función verificarexiste xxxx
     }
 }
 
-
-$('#txtNuevoUsuario').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsUsuario = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteUsuario()) {//nombre función verificar existe xxxx
-        FnJsAjaxEUsuario(); // llamar todos los existes xxxx
+$('#txtNuevoUsuario').keyup(function (e) {                     
+    VarJsUsuario = $(this).val();                
+    if (VerificarExisteUsuario()) {            
+        FnJsAjaxEUsuario();                
 
     }
 });
 
-$('#txtNuevoClave').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsClave = $(this).val(); // variable de este elemento xxxx    
+$('#txtNuevoClave').keyup(function (e) {                     
+    VarJsClave = $(this).val();                            
 });
 
+function FnAlertaUsuario() {            
 
-function FnAlertaUsuario() {//nombre de la función xxxx
-
-    switch (CRUDUsuario) {//nombre de la variable cud xxxx
+    switch (CRUDUsuario) {               
         case "C":
-            VarJsColorAlertUsuario = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertUsuario = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertUsuario = "bg-success";            
+            VarJsTextoAlertUsuario = "Creado";            
             break;
         case "U":
-            VarJsColorAlertUsuario = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertUsuario = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertUsuario = "bg-warning";            
+            VarJsTextoAlertUsuario = "Actualizado";            
             break;
         case "D":
-            VarJsColorAlertUsuario = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertUsuario = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertUsuario = "bg-danger";            
+            VarJsTextoAlertUsuario = "Eliminado";            
             break;
         case "Error":
-            VarJsColorAlertUsuario = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertUsuario = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertUsuario = "bg-secondary";            
+            VarJsTextoAlertUsuario = "No se pudo realizar la operación";            
             break;
         default:
-            console.log("Error CUD Usuario Alert")//tttt
+            console.log("Error CUD Usuario Alert")
     }
-    //alerta
-    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
-    $('.bd-example-modal-sm h5').text(VarJsTextoAlertUsuario);//variable de texto alerta xxxx
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertUsuario);            
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertUsuario);            
     $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
         $('.bd-example-modal-sm').modal('hide');
-        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertUsuario);            
+    }, 1500);                           
 
-    if ($("#secciontblUsuario.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRUsuario();//función ajax de llenado de la tabla xxxx
+    if ($("#secciontblUsuario.show").length > 0) {      
+        FnJsAjaxRUsuario();                     
         FnJsAjaxRUsuarioNEmpleado();
 
     }
-    //cerrar modal
-    $("#modalNUsuario").modal("toggle");//nombre modal xxxx
+    $("#modalNUsuario").modal("toggle");      
 }

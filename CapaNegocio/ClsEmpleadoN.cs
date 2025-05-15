@@ -77,5 +77,11 @@ namespace CapaNegocio
             }
         }
 
+        public List<ClsEmpleado> FnREmpleadoNPersonaN()
+        {
+            List<ClsEmpleado> OEmpleado = new ClsEmpleadoD().FnREmpleadoNPersonaD();
+            return OEmpleado;
+        }
+
     }
 }

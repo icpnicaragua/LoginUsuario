@@ -500,10 +500,7 @@ function FnAlertaTelefono() {
     setTimeout(function () {
         $('.bd-example-modal-sm').modal('hide');
         $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertTelefono);
-    }, 1500);                           
-    console.log($("#secciontblTelefono.show").length)
-    if ($("#secciontblTelefono.show").length > 0) {
-        FnJsAjaxRTelefono();
-    }   
+    }, 1500);
+        FnJsAjaxRTelefono();  
     $("#modalNTelefono").modal("toggle");      
 }

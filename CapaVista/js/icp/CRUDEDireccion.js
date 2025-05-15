@@ -685,10 +685,7 @@ function FnAlertaDireccion() {
     setTimeout(function () {
         $('.bd-example-modal-sm').modal('hide');
         $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertDireccion);
-    }, 1500);
-    console.log($("#secciontblDireccion.show").length)
-    if ($("#secciontblDireccion.show").length > 0) {
-        FnJsAjaxRDireccion();
-    }
+    }, 1500);   
+        FnJsAjaxRDireccion(); 
     $("#modalNDireccion").modal("toggle");
 }

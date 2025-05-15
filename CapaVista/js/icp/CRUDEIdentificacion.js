@@ -517,11 +517,7 @@ function FnAlertaIdentificacion() {
     setTimeout(function () {
         $('.bd-example-modal-sm').modal('hide');
         $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertIdentificacion);
-    }, 1500);                           
-    console.log($("#secciontblIdentificacion.show").length)
-    if ($("#secciontblIdentificacion.show").length > 0) {
-        FnJsAjaxRIdentificacion();
-    }
-       
+    }, 1500);
+    FnJsAjaxRIdentificacion();        
     $("#modalNIdentificacion").modal("toggle");      
 }

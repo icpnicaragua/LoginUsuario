@@ -167,6 +167,13 @@ namespace CapaVista.modulo7
 
         }
 
+        [WebMethod]
+        public static List<ClsEmpleado> FnREmpleadoNPersonaV()
+        {
+            List<ClsEmpleado> OEmpleado = new ClsEmpleadoN().FnREmpleadoNPersonaN();
+            return OEmpleado;
+        }
+
         #endregion
 
         #region RegPersona
