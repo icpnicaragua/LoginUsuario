@@ -625,6 +625,7 @@
     <Content Include="js\icp\CRUDEBanco.js" />
     <Content Include="js\icp\CRUDEBodega.js" />
     <Content Include="js\icp\CRUDECategoria.js" />
+    <Content Include="js\icp\CRUDECliente.js" />
     <Content Include="js\icp\CRUDEConceptoRoc.js" />
     <Content Include="js\icp\CRUDECorreo.js" />
     <Content Include="js\icp\CRUDECorreoEmpresa.js" />
@@ -641,6 +642,7 @@
     <Content Include="js\icp\CRUDEIdentificacion.js" />
     <Content Include="js\icp\CRUDEPagoSobre.js" />
     <Content Include="js\icp\CRUDEPalabraClave.js" />
+    <Content Include="js\icp\CRUDEPersona.js" />
     <Content Include="js\icp\CRUDEPersonajs.js" />
     <Content Include="js\icp\CRUDEPromo.js" />
     <Content Include="js\icp\CRUDERack.js" />

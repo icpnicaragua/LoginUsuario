@@ -137,37 +137,28 @@
         </div>
     </div>
     <div class="modal" id="modalNCategoria">
-        <!-- id-->
         <div class="modal-dialog" role="document">
             <div id="DivModBorCategoria" class="modal-content border-success">
-                <!-- id-->
                 <div id="DivModHeaCategoria" class="modal-header bg-success">
-                    <!-- id-->
                     <h4 id="H4ModTitCategoria">Editar Categoría</h4>
-                    <!-- id h4-->
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div id="frmnueCategoria" runat="server" data-toggle="validator" role="form">
-                        <!-- id-->
                         <label id="lblexistenuevoCategoria" for="txtNuevoCategoria" runat="server" class="text-warning" text=""></label>
-                        <!-- id for-->
                         <div class="input-group mb-3">
                             <asp:TextBox ID="txtNuevoCategoria" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Categoria" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfo345NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
-                                    <!-- class popinfoX-->
                                     <i class="fas fa-info"></i>
                                 </button>
                             </span>
                         </div>
                         <div class="input-group md-3">
                             <asp:DropDownList ID="ddlCCategoriaFamilia" TabIndex="2" CssClass="form-control border-success" runat="server">
-                                <%--id tap xxxx--%>
                             </asp:DropDownList>
                         </div>
                         <button id="btnNueCategoria" tabindex="3" class="btn btn-success pull-right">
-                            <!-- id idex(si aplica)-->
                             <i class="fas fa-save fa-2x"></i>
                         </button>
                     </div>
@@ -186,5 +177,5 @@
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <!-- crear para cada tabla-->
     <script src="/js/icp/CRUDEFamilia.js" type="text/javascript"></script>
-     <script src="/js/icp/CRUDECategoria.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDECategoria.js" type="text/javascript"></script>
 </asp:Content>

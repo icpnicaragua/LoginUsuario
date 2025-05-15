@@ -1,8 +1,8 @@
-﻿/*variable de tablas*/
-var tablaUsuario;/*tabla mpodulo*/
-var tablaUsuarioNEmpleado;/*tabla mpodulo*/
-var ModCUsuario = $('#modalNUsuario'); // modal 
-//campos de tablas
+﻿
+var tablaUsuario;
+var tablaUsuarioNEmpleado;
+var ModCUsuario = $('#modalNUsuario'); 
+
 var VarJsUsuarioId = 0;
 var VarJsUsuario = "";
 var VarJsClave = "";
@@ -10,15 +10,14 @@ var VarJsIdEmpleado = 0;
 var VarJsNombre1 = "";
 var VarJsApellido1 = "";
 
-//igual para todos
+
 var formUsuario = document.querySelector('#form1');
 
-//variables crud
 CRUDUsuario = "";
-//variables alertas
+
 var VarJsColorAlertUsuario = "";
 var VarJsTextoAlertUsuario = "";
-//variables existe
+
 var EUsuario = true;
 
 
@@ -27,9 +26,9 @@ $('#lbMostrarUsuario').click(function (e) {//1 evento para mostrar contenido  xx
     FnJsAjaxRUsuario(); //llama al ajax xxxx
 });
 
-$('#lbNUsuario').click(function (e) {//1 evento para mostrar contenido  xxxx
+$('#lbNUsuario').click(function (e) {
     e.preventDefault();
-    FnJsAjaxRUsuarioNEmpleado(); //llama al ajax xxxx
+    FnJsAjaxRUsuarioNEmpleado();
 });
 
 function FnJsAjaxRUsuario() { //2 pide los datos en bd de la tabla  xxxx
@@ -262,29 +261,25 @@ function AddrowUsuarioNEmpleado(data) {//3 llenar la tabla xxxx
 }
 
 
-//acciones cud
-
-$(document).on('click', '.btn-AddUsuario', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-AddUsuario', function (e) {
     e.preventDefault();
-    FnJsCUsuario(); // nombre función xxxx
-    var dataUsuarioNEmpleado = tablaUsuarioNEmpleado.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsIdEmpleado = dataUsuarioNEmpleado[0]; //id de la fila seleccionada
+    FnJsCUsuario(); 
+    var dataUsuarioNEmpleado = tablaUsuarioNEmpleado.row($(this).parents("tr")).data();
+    VarJsIdEmpleado = dataUsuarioNEmpleado[0]; 
     VarJsNombre1 = dataUsuarioNEmpleado[1];
-    $('#txtNuevoNombre1').val(dataUsuarioNEmpleado[1]);// [indice columna]  de la fila seleccionada xxxx
+    $('#txtNuevoNombre1').val(dataUsuarioNEmpleado[1]);
     VarJsApellido1 = dataUsuarioNEmpleado[2];
-    $('#txtNuevoApellido1').val(dataUsuarioNEmpleado[2]);// [indice columna]  de la fila seleccionada xxxx
+    $('#txtNuevoApellido1').val(dataUsuarioNEmpleado[2]);
 
-    EUsuario = true; // variable xxxx
+    EUsuario = true; 
 
-    FnJsBlockUsuario(); // nombre función xxxx
+    FnJsBlockUsuario(); 
 
-    CRUDUsuario = "C"; // nombre variable xxxx
-
-    //campos xxxx
-    VarJsUsuarioId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsUsuario = ""; // cada campo tiene una variable, inicializar xxxx
+    CRUDUsuario = "C"; 
+       
+    VarJsUsuarioId = 0; 
+    VarJsUsuario = ""; 
     VarJsClave = "";
-
 
 });
 $(document).on('click', '.btn-editUsuario', function (e) {//nombre de clase xxxx
@@ -305,9 +300,8 @@ $(document).on('click', '.btn-editUsuario', function (e) {//nombre de clase xxxx
 });
 $(document).on('click', '.btn-deleteUsuario', function (e) {//nombre de clase xxxx
     e.preventDefault();
-    FnJsDUsuario();//nombre de función xxxx
-    EUsuario = false; // variable de existe xxxx
-
+    FnJsDUsuario();
+    EUsuario = false; 
 
     FnJsBlockUsuario();//función bloquear xxxx
     var dataUsuario = tablaUsuario.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
@@ -324,7 +318,6 @@ $(document).on('click', '.btn-deleteUsuario', function (e) {//nombre de clase xx
     CRUDUsuario = "D";
 });
 
-//pintar modal
 function FnJsCUsuario() { //nombe función xxxx
     //campos xxxx
     $('#lblexistenuevoUsuario').text(""); // id etiqueta texto etiqueta xxxx
@@ -408,7 +401,7 @@ function FnJsDUsuario() { //nombe función xxxx
 
 }
 
-/*quitar btn CUD*/
+
 function FnJsBlockUsuario() {// nombre función xxxx
 
     if (EUsuario == true) {// variables xxxx
@@ -421,7 +414,7 @@ function FnJsBlockUsuario() {// nombre función xxxx
     }
 }
 
-//guardar CUD
+
 $('#btnNueUsuario').click(function (e) {//1 evento para mostrar contenido xxxx
     e.preventDefault();
     if (formUsuario.checkValidity()) {
@@ -604,12 +597,12 @@ function FnAlertaUsuario() {//nombre de la función xxxx
             console.log("Error CUD Usuario Alert")//tttt
     }
     //alerta
-    $('#alertaUsuarios .modal-content').addClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
-    $('#alertaUsuarios h5').text(VarJsTextoAlertUsuario);//variable de texto alerta xxxx
-    $('#alertaUsuarios').modal('show');
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertUsuario);//variable de texto alerta xxxx
+    $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
-        $('#alertaUsuarios').modal('hide');
-        $('#alertaUsuarios .modal-content').removeClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
+        $('.bd-example-modal-sm').modal('hide');
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertUsuario);//variable de color alerta xxxx
     }, 1500);// tiempo para que aparezca la alerta crear variable ms
 
     if ($("#secciontblUsuario.show").length > 0) {//seccion tabla xxxx

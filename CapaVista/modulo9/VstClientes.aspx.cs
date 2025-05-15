@@ -15,6 +15,76 @@ namespace CapaVista.modulo9
     {
         protected void Page_Load(object sender, EventArgs e){}
 
+        #region RegCliente
+        [WebMethod]
+        public static bool FnCClienteV(string PlazoCredito, string LimiteCredito, string IdTipoCliente, string IdPersona,string IdEmpresa)
+        {
+            bool CreateCliente = false;
+            ClsCliente OCliente = new ClsCliente();
+
+            OCliente.PlazoCredito = PlazoCredito;
+            OCliente.LimiteCredito = LimiteCredito;
+            OCliente.ObjTipoCliente.IdTipoCliente = IdTipoCliente;
+            OCliente.ObjPersona.IdPersona = IdPersona;
+            OCliente.ObjEmpresa.IdEmpresa = IdEmpresa;
+
+            CreateCliente = new ClsClienteN().FnCClienteN(OCliente);
+
+            return CreateCliente;
+        }
+
+        [WebMethod]
+        public static List<ClsCliente> FnRClienteV()
+        {
+            List<ClsCliente> OCliente = new ClsClienteN().FnRClienteN();
+            return OCliente;
+        }
+
+        [WebMethod]
+        public static bool FnUClienteV(string IdCliente, string PlazoCredito, string LimiteCredito, string IdTipoCliente )
+        {
+            bool UpdateCliente = false;
+            ClsCliente OCliente = new ClsCliente();
+
+            OCliente.IdCliente = IdCliente;
+            OCliente.PlazoCredito = PlazoCredito;
+            OCliente.LimiteCredito = LimiteCredito;
+            OCliente.ObjTipoCliente.IdTipoCliente = IdTipoCliente;
+            UpdateCliente = new ClsClienteN().FnUClienteN(OCliente);
+
+            return UpdateCliente;
+        }
+
+        [WebMethod]
+        public static bool FnDClienteV(string IdCliente)
+        {
+            bool DeleteCliente = false;
+            ClsCliente OCliente = new ClsCliente();
+
+            OCliente.IdCliente = IdCliente;
+
+            DeleteCliente = new ClsClienteN().FnDClienteN(OCliente);
+
+            return DeleteCliente;
+
+        }
+
+        [WebMethod]
+        public static List<ClsCliente> FnRClienteNPersonaV()
+        {
+            List<ClsCliente> OCliente = new ClsClienteN().FnRClienteNPersonaN();
+            return OCliente;
+        }
+
+        [WebMethod]
+        public static List<ClsCliente> FnRClienteNEmpresaV()
+        {
+            List<ClsCliente> OCliente = new ClsClienteN().FnRClienteNEmpresaN();
+            return OCliente;
+        }
+
+        #endregion
+
         #region RegEmpresa
         [WebMethod]
         public static bool FnCEmpresaV(string Empresa, string RazonSocial, string Ruc, string IdTipoEmpresa, string IdRegimen)

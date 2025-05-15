@@ -1,57 +1,52 @@
-﻿/*variable de tablas*/
-var tablaCategoria;/*tabla mpodulo*/
-var ModCCategoria = $('#modalNCategoria'); // modal 
-//campos de tablas
+﻿var tablaCategoria;
+var ModCCategoria = $('#modalNCategoria');
+
 var VarJsCategoriaId = 0;
 var VarJsCategoria = "";
 var VarJsIdFamilia = 0;
-//dddlist Familia
-var VAlDDLCategoriaFamilia = "null";// para guardar lo que está en la tabla y luego asignar al ddl
 
-//igual para todos
+var VAlDDLCategoriaFamilia = "null";
+
 var formCategoria = document.querySelector('#form1');
 
-//variables crud
 CRUDCategoria = "";
-//variables alertas
+
 var VarJsColorAlertCategoria = "";
 var VarJsTextoAlertCategoria = "";
-//variables existe
+
 var ECategoria = true;
 
-
-$('#lbMostrarCategoria').click(function (e) {//1 evento para mostrar contenido  xxxx
+$('#lbMostrarCategoria').click(function (e) {
     e.preventDefault();
-    FnJsAjaxRCategoria(); //llama al ajax xxxx
-    FnJSFillDdlCategoriaFamilia();//cargar ddl
+    FnJsAjaxRCategoria();
+    FnJSFillDdlCategoriaFamilia();
 });
 
-function FnJsAjaxRCategoria() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRCategoria() {
     $.ajax({
         type: "POST",
-        url: "/modulo10/VstFamilia.aspx/FnRCategoriaV", // nombre de página y nombre de función xxxx
+        url: "/modulo10/VstFamilia.aspx/FnRCategoriaV",
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowCategoria(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowCategoria(data.d);
         }
     }
     );
 }
 
-function AddrowCategoria(data) {//3 llenar la tabla xxxx
+function AddrowCategoria(data) {
+    $('#tblCategoria').DataTable().clear().destroy();
 
-    $('#tblCategoria').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
-
-    tablaCategoria = $("#tblCategoria").DataTable({// variable nombre tabla xxxx
+    tablaCategoria = $("#tblCategoria").DataTable({
 
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [[2, 'asc'],[1, 'asc']],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [[2, 'asc'], [1, 'asc']],
         "columnDefs": [
             { "targets": 3, "searchable": false },
             { "orderable": false, "targets": 3 }
@@ -61,22 +56,21 @@ function AddrowCategoria(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colCategoria'//se añade el id para ocultar xxxx
+                    id: 'colCategoria'
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',
+                className: 'btn btn-info',
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'copy',
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(3)):visible']
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -89,10 +83,10 @@ function AddrowCategoria(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(3)):visible']
                 },
                 titleAttr: 'PDF',
-                filename: 'Categoria' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Categoria' + "_" + FnJsDate() + "_" + FnJsHour(),
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -100,7 +94,7 @@ function AddrowCategoria(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64();
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -114,14 +108,14 @@ function AddrowCategoria(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Categoria', //tttt
+                                    text: 'Categoria',
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Categoria' //tttt
+                                    text: 'Reporte Categoria'
                                 }
                             ],
                             margin: 20
@@ -144,238 +138,215 @@ function AddrowCategoria(data) {//3 llenar la tabla xxxx
                     });
 
                 }
-
             },
             {
                 extend: 'excel',
-                filename: 'Categoria' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Categoria' + "_" + FnJsDate() + "_" + FnJsHour(),
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(3)):visible']
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
-
                 }
-
             }
         ],
         "language": FnJsEspTbl()
     });
-    tablaCategoria.buttons().container().addClass('form-inline');///variable xxxx
+    tablaCategoria.buttons().container().addClass('form-inline');
 
-    for (var contCategoria = 0; contCategoria < data.length; contCategoria++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaCategoria.row.add([//sensitivecase:
-            data[contCategoria].IdCategoria,//campos
-            data[contCategoria].Categoria,//campos
+    for (var contCategoria = 0; contCategoria < data.length; contCategoria++) {
+        tablaCategoria.row.add([
+            data[contCategoria].IdCategoria,
+            data[contCategoria].Categoria,
             data[contCategoria].ObjFamilia.Familia,
-            '<button value="editar" href="#modalNCategoria" data-toggle="modal" title="editar" class="btn btn-warning  btn-editCategoria"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNCategoria" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteCategoria"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNCategoria" data-toggle="modal" title="editar" class="btn btn-warning  btn-editCategoria"><i class="fas fa-pencil-alt"></i> </button>' +
+            '<button value="eliminar" href="#modalNCategoria" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteCategoria"><i class="fa fa-trash" ></i> </button>'
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$('#lbNCategoria').click(function (e) {//4 evento para mostrar modal de nuevo
+$('#lbNCategoria').click(function (e) {
     e.preventDefault();
-    FnJsCCategoria(); // nombre función xxxx
-    ECategoria = true; // variable xxxx
+    FnJsCCategoria();
+    ECategoria = true;
 
-    FnJsBlockCategoria(); // nombre función xxxx
+    FnJsBlockCategoria();
     FnJSFillDdlCategoriaFamilia();
-    CRUDCategoria = "C"; // nombre variable xxxx
+    CRUDCategoria = "C";
 
-    //campos xxxx
-    VarJsCategoriaId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsCategoria = ""; // cada campo tiene una variable, inicializar xxxx
+    VarJsCategoriaId = 0;
+    VarJsCategoria = "";
     VarJsIdFamilia = 0;
 
 });
-$(document).on('click', '.btn-editCategoria', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editCategoria', function (e) {
     e.preventDefault();
-    FnJsUCategoria();//nombre de función xxxx
-    var dataCategoria = tablaCategoria.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsCategoriaId = dataCategoria[0]; //id de la fila seleccionada
-    $('#txtNuevoCategoria').val(dataCategoria[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsCategoria = dataCategoria[1]; // variable elemento, variable data, índice xxxx
+    FnJsUCategoria();
+    var dataCategoria = tablaCategoria.row($(this).parents("tr")).data();
+    VarJsCategoriaId = dataCategoria[0];
+    $('#txtNuevoCategoria').val(dataCategoria[1]);
+    VarJsCategoria = dataCategoria[1];
     VAlDDLCategoriaFamilia = (dataCategoria[2]);
     FnJSFillDdlCategoriaFamilia();
     VarJsIdFamilia = $('#ddlCCategoriaFamilia').val();
-    CRUDCategoria = "U";// variable crud, estado crud xxxx
+    CRUDCategoria = "U";
 });
-$(document).on('click', '.btn-deleteCategoria', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteCategoria', function (e) {
     e.preventDefault();
-    FnJsDCategoria();//nombre de función xxxx
-    ECategoria = false; // variable de existe xxxx
+    FnJsDCategoria();
+    ECategoria = false;
 
-
-    FnJsBlockCategoria();//función bloquear xxxx
-    var dataCategoria = tablaCategoria.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsCategoriaId = dataCategoria[0]; //id de la fila seleccionada
-    $('#txtNuevoCategoria').val(dataCategoria[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsCategoria = dataCategoria[1]; // variable elemento, variable data, índice xxxx
+    FnJsBlockCategoria();
+    var dataCategoria = tablaCategoria.row($(this).parents("tr")).data();
+    VarJsCategoriaId = dataCategoria[0];
+    $('#txtNuevoCategoria').val(dataCategoria[1]);
+    VarJsCategoria = dataCategoria[1];
     VAlDDLCategoriaFamilia = (dataCategoria[2]);
     FnJSFillDdlCategoriaFamilia();
-    
+
     CRUDCategoria = "D";
 });
 
-//pintar modal
-function FnJsCCategoria() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoCategoria').text(""); // id etiqueta texto etiqueta xxxx
 
-    //cambiar el color del modal borde
-    $("#DivModBorCategoria").removeAttr("class");//quitar el atributo class
-    $("#DivModBorCategoria").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaCategoria").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaCategoria").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitCategoria').text('Nuevo Categoria');//tttt
-    //cambiar el color icono btn
-    $("#btnNueCategoria").removeAttr("class");//quitar el atributo class
-    $("#btnNueCategoria").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+function FnJsCCategoria() {
+    $('#lblexistenuevoCategoria').text("");
+
+    $("#DivModBorCategoria").removeAttr("class");
+    $("#DivModBorCategoria").attr('class', 'modal-content border-success');
+
+    $("#DivModHeaCategoria").removeAttr("class");
+    $("#DivModHeaCategoria").attr('class', 'modal-header bg-success');
+
+    $('#H4ModTitCategoria').text('Nuevo Categoria');
+
+    $("#btnNueCategoria").removeAttr("class");
+    $("#btnNueCategoria").attr('class', 'btn btn-success pull-right');
     $("#btnNueCategoria i").removeAttr("class");
     $("#btnNueCategoria i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCCategoriaFamilia").removeAttr("class"); //uitar propiedades
-    $("#ddlCCategoriaFamilia").attr("class", "form-control border-success");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoCategoria").attr('disabled', false); //variables de los elementos del modal xxxx
+
+    $("#ddlCCategoriaFamilia").removeAttr("class");
+    $("#ddlCCategoriaFamilia").attr("class", "form-control border-success");
+
+    $("#txtNuevoCategoria").attr('disabled', false);
     $('#ddlCCategoriaFamilia').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCCategoria[0].id + ' :text').val(""); // variable del modal xxxx
+
+    $('#' + ModCCategoria[0].id + ' :text').val("");
 
 }
-function FnJsUCategoria() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoCategoria').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUCategoria() {
+    $('#lblexistenuevoCategoria').text("");
 
-    console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorCategoria").removeAttr("class");//quitar el atributo class
-    $("#DivModBorCategoria").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaCategoria").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaCategoria").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitCategoria').text('Editar Categoria');//tttt
-    //cambiar el color icono btn
-    $("#btnNueCategoria").removeAttr("class");//quitar el atributo class
-    $("#btnNueCategoria").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#DivModBorCategoria").removeAttr("class");
+    $("#DivModBorCategoria").attr('class', 'modal-content border-warning');
+
+    $("#DivModHeaCategoria").removeAttr("class");
+    $("#DivModHeaCategoria").attr('class', 'modal-header bg-warning');
+
+    $('#H4ModTitCategoria').text('Editar Categoria');
+
+    $("#btnNueCategoria").removeAttr("class");
+    $("#btnNueCategoria").attr('class', 'btn btn-warning pull-right');
     $("#btnNueCategoria i").removeAttr("class");
     $("#btnNueCategoria i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCCategoriaFamilia").removeAttr("class"); //uitar propiedades
-    $("#ddlCCategoriaFamilia").attr("class", "form-control border-warning");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoCategoria").attr('disabled', false); //variables de los elementos del modal xxxx
+
+    $("#ddlCCategoriaFamilia").removeAttr("class");
+    $("#ddlCCategoriaFamilia").attr("class", "form-control border-warning");
+
+    $("#txtNuevoCategoria").attr('disabled', false);
     $('#ddlCCategoriaFamilia').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCCategoria[0].id + ' :text').val(""); // variable del modal xxxx
 
+    $('#' + ModCCategoria[0].id + ' :text').val("");
 }
-function FnJsDCategoria() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoCategoria').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDCategoria() {
+    $('#lblexistenuevoCategoria').text("");
 
-    //cambiar el color del modal borde
-    $("#DivModBorCategoria").removeAttr("class");//quitar el atributo class
-    $("#DivModBorCategoria").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaCategoria").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaCategoria").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitCategoria').text('Eliminar Categoria');//tttt
-    //cambiar el color icono btn
-    $("#btnNueCategoria").removeAttr("class");//quitar el atributo class
-    $("#btnNueCategoria").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#DivModBorCategoria").removeAttr("class");
+    $("#DivModBorCategoria").attr('class', 'modal-content border-danger');
+
+    $("#DivModHeaCategoria").removeAttr("class");
+    $("#DivModHeaCategoria").attr('class', 'modal-header bg-danger');
+
+    $('#H4ModTitCategoria').text('Eliminar Categoria');
+
+    $("#btnNueCategoria").removeAttr("class");
+    $("#btnNueCategoria").attr('class', 'btn btn-danger pull-right');
     $("#btnNueCategoria i").removeAttr("class");
-    $("#btnNueCategoria i").attr("class", "fa fa-trash fa-2x");//ícono
-    //color ddl
-    $("#ddlCCategoriaFamilia").removeAttr("class"); //uitar propiedades
-    $("#ddlCCategoriaFamilia").attr("class", "form-control border-danger");//pintr roo
-    //bloquear elementos
-    $("#txtNuevoCategoria").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#btnNueCategoria i").attr("class", "fa fa-trash fa-2x");
+
+    $("#ddlCCategoriaFamilia").removeAttr("class");
+    $("#ddlCCategoriaFamilia").attr("class", "form-control border-danger");
+
+    $("#txtNuevoCategoria").attr('disabled', true);
     $('#ddlCCategoriaFamilia').attr('disabled', true);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCCategoria[0].id + ' :text').val(""); // variable del modal xxxx
 
+    $('#' + ModCCategoria[0].id + ' :text').val("");
 }
 
-/*quitar btn CUD*/
-function FnJsBlockCategoria() {// nombre función xxxx
 
-    if (ECategoria == true) {// variables xxxx
-        $("#btnNueCategoria").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueCategoria").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
-      
+function FnJsBlockCategoria() {
+    if (ECategoria == true) {
+        $("#btnNueCategoria").fadeOut("fast");
+        $("#btnNueCategoria").attr('disabled', true);
     }
-    else if (ECategoria == false) {// variables xxxx
-        $("#btnNueCategoria").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueCategoria").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
-     
-
+    else if (ECategoria == false) {
+        $("#btnNueCategoria").fadeIn("slow");
+        $("#btnNueCategoria").attr('disabled', false);
     }
 }
 
-//guardar CUD
-$('#btnNueCategoria').click(function (e) {//1 evento para mostrar contenido xxxx
+
+$('#btnNueCategoria').click(function (e) {
     e.preventDefault();
     if (formCategoria.checkValidity()) {
-        switch (CRUDCategoria) { // variable crud xxxx
+        switch (CRUDCategoria) {
             case "C":
-                FnJsAjaxCCategoria(); // función para crear xxxx
+                FnJsAjaxCCategoria();
                 break;
             case "U":
-                FnJsAjaxUCategoria();// función para crear xxxx
+                FnJsAjaxUCategoria();
                 break;
             case "D":
-                FnJsAjaxDCategoria();// función para crear xxxx
+                FnJsAjaxDCategoria();
                 break;
             default:
-                console.log("Error en cud Categoria");/////tttt
+                console.log("Error en cud Categoria");
         }
-    }
-    console.log(formCategoria.checkValidity());
+    }   
 });
 
-//ajax CUD
 function FnJsAjaxCCategoria() {
     $.ajax({
-        url: "/modulo10/VstFamilia.aspx/FnCCategoriaV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo10/VstFamilia.aspx/FnCCategoriaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             Categoria: VarJsCategoria,
             IdFamilia: VarJsIdFamilia
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Categoria Agregado"); ////tttt        
+                console.log("Categoría Agregado");
             }
             else {
-                //no se creó
                 CRUDCategoria = "error"
-                console.log("No se pudo agregar Categoría");//
+                console.log("No se pudo agregar Categoría");
             }
-            FnAlertaCategoria(); // nombre función alerta xxxx
+            FnAlertaCategoria();
         }
-    });//ajax fin
+    });
 }
 function FnJsAjaxUCategoria() {
     $.ajax({
-        url: "/modulo10/VstFamilia.aspx/FnUCategoriaV", // nombre de página y nombre de función cude
+        url: "/modulo10/VstFamilia.aspx/FnUCategoriaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             IdCategoria: VarJsCategoriaId,
             Categoria: VarJsCategoria,
             IdFamilia: VarJsIdFamilia
@@ -387,80 +358,73 @@ function FnJsAjaxUCategoria() {
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Categoria Actualizado"); ////tttt
+                console.log("Categoría Actualizado");
             }
             else {
-                //no se borró
                 CRUDCategoria = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaCategoria();// nombre función alerta xxxx
+            FnAlertaCategoria();
         }
-    });//ajax fin
+    });
 }
 function FnJsAjaxDCategoria() {
     $.ajax({
-        url: "/modulo10/VstFamilia.aspx/FnDCategoriaV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo10/VstFamilia.aspx/FnDCategoriaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             IdCategoria: VarJsCategoriaId
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Categoria Eliminado"); ////tttt
+
+                console.log("Categoría Eliminado");
             }
             else {
-                //no se creó
+
                 CRUDCategoria = "error"
-                console.log("No se pudo Eliminar Categoria");////tttt
+                console.log("No se pudo Eliminar Categoría");
             }
-            FnAlertaCategoria(); // nombre función alerta xxxx
+            FnAlertaCategoria();
 
         }
-    });//ajax fin
+    });
 }
-
-//Existe
-function FnJsAjaxECategoria() {// nombre de la función existe xxxx
+function FnJsAjaxECategoria() {
     $.ajax({
-        url: "/modulo10/VstFamilia.aspx/FnECategoriaV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo10/VstFamilia.aspx/FnECategoriaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({
             IdCategoria: VarJsCategoriaId,
             Categoria: VarJsCategoria,
             IdFamilia: VarJsIdFamilia
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                ECategoria = true; // variable existe xxxx
-                $('#lblexistenuevoCategoria').text("Existe Categoria");// id etiqueta texto etiqueta //tttt
-                FnJsBlockCategoria();//nombre de función bloquear xxxx
+                ECategoria = true;
+                $('#lblexistenuevoCategoria').text("Existe Categoria");
+                FnJsBlockCategoria();
 
             }
             else {
-                //mostrar btn
-                ECategoria = false;// variable existe xxxx
-                $('#lblexistenuevoCategoria').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockCategoria(); //nombre de función bloquear xxxx
+                ECategoria = false;
+                $('#lblexistenuevoCategoria').text("");
+                FnJsBlockCategoria();
             }
         }
-    });//ajax fin
+    });
 }
 
-
-function VerificarExisteCategoria() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoCategoria').val().length >= 3 && $('#ddlCCategoriaFamilia').val()>0) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteCategoria() {
+    if ($('#txtNuevoCategoria').val().length >= 3 && $('#ddlCCategoriaFamilia').val() > 0) {
         return true;
     }
     else {
@@ -468,12 +432,10 @@ function VerificarExisteCategoria() {// nombre de función verificarexiste xxxx
     }
 }
 
-
-$('#txtNuevoCategoria').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsCategoria = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteCategoria()) {//nombre función verificar existe xxxx
-        FnJsAjaxECategoria(); // llamar todos los existes xxxx
-
+$('#txtNuevoCategoria').keyup(function (e) {
+    VarJsCategoria = $(this).val();
+    if (VerificarExisteCategoria()) {
+        FnJsAjaxECategoria();
     }
 });
 
@@ -485,69 +447,69 @@ $('#ddlCCategoriaFamilia').change(function (e) {
 });
 
 function FnJSFillDdlCategoriaFamilia() {
-    $('#ddlCCategoriaFamilia').empty(); // xxxx id
+    $('#ddlCCategoriaFamilia').empty();
     $.ajax({
         type: "POST",
-        url: "/modulo10/VstFamilia.aspx/FnRFamiliaV", // xxxx
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo10/VstFamilia.aspx/FnRFamiliaV",
+        data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLCategoriaFamilia == "null") {
-                $('#ddlCCategoriaFamilia').append($("<option> </option>").val("0").html("Seleccionar Familia"));  // xxxx id val html            
+                $('#ddlCCategoriaFamilia').append($("<option> </option>").val("0").html("Seleccionar Familia"));
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLCategoriaFamilia == value.Familia) {
-                        $('#ddlCCategoriaFamilia').append($("<option> </option>").val(value.IdFamilia).html(value.Familia));  // xxxx id texto
+                        $('#ddlCCategoriaFamilia').append($("<option> </option>").val(value.IdFamilia).html(value.Familia));
                         VarJsIdFamilia = value.IdFamilia;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCCategoriaFamilia').append($("<option> </option>").val(value.IdFamilia).html(value.Familia)); // id en un val y en html el nombre
+                $('#ddlCCategoriaFamilia').append($("<option> </option>").val(value.IdFamilia).html(value.Familia));
             });
             VAlDDLCategoriaFamilia = "null";
         }
     });
 }
 
-function FnAlertaCategoria() {//nombre de la función xxxx
+function FnAlertaCategoria() {
 
-    switch (CRUDCategoria) {//nombre de la variable cud xxxx
+    switch (CRUDCategoria) {
         case "C":
-            VarJsColorAlertCategoria = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertCategoria = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertCategoria = "bg-success";
+            VarJsTextoAlertCategoria = "Creado";
             break;
         case "U":
-            VarJsColorAlertCategoria = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertCategoria = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertCategoria = "bg-warning";
+            VarJsTextoAlertCategoria = "Actualizado";
             break;
         case "D":
-            VarJsColorAlertCategoria = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertCategoria = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertCategoria = "bg-danger";
+            VarJsTextoAlertCategoria = "Eliminado";
             break;
         case "Error":
-            VarJsColorAlertCategoria = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertCategoria = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertCategoria = "bg-secondary";
+            VarJsTextoAlertCategoria = "No se pudo realizar la operación";
             break;
         default:
-            console.log("Error CUD Categoria Alert")//tttt
+            console.log("Error CUD Categoría Alert")
     }
-    //alerta
-    $('#alertaFamilia .modal-content').addClass(VarJsColorAlertCategoria);//variable de color alerta xxxx
-    $('#alertaFamilia h5').text(VarJsTextoAlertCategoria);//variable de texto alerta xxxx
+
+    $('#alertaFamilia .modal-content').addClass(VarJsColorAlertCategoria);
+    $('#alertaFamilia h5').text(VarJsTextoAlertCategoria);
     $('#alertaFamilia').modal('show');
     setTimeout(function () {
         $('#alertaFamilia').modal('hide');
-        $('#alertaFamilia .modal-content').removeClass(VarJsColorAlertCategoria);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
+        $('#alertaFamilia .modal-content').removeClass(VarJsColorAlertCategoria);
+    }, 1500);
 
-    if ($("#secciontblCategoria.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRCategoria();//función ajax de llenado de la tabla xxxx
+    if ($("#secciontblCategoria.show").length > 0) {
+        FnJsAjaxRCategoria();
     }
-    //cerrar modal
-    $("#modalNCategoria").modal("toggle");//nombre modal xxxx
+
+    $("#modalNCategoria").modal("toggle");
 }

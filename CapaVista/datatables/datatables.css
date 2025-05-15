@@ -72,9 +72,9 @@ table.dataTable thead .sorting_desc_disabled {
 table.dataTable tbody tr {
   background-color: #ffffff;
 }
-table.dataTable tbody tr.selected {
-  background-color: #B0BED9;
-}
+    table.dataTable tbody tr.selected {
+        background-color: #B0BED9;
+    }
 table.dataTable tbody th,
 table.dataTable tbody td {
   padding: 8px 10px;
@@ -1144,7 +1144,9 @@ div.DTS div.dataTables_length {
 
 table.dataTable tbody > tr.selected,
 table.dataTable tbody > tr > .selected {
-  background-color: #B0BED9;
+    background: #419b2a;
+    background: linear-gradient(90deg, rgba(65, 155, 42, 1) 0%, rgba(87, 199, 108, 0.75) 53%, rgba(208, 252, 149, 0.27) 100%);
+    font-weight: bold;
 }
 table.dataTable.stripe tbody > tr.odd.selected,
 table.dataTable.stripe tbody > tr.odd > .selected, table.dataTable.display tbody > tr.odd.selected,

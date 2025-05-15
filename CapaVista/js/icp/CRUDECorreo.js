@@ -21,8 +21,7 @@ var VarJsTextoAlertCorreo = "";
 var ECorreo = true;
 
 $('#tblPersona tbody').on('click', 'tr', function () {
-    var tablaPersona = $('#tblPersona').DataTable();
-    //console.log('clicked: ' + tablaPersona.row(this).data()[0]);
+    var tablaPersona = $('#tblPersona').DataTable(); 
     VarJsIdPersona = tablaPersona.row(this).data()[0];
     FnJsAjaxRCorreo(); //llama al ajax xxxx
     FnJSFillDdlCorreoTipoCorreo();//cargar ddl
