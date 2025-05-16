@@ -70,6 +70,7 @@
     <Compile Include="ClsPermisosN.cs" />
     <Compile Include="ClsPersonaN.cs" />
     <Compile Include="ClsPromoN.cs" />
+    <Compile Include="ClsProveedorN.cs" />
     <Compile Include="ClsRackN.cs" />
     <Compile Include="ClsRangoPrecioN.cs" />
     <Compile Include="ClsRegimenN.cs" />

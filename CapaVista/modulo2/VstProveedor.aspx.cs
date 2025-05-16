@@ -12,11 +12,8 @@ using System.Net;
 namespace CapaVista.modulo2
 {
     public partial class VstProveedor : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+    {protected void Page_Load(object sender, EventArgs e){}
 
-        }
 
         #region RegRegimen
         [WebMethod]
@@ -85,7 +82,6 @@ namespace CapaVista.modulo2
         }
         #endregion
 
-
         #region RegTipoEmpresa
         [WebMethod]
         public static bool FnCTipoEmpresaV(string TipoEmpresa)
@@ -153,6 +149,67 @@ namespace CapaVista.modulo2
         }
         #endregion
 
+        #region RegProveedor
+        [WebMethod]
+        public static bool FnCProveedorV(string PlazoCredito, string IdPersona, string IdEmpresa)
+        {
+            bool CreateProveedor = false;
+            ClsProveedor OProveedor = new ClsProveedor();
 
+            OProveedor.PlazoCredito = PlazoCredito;
+            OProveedor.ObjPersona.IdPersona = IdPersona;
+            OProveedor.ObjEmpresa.IdEmpresa = IdEmpresa;
+
+            CreateProveedor = new ClsProveedorN().FnCProveedorN(OProveedor);
+
+            return CreateProveedor;
+        }
+
+        [WebMethod]
+        public static List<ClsProveedor> FnRProveedorV()
+        {
+            List<ClsProveedor> OProveedor = new ClsProveedorN().FnRProveedorN();
+            return OProveedor;
+        }
+
+        [WebMethod]
+        public static bool FnUProveedorV(string IdProveedor, string PlazoCredito)
+        {
+            bool UpdateProveedor = false;
+            ClsProveedor OProveedor = new ClsProveedor();
+
+            OProveedor.IdProveedor = IdProveedor;
+            OProveedor.PlazoCredito = PlazoCredito;           
+            UpdateProveedor = new ClsProveedorN().FnUProveedorN(OProveedor);
+
+            return UpdateProveedor;
+        }
+
+        [WebMethod]
+        public static bool FnDProveedorV(string IdProveedor)
+        {
+            bool DeleteProveedor = false;
+            ClsProveedor OProveedor = new ClsProveedor();
+
+            OProveedor.IdProveedor = IdProveedor;
+
+            DeleteProveedor = new ClsProveedorN().FnDProveedorN(OProveedor);
+
+            return DeleteProveedor;
+        }
+        [WebMethod]
+        public static List<ClsProveedor> FnRProveedorNPersonaV()
+        {
+            List<ClsProveedor> OProveedor = new ClsProveedorN().FnRProveedorNPersonaN();
+            return OProveedor;
+        }
+        [WebMethod]
+        public static List<ClsProveedor> FnRProveedorNEmpresaV()
+        {
+            List<ClsProveedor> OProveedor = new ClsProveedorN().FnRProveedorNEmpresaN();
+            return OProveedor;
+        }
+
+        #endregion
     }
 }

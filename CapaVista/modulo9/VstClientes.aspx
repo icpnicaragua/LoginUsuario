@@ -261,7 +261,7 @@
                                         <th>Ctrl</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tblBodyPersona" ">
+                                <tbody id="tblBodyPersona" >
                                 </tbody>
                             </table>
                         </div>
@@ -395,7 +395,7 @@
         <div class="modal-dialog" role="document">
             <div id="DivModBorCliente" class="modal-content border-success">
                 <div id="DivModHeaCliente" class="modal-header bg-success">
-                    <h4 id="H4ModTitCliente">Editar Clientte</h4>
+                    <h4 id="H4ModTitCliente">Editar Cliente</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -410,7 +410,7 @@
                             </span>
                         </div>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoPlazoCredito" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Plazo Cédito" data-required-error="dddd" pattern="[0-9]+" ClientIDMode="Static"></asp:TextBox>    
+                            <asp:TextBox ID="txtNuevoPlazoCredito" runat="server" TabIndex="2" CssClass="form-control" placeholder="Nuevo Plazo Crédito" data-required-error="dddd" pattern="[0-9]+" ClientIDMode="Static"></asp:TextBox>    
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary popinfoNum" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
