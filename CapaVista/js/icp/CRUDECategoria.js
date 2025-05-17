@@ -496,15 +496,15 @@ function FnAlertaCategoria() {
             VarJsTextoAlertCategoria = "No se pudo realizar la operación";
             break;
         default:
-            console.log("Error CUD Categoría Alert")
+            console.log("Error CUD Categoría Alert");
     }
 
-    $('#alertaFamilia .modal-content').addClass(VarJsColorAlertCategoria);
-    $('#alertaFamilia h5').text(VarJsTextoAlertCategoria);
-    $('#alertaFamilia').modal('show');
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertCategoria);
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertCategoria);
+    $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
-        $('#alertaFamilia').modal('hide');
-        $('#alertaFamilia .modal-content').removeClass(VarJsColorAlertCategoria);
+        $('.bd-example-modal-sm').modal('hide');
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertCategoria);
     }, 1500);
 
     if ($("#secciontblCategoria.show").length > 0) {

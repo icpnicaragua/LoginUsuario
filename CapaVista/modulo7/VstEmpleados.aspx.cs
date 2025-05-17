@@ -84,7 +84,6 @@ namespace CapaVista.modulo7
         }
         #endregion
 
-
         #region RegEmpleado
         [WebMethod]
         public static bool FnCEmpleadoV(string IdArea, string IdPersona, string IdJefe)
@@ -174,6 +173,143 @@ namespace CapaVista.modulo7
             return OEmpleado;
         }
 
+        #endregion
+
+        #region RegCargo
+        [WebMethod]
+        public static bool FnCCargoV(string Cargo)
+        {
+            bool CreateCargo = false;
+            ClsCargo OCargo = new ClsCargo();
+
+            OCargo.Cargo = Cargo;
+
+            CreateCargo = new ClsCargoN().FnCCargoN(OCargo);
+
+            return CreateCargo;
+
+        }
+
+        [WebMethod]
+        public static List<ClsCargo> FnRCargoV()
+        {
+            List<ClsCargo> OCargo = new ClsCargoN().FnRCargoN();
+            return OCargo;
+        }
+
+        [WebMethod]
+        public static bool FnUCargoV(string IdCargo, string Cargo)
+        {
+            bool UpdateCargo = false;
+            ClsCargo OCargo = new ClsCargo();
+
+            OCargo.IdCargo = IdCargo;
+            OCargo.Cargo = Cargo;
+
+            UpdateCargo = new ClsCargoN().FnUCargoN(OCargo);
+
+            return UpdateCargo;
+
+        }
+
+        [WebMethod]
+        public static bool FnDCargoV(string IdCargo)
+        {
+            bool DeleteCargo = false;
+            ClsCargo OCargo = new ClsCargo();
+
+            OCargo.IdCargo = IdCargo;
+
+            DeleteCargo = new ClsCargoN().FnDCargoN(OCargo);
+
+            return DeleteCargo;
+
+        }
+
+        [WebMethod]
+        public static bool FnECargoV(string IdCargo, string Cargo)
+        {
+            bool ExisteCargo = false;
+            ClsCargo OCargo = new ClsCargo();
+
+            OCargo.IdCargo = IdCargo;
+            OCargo.Cargo = Cargo;
+
+            ExisteCargo = new ClsCargoN().FnECargoN(OCargo);
+
+            return ExisteCargo;
+
+        }
+        #endregion
+
+        #region RegCargoEmpleado
+     
+        [WebMethod]
+        public static bool FnCCargoEmpleadoV(string IdEmpleado, string IdCargo)
+        {
+            bool CreateCargoEmpleado = false;
+            ClsCargoEmpleado OCargoEmpleado = new ClsCargoEmpleado();
+
+            OCargoEmpleado.ObjEmpleado.IdEmpleado = IdEmpleado;
+            OCargoEmpleado.ObjCargo.IdCargo = IdCargo;
+
+            CreateCargoEmpleado = new ClsCargoEmpleadoN().FnCCargoEmpleadoN(OCargoEmpleado);
+
+            return CreateCargoEmpleado;
+
+        }
+
+        [WebMethod]
+        public static List<ClsCargoEmpleado> FnRCargoEmpleadoV()
+        {
+            List<ClsCargoEmpleado> OCargoEmpleado = new ClsCargoEmpleadoN().FnRCargoEmpleadoN();
+            return OCargoEmpleado;
+        }
+
+        [WebMethod]
+        public static bool FnUCargoEmpleadoV(string IdCargoEmpleado, string IdCargo)
+        {
+            bool UpdateCargoEmpleado = false;
+            ClsCargoEmpleado OCargoEmpleado = new ClsCargoEmpleado();
+
+            OCargoEmpleado.IdCargoEmpleado = IdCargoEmpleado;           
+            OCargoEmpleado.ObjCargo.IdCargo = IdCargo;
+            UpdateCargoEmpleado = new ClsCargoEmpleadoN().FnUCargoEmpleadoN(OCargoEmpleado);
+
+            return UpdateCargoEmpleado;
+
+        }
+
+        [WebMethod]
+        public static bool FnDCargoEmpleadoV(string IdCargoEmpleado)
+        {
+            bool DeleteCargoEmpleado = false;
+            ClsCargoEmpleado OCargoEmpleado = new ClsCargoEmpleado();
+
+            OCargoEmpleado.IdCargoEmpleado = IdCargoEmpleado;
+
+            DeleteCargoEmpleado = new ClsCargoEmpleadoN().FnDCargoEmpleadoN(OCargoEmpleado);
+
+            return DeleteCargoEmpleado;
+
+        }
+
+        [WebMethod]
+        public static bool FnECargoEmpleadoV(string IdCargoEmpleado, string IdEmpleado, string IdCargo)
+        {
+            bool ExisteCargoEmpleado = false;
+            ClsCargoEmpleado OCargoEmpleado = new ClsCargoEmpleado();
+
+            OCargoEmpleado.IdCargoEmpleado = IdCargoEmpleado;
+            OCargoEmpleado.ObjEmpleado.IdEmpleado = IdEmpleado;
+            OCargoEmpleado.ObjCargo.IdCargo = IdCargo;
+
+            ExisteCargoEmpleado = new ClsCargoEmpleadoN().FnECargoEmpleadoN(OCargoEmpleado);
+
+            return ExisteCargoEmpleado;
+
+        }
+    
         #endregion
 
         #region RegPersona

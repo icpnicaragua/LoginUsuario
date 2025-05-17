@@ -115,6 +115,8 @@
     <Compile Include="ClsBancoD.cs" />
     <Compile Include="ClsBarrioD.cs" />
     <Compile Include="ClsBodegaD.cs" />
+    <Compile Include="ClsCargoD.cs" />
+    <Compile Include="ClsCargoEmpleadoD.cs" />
     <Compile Include="ClsCategoriaD.cs" />
     <Compile Include="ClsClienteD.cs" />
     <Compile Include="ClsConceptoRocD.cs" />

@@ -1,54 +1,41 @@
-﻿/*variable de tablas*/
-var tablaBanco;/*tabla mpodulo*/
-var ModCBanco = $('#modalNBanco'); // modal 
-//campos de tablas
+﻿var tablaBanco;   
+var ModCBanco = $('#modalNBanco');       
 var VarJsBancoId = 0;
 var VarJsBanco = "";
 
-
-//igual para todos
 var formBanco = document.querySelector('#form1');
 
-//variables crud
 CRUDBanco = "";
-//variables alertas
 var VarJsColorAlertBanco = "";
 var VarJsTextoAlertBanco = "";
-//variables existe
 var EBanco = true;
 
-
-$('#lbMostrarBanco').click(function (e) {//1 evento para mostrar contenido  xxxx
+$('#lbMostrarBanco').click(function (e) {                  
     e.preventDefault();
-    FnJsAjaxRBanco(); //llama al ajax xxxx
+    FnJsAjaxRBanco();          
 });
 
-function FnJsAjaxRBanco() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRBanco() {                               
     $.ajax({
         type: "POST",
-        url: "/modulo1/VstCuentasbanco.aspx/FnRBancoV", // nombre de página y nombre de función xxxx
+        url: "/modulo1/VstCuentasbanco.aspx/FnRBancoV",                         
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowBanco(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowBanco(data.d);                                        
         }
     }
     );
 }
-
-function AddrowBanco(data) {//3 llenar la tabla xxxx
-
-    $('#tblBanco').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
-
-    tablaBanco = $("#tblBanco").DataTable({// variable nombre tabla xxxx
-
+function AddrowBanco(data) {
+    $('#tblBanco').DataTable().clear().destroy();
+    tablaBanco = $("#tblBanco").DataTable({
         "retrieve": true,
         dom: 'Bfrtip',
-
-        "order": [1, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [1, 'asc'],                                             
         "columnDefs": [
             { "targets": 2, "searchable": false },
             { "orderable": false, "targets": 2 }
@@ -58,38 +45,36 @@ function AddrowBanco(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colBanco'//se añade el id para ocultar xxxx
+                    id: 'colBanco'                  
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',             
+                className: 'btn btn-info',       
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'copy',
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(2)):visible']                               
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'pdf',
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(2)):visible']                                  
                 },
                 titleAttr: 'PDF',
-                filename: 'Banco' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Banco' + "_" + FnJsDate() + "_" + FnJsHour(),         
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -97,7 +82,7 @@ function AddrowBanco(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64();          
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -111,14 +96,14 @@ function AddrowBanco(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Banco', //tttt
+                                    text: 'Banco', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Banco' //tttt
+                                    text: 'Reporte Banco' 
                                 }
                             ],
                             margin: 20
@@ -139,307 +124,252 @@ function AddrowBanco(data) {//3 llenar la tabla xxxx
                             margin: 20
                         }
                     });
-
                 }
-
             },
             {
                 extend: 'excel',
-                filename: 'Banco' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Banco' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(2)):visible']                               
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
-
                 }
-
             }
         ],
         "language": FnJsEspTbl()
     });
-    tablaBanco.buttons().container().addClass('form-inline');///variable xxxx
-
-    for (var contBanco = 0; contBanco < data.length; contBanco++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaBanco.row.add([//sensitivecase:
-            data[contBanco].IdBanco,//campos
+    tablaBanco.buttons().container().addClass('form-inline');
+    for (var contBanco = 0; contBanco < data.length; contBanco++) {                         
+        tablaBanco.row.add([
+            data[contBanco].IdBanco,
             data[contBanco].Banco,
-            '<button value="editar" href="#modalNBanco" data-toggle="modal" title="editar" class="btn btn-warning  btn-editBanco"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNBanco" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteBanco"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNBanco" data-toggle="modal" title="editar" class="btn btn-warning  btn-editBanco"><i class="fas fa-pencil-alt"></i> </button>' +                     
+            '<button value="eliminar" href="#modalNBanco" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteBanco"><i class="fa fa-trash" ></i> </button>'                     
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$('#lbNBanco').click(function (e) {//4 evento para mostrar modal de nuevo
+$('#lbNBanco').click(function (e) {                  
     e.preventDefault();
-    FnJsCBanco(); // nombre función xxxx
-    EBanco = true; // variable xxxx
+    FnJsCBanco();          
+    EBanco = true;       
 
-    FnJsBlockBanco(); // nombre función xxxx
+    FnJsBlockBanco();          
 
-    CRUDBanco = "C"; // nombre variable xxxx
+    CRUDBanco = "C";          
 
-    //campos xxxx
-    VarJsBancoId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsBanco = ""; // cada campo tiene una variable, inicializar xxxx
-
+    VarJsBancoId = 0;                      
+    VarJsBanco = "";
 });
-$(document).on('click', '.btn-editBanco', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editBanco', function (e) {         
     e.preventDefault();
-    FnJsUBanco();//nombre de función xxxx
-    var dataBanco = tablaBanco.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsBancoId = dataBanco[0]; //id de la fila seleccionada
-    $('#txtNuevoBanco').val(dataBanco[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsBanco = dataBanco[1]; // variable elemento, variable data, índice xxxx
-
-    CRUDBanco = "U";// variable crud, estado crud xxxx
+    FnJsUBanco();         
+    var dataBanco = tablaBanco.row($(this).parents("tr")).data();                                                
+    VarJsBancoId = dataBanco[0];             
+    $('#txtNuevoBanco').val(dataBanco[1]);                        
+    VarJsBanco = dataBanco[1];
+    CRUDBanco = "U";               
 });
-$(document).on('click', '.btn-deleteBanco', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteBanco', function (e) {         
     e.preventDefault();
-    FnJsDBanco();//nombre de función xxxx
-    EBanco = false; // variable de existe xxxx
+    FnJsDBanco();         
+    EBanco = false;
 
+    FnJsBlockBanco();      
+    var dataBanco = tablaBanco.row($(this).parents("tr")).data();                                                
+    VarJsBancoId = dataBanco[0];             
+    $('#txtNuevoBanco').val(dataBanco[1]);                        
 
-    FnJsBlockBanco();//función bloquear xxxx
-    var dataBanco = tablaBanco.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsBancoId = dataBanco[0]; //id de la fila seleccionada
-    $('#txtNuevoBanco').val(dataBanco[1]);// [indice columna]  de la fila seleccionada xxxx
-
-    VarJsBanco = dataBanco[1]; // variable elemento, variable data, índice xxxx
+    VarJsBanco = dataBanco[1];                   
 
     CRUDBanco = "D";
 });
 
-//pintar modal
-function FnJsCBanco() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoBanco').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsCBanco() {       
+    $('#lblexistenuevoBanco').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorBanco").removeAttr("class");//quitar el atributo class
-    $("#DivModBorBanco").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaBanco").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaBanco").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitBanco').text('Nuevo Banco');//tttt
-    //cambiar el color icono btn
-    $("#btnNueBanco").removeAttr("class");//quitar el atributo class
-    $("#btnNueBanco").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+    $("#DivModBorBanco").removeAttr("class");         
+    $("#DivModBorBanco").attr('class', 'modal-content border-success');   
+    $("#DivModHeaBanco").removeAttr("class");         
+    $("#DivModHeaBanco").attr('class', 'modal-header bg-success');   
+    $('#H4ModTitBanco').text('Nuevo Banco');
+    $("#btnNueBanco").removeAttr("class");         
+    $("#btnNueBanco").attr('class', 'btn btn-success pull-right');               
     $("#btnNueBanco i").removeAttr("class");
     $("#btnNueBanco i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtNuevoBanco").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoBanco").attr('disabled', false);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCBanco[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $('#' + ModCBanco[0].id + ' :text').val("");
 }
-function FnJsUBanco() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoBanco').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUBanco() {       
+    $('#lblexistenuevoBanco').text("");
 
-    console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorBanco").removeAttr("class");//quitar el atributo class
-    $("#DivModBorBanco").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaBanco").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaBanco").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitBanco').text('Editar Banco');//tttt
-    //cambiar el color icono btn
-    $("#btnNueBanco").removeAttr("class");//quitar el atributo class
-    $("#btnNueBanco").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#DivModBorBanco").removeAttr("class");         
+    $("#DivModBorBanco").attr('class', 'modal-content border-warning');   
+    $("#DivModHeaBanco").removeAttr("class");         
+    $("#DivModHeaBanco").attr('class', 'modal-header bg-warning');   
+    $('#H4ModTitBanco').text('Editar Banco');
+    $("#btnNueBanco").removeAttr("class");         
+    $("#btnNueBanco").attr('class', 'btn btn-warning pull-right');               
     $("#btnNueBanco i").removeAttr("class");
     $("#btnNueBanco i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtNuevoBanco").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoBanco").attr('disabled', false);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCBanco[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $('#' + ModCBanco[0].id + ' :text').val("");
 }
-function FnJsDBanco() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoBanco').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDBanco() {       
+    $('#lblexistenuevoBanco').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorBanco").removeAttr("class");//quitar el atributo class
-    $("#DivModBorBanco").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaBanco").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaBanco").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitBanco').text('Eliminar Banco');//tttt
-    //cambiar el color icono btn
-    $("#btnNueBanco").removeAttr("class");//quitar el atributo class
-    $("#btnNueBanco").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#DivModBorBanco").removeAttr("class");         
+    $("#DivModBorBanco").attr('class', 'modal-content border-danger');   
+    $("#DivModHeaBanco").removeAttr("class");         
+    $("#DivModHeaBanco").attr('class', 'modal-header bg-danger');   
+    $('#H4ModTitBanco').text('Eliminar Banco');
+    $("#btnNueBanco").removeAttr("class");         
+    $("#btnNueBanco").attr('class', 'btn btn-danger pull-right');               
     $("#btnNueBanco i").removeAttr("class");
-    $("#btnNueBanco i").attr("class", "fa fa-trash fa-2x");//ícono
-    //bloquear elementos
-    $("#txtNuevoBanco").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#btnNueBanco i").attr("class", "fa fa-trash fa-2x");
+    $("#txtNuevoBanco").attr('disabled', true);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCBanco[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $('#' + ModCBanco[0].id + ' :text').val("");
 }
 
-/*quitar btn CUD*/
-function FnJsBlockBanco() {// nombre función xxxx
-
-    if (EBanco == true) {// variables xxxx
-        $("#btnNueBanco").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueBanco").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
+function FnJsBlockBanco() {
+    if (EBanco == true) {      
+        $("#btnNueBanco").fadeOut("fast");                      
+        $("#btnNueBanco").attr('disabled', true);                                         
     }
-    else if (EBanco == false) {// variables xxxx
-        $("#btnNueBanco").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueBanco").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
+    else if (EBanco == false) {      
+        $("#btnNueBanco").fadeIn("slow");                      
+        $("#btnNueBanco").attr('disabled', false);                                         
     }
 }
 
-//guardar CUD
-$('#btnNueBanco').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueBanco').click(function (e) {               
     e.preventDefault();
     if (formBanco.checkValidity()) {
-        switch (CRUDBanco) { // variable crud xxxx
+        switch (CRUDBanco) {          
             case "C":
-                FnJsAjaxCBanco(); // función para crear xxxx
+                FnJsAjaxCBanco();             
                 break;
             case "U":
-                FnJsAjaxUBanco();// función para crear xxxx
+                FnJsAjaxUBanco();            
                 break;
             case "D":
-                FnJsAjaxDBanco();// función para crear xxxx
+                FnJsAjaxDBanco();            
                 break;
             default:
-                console.log("Error en cud Banco");/////tttt
+                console.log("Error en cud Banco");
         }
-    }
-    console.log(formBanco.checkValidity());
+    }    
 });
 
-//ajax CUD
 function FnJsAjaxCBanco() {
     $.ajax({
-        url: "/modulo1/VstCuentasbanco.aspx/FnCBancoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo1/VstCuentasbanco.aspx/FnCBancoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
-            Banco: VarJsBanco,
-
-        }), /*parametro: valor*/
+        data: JSON.stringify({                  
+            Banco: VarJsBanco
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Banco Agregado"); ////tttt        
+                console.log("Banco Agregado");                         
             }
             else {
-                //no se creó
                 CRUDBanco = "error"
-                console.log("No se pudo agregar Tipo de indentificación");//
+                console.log("No se pudo agregar Banco");
             }
-            FnAlertaBanco(); // nombre función alerta xxxx
+            FnAlertaBanco();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUBanco() {
     $.ajax({
-        url: "/modulo1/VstCuentasbanco.aspx/FnUBancoV", // nombre de página y nombre de función cude
+        url: "/modulo1/VstCuentasbanco.aspx/FnUBancoV",                         
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdBanco: VarJsBancoId,
-            Banco: VarJsBanco,
-
-
-        }), /*parametro: valor*/
+            Banco: VarJsBanco
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Banco Actualizado"); ////tttt
+                console.log("Banco Actualizado"); 
             }
             else {
-                //no se borró
                 CRUDBanco = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaBanco();// nombre función alerta xxxx
+            FnAlertaBanco();            
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxDBanco() {
     $.ajax({
-        url: "/modulo1/VstCuentasbanco.aspx/FnDBancoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo1/VstCuentasbanco.aspx/FnDBancoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdBanco: VarJsBancoId
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Banco Eliminado"); ////tttt
+                console.log("Banco Eliminado"); 
             }
             else {
-                //no se creó
                 CRUDBanco = "error"
-                console.log("No se pudo Eliminar Banco");////tttt
+                console.log("No se pudo Eliminar Banco");
             }
-            FnAlertaBanco(); // nombre función alerta xxxx
-
+            FnAlertaBanco();
         }
-    });//ajax fin
+    });   
 }
 
-//Existe
-function FnJsAjaxEBanco() {// nombre de la función existe xxxx
+function FnJsAjaxEBanco() {                  
     $.ajax({
-        url: "/modulo1/VstCuentasbanco.aspx/FnEBancoV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo1/VstCuentasbanco.aspx/FnEBancoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({   
             IdBanco: VarJsBancoId,
             Banco: VarJsBanco
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                EBanco = true; // variable existe xxxx
-                $('#lblexistenuevoBanco').text("Existe Banco");// id etiqueta texto etiqueta //tttt
-                FnJsBlockBanco();//nombre de función bloquear xxxx
-
+                EBanco = true;          
+                $('#lblexistenuevoBanco').text("Existe Banco");               
+                FnJsBlockBanco();
             }
             else {
-                //mostrar btn
-                EBanco = false;// variable existe xxxx
-                $('#lblexistenuevoBanco').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockBanco(); //nombre de función bloquear xxxx
+                EBanco = false;         
+                $('#lblexistenuevoBanco').text("");                
+                FnJsBlockBanco();             
             }
         }
-    });//ajax fin
+    });   
 }
 
 
-function VerificarExisteBanco() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoBanco').val().length > 3) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteBanco() {               
+    if ($('#txtNuevoBanco').val().length > 3) {                            
         return true;
     }
     else {
@@ -448,49 +378,45 @@ function VerificarExisteBanco() {// nombre de función verificarexiste xxxx
 }
 
 
-$('#txtNuevoBanco').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsBanco = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteBanco()) {//nombre función verificar existe xxxx
-        FnJsAjaxEBanco(); // llamar todos los existes xxxx
-
+$('#txtNuevoBanco').keyup(function (e) {                     
+    VarJsBanco = $(this).val();                
+    if (VerificarExisteBanco()) {            
+        FnJsAjaxEBanco();
     }
 });
 
 
-function FnAlertaBanco() {//nombre de la función xxxx
-
-    switch (CRUDBanco) {//nombre de la variable cud xxxx
+function FnAlertaBanco() {
+    switch (CRUDBanco) {               
         case "C":
-            VarJsColorAlertBanco = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertBanco = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertBanco = "bg-success";            
+            VarJsTextoAlertBanco = "Creado";            
             break;
         case "U":
-            VarJsColorAlertBanco = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertBanco = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertBanco = "bg-warning";            
+            VarJsTextoAlertBanco = "Actualizado";            
             break;
         case "D":
-            VarJsColorAlertBanco = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertBanco = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertBanco = "bg-danger";            
+            VarJsTextoAlertBanco = "Eliminado";            
             break;
         case "Error":
-            VarJsColorAlertBanco = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertBanco = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertBanco = "bg-secondary";            
+            VarJsTextoAlertBanco = "No se pudo realizar la operación";            
             break;
         default:
-            console.log("Error CUD Banco Alert")//tttt
+            console.log("Error CUD Banco Alert")
     }
-    //alerta
-    $('#alertaCuentasBanco .modal-content').addClass(VarJsColorAlertBanco);//variable de color alerta xxxx
-    $('#alertaCuentasBanco h5').text(VarJsTextoAlertBanco);//variable de texto alerta xxxx
-    $('#alertaCuentasBanco').modal('show');
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertBanco);            
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertBanco);            
+    $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
-        $('#alertaCuentasBanco').modal('hide');
-        $('#alertaCuentasBanco .modal-content').removeClass(VarJsColorAlertBanco);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
+        $('.bd-example-modal-sm').modal('hide');
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertBanco);            
+    }, 1500);                           
 
-    if ($("#secciontblBanco.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRBanco();//función ajax de llenado de la tabla xxxx
+    if ($("#secciontblBanco.show").length > 0) {      
+        FnJsAjaxRBanco();                     
     }
-    //cerrar modal
-    $("#modalNBanco").modal("toggle");//nombre modal xxxx
+    $("#modalNBanco").modal("toggle");      
 }

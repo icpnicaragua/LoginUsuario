@@ -46,6 +46,8 @@
     <Compile Include="ClsBancoN.cs" />
     <Compile Include="ClsBarrioN.cs" />
     <Compile Include="ClsBodegaN.cs" />
+    <Compile Include="ClsCargoEmpleadoN.cs" />
+    <Compile Include="ClsCargoN.cs" />
     <Compile Include="ClsCategoriaN.cs" />
     <Compile Include="ClsClienteN.cs" />
     <Compile Include="ClsConceptoRocN.cs" />

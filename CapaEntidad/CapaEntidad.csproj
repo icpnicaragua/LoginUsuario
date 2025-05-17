@@ -46,6 +46,8 @@
     <Compile Include="ClsBanco.cs" />
     <Compile Include="ClsBarrio.cs" />
     <Compile Include="ClsBodega.cs" />
+    <Compile Include="ClsCargo.cs" />
+    <Compile Include="ClsCargoEmpleado.cs" />
     <Compile Include="ClsCategoria.cs" />
     <Compile Include="ClsCliente.cs" />
     <Compile Include="ClsConceptoRoc.cs" />

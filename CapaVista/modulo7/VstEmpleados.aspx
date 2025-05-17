@@ -11,7 +11,9 @@
                 <h4>Administrar Empleados</h4>
                 <div class="form-group">
                     <asp:LinkButton ID="lbArea" href="#Area" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Área</asp:LinkButton>
+                    <asp:LinkButton ID="lbCargo" href="#Cargo" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Cargo</asp:LinkButton>
                     <asp:LinkButton ID="lbEmpleado" href="#Empleado" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Empleados</asp:LinkButton>
+                    <asp:LinkButton ID="lbCargoEmpleado" href="#CargoEmpleado" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Cargo del Empleado</asp:LinkButton>
                 </div>
             </div>
         </div>
@@ -21,7 +23,7 @@
             <div class="header">
                 <h4>Administrar Datos personales de Personas</h4>
                 <div class="form-group">
-                    <asp:LinkButton ID="LinkButton3" href="#Persona" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Personas</asp:LinkButton>
+                    <asp:LinkButton ID="lbPersona" href="#Persona" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Personas</asp:LinkButton>
                 </div>
             </div>
         </div>
@@ -54,6 +56,62 @@
                     </div>
                 </div>
             </div>
+
+            <div id="Cargo" class="  col-lg-6 col-md-6 col-sm-12 collapse">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <h2 class="d-inline-block">Cargo</h2>
+                        <div class="d-inline-block pull-right">
+                            <asp:LinkButton ID="lbNCargo" href="#modalNCargo" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                            <asp:LinkButton ID="lbMostrarCargo" href="#secciontblCargo" runat="server" Text="Mostrar Cargo" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="secciontblCargo" class="table-responsive collapse">
+                            <table id="tblCargo" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Cargo</th>
+                                        <th>Ctrl</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblBodyCargo">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="CargoEmpleado" class="  col-lg-6 col-md-6 col-sm-12 collapse">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <h2 class="d-inline-block">Cargo del Empleado</h2>
+                        <div class="d-inline-block pull-right">
+                            <asp:LinkButton ID="lbNCargoEmpleado" href="#modalNCargoEmpleado" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                            <asp:LinkButton ID="lbMostrarCargoEmpleado" href="#secciontblCargoEmpleado" runat="server" Text="Mostrar CargoEmpleado" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="secciontblCargoEmpleado" class="table-responsive collapse">
+                            <table id="tblCargoEmpleado" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Cargo</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Ctrl</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblBodyCargoEmpleado">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="Empleado" class="col-lg-6 col-md-6 col-sm-12 collapse bg-success">
                 <div class="card bg-light mb-3">
                     <div class="card-header">
@@ -111,7 +169,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div id="Persona" class="col-lg-12 col-md-12 col-sm-12 collapse bg-primary">
                 <div class="card bg-light mb-3">
@@ -132,12 +189,12 @@
                                         <th>Nombre2</th>
                                         <th>Apellido1</th>
                                         <th>Apellido2</th>
-                                        <th>Género</th>                                   
+                                        <th>Género</th>
                                         <th>Ctrl</th>
 
                                     </tr>
                                 </thead>
-                                <tbody id="tblBodyPersona" >
+                                <tbody id="tblBodyPersona">
                                 </tbody>
                             </table>
                         </div>
@@ -291,6 +348,59 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="modalNCargo">
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorCargo" class="modal-content border-success">
+                <div id="DivModHeaCargo" class="modal-header bg-success">
+                    <h4 id="H4ModTitCargo">Editar Cargo</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnueCargo" runat="server" data-toggle="validator" role="form">
+                        <label id="lblexistenuevoCargo" for="txtNuevoCargo" runat="server" class="text-warning" text=""></label>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoCargo" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Cargo" data-required-error="dddd" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="45" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo45" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <button id="btnNueCargo" tabindex="2" class="btn btn-success pull-right">
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modalNCargoEmpleado">
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorCargoEmpleado" class="modal-content border-success">
+                <div id="DivModHeaCargoEmpleado" class="modal-header bg-success">
+                    <h4 id="H4ModTitCargoEmpleado">Editar Cargo del Empleado</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnueCargoEmpleado" runat="server" data-toggle="validator" role="form">
+                        <label id="lblexistenuevoCargoEmpleado" for="ddlCCargoEmpleadoCargo" runat="server" class="text-warning" text=""></label>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCCargoEmpleadoCargo" TabIndex="1" CssClass="form-control border-success" runat="server">
+                            </asp:DropDownList>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCCargoEmpleadoEmpleado" TabIndex="2" CssClass="form-control border-success" runat="server">
+                            </asp:DropDownList>
+                        </div>
+                        <button id="btnNueCargoEmpleado" tabindex="3" class="btn btn-success pull-right">
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="modal" id="modalNEmpleado">
         <div class="modal-dialog" role="document">
@@ -539,6 +649,8 @@
     <script src="/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEArea.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDECargo.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDECargoEmpleado.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEPersona.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEIdentificacion.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDETelefono.js" type="text/javascript"></script>

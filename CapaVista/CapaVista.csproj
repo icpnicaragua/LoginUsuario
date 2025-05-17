@@ -624,6 +624,8 @@
     <Content Include="js\icp\CRUDEArea.js" />
     <Content Include="js\icp\CRUDEBanco.js" />
     <Content Include="js\icp\CRUDEBodega.js" />
+    <Content Include="js\icp\CRUDECargo.js" />
+    <Content Include="js\icp\CRUDECargoEmpleado.js" />
     <Content Include="js\icp\CRUDECategoria.js" />
     <Content Include="js\icp\CRUDECliente.js" />
     <Content Include="js\icp\CRUDEConceptoRoc.js" />
