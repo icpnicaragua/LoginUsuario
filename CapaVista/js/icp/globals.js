@@ -15,6 +15,8 @@ $('.popinfo320S').attr('data-content', "Letras y espacios. Mínimo 3, máximo 20
 $('.popinfoMAIL').attr('data-content', "Formato para correo electrónico");
 $('.popinfo3_5NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 5 caracteres");
 $('.popinfoDecimal2').attr('data-content', "Enteros o decimales, hasta 2 cifras decimales"); //^\d + ([,.]\d{ 1, 2 })?$
+$('.popinfoDATE').attr('data-content', "Solo fechas válidas."); //^\d + ([,.]\d{ 1, 2 })?$
+
 
 /* variable de fx*/
 var ModFx = [

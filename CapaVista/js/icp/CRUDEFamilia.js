@@ -1,54 +1,42 @@
-﻿/*variable de tablas*/
-var tablaFamilia;/*tabla mpodulo*/
-var ModCFamilia = $('#modalNFamilia'); // modal 
-//campos de tablas
+﻿var tablaFamilia;
+var ModCFamilia = $('#modalNFamilia');
 var VarJsFamiliaId = 0;
 var VarJsFamilia = "";
 
-
-//igual para todos
 var formFamilia = document.querySelector('#form1');
 
-//variables crud
 CRUDFamilia = "";
-//variables alertas
 var VarJsColorAlertFamilia = "";
 var VarJsTextoAlertFamilia = "";
-//variables existe
 var EFamilia = true;
 
-
-$('#lbMostrarFamilia').click(function (e) {//1 evento para mostrar contenido  xxxx
+$('#lbMostrarFamilia').click(function (e) {
     e.preventDefault();
-    FnJsAjaxRFamilia(); //llama al ajax xxxx
+    FnJsAjaxRFamilia();
 });
 
-function FnJsAjaxRFamilia() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRFamilia() {
     $.ajax({
         type: "POST",
-        url: "/modulo10/VstFamilia.aspx/FnRFamiliaV", // nombre de página y nombre de función xxxx
+        url: "/modulo10/VstFamilia.aspx/FnRFamiliaV",
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowFamilia(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowFamilia(data.d);
         }
     }
     );
 }
 
-function AddrowFamilia(data) {//3 llenar la tabla xxxx
-
-    $('#tblFamilia').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
-
-    tablaFamilia = $("#tblFamilia").DataTable({// variable nombre tabla xxxx
-
+function AddrowFamilia(data) {
+    $('#tblFamilia').DataTable().clear().destroy();
+    tablaFamilia = $("#tblFamilia").DataTable({
         "retrieve": true,
         dom: 'Bfrtip',
-
-        "order": [1, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [1, 'asc'],
         "columnDefs": [
             { "targets": 2, "searchable": false },
             { "orderable": false, "targets": 2 }
@@ -58,38 +46,36 @@ function AddrowFamilia(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colFamilia'//se añade el id para ocultar xxxx
+                    id: 'colFamilia'
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',
+                className: 'btn btn-info',
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'copy',
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(2)):visible']
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'pdf',
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(2)):visible']
                 },
                 titleAttr: 'PDF',
-                filename: 'Tipo de Familia' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Tipo de Familia' + "_" + FnJsDate() + "_" + FnJsHour(),
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -97,7 +83,7 @@ function AddrowFamilia(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64();
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -111,14 +97,14 @@ function AddrowFamilia(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Tipo de Familia', //tttt
+                                    text: 'Tipo de Familia',
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Tipo de Familia' //tttt
+                                    text: 'Reporte Tipo de Familia'
                                 }
                             ],
                             margin: 20
@@ -139,307 +125,241 @@ function AddrowFamilia(data) {//3 llenar la tabla xxxx
                             margin: 20
                         }
                     });
-
                 }
-
             },
             {
                 extend: 'excel',
-                filename: 'Tipo de Familia' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Tipo de Familia' + "_" + FnJsDate() + "_" + FnJsHour(),
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(2)):visible']
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
-
                 }
-
             }
         ],
         "language": FnJsEspTbl()
     });
-    tablaFamilia.buttons().container().addClass('form-inline');///variable xxxx
-
-    for (var contFamilia = 0; contFamilia < data.length; contFamilia++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaFamilia.row.add([//sensitivecase:
-            data[contFamilia].IdFamilia,//campos
+    tablaFamilia.buttons().container().addClass('form-inline');
+    for (var contFamilia = 0; contFamilia < data.length; contFamilia++) {
+        tablaFamilia.row.add([
+            data[contFamilia].IdFamilia,
             data[contFamilia].Familia,
-            '<button value="editar" href="#modalNFamilia" data-toggle="modal" title="editar" class="btn btn-warning  btn-editFamilia"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNFamilia" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteFamilia"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNFamilia" data-toggle="modal" title="editar" class="btn btn-warning  btn-editFamilia"><i class="fas fa-pencil-alt"></i> </button>' +
+            '<button value="eliminar" href="#modalNFamilia" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteFamilia"><i class="fa fa-trash" ></i> </button>'+
+            '<button value="add" href="#modalNCategoria" data-toggle="modal" title="Agregar Categoría" class="btn btn-success btn-AddCategoria"><i class="fa fa-plus-square-o" ></i> </button>'
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$('#lbNFamilia').click(function (e) {//4 evento para mostrar modal de nuevo
+$('#lbNFamilia').click(function (e) {
     e.preventDefault();
-    FnJsCFamilia(); // nombre función xxxx
-    EFamilia = true; // variable xxxx
-
-    FnJsBlockFamilia(); // nombre función xxxx
-
-    CRUDFamilia = "C"; // nombre variable xxxx
-
-    //campos xxxx
-    VarJsFamiliaId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsFamilia = ""; // cada campo tiene una variable, inicializar xxxx
-
+    FnJsCFamilia();
+    EFamilia = true;
+    FnJsBlockFamilia();
+    CRUDFamilia = "C";
+    VarJsFamiliaId = 0;
+    VarJsFamilia = "";
 });
-$(document).on('click', '.btn-editFamilia', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editFamilia', function (e) {
     e.preventDefault();
-    FnJsUFamilia();//nombre de función xxxx
-    var dataFamilia = tablaFamilia.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsFamiliaId = dataFamilia[0]; //id de la fila seleccionada
-    $('#txtNuevoFamilia').val(dataFamilia[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsFamilia = dataFamilia[1]; // variable elemento, variable data, índice xxxx
-
-    CRUDFamilia = "U";// variable crud, estado crud xxxx
+    FnJsUFamilia();
+    var dataFamilia = tablaFamilia.row($(this).parents("tr")).data();
+    VarJsFamiliaId = dataFamilia[0];
+    $('#txtNuevoFamilia').val(dataFamilia[1]);
+    VarJsFamilia = dataFamilia[1];
+    CRUDFamilia = "U";
 });
-$(document).on('click', '.btn-deleteFamilia', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteFamilia', function (e) {
     e.preventDefault();
-    FnJsDFamilia();//nombre de función xxxx
-    EFamilia = false; // variable de existe xxxx
-
-
-    FnJsBlockFamilia();//función bloquear xxxx
-    var dataFamilia = tablaFamilia.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsFamiliaId = dataFamilia[0]; //id de la fila seleccionada
-    $('#txtNuevoFamilia').val(dataFamilia[1]);// [indice columna]  de la fila seleccionada xxxx
-
-    VarJsFamilia = dataFamilia[1]; // variable elemento, variable data, índice xxxx
-
+    FnJsDFamilia();
+    EFamilia = false;
+    FnJsBlockFamilia();
+    var dataFamilia = tablaFamilia.row($(this).parents("tr")).data();
+    VarJsFamiliaId = dataFamilia[0];
+    $('#txtNuevoFamilia').val(dataFamilia[1]);
+    VarJsFamilia = dataFamilia[1];
     CRUDFamilia = "D";
 });
 
-//pintar modal
-function FnJsCFamilia() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoFamilia').text(""); // id etiqueta texto etiqueta xxxx
-
-    //cambiar el color del modal borde
-    $("#DivModBorFamilia").removeAttr("class");//quitar el atributo class
-    $("#DivModBorFamilia").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaFamilia").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaFamilia").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitFamilia').text('Nuevo Tipo de Familia');//tttt
-    //cambiar el color icono btn
-    $("#btnNueFamilia").removeAttr("class");//quitar el atributo class
-    $("#btnNueFamilia").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+function FnJsCFamilia() {
+    $('#lblexistenuevoFamilia').text("");
+    $("#DivModBorFamilia").removeAttr("class");
+    $("#DivModBorFamilia").attr('class', 'modal-content border-success');
+    $("#DivModHeaFamilia").removeAttr("class");
+    $("#DivModHeaFamilia").attr('class', 'modal-header bg-success');
+    $('#H4ModTitFamilia').text('Nuevo Tipo de Familia');
+    $("#btnNueFamilia").removeAttr("class");
+    $("#btnNueFamilia").attr('class', 'btn btn-success pull-right');
     $("#btnNueFamilia i").removeAttr("class");
     $("#btnNueFamilia i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtNuevoFamilia").attr('disabled', false); //variables de los elementos del modal xxxx
-
-    //vaciar elementos text de todo el modal
-    $('#' + ModCFamilia[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $("#txtNuevoFamilia").attr('disabled', false);
+    $('#' + ModCFamilia[0].id + ' :text').val("");
 }
-function FnJsUFamilia() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoFamilia').text(""); // id etiqueta texto etiqueta xxxx
-
-    console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorFamilia").removeAttr("class");//quitar el atributo class
-    $("#DivModBorFamilia").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaFamilia").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaFamilia").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitFamilia').text('Editar Tipo de Familia');//tttt
-    //cambiar el color icono btn
-    $("#btnNueFamilia").removeAttr("class");//quitar el atributo class
-    $("#btnNueFamilia").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+function FnJsUFamilia() {
+    $('#lblexistenuevoFamilia').text("");
+    $("#DivModBorFamilia").removeAttr("class");
+    $("#DivModBorFamilia").attr('class', 'modal-content border-warning');
+    $("#DivModHeaFamilia").removeAttr("class");
+    $("#DivModHeaFamilia").attr('class', 'modal-header bg-warning');
+    $('#H4ModTitFamilia').text('Editar Tipo de Familia');
+    $("#btnNueFamilia").removeAttr("class");
+    $("#btnNueFamilia").attr('class', 'btn btn-warning pull-right');
     $("#btnNueFamilia i").removeAttr("class");
     $("#btnNueFamilia i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtNuevoFamilia").attr('disabled', false); //variables de los elementos del modal xxxx
-
-    //vaciar elementos text de todo el modal
-    $('#' + ModCFamilia[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $("#txtNuevoFamilia").attr('disabled', false);
+    $('#' + ModCFamilia[0].id + ' :text').val("");
 }
-function FnJsDFamilia() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoFamilia').text(""); // id etiqueta texto etiqueta xxxx
-
-    //cambiar el color del modal borde
-    $("#DivModBorFamilia").removeAttr("class");//quitar el atributo class
-    $("#DivModBorFamilia").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaFamilia").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaFamilia").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitFamilia').text('Eliminar Tipo de Familia');//tttt
-    //cambiar el color icono btn
-    $("#btnNueFamilia").removeAttr("class");//quitar el atributo class
-    $("#btnNueFamilia").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+function FnJsDFamilia() {
+    $('#lblexistenuevoFamilia').text("");
+    $("#DivModBorFamilia").removeAttr("class");
+    $("#DivModBorFamilia").attr('class', 'modal-content border-danger');
+    $("#DivModHeaFamilia").removeAttr("class");
+    $("#DivModHeaFamilia").attr('class', 'modal-header bg-danger');
+    $('#H4ModTitFamilia').text('Eliminar Tipo de Familia');
+    $("#btnNueFamilia").removeAttr("class");
+    $("#btnNueFamilia").attr('class', 'btn btn-danger pull-right');
     $("#btnNueFamilia i").removeAttr("class");
-    $("#btnNueFamilia i").attr("class", "fa fa-trash fa-2x");//ícono
-    //bloquear elementos
-    $("#txtNuevoFamilia").attr('disabled', true); //variables de los elementos del modal xxxx
-
-    //vaciar elementos text de todo el modal
-    $('#' + ModCFamilia[0].id + ' :text').val(""); // variable del modal xxxx
-
+    $("#btnNueFamilia i").attr("class", "fa fa-trash fa-2x");
+    $("#txtNuevoFamilia").attr('disabled', true);
+    $('#' + ModCFamilia[0].id + ' :text').val("");
 }
 
-/*quitar btn CUD*/
-function FnJsBlockFamilia() {// nombre función xxxx
-
-    if (EFamilia == true) {// variables xxxx
-        $("#btnNueFamilia").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueFamilia").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
+function FnJsBlockFamilia() {
+    if (EFamilia == true) {
+        $("#btnNueFamilia").fadeOut("fast");
+        $("#btnNueFamilia").attr('disabled', true);
     }
-    else if (EFamilia == false) {// variables xxxx
-        $("#btnNueFamilia").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueFamilia").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
+    else if (EFamilia == false) {
+        $("#btnNueFamilia").fadeIn("slow");
+        $("#btnNueFamilia").attr('disabled', false);
     }
 }
 
-//guardar CUD
-$('#btnNueFamilia').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueFamilia').click(function (e) {
     e.preventDefault();
     if (formFamilia.checkValidity()) {
-        switch (CRUDFamilia) { // variable crud xxxx
+        switch (CRUDFamilia) {
             case "C":
-                FnJsAjaxCFamilia(); // función para crear xxxx
+                FnJsAjaxCFamilia();
                 break;
             case "U":
-                FnJsAjaxUFamilia();// función para crear xxxx
+                FnJsAjaxUFamilia();
                 break;
             case "D":
-                FnJsAjaxDFamilia();// función para crear xxxx
+                FnJsAjaxDFamilia();
                 break;
             default:
-                console.log("Error en cud Tipo de Familia");/////tttt
+                console.log("Error en cud Tipo de Familia");
         }
     }
-    console.log(formFamilia.checkValidity());
 });
 
-//ajax CUD
 function FnJsAjaxCFamilia() {
     $.ajax({
-        url: "/modulo10/VstFamilia.aspx/FnCFamiliaV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo10/VstFamilia.aspx/FnCFamiliaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
-            Familia: VarJsFamilia,
-
-        }), /*parametro: valor*/
+        data: JSON.stringify({
+            Familia: VarJsFamilia
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Tipo de Familia Agregado"); ////tttt        
+                console.log("Tipo de Familia Agregado");
             }
             else {
-                //no se creó
                 CRUDFamilia = "error"
-                console.log("No se pudo agregar Tipo de Familia");//
+                console.log("No se pudo agregar Tipo de Familia");
             }
-            FnAlertaFamilia(); // nombre función alerta xxxx
+            FnAlertaFamilia();
         }
-    });//ajax fin
+    });
 }
 function FnJsAjaxUFamilia() {
     $.ajax({
-        url: "/modulo10/VstFamilia.aspx/FnUFamiliaV", // nombre de página y nombre de función cude
+        url: "/modulo10/VstFamilia.aspx/FnUFamiliaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             IdFamilia: VarJsFamiliaId,
-            Familia: VarJsFamilia,
-
-
-        }), /*parametro: valor*/
+            Familia: VarJsFamilia
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Tipo de Familia Actualizado"); ////tttt
+                console.log("Tipo de Familia Actualizado");
             }
             else {
-                //no se borró
                 CRUDFamilia = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaFamilia();// nombre función alerta xxxx
+            FnAlertaFamilia();
         }
-    });//ajax fin
+    });
 }
 function FnJsAjaxDFamilia() {
     $.ajax({
-        url: "/modulo10/VstFamilia.aspx/FnDFamiliaV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo10/VstFamilia.aspx/FnDFamiliaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({
             IdFamilia: VarJsFamiliaId
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Tipo de Familia Eliminado"); ////tttt
+                console.log("Tipo de Familia Eliminado");
             }
             else {
-                //no se creó
                 CRUDFamilia = "error"
-                console.log("No se pudo Eliminar Tipo de Familia");////tttt
+                console.log("No se pudo Eliminar Tipo de Familia");
             }
-            FnAlertaFamilia(); // nombre función alerta xxxx
-
+            FnAlertaFamilia();
         }
-    });//ajax fin
+    });
 }
 
-//Existe
-function FnJsAjaxEFamilia() {// nombre de la función existe xxxx
+function FnJsAjaxEFamilia() {
     $.ajax({
-        url: "/modulo10/VstFamilia.aspx/FnEFamiliaV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo10/VstFamilia.aspx/FnEFamiliaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({
             IdFamilia: VarJsFamiliaId,
             Familia: VarJsFamilia
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                EFamilia = true; // variable existe xxxx
-                $('#lblexistenuevoFamilia').text("Existe Tipo de Familia");// id etiqueta texto etiqueta //tttt
-                FnJsBlockFamilia();//nombre de función bloquear xxxx
-
+                EFamilia = true;
+                $('#lblexistenuevoFamilia').text("Existe Tipo de Familia");
+                FnJsBlockFamilia();
             }
             else {
-                //mostrar btn
-                EFamilia = false;// variable existe xxxx
-                $('#lblexistenuevoFamilia').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockFamilia(); //nombre de función bloquear xxxx
+                EFamilia = false;
+                $('#lblexistenuevoFamilia').text("");
+                FnJsBlockFamilia();
             }
         }
-    });//ajax fin
+    });
 }
 
 
-function VerificarExisteFamilia() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoFamilia').val().length > 3) { // id de objetos de Familias, cantidad mínima permitida xxxx
+function VerificarExisteFamilia() {
+    if ($('#txtNuevoFamilia').val().length > 3) {
         return true;
     }
     else {
@@ -448,49 +368,45 @@ function VerificarExisteFamilia() {// nombre de función verificarexiste xxxx
 }
 
 
-$('#txtNuevoFamilia').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsFamilia = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteFamilia()) {//nombre función verificar existe xxxx
-        FnJsAjaxEFamilia(); // llamar todos los existes xxxx
-
+$('#txtNuevoFamilia').keyup(function (e) {
+    VarJsFamilia = $(this).val();
+    if (VerificarExisteFamilia()) {
+        FnJsAjaxEFamilia();
     }
 });
 
 
-function FnAlertaFamilia() {//nombre de la función xxxx
-
-    switch (CRUDFamilia) {//nombre de la variable cud xxxx
+function FnAlertaFamilia() {
+    switch (CRUDFamilia) {
         case "C":
-            VarJsColorAlertFamilia = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertFamilia = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertFamilia = "bg-success";
+            VarJsTextoAlertFamilia = "Creado";
             break;
         case "U":
-            VarJsColorAlertFamilia = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertFamilia = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertFamilia = "bg-warning";
+            VarJsTextoAlertFamilia = "Actualizado";
             break;
         case "D":
-            VarJsColorAlertFamilia = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertFamilia = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertFamilia = "bg-danger";
+            VarJsTextoAlertFamilia = "Eliminado";
             break;
         case "Error":
-            VarJsColorAlertFamilia = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertFamilia = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertFamilia = "bg-secondary";
+            VarJsTextoAlertFamilia = "No se pudo realizar la operación";
             break;
         default:
-            console.log("Error CUD Tipo de Familia Alert")//tttt
+            console.log("Error CUD Tipo de Familia Alert")
     }
-    //alerta
-    $('#alertaFamilia .modal-content').addClass(VarJsColorAlertFamilia);//variable de color alerta xxxx
-    $('#alertaFamilia h5').text(VarJsTextoAlertFamilia);//variable de texto alerta xxxx
-    $('#alertaFamilia').modal('show');
+    $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertFamilia);
+    $('.bd-example-modal-sm h5').text(VarJsTextoAlertFamilia);
+    $('.bd-example-modal-sm').modal('show');
     setTimeout(function () {
-        $('#alertaFamilia').modal('hide');
-        $('#alertaFamilia .modal-content').removeClass(VarJsColorAlertFamilia);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
+        $('.bd-example-modal-sm').modal('hide');
+        $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertFamilia);
+    }, 1500);
 
-    if ($("#secciontblFamilia.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRFamilia();//función ajax de llenado de la tabla xxxx
+    if ($("#secciontblFamilia.show").length > 0) {
+        FnJsAjaxRFamilia();
     }
-    //cerrar modal
-    $("#modalNFamilia").modal("toggle");//nombre modal xxxx
+    $("#modalNFamilia").modal("toggle");
 }

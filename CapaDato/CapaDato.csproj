@@ -146,7 +146,9 @@
     <Compile Include="ClsRegimenD.cs" />
     <Compile Include="ClsRolD.cs" />
     <Compile Include="ClsSeccionD.cs" />
+    <Compile Include="ClsSubCategoriaD.cs" />
     <Compile Include="ClsSucursalD.cs" />
+    <Compile Include="ClsTCambioD.cs" />
     <Compile Include="ClsTelefonoD.cs" />
     <Compile Include="ClsTipoClienteD.cs" />
     <Compile Include="ClsTipoCorreoD.cs" />

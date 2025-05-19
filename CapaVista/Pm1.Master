@@ -358,7 +358,7 @@
                 <%--esto es dinámico--%>
             </h1>
         </section>
-        <section class="content bg-secondary">
+        <section class="content">
             <%-- contenido dinámico--%>
             <form id="form1" runat="server">
                 <asp:HiddenField ID="hfIDU" runat="server" ClientIDMode="Static" Value="0" />

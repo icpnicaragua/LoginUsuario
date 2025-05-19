@@ -163,7 +163,8 @@ function AddrowCategoria(data) {
             data[contCategoria].Categoria,
             data[contCategoria].ObjFamilia.Familia,
             '<button value="editar" href="#modalNCategoria" data-toggle="modal" title="editar" class="btn btn-warning  btn-editCategoria"><i class="fas fa-pencil-alt"></i> </button>' +
-            '<button value="eliminar" href="#modalNCategoria" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteCategoria"><i class="fa fa-trash" ></i> </button>'
+            '<button value="eliminar" href="#modalNCategoria" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteCategoria"><i class="fa fa-trash" ></i> </button>' +
+            '<button value="add" href="#modalNSubCategoria" data-toggle="modal" title="Agregar SubCategoría" class="btn btn-success btn-AddSubCategoria"><i class="fa fa-plus-square-o" ></i> </button>'
         ]
         ).draw(false);
     }
@@ -183,6 +184,20 @@ $('#lbNCategoria').click(function (e) {
     VarJsIdFamilia = 0;
 
 });
+$(document).on('click', '.btn-AddCategoria', function (e) {
+    e.preventDefault();
+    ECategoria = true;
+    FnJsCCategoria();
+    VarJsCategoriaId = 0;
+    VarJsCategoria = "";
+    tablaFamilia = $("#tblFamilia").DataTable();
+    var dataFamilia = tablaFamilia.row($(this).parents("tr")).data();
+    VAlDDLCategoriaFamilia = (dataFamilia[1]);
+    FnJSFillDdlCategoriaFamilia();
+    VarJsIdFamilia = $('#ddlCCategoriaFamilia').val();
+    CRUDCategoria = "C";
+});
+
 $(document).on('click', '.btn-editCategoria', function (e) {
     e.preventDefault();
     FnJsUCategoria();
@@ -315,7 +330,7 @@ $('#btnNueCategoria').click(function (e) {
             default:
                 console.log("Error en cud Categoria");
         }
-    }   
+    }
 });
 
 function FnJsAjaxCCategoria() {

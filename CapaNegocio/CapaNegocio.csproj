@@ -78,7 +78,9 @@
     <Compile Include="ClsRegimenN.cs" />
     <Compile Include="ClsRolN.cs" />
     <Compile Include="ClsSeccionN.cs" />
+    <Compile Include="ClsSubCategoriaN.cs" />
     <Compile Include="ClsSucursalN.cs" />
+    <Compile Include="ClsTCambioN.cs" />
     <Compile Include="ClsTelefonoN.cs" />
     <Compile Include="ClsTicoControlN.cs" />
     <Compile Include="ClsTipoClienteN.cs" />

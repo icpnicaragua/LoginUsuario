@@ -652,6 +652,8 @@
     <Content Include="js\icp\CRUDERangoPrecio.js" />
     <Content Include="js\icp\CRUDERegimen.js" />
     <Content Include="js\icp\CRUDESeccion.js" />
+    <Content Include="js\icp\CRUDESubCategoria.js" />
+    <Content Include="js\icp\CRUDETCambio.js" />
     <Content Include="js\icp\CRUDETelefono.js" />
     <Content Include="js\icp\CRUDETelefonoEmpresa.js" />
     <Content Include="js\icp\CRUDETipoCliente.js" />

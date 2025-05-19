@@ -152,5 +152,74 @@ namespace CapaVista.modulo10
 
         }
         #endregion
+
+        #region RegSubCategoria
+        [WebMethod]
+        public static bool FnCSubCategoriaV(string SubCategoria, string IdCategoria)
+        {
+            bool CreateSubCategoria = false;
+            ClsSubCategoria OSubCategoria = new ClsSubCategoria();
+
+            OSubCategoria.SubCategoria = SubCategoria;
+            OSubCategoria.ObjCategoria.IdCategoria = IdCategoria;
+
+            CreateSubCategoria = new ClsSubCategoriaN().FnCSubCategoriaN(OSubCategoria);
+
+            return CreateSubCategoria;
+
+        }
+
+        [WebMethod]
+        public static List<ClsSubCategoria> FnRSubCategoriaV()
+        {
+            List<ClsSubCategoria> OSubCategoria = new ClsSubCategoriaN().FnRSubCategoriaN();
+            return OSubCategoria;
+        }
+
+        [WebMethod]
+        public static bool FnUSubCategoriaV(string IdSubCategoria, string SubCategoria, string IdCategoria)
+        {
+            bool UpdateSubCategoria = false;
+            ClsSubCategoria OSubCategoria = new ClsSubCategoria();
+
+            OSubCategoria.IdSubCategoria = IdSubCategoria;
+            OSubCategoria.SubCategoria = SubCategoria;
+            OSubCategoria.ObjCategoria.IdCategoria = IdCategoria;
+            UpdateSubCategoria = new ClsSubCategoriaN().FnUSubCategoriaN(OSubCategoria);
+
+            return UpdateSubCategoria;
+
+        }
+
+        [WebMethod]
+        public static bool FnDSubCategoriaV(string IdSubCategoria)
+        {
+            bool DeleteSubCategoria = false;
+            ClsSubCategoria OSubCategoria = new ClsSubCategoria();
+
+            OSubCategoria.IdSubCategoria = IdSubCategoria;
+
+            DeleteSubCategoria = new ClsSubCategoriaN().FnDSubCategoriaN(OSubCategoria);
+
+            return DeleteSubCategoria;
+
+        }
+
+        [WebMethod]
+        public static bool FnESubCategoriaV(string IdSubCategoria, string SubCategoria, string IdCategoria)
+        {
+            bool ExisteSubCategoria = false;
+            ClsSubCategoria OSubCategoria = new ClsSubCategoria();
+
+            OSubCategoria.IdSubCategoria = IdSubCategoria;
+            OSubCategoria.SubCategoria = SubCategoria;
+            OSubCategoria.ObjCategoria.IdCategoria = IdCategoria;
+
+            ExisteSubCategoria = new ClsSubCategoriaN().FnESubCategoriaN(OSubCategoria);
+
+            return ExisteSubCategoria;
+
+        }
+        #endregion
     }
 }
