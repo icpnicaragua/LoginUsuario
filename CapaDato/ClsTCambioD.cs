@@ -12,7 +12,7 @@ namespace CapaDato
     public class ClsTCambioD
     {
         private ClsConexion ObjConexion = null;
-        private MySqlDataReader Dr_D; 
+        private MySqlDataReader Dr_D;
         private MySqlCommand Cmd_D = null;
 
         public bool FnCTCambioD(ClsTCambio OTCambio)
@@ -23,7 +23,7 @@ namespace CapaDato
                 ObjConexion = new ClsConexion();
                 Cmd_D = new MySqlCommand("spCTcambio", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmCTcambio", Convert.ToDecimal( OTCambio.TCambio));
+                Cmd_D.Parameters.AddWithValue("prmCTcambio", Convert.ToDecimal(OTCambio.TCambio));
                 Cmd_D.Parameters.AddWithValue("prmCIdMoneda", Convert.ToInt16(OTCambio.ObjMoneda.IdMoneda));
                 Cmd_D.Parameters.AddWithValue("prmCFecha", Convert.ToDateTime(OTCambio.Fecha));
                 ObjConexion.Abrircon();
@@ -44,7 +44,7 @@ namespace CapaDato
         }
 
         public List<ClsTCambio> FnRTCambioD()
-        {
+        {           
             ClsTCambio OTCambio = null;
             try
             {
@@ -58,10 +58,11 @@ namespace CapaDato
                 {
                     OTCambio = new ClsTCambio();
                     OTCambio.IdTCambio = Dr_D[0].ToString();
-                    OTCambio.TCambio = Dr_D[1].ToString(); 
+                    OTCambio.TCambio = Dr_D[1].ToString();
                     OTCambio.ObjMoneda.IdMoneda = Dr_D[2].ToString();
                     OTCambio.ObjMoneda.Moneda = Dr_D[3].ToString();
-                    OTCambio.Fecha = Dr_D[4].ToString();
+                    OTCambio.Fecha =ClsCortarFechasD.getFecha(Dr_D[4].ToString());                   
+                    
                     LstTCambio.Add(OTCambio);
                 }
                 return LstTCambio;
@@ -86,7 +87,7 @@ namespace CapaDato
                 Cmd_D = new MySqlCommand("spUTcambio", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmUIdTcambio", Convert.ToInt16(OTCambio.IdTCambio));
-                Cmd_D.Parameters.AddWithValue("prmUTcambio",Convert.ToDecimal( OTCambio.TCambio));
+                Cmd_D.Parameters.AddWithValue("prmUTcambio", Convert.ToDecimal(OTCambio.TCambio));
                 Cmd_D.Parameters.AddWithValue("prmUIdMoneda", Convert.ToInt16(OTCambio.ObjMoneda.IdMoneda));
                 Cmd_D.Parameters.AddWithValue("prmUFecha", Convert.ToDateTime(OTCambio.Fecha));
 
@@ -143,7 +144,7 @@ namespace CapaDato
                 Cmd_D = new MySqlCommand("spETcambio", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmEIdTcambio", Convert.ToInt16(OTCambio.IdTCambio));
-                Cmd_D.Parameters.AddWithValue("prmEFecha",Convert.ToDateTime( OTCambio.TCambio));
+                Cmd_D.Parameters.AddWithValue("prmEFecha", Convert.ToDateTime(OTCambio.Fecha));
                 Cmd_D.Parameters.AddWithValue("prmEIdMoneda", Convert.ToInt16(OTCambio.ObjMoneda.IdMoneda));
 
                 ObjConexion.Abrircon();

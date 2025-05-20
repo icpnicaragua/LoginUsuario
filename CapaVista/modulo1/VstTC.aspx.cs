@@ -14,6 +14,17 @@ namespace CapaVista.modulo1
     {
         protected void Page_Load(object sender, EventArgs e){}
 
+        #region RegMoneda  
+
+        [WebMethod]
+        public static List<ClsMoneda> FnRMonedaV()
+        {
+            List<ClsMoneda> OMoneda = new ClsMonedaN().FnRMonedaN();
+            return OMoneda;
+        }
+
+        #endregion
+
         #region RegTCambio
         [WebMethod]
         public static bool FnCTCambioV(string TCambio, string IdMoneda, string Fecha)

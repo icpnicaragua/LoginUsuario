@@ -66,6 +66,7 @@
     <Compile Include="ClsGeneroN.cs" />
     <Compile Include="ClsIdentificacionN.cs" />
     <Compile Include="ClsModuloN.cs" />
+    <Compile Include="ClsMonedaN.cs" />
     <Compile Include="ClsMunicipioN.cs" />
     <Compile Include="ClsPagoSobreN.cs" />
     <Compile Include="ClsPalabraClaveN.cs" />

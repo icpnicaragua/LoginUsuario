@@ -13,12 +13,14 @@ namespace CapaEntidad
         private string _TCambio;
         private string _Fecha;
         private string _Estado;
+        private bool _Editable;
 
         public string IdTCambio { get => _IdTCambio; set => _IdTCambio = value; }
         public ClsMoneda ObjMoneda { get => _ObjMoneda; set => _ObjMoneda = value; }
         public string TCambio { get => _TCambio; set => _TCambio = value; }
         public string Fecha { get => _Fecha; set => _Fecha = value; }
         public string Estado { get => _Estado; set => _Estado = value; }
+        public bool Editable { get => _Editable; set => _Editable = value; }
 
         public ClsTCambio()
         {

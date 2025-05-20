@@ -15,6 +15,15 @@ namespace CapaVista.modulo1
     {
 
         /// <summary>
+        /// Control lbMoneda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbMoneda;
+
+        /// <summary>
         /// Control lbTCambio.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace CapaVista.modulo1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbTCambio;
+
+        /// <summary>
+        /// Control lbMostrarMoneda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbMostrarMoneda;
 
         /// <summary>
         /// Control lbNTCambio.
@@ -76,6 +94,15 @@ namespace CapaVista.modulo1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCTCambioMoneda;
+
+        /// <summary>
+        /// Control lblFechaAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblFechaAnterior;
 
         /// <summary>
         /// Control txtNuevoFecha.

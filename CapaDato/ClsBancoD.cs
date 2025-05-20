@@ -12,8 +12,8 @@ namespace CapaDato
     public class ClsBancoD
     {
         private ClsConexion ObjConexion = null;
-        private MySqlDataReader Dr_D; //para leer datos de latabla 
-        private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
+        private MySqlDataReader Dr_D;
+        private MySqlCommand Cmd_D = null; 
 
         public bool FnCBancoD(ClsBanco OBanco)
         {
@@ -56,8 +56,8 @@ namespace CapaDato
                 while (Dr_D.Read())
                 {
                     OBanco = new ClsBanco();
-                    OBanco.IdBanco = Dr_D[0].ToString();//id_Banco
-                    OBanco.Banco = Dr_D[1].ToString();  //Banco     
+                    OBanco.IdBanco = Dr_D[0].ToString();
+                    OBanco.Banco = Dr_D[1].ToString();   
                     LstBanco.Add(OBanco);
                 }
                 return LstBanco;

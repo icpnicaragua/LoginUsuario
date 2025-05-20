@@ -16,6 +16,8 @@ var VarJsColorAlertTCambio = "";
 var VarJsTextoAlertTCambio = "";
 
 var ETCambio = true;
+var EFecha = true;
+$("[data-mask]").inputmask();
 
 $('#lbMostrarTCambio').click(function (e) {
     e.preventDefault();
@@ -47,10 +49,10 @@ function AddrowTCambio(data) {
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [[2, 'asc'], [1, 'asc']],
+        "order": [[3, 'desc'], [2, 'asc']],
         "columnDefs": [
-            { "targets": 3, "searchable": false },
-            { "orderable": false, "targets": 3 }
+            { "targets": 4, "searchable": false },
+            { "orderable": false, "targets": 4 }
         ],
         "buttons": [
             {
@@ -71,7 +73,7 @@ function AddrowTCambio(data) {
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible']
+                    columns: [':not(:eq(4)):visible']
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -84,7 +86,7 @@ function AddrowTCambio(data) {
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible']
+                    columns: [':not(:eq(4)):visible']
                 },
                 titleAttr: 'PDF',
                 filename: 'TCambio' + "_" + FnJsDate() + "_" + FnJsHour(),
@@ -146,7 +148,7 @@ function AddrowTCambio(data) {
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(3)):visible']
+                    columns: [':not(:eq(4)):visible']
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -157,15 +159,20 @@ function AddrowTCambio(data) {
         "language": FnJsEspTbl()
     });
     tablaTCambio.buttons().container().addClass('form-inline');
-
+    var Btn='';
     for (var contTCambio = 0; contTCambio < data.length; contTCambio++) {
+        Btn = '';
+        if (data[contTCambio].Editable) {
+           Btn= '<button value="editar" href="#modalNTCambio" data-toggle="modal" title="editar" class="btn btn-warning  btn-editTCambio"><i class="fas fa-pencil-alt"></i> </button>' +
+                '<button value="eliminar" href="#modalNTCambio" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteTCambio"><i class="fa fa-trash" ></i> </button>'
+        }
         tablaTCambio.row.add([
             data[contTCambio].IdTCambio,
             data[contTCambio].TCambio,
             data[contTCambio].ObjMoneda.Moneda,
-            '<button value="editar" href="#modalNTCambio" data-toggle="modal" title="editar" class="btn btn-warning  btn-editTCambio"><i class="fas fa-pencil-alt"></i> </button>' +
-            '<button value="eliminar" href="#modalNTCambio" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteTCambio"><i class="fa fa-trash" ></i> </button>'
-        ]
+            data[contTCambio].Fecha,
+           Btn
+                 ]
         ).draw(false);
     }
 }
@@ -186,6 +193,21 @@ $('#lbNTCambio').click(function (e) {
 
 });
 
+$(document).on('click', '.btn-AddTCambio', function (e) {
+    e.preventDefault();
+    ETCambio = true;
+    FnJsCTCambio();
+    VarJsTCambioId = 0;
+    VarJsTCambio = "";
+    VarJsFecha = "";
+    tablaMoneda = $("#tblMoneda").DataTable();
+    var dataMoneda = tablaMoneda.row($(this).parents("tr")).data();
+    VAlDDLTCambioMoneda = (dataMoneda[1]);
+    FnJSFillDdlTCambioMoneda();
+    VarJsIdMoneda = $('#ddlCTCambioMoneda').val();
+    CRUDTCambio = "C";
+});
+
 $(document).on('click', '.btn-editTCambio', function (e) {
     e.preventDefault();
     FnJsUTCambio();
@@ -193,6 +215,9 @@ $(document).on('click', '.btn-editTCambio', function (e) {
     VarJsTCambioId = dataTCambio[0];
     $('#txtNuevoTCambio').val(dataTCambio[1]);
     VarJsTCambio = dataTCambio[1];
+    // let d = dataTCambio[3].split("/");
+    //let dat = new Date(d[2] + '/' + d[1] + '/' + d[0]);      
+    //document.getElementById('txtNuevoFecha').value = dat; 
     $('#txtNuevoFecha').val(dataTCambio[3]);
     VarJsFecha = dataTCambio[3];
     VAlDDLTCambioMoneda = (dataTCambio[2]);
@@ -298,11 +323,11 @@ function FnJsDTCambio() {
 
 
 function FnJsBlockTCambio() {
-    if (ETCambio == true) {
+    if (ETCambio == true ) {
         $("#btnNueTCambio").fadeOut("fast");
         $("#btnNueTCambio").attr('disabled', true);
     }
-    else if (ETCambio == false) {
+    else if (ETCambio == false && EFecha==false) {
         $("#btnNueTCambio").fadeIn("slow");
         $("#btnNueTCambio").attr('disabled', false);
     }
@@ -410,6 +435,7 @@ function FnJsAjaxETCambio() {
     $.ajax({
         url: "/modulo1/VstTC.aspx/FnETCambioV",
         contentType: 'application/json; charser=utf-8',
+
         data: JSON.stringify({
             IdTCambio: VarJsTCambioId,
             Fecha: VarJsFecha,
@@ -424,7 +450,6 @@ function FnJsAjaxETCambio() {
                 ETCambio = true;
                 $('#lblexistenuevoTCambio').text("Existe TCambio");
                 FnJsBlockTCambio();
-
             }
             else {
                 ETCambio = false;
@@ -434,9 +459,8 @@ function FnJsAjaxETCambio() {
         }
     });
 }
-
 function VerificarExisteTCambio() {
-    if ($('#txtNuevoTCambio').val().length > 0 && $('#txtNuevoFecha').val().length > 0 &&$('#ddlCTCambioMoneda').val() > 0) {
+    if ($('#txtNuevoTCambio').val().length > 0 && $('#txtNuevoFecha').val().length > 0 && $('#ddlCTCambioMoneda').val() > 0) {
         return true;
     }
     else {
@@ -453,10 +477,23 @@ $('#txtNuevoTCambio').keyup(function (e) {
 
 
 $('#txtNuevoFecha').keyup(function (e) {
-    VarJsTFecha = $(this).val();
-    if (VerificarExisteTCambio()) {
+    VarJsFecha = $(this).val(); 
+    var actual = new Date();
+    let d = $('#txtNuevoFecha').val().split("/");
+    let dat = new Date(d[2] + '/' + d[1] + '/' + d[0]);     
+    if (!isNaN(dat)) {       
+        if (actual > dat) {
+            EFecha = true;           
+            $('#lblFechaAnterior').text("Solo fechas futuras");          
+        }
+        else {     
+            FnJsAjaxETCambio();
+            EFecha = false;                 
+            $('#lblFechaAnterior').text("");         
+        }
         FnJsAjaxETCambio();
-    }
+        FnJsBlockTCambio();
+    }       
 });
 
 $('#ddlCTCambioMoneda').change(function (e) {

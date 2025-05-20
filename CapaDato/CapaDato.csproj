@@ -122,6 +122,7 @@
     <Compile Include="ClsConceptoRocD.cs" />
     <Compile Include="ClsConexion.cs" />
     <Compile Include="ClsCorreoD.cs" />
+    <Compile Include="ClsCortarFechasD.cs" />
     <Compile Include="ClsDenominacionesCSD.cs" />
     <Compile Include="ClsDepartamentoD.cs" />
     <Compile Include="ClsDireccionD.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="ClsGarantiaD.cs" />
     <Compile Include="ClsGeneroD.cs" />
     <Compile Include="ClsIdentificacionD.cs" />
+    <Compile Include="ClsMonedaD.cs" />
     <Compile Include="ClsMunicipioD.cs" />
     <Compile Include="ClsPagoSobreD.cs" />
     <Compile Include="ClsPalabraClaveD.cs" />
