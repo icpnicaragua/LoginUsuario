@@ -159,5 +159,39 @@ namespace CapaDato
                 ObjConexion.Cerrarcon();
             }
         }
+
+        #region REGCajero
+        public List<ClsCargoEmpleado> FnRCajeroD()
+        {
+            ClsCargoEmpleado OCajero = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spRCargoEmpleado", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsCargoEmpleado> LstCajero = new List<ClsCargoEmpleado>();
+                while (Dr_D.Read())
+                {
+                    OCajero = new ClsCargoEmpleado();
+                    OCajero.ObjEmpleado.IdEmpleado = Dr_D[0].ToString();
+                    OCajero.ObjEmpleado.ObjPersona.Nombre1 = Dr_D[1].ToString();
+                    OCajero.ObjEmpleado.ObjPersona.Apellido1 = Dr_D[2].ToString();                   
+                    LstCajero.Add(OCajero);
+                }
+                return LstCajero;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+        #endregion
     }
 }

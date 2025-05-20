@@ -156,5 +156,7 @@ namespace CapaDato
                 ObjConexion.Cerrarcon();
             }
         }
+
+
     }
 }

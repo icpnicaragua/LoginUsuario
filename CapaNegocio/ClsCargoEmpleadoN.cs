@@ -59,5 +59,13 @@ namespace CapaNegocio
                 return true;
             }
         }
+
+        #region RegCajero
+        public List<ClsCargoEmpleado> FnRCajeroN()
+        {
+            List<ClsCargoEmpleado> OCajero = new ClsCargoEmpleadoD().FnRCajeroD();
+            return OCajero;
+        }
+        #endregion
     }
 }

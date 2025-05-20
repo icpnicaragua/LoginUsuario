@@ -10,12 +10,14 @@ namespace CapaEntidad
     {
         private string _IdInicioCaja;
         private ClsEmpleado _ObjCajero;
-        private string _Fechahora;
+        private string _Fecha;
+        private string _Hora;
         private string _Estado;
 
         public string IdInicioCaja { get => _IdInicioCaja; set => _IdInicioCaja = value; }
         public ClsEmpleado ObjCajero { get => _ObjCajero; set => _ObjCajero = value; }
-        public string Fechahora { get => _Fechahora; set => _Fechahora = value; }
+        public string Fecha { get => _Fecha; set => _Fecha = value; }
+        public string Hora { get => _Hora; set => _Hora = value; }
         public string Estado { get => _Estado; set => _Estado = value; }
 
         public ClsInicioCaja()

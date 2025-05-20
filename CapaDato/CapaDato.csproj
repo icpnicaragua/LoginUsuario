@@ -135,6 +135,7 @@
     <Compile Include="ClsGarantiaD.cs" />
     <Compile Include="ClsGeneroD.cs" />
     <Compile Include="ClsIdentificacionD.cs" />
+    <Compile Include="ClsInicioCajaD.cs" />
     <Compile Include="ClsMonedaD.cs" />
     <Compile Include="ClsMunicipioD.cs" />
     <Compile Include="ClsPagoSobreD.cs" />

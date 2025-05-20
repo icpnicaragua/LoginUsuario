@@ -309,7 +309,15 @@ namespace CapaVista.modulo7
             return ExisteCargoEmpleado;
 
         }
-    
+
+        #endregion
+        #region RegCajero
+        [WebMethod]
+        public static List<ClsCargoEmpleado> FnRCajeroV()
+        {
+            List<ClsCargoEmpleado> OCajero = new ClsCargoEmpleadoN().FnRCajeroN();
+            return OCajero;
+        }
         #endregion
 
         #region RegPersona
