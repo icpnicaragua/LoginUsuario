@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="/datatables/datatables.css" rel="stylesheet" />
     <link href="/datatables/Buttons-1.5.4/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="/css/datepicker/datepicker3.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="DivNavegadorInicioCaja" class="container-fluid">
@@ -65,20 +66,29 @@
                 </div>
                 <div class="modal-body">
                     <div id="frmnueInicioCaja" runat="server" data-toggle="validator" role="form">
-                        <label id="lblexistenuevoInicioCaja" for="txtNuevoFecha" runat="server" class="text-warning" text=""></label>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCInicioCajaCajero" TabIndex="1" CssClass="form-control border-success" runat="server">
+                            </asp:DropDownList>
+                        </div>
+                        <label id="lblexistenuevoFecha" for="txtNuevoFecha" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoFecha" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nueva Fecha" data-required-error="dddd" ClientIDMode="Static"></asp:TextBox>
+                            <asp:TextBox ID="txtNuevoFecha" runat="server" TabIndex="2" CssClass="form-control" data-inputmask="'alias':'dd/mm/yyyy'" data-mask="" ClientIDMode="Static"></asp:TextBox>
                             <span class="input-group-addon">
                                 <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="">
                                     <i class="fas fa-info"></i>
                                 </button>
                             </span>
                         </div>
-                        <div class="input-group md-3">
-                            <asp:DropDownList ID="ddlCInicioCajaCajero" TabIndex="2" CssClass="form-control border-success" runat="server">
-                            </asp:DropDownList>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoHora" runat="server" TabIndex="3" CssClass="form-control" data-inputmask="'alias':'H:M:s'" data-mask="" ClientIDMode="Static"></asp:TextBox>
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
                         </div>
-                        <button id="btnNueInicioCaja" tabindex="3" class="btn btn-success pull-right">
+
+                        <button id="btnNueInicioCaja" tabindex="4" class="btn btn-success pull-right">
                             <i class="fas fa-save fa-2x"></i>
                         </button>
                     </div>
@@ -93,6 +103,9 @@
     <script src="/datatables/Buttons-1.5.4/js/buttons.flash.min.js"></script>
     <script src="/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
     <script src="/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="/js/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="/js/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="/js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEInicioCaja.js" type="text/javascript"></script>
 

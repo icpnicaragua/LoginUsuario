@@ -175,7 +175,7 @@ namespace CapaDato
                 while (Dr_D.Read())
                 {
                     OCajero = new ClsCargoEmpleado();
-                    OCajero.ObjEmpleado.IdEmpleado = Dr_D[0].ToString();
+                    OCajero.ObjEmpleado.IdEmpleado = Dr_D[3].ToString();
                     OCajero.ObjEmpleado.ObjPersona.Nombre1 = Dr_D[1].ToString();
                     OCajero.ObjEmpleado.ObjPersona.Apellido1 = Dr_D[2].ToString();                   
                     LstCajero.Add(OCajero);

@@ -116,10 +116,18 @@ function FnJsDate() {
     
     return jsDate;
 }
-
+function FnJsDateNow(Separador) {
+    var now = new Date();
+    var jsDate = now.getDate() + Separador + (now.getMonth() + 1) + Separador + now.getFullYear();
+    return jsDate;
+}
 function FnJsHour() {
     var now = new Date();
     var jsDate = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-
+    return jsDate;
+}
+function FnJsHourNow(Separador) {
+    var now = new Date();
+    var jsDate = now.getHours() + Separador + now.getMinutes() + Separador + now.getSeconds();
     return jsDate;
 }

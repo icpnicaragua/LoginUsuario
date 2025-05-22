@@ -51,13 +51,22 @@ namespace CapaVista.modulo1
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl frmnueInicioCaja;
 
         /// <summary>
-        /// Control lblexistenuevoInicioCaja.
+        /// Control ddlCInicioCajaCajero.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoInicioCaja;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCInicioCajaCajero;
+
+        /// <summary>
+        /// Control lblexistenuevoFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblexistenuevoFecha;
 
         /// <summary>
         /// Control txtNuevoFecha.
@@ -69,12 +78,12 @@ namespace CapaVista.modulo1
         protected global::System.Web.UI.WebControls.TextBox txtNuevoFecha;
 
         /// <summary>
-        /// Control ddlCInicioCajaCajero.
+        /// Control txtNuevoHora.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCInicioCajaCajero;
+        protected global::System.Web.UI.WebControls.TextBox txtNuevoHora;
     }
 }

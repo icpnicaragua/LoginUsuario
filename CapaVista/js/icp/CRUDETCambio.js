@@ -43,12 +43,9 @@ function FnJsAjaxRTCambio() {
 
 function AddrowTCambio(data) {
     $('#tblTCambio').DataTable().clear().destroy();
-
     tablaTCambio = $("#tblTCambio").DataTable({
-
         "retrieve": true,
         dom: 'Bfrtip',
-
         "order": [[3, 'desc'], [2, 'asc']],
         "columnDefs": [
             { "targets": 4, "searchable": false },
@@ -79,7 +76,6 @@ function AddrowTCambio(data) {
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 }
-
             },
             {
                 extend: 'pdf',
@@ -139,7 +135,6 @@ function AddrowTCambio(data) {
                             margin: 20
                         }
                     });
-
                 }
             },
             {
@@ -368,11 +363,11 @@ function FnJsAjaxCTCambio() {
         },
         success: function (data) {
             if (data.d) {
-                console.log("Categoría Agregado");
+                console.log("Tipo de Cambio Agregado");
             }
             else {
                 CRUDTCambio = "error"
-                console.log("No se pudo agregar Categoría");
+                console.log("No se pudo agregar Tipo de Cambio");
             }
             FnAlertaTCambio();
         }
@@ -388,14 +383,14 @@ function FnJsAjaxUTCambio() {
             IdMoneda: VarJsIdMoneda,
             Fecha: VarJsFecha
 
-        }), /*parametro: valor*/
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                console.log("Categoría Actualizado");
+                console.log("Tipo de Cambio Actualizado");
             }
             else {
                 CRUDTCambio = "error"
@@ -419,12 +414,12 @@ function FnJsAjaxDTCambio() {
         success: function (data) {
             if (data.d) {
 
-                console.log("Categoría Eliminado");
+                console.log("Tipo de Cambio Eliminado");
             }
             else {
 
                 CRUDTCambio = "error"
-                console.log("No se pudo Eliminar Categoría");
+                console.log("No se pudo Eliminar Tipo de Cambio");
             }
             FnAlertaTCambio();
 
@@ -553,7 +548,7 @@ function FnAlertaTCambio() {
             VarJsTextoAlertTCambio = "No se pudo realizar la operación";
             break;
         default:
-            console.log("Error CUD Categoría Alert");
+            console.log("Error CUD Tipo de Cambio Alert");
     }
 
     $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertTCambio);
