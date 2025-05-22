@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CapaEntidad;
 using MySql.Data.MySqlClient;
 using System.Data;
+using Mysqlx.Crud;
 
 
 namespace CapaDato
@@ -24,8 +25,10 @@ namespace CapaDato
                 ObjConexion = new ClsConexion();
                 Cmd_D = new MySqlCommand("spCInicioCaja", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmCFecha", OInicioCaja.Fecha);
-                Cmd_D.Parameters.AddWithValue("prmCHora", OInicioCaja.Hora);
+                DateTime dateValue = DateTime.Parse(OInicioCaja.Fecha);
+                Cmd_D.Parameters.AddWithValue("prmCFecha", Convert.ToDateTime(dateValue));
+                Cmd_D.Parameters.AddWithValue("prmCHora", Convert.ToDateTime(OInicioCaja.Hora));
+             
                 Cmd_D.Parameters.AddWithValue("prmCIdCajero", Convert.ToInt16(OInicioCaja.ObjCajero.IdEmpleado));
                 ObjConexion.Abrircon();
                 int FilasInicioCaja = Cmd_D.ExecuteNonQuery();
@@ -61,8 +64,9 @@ namespace CapaDato
                     OInicioCaja.IdInicioCaja = Dr_D[0].ToString();
                     OInicioCaja.ObjCajero.ObjPersona.Nombre1 = Dr_D[1].ToString();  
                     OInicioCaja.ObjCajero.ObjPersona.Apellido1 = Dr_D[2].ToString();
-                    OInicioCaja.Fecha = Dr_D[3].ToString();
+                    OInicioCaja.Fecha =ClsCortarFechasD.getFecha( Dr_D[3].ToString());
                     OInicioCaja.Hora = Dr_D[4].ToString();
+                    OInicioCaja.Estado = Dr_D[5].ToString();
                     LstInicioCaja.Add(OInicioCaja);
                 }
                 return LstInicioCaja;
@@ -140,7 +144,8 @@ namespace CapaDato
                 ObjConexion = new ClsConexion();
                 Cmd_D = new MySqlCommand("spEInicioCaja", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
-                Cmd_D.Parameters.AddWithValue("prmEFecha", OInicioCaja.Fecha);
+                Cmd_D.Parameters.AddWithValue("prmEFecha",Convert.ToDateTime (OInicioCaja.Fecha));
+                Cmd_D.Parameters.AddWithValue("prmEIdInicioCaja", Convert.ToInt16 (OInicioCaja.IdInicioCaja));
 
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
@@ -161,7 +166,7 @@ namespace CapaDato
             }
         }
 
-        public List<ClsInicioCaja> FnRInicioCajaEstadoD(ClsInicioCaja OInicioCajaD)
+        public ClsInicioCaja FnRInicioCajaEstadoD(ClsInicioCaja OInicioCajaD)
         {
             ClsInicioCaja OInicioCaja = null;
             try
@@ -171,16 +176,14 @@ namespace CapaDato
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 Cmd_D.Parameters.AddWithValue("prmRIdInicioCaja", Convert.ToInt16(OInicioCajaD.IdInicioCaja));
                 ObjConexion.Abrircon();
-                Dr_D = Cmd_D.ExecuteReader();
-                List<ClsInicioCaja> LstInicioCaja = new List<ClsInicioCaja>();
+                Dr_D = Cmd_D.ExecuteReader();            
                 while (Dr_D.Read())
                 {
                     OInicioCaja = new ClsInicioCaja();
                     OInicioCaja.Estado = Dr_D[0].ToString();
-               
-                    LstInicioCaja.Add(OInicioCaja);
+                                  
                 }
-                return LstInicioCaja;
+                return OInicioCaja;
             }
             catch (Exception ex)
             {

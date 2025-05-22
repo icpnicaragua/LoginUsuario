@@ -22,10 +22,18 @@ namespace CapaNegocio
         }
         public bool FnUInicioCajaN(ClsInicioCaja OInicioCaja)
         {
-            if (OInicioCaja.Fecha != "" && OInicioCaja.Fecha != null && OInicioCaja.IdInicioCaja != "" && OInicioCaja.IdInicioCaja != null)
+            ClsInicioCaja OInicioCajaActualizable = new ClsInicioCajaD().FnRInicioCajaEstadoD(OInicioCaja);
+            if ((OInicioCajaActualizable.Estado == "1") || (OInicioCajaActualizable.Estado == "4"))
             {
-                Boolean UpdateInicioCaja = new ClsInicioCajaD().FnUInicioCajaD(OInicioCaja);
-                return UpdateInicioCaja;
+                if (OInicioCaja.ObjCajero.IdEmpleado != "" && OInicioCaja.ObjCajero.IdEmpleado != null && OInicioCaja.IdInicioCaja != "" && OInicioCaja.IdInicioCaja != null)
+                {
+                    Boolean UpdateInicioCaja = new ClsInicioCajaD().FnUInicioCajaD(OInicioCaja);
+                    return UpdateInicioCaja;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -34,10 +42,18 @@ namespace CapaNegocio
         }
         public bool FnDInicioCajaN(ClsInicioCaja OInicioCaja)
         {
-            if (OInicioCaja.IdInicioCaja != "" && OInicioCaja.IdInicioCaja != null)
+            ClsInicioCaja OInicioCajaBorrable = new ClsInicioCajaD().FnRInicioCajaEstadoD(OInicioCaja);
+            if ((OInicioCajaBorrable.Estado == "1") || (OInicioCajaBorrable.Estado == "4"))
             {
-                Boolean DeleteInicioCaja = new ClsInicioCajaD().FnDInicioCajaD(OInicioCaja);
-                return DeleteInicioCaja;
+                if (OInicioCaja.IdInicioCaja != "" && OInicioCaja.IdInicioCaja != null)
+                {
+                    Boolean DeleteInicioCaja = new ClsInicioCajaD().FnDInicioCajaD(OInicioCaja);
+                    return DeleteInicioCaja;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -46,7 +62,7 @@ namespace CapaNegocio
         }
         public bool FnEInicioCajaN(ClsInicioCaja OInicioCaja)
         {
-            if (OInicioCaja.IdInicioCaja != "" && OInicioCaja.IdInicioCaja != null && OInicioCaja.Fecha != "" && OInicioCaja.Fecha != null)
+            if (OInicioCaja.Fecha != "" && OInicioCaja.Fecha != null && OInicioCaja.IdInicioCaja != "" && OInicioCaja.IdInicioCaja != null)
             {
                 Boolean ExisteInicioCaja = new ClsInicioCajaD().FnEInicioCajaD(OInicioCaja);
                 return ExisteInicioCaja;
@@ -56,9 +72,9 @@ namespace CapaNegocio
                 return true;
             }
         }
-        public List<ClsInicioCaja> FnRInicioCajaEstadoN(ClsInicioCaja OInicioCajaN)
+        public ClsInicioCaja FnRInicioCajaEstadoN(ClsInicioCaja OInicioCajaN)
         {
-            List<ClsInicioCaja> OInicioCaja = new ClsInicioCajaD().FnRInicioCajaEstadoD(OInicioCajaN);
+            ClsInicioCaja OInicioCaja = new ClsInicioCajaD().FnRInicioCajaEstadoD(OInicioCajaN);
             return OInicioCaja;
         }
     }

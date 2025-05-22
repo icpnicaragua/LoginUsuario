@@ -44,8 +44,7 @@ namespace CapaVista.modulo1
             bool UpdateInicioCaja = false;
             ClsInicioCaja OInicioCaja = new ClsInicioCaja();
 
-            OInicioCaja.IdInicioCaja = IdInicioCaja;
-          
+            OInicioCaja.IdInicioCaja = IdInicioCaja;          
             OInicioCaja.ObjCajero.IdEmpleado = IdCajero;
             UpdateInicioCaja = new ClsInicioCajaN().FnUInicioCajaN(OInicioCaja);
 
@@ -68,23 +67,24 @@ namespace CapaVista.modulo1
         }
 
         [WebMethod]
-        public static bool FnEInicioCajaV(string Fecha)
+        public static bool FnEInicioCajaV(string IdInicioCaja,string Fecha)
         {
             bool ExisteInicioCaja = false;
             ClsInicioCaja OInicioCaja = new ClsInicioCaja();
                      
             OInicioCaja.Fecha = Fecha;
+            OInicioCaja.IdInicioCaja = IdInicioCaja;
 
             ExisteInicioCaja = new ClsInicioCajaN().FnEInicioCajaN(OInicioCaja);
 
             return ExisteInicioCaja;
         }
         [WebMethod]
-        public static List<ClsInicioCaja> FnRInicioCajaEstadoV(string IdInicioCaja)
+        public static ClsInicioCaja FnRInicioCajaEstadoV(string IdInicioCaja)
         {
             ClsInicioCaja OInicioCajaN = new ClsInicioCaja();
             OInicioCajaN.IdInicioCaja = IdInicioCaja;
-            List<ClsInicioCaja> OInicioCaja = new ClsInicioCajaN().FnRInicioCajaEstadoN(OInicioCajaN);
+            ClsInicioCaja OInicioCaja = new ClsInicioCajaN().FnRInicioCajaEstadoN(OInicioCajaN);
             return OInicioCaja;
         }
         #endregion

@@ -123,11 +123,11 @@ function FnJsDateNow(Separador) {
 }
 function FnJsHour() {
     var now = new Date();
-    var jsDate = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+    var jsDate = now.getHours() + ":" +  now.getMinutes() + ":" + now.getSeconds();
     return jsDate;
 }
 function FnJsHourNow(Separador) {
     var now = new Date();
-    var jsDate = now.getHours() + Separador + now.getMinutes() + Separador + now.getSeconds();
+    var jsDate = ("0" + now.getHours()).slice(-2)  + Separador + ("0" + now.getMinutes()).slice(-2) + Separador + ("0" + now.getSeconds()).slice(-2) ;
     return jsDate;
 }

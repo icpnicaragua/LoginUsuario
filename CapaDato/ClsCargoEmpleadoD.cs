@@ -167,7 +167,7 @@ namespace CapaDato
             try
             {
                 ObjConexion = new ClsConexion();
-                Cmd_D = new MySqlCommand("spRCargoEmpleado", ObjConexion.Con_D);
+                Cmd_D = new MySqlCommand("spRCajero", ObjConexion.Con_D);
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 ObjConexion.Abrircon();
                 Dr_D = Cmd_D.ExecuteReader();
@@ -175,7 +175,7 @@ namespace CapaDato
                 while (Dr_D.Read())
                 {
                     OCajero = new ClsCargoEmpleado();
-                    OCajero.ObjEmpleado.IdEmpleado = Dr_D[3].ToString();
+                    OCajero.ObjEmpleado.IdEmpleado = Dr_D[0].ToString();
                     OCajero.ObjEmpleado.ObjPersona.Nombre1 = Dr_D[1].ToString();
                     OCajero.ObjEmpleado.ObjPersona.Apellido1 = Dr_D[2].ToString();                   
                     LstCajero.Add(OCajero);

@@ -16,6 +16,8 @@ var VarJsColorAlertInicioCaja = "";
 var VarJsTextoAlertInicioCaja = "";
 
 var EInicioCaja = true;
+var EFecha = true;
+
 $("[data-mask]").inputmask();
 
 $('#lbMostrarInicioCaja').click(function (e) {
@@ -154,16 +156,20 @@ function AddrowInicioCaja(data) {
         "language": FnJsEspTbl()
     });
     tablaInicioCaja.buttons().container().addClass('form-inline');
-
+    var Btn = '';
     for (var contInicioCaja = 0; contInicioCaja < data.length; contInicioCaja++) {
+        Btn = '';
+        if (data[contInicioCaja].Estado == 1 || data[contInicioCaja].Estado == 4 ) {
+            Btn = '<button value="editar" href="#modalNInicioCaja" data-toggle="modal" title="editar" class="btn btn-warning  btn-editInicioCaja"><i class="fas fa-pencil-alt"></i> </button>' +
+                '<button value="eliminar" href="#modalNInicioCaja" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteInicioCaja"><i class="fa fa-trash" ></i> </button>'
+       }
         tablaInicioCaja.row.add([
             data[contInicioCaja].IdInicioCaja,
-            data[contInicioCaja].ObjCajero.ObjPersona.Nombre1 + ' '+ObjCajero.ObjPersona.Apellido1,
+            data[contInicioCaja].ObjCajero.ObjPersona.Nombre1 + ' ' + data[contInicioCaja].ObjCajero.ObjPersona.Apellido1,
             data[contInicioCaja].Fecha,
-            data[contInicioCaja].Hora,            
-            '<button value="editar" href="#modalNInicioCaja" data-toggle="modal" title="editar" class="btn btn-warning  btn-editInicioCaja"><i class="fas fa-pencil-alt"></i> </button>' +
-            '<button value="eliminar" href="#modalNInicioCaja" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteInicioCaja"><i class="fa fa-trash" ></i> </button>'             
-        ]
+            data[contInicioCaja].Hora,
+            Btn
+               ]
         ).draw(false);
     }
 }
@@ -405,7 +411,8 @@ function FnJsAjaxEInicioCaja() {
         url: "/modulo1/VstInicioCaja.aspx/FnEInicioCajaV",
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({          
-            Fecha: VarJsFecha            
+            Fecha: VarJsFecha,
+            IdInicioCaja: VarJsInicioCajaId
         }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
@@ -425,7 +432,6 @@ function FnJsAjaxEInicioCaja() {
         }
     });
 }
-
 function VerificarExisteInicioCaja() {
     if ($('#txtNuevoFecha').val().length > 0 && $('#txtNuevoHora').val().length > 0 && $('#ddlCInicioCajaCajero').val() > 0) {
         return true;
@@ -437,11 +443,19 @@ function VerificarExisteInicioCaja() {
 
 $('#txtNuevoFecha').keyup(function (e) {
     VarJsFecha = $(this).val();
+
+});
+
+$('#ddlCInicioCajaCajero').change(function (e) {
+    VarJsIdCajero = $('#ddlCInicioCajaCajero').val();
+    if (VerificarExisteInicioCaja()) {
+        FnJsAjaxEInicioCaja();
+    }
     var actual = new Date();
     let d = $('#txtNuevoFecha').val().split("/");
-    let dat = new Date(d[2] + '/' + d[1] + '/' + d[0]);
+    let dat = new Date(d[2] + '/' + d[1] + '/' + d[0]+' '+ '23:59:00');
     if (!isNaN(dat)) {
-        if (actual > dat) {
+        if (actual >= dat) {
             EFecha = true;
             $('#lblexistenuevoFecha').text("Solo fechas futuras");
         }
@@ -454,14 +468,6 @@ $('#txtNuevoFecha').keyup(function (e) {
         FnJsBlockInicioCaja();
     }
 });
-
-$('#ddlCInicioCajaCajero').change(function (e) {
-    VarJsIdCajero = $('#ddlCInicioCajaCajero').val();
-    if (VerificarExisteInicioCaja()) {
-        FnJsAjaxEInicioCaja();
-    }
-});
-
 function FnJSFillDdlInicioCajaCajero() {
     $('#ddlCInicioCajaCajero').empty();
     $.ajax({
@@ -491,7 +497,6 @@ function FnJSFillDdlInicioCajaCajero() {
         }
     });
 }
-
 function FnAlertaInicioCaja() {
 
     switch (CRUDInicioCaja) {
@@ -514,7 +519,6 @@ function FnAlertaInicioCaja() {
         default:
             console.log("Error CUD Inicio de Caja Alert");
     }
-
     $('.bd-example-modal-sm .modal-content').addClass(VarJsColorAlertInicioCaja);
     $('.bd-example-modal-sm h5').text(VarJsTextoAlertInicioCaja);
     $('.bd-example-modal-sm').modal('show');
@@ -522,10 +526,8 @@ function FnAlertaInicioCaja() {
         $('.bd-example-modal-sm').modal('hide');
         $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertInicioCaja);
     }, 1500);
-
     if ($("#secciontblInicioCaja.show").length > 0) {
-        FnJsAjaxRInicioCaja();
-    }
+        FnJsAjaxRInicioCaja();    }
 
     $("#modalNInicioCaja").modal("toggle");
 }

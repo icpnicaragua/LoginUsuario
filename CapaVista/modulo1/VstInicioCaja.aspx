@@ -18,13 +18,13 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div id="InicioCaja" class="  col-lg-4 col-md-6 col-sm-12 collapse">
+            <div id="InicioCaja" class="  col-lg-6 col-md-6 col-sm-12 collapse">
                 <div class="card bg-light mb-3">
                     <div class="card-header">
                         <h2 class="d-inline-block">InicioCaja</h2>
                         <div class="d-inline-block pull-right">
                             <asp:LinkButton ID="lbNInicioCaja" href="#modalNInicioCaja" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton>
-                            <asp:LinkButton ID="lbMostrarInicioCaja" href="#secciontblInicioCaja" runat="server" Text="Mostrar InicioCaja" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>
+                            <asp:LinkButton ID="lbMostrarInicioCaja" href="#secciontblInicioCaja" runat="server" Text="Mostrar Inicio Caja" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton>
                         </div>
                     </div>
                     <div class="card-body">
@@ -33,10 +33,10 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th>Cajero</th>
                                         <th>Fecha</th>
                                         <th>Hora</th>
-                                        <th>Cajero</th>
-                                        <th>Ctrl</th>
+                                        <th title="Solo Se puede editar o eliminar si no se ha asignado denominaciones">Ctrl</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tblBodyInicioCaja">
@@ -71,6 +71,7 @@
                             </asp:DropDownList>
                         </div>
                         <label id="lblexistenuevoFecha" for="txtNuevoFecha" runat="server" class="text-warning" text=""></label>
+                        <label id="lblexistenuevoInicioCaja" for="txtNuevoFecha" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
                             <asp:TextBox ID="txtNuevoFecha" runat="server" TabIndex="2" CssClass="form-control" data-inputmask="'alias':'dd/mm/yyyy'" data-mask="" ClientIDMode="Static"></asp:TextBox>
                             <span class="input-group-addon">
