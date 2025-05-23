@@ -89,5 +89,44 @@ namespace CapaVista.modulo1
         }
         #endregion
 
+        #region RegDenominacionInicio
+        [WebMethod]
+        public static bool FnCUEDenominacionInicioV(string IdInicioCaja, string IdDenominacion, string Cantidad)
+        {
+            bool CUEDenominacionIncio = false;
+            ClsDenominacionInicio ODenominacionInicio = new ClsDenominacionInicio();
+
+            ODenominacionInicio.ObjInicioCaja.IdInicioCaja = IdInicioCaja;
+            ODenominacionInicio.ObjDenominacionCS.IdDenominacion = IdDenominacion;
+            ODenominacionInicio.Cantidad = Cantidad;
+
+            CUEDenominacionIncio = new ClsDenominacionInicioN().FnCUEDenominacionInicioN(ODenominacionInicio);
+
+            return CUEDenominacionIncio;
+        }
+
+        [WebMethod]
+        public static List<ClsDenominacionInicio> FnRDenominacionInicioV(string IdInicioCaja)
+        {
+            ClsDenominacionInicio ODenominacionInicioV = new ClsDenominacionInicio();
+            ODenominacionInicioV.ObjInicioCaja.IdInicioCaja = IdInicioCaja;
+            List<ClsDenominacionInicio> ODenominacionInicio = new ClsDenominacionInicioN().FnRDenominacionInicioN(ODenominacionInicioV);
+            return ODenominacionInicio;
+        }
+
+
+    
+        [WebMethod]
+        public static bool FnCerrarDenominacionInicioV(string IdInicioCaja)
+        {
+            bool CerrarDenominacionIncio = false;
+            ClsDenominacionInicio ODenominacionInicio = new ClsDenominacionInicio();
+            ODenominacionInicio.ObjInicioCaja.IdInicioCaja = IdInicioCaja;          
+            CerrarDenominacionIncio = new ClsDenominacionInicioN().FnCerrarDenominacionInicioN(ODenominacionInicio);
+            return CerrarDenominacionIncio;
+        }
+        #endregion
+
+
     }
 }

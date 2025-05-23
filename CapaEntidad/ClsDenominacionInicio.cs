@@ -8,13 +8,13 @@ namespace CapaEntidad
 {
     public class ClsDenominacionInicio
     {
-        private string _IdDenoInicio;
+      
         private ClsInicioCaja _ObjInicioCaja;
         private ClsDenominacionesCS _ObjDenominacionCS;
         private string _Cantidad;
         private string _Estado;
 
-        public string IdDenoInicio { get => _IdDenoInicio; set => _IdDenoInicio = value; }
+     
         public ClsInicioCaja ObjInicioCaja { get => _ObjInicioCaja; set => _ObjInicioCaja = value; }
         public ClsDenominacionesCS ObjDenominacionCS { get => _ObjDenominacionCS; set => _ObjDenominacionCS = value; }
         public string Cantidad { get => _Cantidad; set => _Cantidad = value; }

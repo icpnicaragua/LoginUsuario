@@ -5,7 +5,6 @@ var VarJsInicioCajaId = 0;
 var VarJsFecha = "";
 var VarJsHora = "";
 var VarJsIdCajero = 0;
-
 var VAlDDLInicioCajaCajero = "null";
 
 var formInicioCaja = document.querySelector('#form1');
@@ -46,11 +45,14 @@ function AddrowInicioCaja(data) {
     $('#tblInicioCaja').DataTable().clear().destroy();
     tablaInicioCaja = $("#tblInicioCaja").DataTable({
         "retrieve": true,
+        select: true,
         dom: 'Bfrtip',
         "order": [2, 'desc'],
         "columnDefs": [
             { "targets": 4, "searchable": false },
-            { "orderable": false, "targets": 4 }
+            { "orderable": false, "targets": 4 },
+            { "targets": 5, "searchable": false },
+            { "visible": false, "targets": 5 }
         ],
         "buttons": [
             {
@@ -159,17 +161,18 @@ function AddrowInicioCaja(data) {
     var Btn = '';
     for (var contInicioCaja = 0; contInicioCaja < data.length; contInicioCaja++) {
         Btn = '';
-        if (data[contInicioCaja].Estado == 1 || data[contInicioCaja].Estado == 4 ) {
+        if (data[contInicioCaja].Estado == 1 || data[contInicioCaja].Estado == 4) {
             Btn = '<button value="editar" href="#modalNInicioCaja" data-toggle="modal" title="editar" class="btn btn-warning  btn-editInicioCaja"><i class="fas fa-pencil-alt"></i> </button>' +
                 '<button value="eliminar" href="#modalNInicioCaja" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteInicioCaja"><i class="fa fa-trash" ></i> </button>'
-       }
+        }
         tablaInicioCaja.row.add([
             data[contInicioCaja].IdInicioCaja,
             data[contInicioCaja].ObjCajero.ObjPersona.Nombre1 + ' ' + data[contInicioCaja].ObjCajero.ObjPersona.Apellido1,
             data[contInicioCaja].Fecha,
             data[contInicioCaja].Hora,
-            Btn
-               ]
+            Btn,
+            data[contInicioCaja].Estado
+        ]
         ).draw(false);
     }
 }
@@ -186,7 +189,7 @@ $('#lbNInicioCaja').click(function (e) {
     VarJsInicioCajaId = 0;
     VarJsFecha = FnJsDateNow('/');
     VarJsHora = FnJsHourNow(':');
-    $('#txtNuevoFecha').val(VarJsFecha); 
+    $('#txtNuevoFecha').val(VarJsFecha);
     $('#txtNuevoHora').val(VarJsHora);
     VarJsIdCajero = 0;
 });
@@ -200,10 +203,10 @@ $(document).on('click', '.btn-editInicioCaja', function (e) {
     VarJsFecha = dataInicioCaja[2];
     $('#txtNuevoHora').val(dataInicioCaja[3]);
     VarJsHora = dataInicioCaja[3];
-    VAlDDLInicioCajaCajero = (dataInicioCaja[1]);   
+    VAlDDLInicioCajaCajero = (dataInicioCaja[1]);
     FnJSFillDdlInicioCajaCajero();
-    VarJsIdCajero = $('#ddlCInicioCajaCajero').val();    
-       
+    VarJsIdCajero = $('#ddlCInicioCajaCajero').val();
+
     CRUDInicioCaja = "U";
 });
 $(document).on('click', '.btn-deleteInicioCaja', function (e) {
@@ -214,11 +217,11 @@ $(document).on('click', '.btn-deleteInicioCaja', function (e) {
     FnJsBlockInicioCaja();
     var dataInicioCaja = tablaInicioCaja.row($(this).parents("tr")).data();
     VarJsInicioCajaId = dataInicioCaja[0];
-    $('#txtNuevoFecha').val(dataInicioCaja[2]); 
-    $('#txtNuevoHora').val(dataInicioCaja[3]);    
+    $('#txtNuevoFecha').val(dataInicioCaja[2]);
+    $('#txtNuevoHora').val(dataInicioCaja[3]);
     VAlDDLInicioCajaCajero = (dataInicioCaja[1]);
     FnJSFillDdlInicioCajaCajero();
-    VarJsIdCajero = $('#ddlCInicioCajaCajero').val();    
+    VarJsIdCajero = $('#ddlCInicioCajaCajero').val();
 
     CRUDInicioCaja = "D";
 });
@@ -305,7 +308,7 @@ function FnJsBlockInicioCaja() {
         $("#btnNueInicioCaja").fadeOut("fast");
         $("#btnNueInicioCaja").attr('disabled', true);
     }
-    else if (EInicioCaja == false && EFecha==false) {
+    else if (EInicioCaja == false && EFecha == false) {
         $("#btnNueInicioCaja").fadeIn("slow");
         $("#btnNueInicioCaja").attr('disabled', false);
     }
@@ -361,9 +364,9 @@ function FnJsAjaxUInicioCaja() {
         url: "/modulo1/VstInicioCaja.aspx/FnUInicioCajaV",
         contentType: 'application/json; charser=utf-8',
         data: JSON.stringify({
-            IdInicioCaja: VarJsInicioCajaId,           
+            IdInicioCaja: VarJsInicioCajaId,
             IdCajero: VarJsIdCajero
-        }), 
+        }),
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
@@ -410,7 +413,7 @@ function FnJsAjaxEInicioCaja() {
     $.ajax({
         url: "/modulo1/VstInicioCaja.aspx/FnEInicioCajaV",
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({          
+        data: JSON.stringify({
             Fecha: VarJsFecha,
             IdInicioCaja: VarJsInicioCajaId
         }),
@@ -453,7 +456,7 @@ $('#ddlCInicioCajaCajero').change(function (e) {
     }
     var actual = new Date();
     let d = $('#txtNuevoFecha').val().split("/");
-    let dat = new Date(d[2] + '/' + d[1] + '/' + d[0]+' '+ '23:59:00');
+    let dat = new Date(d[2] + '/' + d[1] + '/' + d[0] + ' ' + '23:59:00');
     if (!isNaN(dat)) {
         if (actual >= dat) {
             EFecha = true;
@@ -527,7 +530,8 @@ function FnAlertaInicioCaja() {
         $('.bd-example-modal-sm .modal-content').removeClass(VarJsColorAlertInicioCaja);
     }, 1500);
     if ($("#secciontblInicioCaja.show").length > 0) {
-        FnJsAjaxRInicioCaja();    }
+        FnJsAjaxRInicioCaja();
+    }
 
     $("#modalNInicioCaja").modal("toggle");
 }

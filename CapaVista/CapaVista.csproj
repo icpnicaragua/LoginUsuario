@@ -632,6 +632,7 @@
     <Content Include="js\icp\CRUDECorreo.js" />
     <Content Include="js\icp\CRUDECorreoEmpresa.js" />
     <Content Include="js\icp\CRUDEDenominacionesCS.js" />
+    <Content Include="js\icp\CRUDEDenominacionInicio.js" />
     <Content Include="js\icp\CRUDEDireccion.js" />
     <Content Include="js\icp\CRUDEDireccionEmpresa.js" />
     <Content Include="js\icp\CRUDEEmpleado.js" />

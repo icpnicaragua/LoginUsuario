@@ -16,9 +16,9 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid collapse" id="InicioCaja">
         <div class="row">
-            <div id="InicioCaja" class="  col-lg-6 col-md-6 col-sm-12 collapse">
+            <div class="col-lg-12 col-md-12 col-sm-12 ">
                 <div class="card bg-light mb-3">
                     <div class="card-header">
                         <h2 class="d-inline-block">InicioCaja</h2>
@@ -37,6 +37,7 @@
                                         <th>Fecha</th>
                                         <th>Hora</th>
                                         <th title="Solo Se puede editar o eliminar si no se ha asignado denominaciones">Ctrl</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tblBodyInicioCaja">
@@ -45,9 +46,42 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+
+            <div class="collapse" id="DenominacionInicioROW">
+                <div id="DenominacionInicio" class="  col-lg-12 col-md-12 col-sm-12 ">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">
+                            <h2 id="H2DenominacionInicio"class="d-inline-block">Denominaciones Inicio de Caja</h2>
+                            <div class="d-inline-block pull-right">
+                                <asp:LinkButton ID="lbNCerrarDenominacionInicio" runat="server" CssClass="btn btn-success  btn3d "><i class="fa fa-floppy-o fa-2x"></i></asp:LinkButton>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="secciontblDenominacionInicio" class="table-responsive">
+                                <table id="tblDenominacionInicio" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Denominación</th>
+                                            <th>Cantidad</th>
+                                            <th>Total</th>
+                                            <th>Ctrl</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tblBodyDenominacionInicio">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
+
     <div id="alertaInicioCaja" class="modal bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -109,5 +143,6 @@
     <script src="/js/plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEInicioCaja.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDEDenominacionInicio.js" type="text/javascript"></script>
 
 </asp:Content>
