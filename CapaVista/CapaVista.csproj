@@ -644,6 +644,7 @@
     <Content Include="js\icp\CRUDEGarantia.js" />
     <Content Include="js\icp\CRUDEIdentificacion.js" />
     <Content Include="js\icp\CRUDEInicioCaja.js" />
+    <Content Include="js\icp\CRUDEInyeccion.js" />
     <Content Include="js\icp\CRUDEMoneda.js" />
     <Content Include="js\icp\CRUDEPagoSobre.js" />
     <Content Include="js\icp\CRUDEPalabraClave.js" />

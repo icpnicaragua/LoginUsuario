@@ -77,5 +77,12 @@ namespace CapaNegocio
             ClsInicioCaja OInicioCaja = new ClsInicioCajaD().FnRInicioCajaEstadoD(OInicioCajaN);
             return OInicioCaja;
         }
-    }
+
+        public List<ClsInicioCaja> FnRAInicioCajaN()
+        {
+            List<ClsInicioCaja> OInicioCaja = new ClsInicioCajaD().FnRAInicioCajaD();
+            return OInicioCaja;
+        }
+
+}
 }

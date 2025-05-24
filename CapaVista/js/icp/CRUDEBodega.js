@@ -1,7 +1,5 @@
-﻿/*variable de tablas*/
-var tablaBodega;/*tabla mpodulo*/
-var ModCBodega = $('#modalNBodega'); // modal 
-//campos de tablas
+﻿var tablaBodega;   
+var ModCBodega = $('#modalNBodega');       
 var VarJsBodegaId = 0;
 var VarJsBodega = "";
 var VarJsIdSucursal = 0;
@@ -12,54 +10,49 @@ var VarJsIdResponsable = 0;
 var VarJsResponsable = "";
 
 
-//dddlist Sucursal
-var VAlDDLBodegaSucursal = "null";// para guardar lo que está en la tabla y luego asignar al ddl
-var VAlDDLBodegaResponsable = "null";// para guardar lo que está en la tabla y luego asignar al ddl
+var VAlDDLBodegaSucursal = "null";                                       
+var VAlDDLBodegaResponsable = "null";                                       
 
-//igual para todos
 var formBodega = document.querySelector('#form1');
 
-//variables crud
 CRUDBodega = "";
-//variables alertas
 var VarJsColorAlertBodega = "";
 var VarJsTextoAlertBodega = "";
-//variables existe
 var EBodega = true;
 
 
-$('#lbMostrarBodega').click(function (e) {//1 evento para mostrar contenido  xxxx
+$('#lbMostrarBodega').click(function (e) {                  
     e.preventDefault();
-    FnJsAjaxRBodega(); //llama al ajax xxxx
-    FnJSFillDdlBodegaSucursal();//cargar ddl
+    FnJsAjaxRBodega();          
+    FnJSFillDdlBodegaSucursal();   
 });
 
-function FnJsAjaxRBodega() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRBodega() {                               
     $.ajax({
         type: "POST",
-        url: "/modulo3/VstBodega.aspx/FnRBodegaV", // nombre de página y nombre de función xxxx
+        url: "/modulo3/VstBodega.aspx/FnRBodegaV",                         
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowBodega(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowBodega(data.d);                                        
         }
     }
     );
 }
 
-function AddrowBodega(data) {//3 llenar la tabla xxxx
+function AddrowBodega(data) {            
 
-    $('#tblBodega').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
+    $('#tblBodega').DataTable().clear().destroy();                            
 
-    tablaBodega = $("#tblBodega").DataTable({// variable nombre tabla xxxx
+    tablaBodega = $("#tblBodega").DataTable({            
 
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [1, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [1, 'asc'],                                             
         "columnDefs": [
             { "targets": 5, "searchable": false },
             { "orderable": false, "targets": 5 }
@@ -69,10 +62,10 @@ function AddrowBodega(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colBodega'//se añade el id para ocultar xxxx
+                    id: 'colBodega'                  
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',             
+                className: 'btn btn-info',       
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -84,7 +77,7 @@ function AddrowBodega(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(5)):visible']                               
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -97,10 +90,10 @@ function AddrowBodega(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(5)):visible']                                  
                 },
                 titleAttr: 'PDF',
-                filename: 'Bodega' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Bodega' + "_" + FnJsDate() + "_" + FnJsHour(),         
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -108,7 +101,7 @@ function AddrowBodega(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64();          
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -122,14 +115,14 @@ function AddrowBodega(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Bodega', //tttt
+                                    text: 'Bodega', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Bodega' //tttt
+                                    text: 'Reporte Bodega' 
                                 }
                             ],
                             margin: 20
@@ -156,11 +149,11 @@ function AddrowBodega(data) {//3 llenar la tabla xxxx
             },
             {
                 extend: 'excel',
-                filename: 'Bodega' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Bodega' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(5)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(5)):visible']                               
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -172,36 +165,34 @@ function AddrowBodega(data) {//3 llenar la tabla xxxx
         ],
         "language": FnJsEspTbl()
     });
-    tablaBodega.buttons().container().addClass('form-inline');///variable xxxx
+    tablaBodega.buttons().container().addClass('form-inline');   
 
-    for (var contBodega = 0; contBodega < data.length; contBodega++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaBodega.row.add([//sensitivecase:
-            data[contBodega].IdBodega,//campos
-            data[contBodega].NombreBodega,//campos
-            data[contBodega].Descripcion,//campos
+    for (var contBodega = 0; contBodega < data.length; contBodega++) {                         
+        tablaBodega.row.add([
+            data[contBodega].IdBodega,
+            data[contBodega].NombreBodega,
+            data[contBodega].Descripcion,
             data[contBodega].ObjSucursal.Sucursal,
             data[contBodega].ObjResponsable.ObjPersona.Nombre1 + ' ' + data[contBodega].ObjResponsable.ObjPersona.Apellido1,
-            '<button value="editar" href="#modalNBodega" data-toggle="modal" title="editar" class="btn btn-warning  btn-editBodega"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNBodega" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteBodega"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNBodega" data-toggle="modal" title="editar" class="btn btn-warning  btn-editBodega"><i class="fas fa-pencil-alt"></i> </button>' +                     
+            '<button value="eliminar" href="#modalNBodega" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteBodega"><i class="fa fa-trash" ></i> </button>'                     
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$('#lbNBodega').click(function (e) {//4 evento para mostrar modal de nuevo
+$('#lbNBodega').click(function (e) {                  
     e.preventDefault();
-    FnJsCBodega(); // nombre función xxxx
-    EBodega = true; // variable xxxx
+    FnJsCBodega();          
+    EBodega = true;       
 
-    FnJsBlockBodega(); // nombre función xxxx
+    FnJsBlockBodega();          
     FnJSFillDdlBodegaSucursal();
     FnJSFillDdlBodegaResponsable();
-    CRUDBodega = "C"; // nombre variable xxxx
+    CRUDBodega = "C";          
 
-    //campos xxxx
-    VarJsBodegaId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsBodega = ""; // cada campo tiene una variable, inicializar xxxx
+    VarJsBodegaId = 0;                      
+    VarJsBodega = "";                      
     VarJsIdSucursal = 0;
 
     VarJsDescripcion = "";
@@ -209,18 +200,18 @@ $('#lbNBodega').click(function (e) {//4 evento para mostrar modal de nuevo
     VarJsIdResponsable = 0;
     VarJsResponsable = "";
 });
-$(document).on('click', '.btn-editBodega', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editBodega', function (e) {         
     e.preventDefault();
-    FnJsUBodega();//nombre de función xxxx
-    var dataBodega = tablaBodega.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
+    FnJsUBodega();         
+    var dataBodega = tablaBodega.row($(this).parents("tr")).data();                                                
 
-    VarJsBodegaId = dataBodega[0]; //id de la fila seleccionada
+    VarJsBodegaId = dataBodega[0];             
 
-    $('#txtNuevoBodega').val(dataBodega[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsBodega = dataBodega[1]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoBodega').val(dataBodega[1]);                        
+    VarJsBodega = dataBodega[1];                   
 
-    $('#txtNuevoDescripcion').val(dataBodega[2]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsDescripcion = dataBodega[2]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoDescripcion').val(dataBodega[2]);                        
+    VarJsDescripcion = dataBodega[2];                   
 
     VAlDDLBodegaSucursal = (dataBodega[3]);
     VarJsSucursal = dataBodega[3];
@@ -232,23 +223,23 @@ $(document).on('click', '.btn-editBodega', function (e) {//nombre de clase xxxx
     FnJSFillDdlBodegaResponsable();
     VarJsIdResponsable = $('#ddlCBodegaResponsable').val();
         
-    CRUDBodega = "U";// variable crud, estado crud xxxx
+    CRUDBodega = "U";               
 });
-$(document).on('click', '.btn-deleteBodega', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteBodega', function (e) {         
     e.preventDefault();
-    FnJsDBodega();//nombre de función xxxx
-    EBodega = false; // variable de existe xxxx
+    FnJsDBodega();         
+    EBodega = false;             
 
 
-    FnJsBlockBodega();//función bloquear xxxx
-    var dataBodega = tablaBodega.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsBodegaId = dataBodega[0]; //id de la fila seleccionada
+    FnJsBlockBodega();      
+    var dataBodega = tablaBodega.row($(this).parents("tr")).data();                                                
+    VarJsBodegaId = dataBodega[0];             
 
-    $('#txtNuevoBodega').val(dataBodega[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsBodega = dataBodega[1]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoBodega').val(dataBodega[1]);                        
+    VarJsBodega = dataBodega[1];                   
 
-    $('#txtNuevoDescripcion').val(dataBodega[2]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsDescripcion = dataBodega[2]; // variable elemento, variable data, índice xxxx
+    $('#txtNuevoDescripcion').val(dataBodega[2]);                        
+    VarJsDescripcion = dataBodega[2];                   
 
     VAlDDLBodegaSucursal = (dataBodega[3]);
     VarJsSucursal = dataBodega[3];
@@ -261,267 +252,230 @@ $(document).on('click', '.btn-deleteBodega', function (e) {//nombre de clase xxx
     CRUDBodega = "D";
 });
 
-//pintar modal
-function FnJsCBodega() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoBodega').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsCBodega() {       
+    $('#lblexistenuevoBodega').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorBodega").removeAttr("class");//quitar el atributo class
-    $("#DivModBorBodega").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaBodega").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaBodega").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitBodega').text('Nuevo Bodega');//tttt
-    //cambiar el color icono btn
-    $("#btnNueBodega").removeAttr("class");//quitar el atributo class
-    $("#btnNueBodega").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+    $("#DivModBorBodega").removeAttr("class");         
+    $("#DivModBorBodega").attr('class', 'modal-content border-success');   
+    $("#DivModHeaBodega").removeAttr("class");         
+    $("#DivModHeaBodega").attr('class', 'modal-header bg-success');   
+    $('#H4ModTitBodega').text('Nuevo Bodega');
+    $("#btnNueBodega").removeAttr("class");         
+    $("#btnNueBodega").attr('class', 'btn btn-success pull-right');               
     $("#btnNueBodega i").removeAttr("class");
     $("#btnNueBodega i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCBodegaSucursal").removeAttr("class"); //uitar propiedades
-    $("#ddlCBodegaSucursal").attr("class", "form-control border-success");//pintr roo
-    $("#ddlCBodegaResponsable").removeAttr("class"); //uitar propiedades
-    $("#ddlCBodegaResponsable").attr("class", "form-control border-success");//pintr roo
+    $("#ddlCBodegaSucursal").removeAttr("class");    
+    $("#ddlCBodegaSucursal").attr("class", "form-control border-success");   
+    $("#ddlCBodegaResponsable").removeAttr("class");    
+    $("#ddlCBodegaResponsable").attr("class", "form-control border-success");   
     
-    //bloquear elementos
-    $("#txtNuevoBodega").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#txtNuevoDescripcion").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoBodega").attr('disabled', false);                   
+    $("#txtNuevoDescripcion").attr('disabled', false);                   
     
     $('#ddlCBodegaSucursal').attr('disabled', false);
     $('#ddlCBodegaResponsable').attr('disabled', false);
     
-    //vaciar elementos text de todo el modal
-    $('#' + ModCBodega[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCBodega[0].id + ' :text').val("");             
 
 }
-function FnJsUBodega() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoBodega').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUBodega() {       
+    $('#lblexistenuevoBodega').text("");                
 
     console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorBodega").removeAttr("class");//quitar el atributo class
-    $("#DivModBorBodega").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaBodega").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaBodega").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitBodega').text('Editar Bodega');//tttt
-    //cambiar el color icono btn
-    $("#btnNueBodega").removeAttr("class");//quitar el atributo class
-    $("#btnNueBodega").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#DivModBorBodega").removeAttr("class");         
+    $("#DivModBorBodega").attr('class', 'modal-content border-warning');   
+    $("#DivModHeaBodega").removeAttr("class");         
+    $("#DivModHeaBodega").attr('class', 'modal-header bg-warning');   
+    $('#H4ModTitBodega').text('Editar Bodega');
+    $("#btnNueBodega").removeAttr("class");         
+    $("#btnNueBodega").attr('class', 'btn btn-warning pull-right');               
     $("#btnNueBodega i").removeAttr("class");
     $("#btnNueBodega i").attr("class", "fa fa-save fa-2x");
-    //color ddl
-    $("#ddlCBodegaSucursal").removeAttr("class"); //uitar propiedades
-    $("#ddlCBodegaSucursal").attr("class", "form-control border-warning");//pintr roo
-    $("#ddlCBodegaResponsable").removeAttr("class"); //uitar propiedades
-    $("#ddlCBodegaResponsable").attr("class", "form-control border-warning");//pintr roo
+    $("#ddlCBodegaSucursal").removeAttr("class");    
+    $("#ddlCBodegaSucursal").attr("class", "form-control border-warning");   
+    $("#ddlCBodegaResponsable").removeAttr("class");    
+    $("#ddlCBodegaResponsable").attr("class", "form-control border-warning");   
 
-    //bloquear elementos
-    $("#txtNuevoBodega").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#txtNuevoDescripcion").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoBodega").attr('disabled', false);                   
+    $("#txtNuevoDescripcion").attr('disabled', false);                   
 
     $('#ddlCBodegaSucursal').attr('disabled', false);
     $('#ddlCBodegaResponsable').attr('disabled', false);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCBodega[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCBodega[0].id + ' :text').val("");             
 
 }
-function FnJsDBodega() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoBodega').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDBodega() {       
+    $('#lblexistenuevoBodega').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorBodega").removeAttr("class");//quitar el atributo class
-    $("#DivModBorBodega").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaBodega").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaBodega").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitBodega').text('Eliminar Bodega');//tttt
-    //cambiar el color icono btn
-    $("#btnNueBodega").removeAttr("class");//quitar el atributo class
-    $("#btnNueBodega").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#DivModBorBodega").removeAttr("class");         
+    $("#DivModBorBodega").attr('class', 'modal-content border-danger');   
+    $("#DivModHeaBodega").removeAttr("class");         
+    $("#DivModHeaBodega").attr('class', 'modal-header bg-danger');   
+    $('#H4ModTitBodega').text('Eliminar Bodega');
+    $("#btnNueBodega").removeAttr("class");         
+    $("#btnNueBodega").attr('class', 'btn btn-danger pull-right');               
     $("#btnNueBodega i").removeAttr("class");
-    $("#btnNueBodega i").attr("class", "fa fa-trash fa-2x");//ícono
-    //color ddl
-    $("#ddlCBodegaSucursal").removeAttr("class"); //uitar propiedades
-    $("#ddlCBodegaSucursal").attr("class", "form-control border-danger");//pintr roo
-    $("#ddlCBodegaResponsable").removeAttr("class"); //uitar propiedades
-    $("#ddlCBodegaResponsable").attr("class", "form-control border-danger");//pintr roo
+    $("#btnNueBodega i").attr("class", "fa fa-trash fa-2x");
+    $("#ddlCBodegaSucursal").removeAttr("class");    
+    $("#ddlCBodegaSucursal").attr("class", "form-control border-danger");   
+    $("#ddlCBodegaResponsable").removeAttr("class");    
+    $("#ddlCBodegaResponsable").attr("class", "form-control border-danger");   
 
-    //bloquear elementos
-    $("#txtNuevoBodega").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtNuevoDescripcion").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#txtNuevoBodega").attr('disabled', true);                   
+    $("#txtNuevoDescripcion").attr('disabled', true);                   
 
     $('#ddlCBodegaSucursal').attr('disabled', true);
     $('#ddlCBodegaResponsable').attr('disabled', true);
-    //vaciar elementos text de todo el modal
-    $('#' + ModCBodega[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCBodega[0].id + ' :text').val("");             
 
 }
 
-/*quitar btn CUD*/
-function FnJsBlockBodega() {// nombre función xxxx
+function FnJsBlockBodega() {         
 
-    if (EBodega == true) {// variables xxxx
-        $("#btnNueBodega").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueBodega").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
+    if (EBodega == true) {      
+        $("#btnNueBodega").fadeOut("fast");                      
+        $("#btnNueBodega").attr('disabled', true);                                         
 
     }
-    else if (EBodega == false) {// variables xxxx
-        $("#btnNueBodega").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueBodega").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
+    else if (EBodega == false) {      
+        $("#btnNueBodega").fadeIn("slow");                      
+        $("#btnNueBodega").attr('disabled', false);                                         
 
 
     }
 }
 
-//guardar CUD
-$('#btnNueBodega').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueBodega').click(function (e) {               
     e.preventDefault();
     if (formBodega.checkValidity()) {
-        switch (CRUDBodega) { // variable crud xxxx
+        switch (CRUDBodega) {          
             case "C":
-                FnJsAjaxCBodega(); // función para crear xxxx
+                FnJsAjaxCBodega();             
                 break;
             case "U":
-                FnJsAjaxUBodega();// función para crear xxxx
+                FnJsAjaxUBodega();            
                 break;
             case "D":
-                FnJsAjaxDBodega();// función para crear xxxx
+                FnJsAjaxDBodega();            
                 break;
             default:
-                console.log("Error en cud Bodega");/////tttt
+                console.log("Error en cud Bodega");
         }
     }
     console.log(formBodega.checkValidity());
 });
 
-//ajax CUD
 function FnJsAjaxCBodega() {
     $.ajax({
-        url: "/modulo3/VstBodega.aspx/FnCBodegaV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo3/VstBodega.aspx/FnCBodegaV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             Bodega: VarJsBodega,
             Descripcion:VarJsDescripcion,
             IdSucursal: VarJsIdSucursal,
             IdResponsable: VarJsIdResponsable
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Bodega Agregado"); ////tttt        
+                console.log("Bodega Agregado");                         
             }
             else {
-                //no se creó
                 CRUDBodega = "error"
-                console.log("No se pudo agregar Bodega");//
+                console.log("No se pudo agregar Bodega");
             }
-            FnAlertaBodega(); // nombre función alerta xxxx
+            FnAlertaBodega();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUBodega() {
     $.ajax({
-        url: "/modulo3/VstBodega.aspx/FnUBodegaV", // nombre de página y nombre de función cude
+        url: "/modulo3/VstBodega.aspx/FnUBodegaV",                         
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdBodega: VarJsBodegaId,
             Bodega: VarJsBodega,
             Descripcion: VarJsDescripcion,
             IdSucursal: VarJsIdSucursal,
             IdResponsable: VarJsIdResponsable
 
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Bodega Actualizado"); ////tttt
+                console.log("Bodega Actualizado"); 
             }
             else {
-                //no se borró
                 CRUDBodega = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaBodega();// nombre función alerta xxxx
+            FnAlertaBodega();            
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxDBodega() {
     $.ajax({
-        url: "/modulo3/VstBodega.aspx/FnDBodegaV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo3/VstBodega.aspx/FnDBodegaV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdBodega: VarJsBodegaId
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Bodega Eliminado"); ////tttt
+                console.log("Bodega Eliminado"); 
             }
             else {
-                //no se creó
                 CRUDBodega = "error"
-                console.log("No se pudo Eliminar Bodega");////tttt
+                console.log("No se pudo Eliminar Bodega");
             }
-            FnAlertaBodega(); // nombre función alerta xxxx
+            FnAlertaBodega();             
 
         }
-    });//ajax fin
+    });   
 }
 
-//Existe
-function FnJsAjaxEBodega() {// nombre de la función existe xxxx
+function FnJsAjaxEBodega() {                  
     $.ajax({
-        url: "/modulo3/VstBodega.aspx/FnEBodegaV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo3/VstBodega.aspx/FnEBodegaV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({   
             IdBodega: VarJsBodegaId,
             Bodega: VarJsBodega,
             IdSucursal: VarJsIdSucursal
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                EBodega = true; // variable existe xxxx
-                $('#lblexistenuevoBodega').text("Existe Bodega");// id etiqueta texto etiqueta //tttt
-                FnJsBlockBodega();//nombre de función bloquear xxxx
+                EBodega = true;          
+                $('#lblexistenuevoBodega').text("Existe Bodega");               
+                FnJsBlockBodega();            
 
             }
             else {
-                //mostrar btn
-                EBodega = false;// variable existe xxxx
-                $('#lblexistenuevoBodega').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockBodega(); //nombre de función bloquear xxxx
+                EBodega = false;         
+                $('#lblexistenuevoBodega').text("");                
+                FnJsBlockBodega();             
             }
         }
-    });//ajax fin
+    });   
 }
 
 
-function VerificarExisteBodega() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoBodega').val().length >= 3 && $('#ddlCBodegaSucursal').val() > 0 && $('#ddlCBodegaResponsable').val() > 0) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteBodega() {               
+    if ($('#txtNuevoBodega').val().length >= 3 && $('#ddlCBodegaSucursal').val() > 0 && $('#ddlCBodegaResponsable').val() > 0) {                            
         return true;
     }
     else {
@@ -530,16 +484,16 @@ function VerificarExisteBodega() {// nombre de función verificarexiste xxxx
 }
 
 
-$('#txtNuevoBodega').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsBodega = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteBodega()) {//nombre función verificar existe xxxx
-        FnJsAjaxEBodega(); // llamar todos los existes xxxx
+$('#txtNuevoBodega').keyup(function (e) {                     
+    VarJsBodega = $(this).val();                
+    if (VerificarExisteBodega()) {            
+        FnJsAjaxEBodega();                
 
     }
 });
 
-$('#txtNuevoDescripcion').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsDescripcion = $(this).val(); // variable de este elemento xxxx    
+$('#txtNuevoDescripcion').keyup(function (e) {                     
+    VarJsDescripcion = $(this).val();                            
 });
 
 $('#ddlCBodegaSucursal').change(function (e) {
@@ -559,29 +513,29 @@ $('#ddlCBodegaResponsable').change(function (e) {
 });
 
 function FnJSFillDdlBodegaSucursal() {
-    $('#ddlCBodegaSucursal').empty(); // xxxx id
+    $('#ddlCBodegaSucursal').empty();       
     $.ajax({
         type: "POST",
-        url: "/modulo3/VstBodega.aspx/FnRSucursalV", // xxxx
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo3/VstBodega.aspx/FnRSucursalV",    
+        data: {},          
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLBodegaSucursal == "null") {
-                $('#ddlCBodegaSucursal').append($("<option> </option>").val("0").html("Seleccionar Sucursal"));  // xxxx id val html            
+                $('#ddlCBodegaSucursal').append($("<option> </option>").val("0").html("Seleccionar Sucursal"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLBodegaSucursal == value.Sucursal) {
-                        $('#ddlCBodegaSucursal').append($("<option> </option>").val(value.IdSucursal).html(value.Sucursal));  // xxxx id texto
+                        $('#ddlCBodegaSucursal').append($("<option> </option>").val(value.IdSucursal).html(value.Sucursal));           
                         VarJsIdSucursal = value.IdSucursal;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCBodegaSucursal').append($("<option> </option>").val(value.IdSucursal).html(value.Sucursal)); // id en un val y en html el nombre
+                $('#ddlCBodegaSucursal').append($("<option> </option>").val(value.IdSucursal).html(value.Sucursal));                            
             });
             VAlDDLBodegaSucursal = "null";
         }
@@ -589,69 +543,67 @@ function FnJSFillDdlBodegaSucursal() {
 }
 
 function FnJSFillDdlBodegaResponsable() {
-    $('#ddlCBodegaResponsable').empty(); // xxxx id
+    $('#ddlCBodegaResponsable').empty();       
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstEmpleados.aspx/FnREmpleadoV", // xxxx
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo7/VstEmpleados.aspx/FnREmpleadoV",    
+        data: {},          
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLBodegaResponsable == "null") {
-                $('#ddlCBodegaResponsable').append($("<option> </option>").val("0").html("Seleccionar Responsable"));  // xxxx id val html            
+                $('#ddlCBodegaResponsable').append($("<option> </option>").val("0").html("Seleccionar Responsable"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
                     if (VAlDDLBodegaResponsable == value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1) {
-                        $('#ddlCBodegaResponsable').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1));  // xxxx id texto
+                        $('#ddlCBodegaResponsable').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1));           
                         VarJsIdResponsable = value.IdEmpleado;
                     }
                 });
             }
             $.each(data.d, function (data, value) {
-                $('#ddlCBodegaResponsable').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1)); // id en un val y en html el nombre
+                $('#ddlCBodegaResponsable').append($("<option> </option>").val(value.IdEmpleado).html(value.ObjPersona.Nombre1 + ' ' + value.ObjPersona.Apellido1));                            
             });
             VAlDDLBodegaResponsable = "null";
         }
     });
 }
 
-function FnAlertaBodega() {//nombre de la función xxxx
+function FnAlertaBodega() {            
 
-    switch (CRUDBodega) {//nombre de la variable cud xxxx
+    switch (CRUDBodega) {               
         case "C":
-            VarJsColorAlertBodega = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertBodega = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertBodega = "bg-success";            
+            VarJsTextoAlertBodega = "Creado";            
             break;
         case "U":
-            VarJsColorAlertBodega = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertBodega = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertBodega = "bg-warning";            
+            VarJsTextoAlertBodega = "Actualizado";            
             break;
         case "D":
-            VarJsColorAlertBodega = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertBodega = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertBodega = "bg-danger";            
+            VarJsTextoAlertBodega = "Eliminado";            
             break;
         case "Error":
-            VarJsColorAlertBodega = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertBodega = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertBodega = "bg-secondary";            
+            VarJsTextoAlertBodega = "No se pudo realizar la operación";            
             break;
         default:
-            console.log("Error CUD Bodega Alert")//tttt
+            console.log("Error CUD Bodega Alert")
     }
-    //alerta
-    $('#alertaEmpleados .modal-content').addClass(VarJsColorAlertBodega);//variable de color alerta xxxx
-    $('#alertaEmpleados h5').text(VarJsTextoAlertBodega);//variable de texto alerta xxxx
+    $('#alertaEmpleados .modal-content').addClass(VarJsColorAlertBodega);            
+    $('#alertaEmpleados h5').text(VarJsTextoAlertBodega);            
     $('#alertaEmpleados').modal('show');
     setTimeout(function () {
         $('#alertaEmpleados').modal('hide');
-        $('#alertaEmpleados .modal-content').removeClass(VarJsColorAlertBodega);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
+        $('#alertaEmpleados .modal-content').removeClass(VarJsColorAlertBodega);            
+    }, 1500);                           
 
-    if ($("#secciontblBodega.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRBodega();//función ajax de llenado de la tabla xxxx
+    if ($("#secciontblBodega.show").length > 0) {      
+        FnJsAjaxRBodega();                     
     }
-    //cerrar modal
-    $("#modalNBodega").modal("toggle");//nombre modal xxxx
+    $("#modalNBodega").modal("toggle");      
 }

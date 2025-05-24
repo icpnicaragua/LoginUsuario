@@ -87,6 +87,14 @@ namespace CapaVista.modulo1
             ClsInicioCaja OInicioCaja = new ClsInicioCajaN().FnRInicioCajaEstadoN(OInicioCajaN);
             return OInicioCaja;
         }
+
+        [WebMethod]
+        public static List<ClsInicioCaja> FnRAInicioCajaV()
+        {
+            List<ClsInicioCaja> OInicioCaja = new ClsInicioCajaN().FnRAInicioCajaN();
+            return OInicioCaja;
+        }
+
         #endregion
 
         #region RegDenominacionInicio

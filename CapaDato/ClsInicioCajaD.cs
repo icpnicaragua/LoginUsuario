@@ -195,5 +195,40 @@ namespace CapaDato
                 ObjConexion.Cerrarcon();
             }
         }
+
+        public List<ClsInicioCaja> FnRAInicioCajaD()
+        {
+            ClsInicioCaja OInicioCaja = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spRAInicioCaja", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsInicioCaja> LstInicioCaja = new List<ClsInicioCaja>();
+                while (Dr_D.Read())
+                {
+                    OInicioCaja = new ClsInicioCaja();
+                    OInicioCaja.IdInicioCaja = Dr_D[0].ToString();
+                    OInicioCaja.ObjCajero.ObjPersona.Nombre1 = Dr_D[1].ToString();
+                    OInicioCaja.ObjCajero.ObjPersona.Apellido1 = Dr_D[2].ToString();
+                    OInicioCaja.Fecha = ClsCortarFechasD.getFecha(Dr_D[3].ToString());
+                    OInicioCaja.Hora = Dr_D[4].ToString();
+                    OInicioCaja.Estado = Dr_D[5].ToString();
+                    LstInicioCaja.Add(OInicioCaja);
+                }
+                return LstInicioCaja;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
     }
 }

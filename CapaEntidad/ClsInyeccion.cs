@@ -15,6 +15,7 @@ namespace CapaEntidad
         private ClsEmpleado _ObjRealizadoPor;
         private string _Nota;
         private string _Estado;
+        private string _Hora;
 
         public string IdInyeccion { get => _IdInyeccion; set => _IdInyeccion = value; }
         public ClsInicioCaja ObjInicioCaja { get => _ObjInicioCaja; set => _ObjInicioCaja = value; }
@@ -23,6 +24,7 @@ namespace CapaEntidad
         public ClsEmpleado ObjRealizadoPor { get => _ObjRealizadoPor; set => _ObjRealizadoPor = value; }
         public string Nota { get => _Nota; set => _Nota = value; }
         public string Estado { get => _Estado; set => _Estado = value; }
+        public string Hora { get => _Hora; set => _Hora = value; }
 
         public ClsInyeccion()
         {
