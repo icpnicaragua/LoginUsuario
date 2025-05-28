@@ -123,6 +123,7 @@
     <Compile Include="ClsConexion.cs" />
     <Compile Include="ClsCorreoD.cs" />
     <Compile Include="ClsCortarFechasD.cs" />
+    <Compile Include="ClsCuentaD.cs" />
     <Compile Include="ClsDenominacionesCSD.cs" />
     <Compile Include="ClsDenominacionFinD.cs" />
     <Compile Include="ClsDenominacionInicioD.cs" />

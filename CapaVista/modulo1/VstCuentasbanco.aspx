@@ -11,6 +11,8 @@
                 <h4>Navegador</h4>
                 <div class="form-group">
                     <asp:LinkButton ID="lbBanco" href="#Banco" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Banco</asp:LinkButton><!-- id href text-->
+                    <asp:LinkButton ID="lbCuenta" href="#Cuenta" data-toggle="collapse" runat="server" CssClass="btn btn-info btn3d">Cuentas de Banco</asp:LinkButton>
+
                 </div>
             </div>
         </div>
@@ -37,6 +39,35 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tblBodyBanco">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="Cuenta" class="  col-lg-6 col-md-6 col-sm-12 collapse">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <h2 class="d-inline-block">Cuenta</h2>
+                        <div class="d-inline-block pull-right">
+                            <asp:LinkButton ID="lbNCuenta" href="#modalNCuenta" data-toggle="modal" runat="server" CssClass="btn btn-success  btn3d "><i class="fas fa-plus fa-2x"></i></asp:LinkButton><!-- id href-->
+                            <asp:LinkButton ID="lbMostrarCuenta" href="#secciontblCuenta" runat="server" Text="Mostrar Cuenta" CssClass="btn btn-info btn3d" data-toggle="collapse"><i class="far fa-eye fa-2x"></i></asp:LinkButton><!-- id href text-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="secciontblCuenta" class="table-responsive collapse">
+                            <table id="tblCuenta" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Cuenta</th>
+                                        <th>Banco</th>
+                                        <th>Propietario</th>
+                                        <th>Moneda</th>
+                                        <th>Ctrl</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblBodyCuenta">
                                 </tbody>
                             </table>
                         </div>
@@ -80,6 +111,48 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="modalNCuenta">
+        <div class="modal-dialog" role="document">
+            <div id="DivModBorCuenta" class="modal-content border-success">
+                <div id="DivModHeaCuenta" class="modal-header bg-success">
+                    <h4 id="H4ModTitCuenta">Editar Categoría</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="frmnueCuenta" runat="server" data-toggle="validator" role="form">
+                        <label id="lblexistenuevoCuenta" for="txtNuevoCuenta" runat="server" class="text-warning" text=""></label>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoCuenta" runat="server" TabIndex="1" CssClass="form-control" placeholder="Nuevo Cuenta" data-required-error="dddd" pattern="[a-zA-Z0-9\s]*$" MaxLength="20" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo320NS" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCCuentaBanco" TabIndex="2" CssClass="form-control border-success" runat="server">
+                            </asp:DropDownList>
+                        </div>
+                        <div class="input-group mb-3">
+                            <asp:TextBox ID="txtNuevoPropietario" runat="server" TabIndex="3" CssClass="form-control" placeholder="Nuevo Propietario" data-required-error="dddd" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$" MaxLength="50" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <span class="input-group-addon">
+                                <button type="button" class="btn btn-secondary popinfo350S" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group md-3">
+                            <asp:DropDownList ID="ddlCCuentaMoneda" TabIndex="4" CssClass="form-control border-success" runat="server">
+                            </asp:DropDownList>
+                        </div>
+                        <button id="btnNueCuenta" tabindex="5" class="btn btn-success pull-right">
+                            <i class="fas fa-save fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphJs" runat="server">
     <script src="/datatables/datatables.min.js"></script>
@@ -89,4 +162,5 @@
     <script src="/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
     <script src="/js/icp/crudMVE.js" type="text/javascript"></script>
     <script src="/js/icp/CRUDEBanco.js" type="text/javascript"></script>
+    <script src="/js/icp/CRUDECuenta.js" type="text/javascript"></script>
 </asp:Content>

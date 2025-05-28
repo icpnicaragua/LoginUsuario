@@ -631,6 +631,7 @@
     <Content Include="js\icp\CRUDEConceptoRoc.js" />
     <Content Include="js\icp\CRUDECorreo.js" />
     <Content Include="js\icp\CRUDECorreoEmpresa.js" />
+    <Content Include="js\icp\CRUDECuenta.js" />
     <Content Include="js\icp\CRUDEDenominacionesCS.js" />
     <Content Include="js\icp\CRUDEDenominacionFin.js" />
     <Content Include="js\icp\CRUDEDenominacionInicio.js" />

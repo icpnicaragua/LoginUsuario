@@ -52,6 +52,7 @@
     <Compile Include="ClsClienteN.cs" />
     <Compile Include="ClsConceptoRocN.cs" />
     <Compile Include="ClsCorreoN.cs" />
+    <Compile Include="ClsCuentaN.cs" />
     <Compile Include="ClsDenominacionesCSN.cs" />
     <Compile Include="ClsDenominacionFinN.cs" />
     <Compile Include="ClsDenominacionInicioN.cs" />

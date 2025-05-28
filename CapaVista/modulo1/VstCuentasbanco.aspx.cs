@@ -13,10 +13,7 @@ namespace CapaVista.modulo1
 {
     public partial class VstCuentasbanco : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
+        protected void Page_Load(object sender, EventArgs e){}
 
         #region RegBanco
         [WebMethod]
@@ -81,6 +78,78 @@ namespace CapaVista.modulo1
             ExisteBanco = new ClsBancoN().FnEBancoN(OBanco);
 
             return ExisteBanco;
+
+        }
+        #endregion
+        #region RegCuenta
+        [WebMethod]
+        public static bool FnCCuentaV(string Cuenta, string IdBanco, string Propietario, string IdMoneda)
+        {
+            bool CreateCuenta = false;
+            ClsCuenta OCuenta = new ClsCuenta();
+
+            OCuenta.NumeroCuenta = Cuenta;
+            OCuenta.ObjBanco.IdBanco = IdBanco;
+            OCuenta.Propietario = Propietario;
+            OCuenta.ObjMoneda.IdMoneda = IdMoneda;
+
+            CreateCuenta = new ClsCuentaN().FnCCuentaN(OCuenta);
+
+            return CreateCuenta;
+
+        }
+
+        [WebMethod]
+        public static List<ClsCuenta> FnRCuentaV()
+        {
+            List<ClsCuenta> OCuenta = new ClsCuentaN().FnRCuentaN();
+            return OCuenta;
+        }
+
+        [WebMethod]
+        public static bool FnUCuentaV(string IdCuenta, string Cuenta, string IdBanco, string Propietario, string IdMoneda)
+        {
+            bool UpdateCuenta = false;
+            ClsCuenta OCuenta = new ClsCuenta();
+
+            OCuenta.IdCuenta = IdCuenta;
+            OCuenta.NumeroCuenta = Cuenta;
+            OCuenta.ObjBanco.IdBanco = IdBanco;
+            OCuenta.Propietario = Propietario;
+            OCuenta.ObjMoneda.IdMoneda= IdMoneda;
+            UpdateCuenta = new ClsCuentaN().FnUCuentaN(OCuenta);
+
+            return UpdateCuenta;
+
+        }
+
+        [WebMethod]
+        public static bool FnDCuentaV(string IdCuenta)
+        {
+            bool DeleteCuenta = false;
+            ClsCuenta OCuenta = new ClsCuenta();
+
+            OCuenta.IdCuenta = IdCuenta;
+
+            DeleteCuenta = new ClsCuentaN().FnDCuentaN(OCuenta);
+
+            return DeleteCuenta;
+
+        }
+
+        [WebMethod]
+        public static bool FnECuentaV(string IdCuenta, string Cuenta, string IdBanco)
+        {
+            bool ExisteCuenta = false;
+            ClsCuenta OCuenta = new ClsCuenta();
+
+            OCuenta.IdCuenta = IdCuenta;
+            OCuenta.NumeroCuenta = Cuenta;
+            OCuenta.ObjBanco.IdBanco = IdBanco;
+
+            ExisteCuenta = new ClsCuentaN().FnECuentaN(OCuenta);
+
+            return ExisteCuenta;
 
         }
         #endregion

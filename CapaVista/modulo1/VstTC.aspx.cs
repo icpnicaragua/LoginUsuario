@@ -23,6 +23,14 @@ namespace CapaVista.modulo1
             return OMoneda;
         }
 
+        [WebMethod]
+        public static List<ClsMoneda> FnRALLMonedaV()
+        {
+            List<ClsMoneda> OMoneda = new ClsMonedaN().FnRALLMonedaN();
+            return OMoneda;
+        }
+
+
         #endregion
 
         #region RegTCambio

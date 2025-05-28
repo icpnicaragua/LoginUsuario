@@ -15,5 +15,11 @@ namespace CapaNegocio
             List<ClsMoneda> OMoneda = new ClsMonedaD().FnRMonedaD();
             return OMoneda;
         }
+
+        public List<ClsMoneda> FnRALLMonedaN()
+        {
+            List<ClsMoneda> OMoneda = new ClsMonedaD().FnRALLMonedaD();
+            return OMoneda;
+        }
     }
 }
