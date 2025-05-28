@@ -12,8 +12,8 @@ namespace CapaDato
     public class ClsCategoriaD
     {
         private ClsConexion ObjConexion = null;
-        private MySqlDataReader Dr_D; //para leer datos de latabla 
-        private MySqlCommand Cmd_D = null; // ejecutamos comandos de transact o procedimiento almacenado
+        private MySqlDataReader Dr_D; 
+        private MySqlCommand Cmd_D = null; 
 
         public bool FnCCategoriaD(ClsCategoria OCategoria)
         {
@@ -56,10 +56,10 @@ namespace CapaDato
                 while (Dr_D.Read())
                 {
                     OCategoria = new ClsCategoria();
-                    OCategoria.IdCategoria = Dr_D[0].ToString();//id_Categoria
-                    OCategoria.Categoria = Dr_D[1].ToString();  //Categoria
-                    OCategoria.ObjFamilia.IdFamilia = Dr_D[2].ToString();//idfamilia
-                    OCategoria.ObjFamilia.Familia = Dr_D[3].ToString();//familia 
+                    OCategoria.IdCategoria = Dr_D[0].ToString();
+                    OCategoria.Categoria = Dr_D[1].ToString();  
+                    OCategoria.ObjFamilia.IdFamilia = Dr_D[2].ToString();
+                    OCategoria.ObjFamilia.Familia = Dr_D[3].ToString();
                     LstCategoria.Add(OCategoria);
                 }
                 return LstCategoria;

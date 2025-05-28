@@ -124,6 +124,7 @@
     <Compile Include="ClsCorreoD.cs" />
     <Compile Include="ClsCortarFechasD.cs" />
     <Compile Include="ClsDenominacionesCSD.cs" />
+    <Compile Include="ClsDenominacionFinD.cs" />
     <Compile Include="ClsDenominacionInicioD.cs" />
     <Compile Include="ClsDepartamentoD.cs" />
     <Compile Include="ClsDireccionD.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="ClsEstadoCivilD.cs" />
     <Compile Include="ClsEstanteD.cs" />
     <Compile Include="ClsFamiliaD.cs" />
+    <Compile Include="ClsFinCajaD.cs" />
     <Compile Include="ClsGarantiaD.cs" />
     <Compile Include="ClsGeneroD.cs" />
     <Compile Include="ClsIdentificacionD.cs" />

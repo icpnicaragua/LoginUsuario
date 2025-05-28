@@ -10,17 +10,22 @@ namespace CapaEntidad
     {
         private string _IdFinCaja;
         private ClsEmpleado _ObjCajero;
-        private string _FechaHora;
+        private string _Fecha;
+        private string _Hora;
         private string _Estado;
+        private ClsInicioCaja _ObjInicioCaja;
 
         public string IdFinCaja { get => _IdFinCaja; set => _IdFinCaja = value; }
         public ClsEmpleado ObjCajero { get => _ObjCajero; set => _ObjCajero = value; }
-        public string FechaHora { get => _FechaHora; set => _FechaHora = value; }
+        public string Fecha { get => _Fecha; set => _Fecha = value; }
+        public string Hora { get => _Hora; set => _Hora = value; }
         public string Estado { get => _Estado; set => _Estado = value; }
+        public ClsInicioCaja ObjInicioCaja { get => _ObjInicioCaja; set => _ObjInicioCaja = value; }
 
         public ClsFinCaja()
         {
             this.ObjCajero = new ClsEmpleado();
+            this.ObjInicioCaja=new ClsInicioCaja();
         }
 
     }

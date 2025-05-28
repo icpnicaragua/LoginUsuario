@@ -3,9 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <%--importante poner esto--%>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <%--css//////////////////////////////////////////////////////////////////////////--%>
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="/css/Admin.css" type="text/css" />
     <link rel="stylesheet" href="/css/all.css" type="text/css" />
@@ -15,7 +13,7 @@
     <link href="/css/animate.css" rel="stylesheet" />
     <link href="/css/bootstrap3d.css" rel="stylesheet" />
     <link href="/css/jquery-ui.min.css" rel="stylesheet" />
-    <%--importante poner esto--%>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,8 +24,7 @@
     <noscript>
         <meta http-equiv="refresh" content="0;url=errores/NoJava.aspx" />
     </noscript>
-    <header class="header">
-        <%--elementos horizontales superiores--%>
+    <header class="header"> 
         <a href="../Inicio.aspx" class="logo">Empresa X</a>
         <nav class="navbar navbar-static-top" role="navigation">
             <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -39,22 +36,16 @@
             </a>
         </nav>
     </header>
-    <%--elementos horizontales superiores--%>
-
-    <%--barra lateral izquierda--%>
     <div id="barraderecha" class="wrapper row-offcanvas row-offcanvas-left">
         <aside class="left-side sidebar-offcanvas collapse-left">
-            <%--collapse-left--%>
             <section class="sidebar">
                 <div class="user-panel">
                     <div class="fa-pull-left image ">
-                        <img src="/img/nini.jpg" class="rounded-circle" />
-                        <%-- poner dinámico--%>
+                        <img src="/img/nini.jpg" class="rounded-circle" />               
                     </div>
                     <div class="pull-left info">
                         <p>
                             <asp:Label ID="lblWelcome" runat="server" Text="Wellcome"></asp:Label>
-
                         </p>
                         <div>
                             <a href="../Login.aspx?Cerrrarsesion=1" class="btn btn-danger">
@@ -66,7 +57,6 @@
                     </div>
                 </div>
                 <ul class="list-unstyled components">
-
                     <li id="mdl8" >
                         <a href="#ulmdl8" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fa fa-shopping-cart"></i><span> Facturación</span>
@@ -90,13 +80,12 @@
                         </ul>
                     </li>
                     <li class="dropdown-divider"></li>
-
                     <li id="mdl9">
                         <a href="#ulmdl9" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fa fa-users"></i><span> Clientes</span>
                         </a>
                         <ul id="ulmdl9" class="collapse list-unstyled">
-                            <li id="VstClientes">
+                            <li id="VstClientes" >
                                 <a href="../modulo9/VstClientes.aspx">
                                     <i class="fa fa-user"></i><span> Clientes</span>
                                 </a>
@@ -114,7 +103,6 @@
                         </ul>
                     </li>
                     <li class="dropdown-divider"></li>
-
                     <li id="mdl1" class="active">
                         <a href="#ulmdl1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fa fa-money"></i><span> Caja </span>
@@ -238,7 +226,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <li class="dropdown-divider"></li>
                     <li id="mdl3">
                         <a href="#ulmdl3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -342,24 +329,19 @@
                                     <i class="fa fa-cogs fa-fw"></i><span> Sistema</span>
                                 </a>
                             </li>
-
                         </ul>
                     </li>
                 </ul>
             </section>
         </aside>
     </div>
-    <%--fin barra lateral izquierda--%>
     <aside class="right-side strech">
-        <%--strech--%>
         <section class=" content-header bg-aqua">
             <h1>
-                <asp:Label ID="lblNombrePag" runat="server"></asp:Label>
-                <%--esto es dinámico--%>
+                <asp:Label ID="lblNombrePag" runat="server"></asp:Label>     
             </h1>
         </section>
-        <section class="content">
-            <%-- contenido dinámico--%>
+        <section class="content">  
             <form id="form1" runat="server">
                 <asp:HiddenField ID="hfIDU" runat="server" ClientIDMode="Static" Value="0" />
                 <asp:HiddenField ID="hfEU" runat="server" ClientIDMode="Static" Value="0" />
@@ -367,27 +349,19 @@
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
-            </form>
-            <%-- contenido dinámico--%>
+            </form>      
         </section>
     </aside>
-
-
     <script src="/js/jquery.js" type="text/javascript"></script>
     <script src="../js/jquery-ui.min.js"></script>
-
     <script src="/js/poppers.js" type="text/javascript"></script>
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/js/velocity.min.js"></script>
     <script src="/js/velocity.ui.min.js"></script>
-
     <script src="/js/Admin/app.js" type="text/javascript"></script>
-
     <script src="/js/icp/pm.js" type="text/javascript"></script>
     <script src="/js/icp/globals.js" type="text/javascript"></script>
-
     <asp:ContentPlaceHolder ID="cphJs" runat="server">
     </asp:ContentPlaceHolder>
 </body>
-
 </html>

@@ -13,8 +13,8 @@ namespace CapaNegocio
         public bool FnCUEDenominacionInicioN(ClsDenominacionInicio ODenominacionInicio)
         {
             if (ODenominacionInicio.ObjInicioCaja.IdInicioCaja != "" && ODenominacionInicio.ObjInicioCaja.IdInicioCaja != null &&
-                ODenominacionInicio.Cantidad!= "" && ODenominacionInicio.Cantidad != null &&
-                ODenominacionInicio.ObjDenominacionCS.IdDenominacion!= "" && ODenominacionInicio.ObjDenominacionCS.IdDenominacion != null)
+                ODenominacionInicio.Cantidad != "" && ODenominacionInicio.Cantidad != null &&
+                ODenominacionInicio.ObjDenominacionCS.IdDenominacion != "" && ODenominacionInicio.ObjDenominacionCS.IdDenominacion != null)
             {
                 Boolean CreateDenominacionInicio = new ClsDenominacionInicioD().FnCUEDenominacionInicioD(ODenominacionInicio);
                 return CreateDenominacionInicio;
@@ -22,16 +22,15 @@ namespace CapaNegocio
             else
             {
                 return false;
-            }            
+            }
         }
         public List<ClsDenominacionInicio> FnRDenominacionInicioN(ClsDenominacionInicio ODenominacionIncioN)
         {
             List<ClsDenominacionInicio> ODenominacionInicio = new ClsDenominacionInicioD().FnRDenominacionInicioD(ODenominacionIncioN);
             return ODenominacionInicio;
         }
-        
 
-                public bool FnCerrarDenominacionInicioN(ClsDenominacionInicio ODenominacionInicio)
+        public bool FnCerrarDenominacionInicioN(ClsDenominacionInicio ODenominacionInicio)
         {
             if (ODenominacionInicio.ObjInicioCaja.IdInicioCaja != "" && ODenominacionInicio.ObjInicioCaja.IdInicioCaja != null)
             {

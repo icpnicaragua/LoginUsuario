@@ -27,8 +27,7 @@ namespace CapaDato
                 Cmd_D.CommandType = CommandType.StoredProcedure;
                 DateTime dateValue = DateTime.Parse(OInicioCaja.Fecha);
                 Cmd_D.Parameters.AddWithValue("prmCFecha", Convert.ToDateTime(dateValue));
-                Cmd_D.Parameters.AddWithValue("prmCHora", Convert.ToDateTime(OInicioCaja.Hora));
-             
+                Cmd_D.Parameters.AddWithValue("prmCHora", Convert.ToDateTime(OInicioCaja.Hora));             
                 Cmd_D.Parameters.AddWithValue("prmCIdCajero", Convert.ToInt16(OInicioCaja.ObjCajero.IdEmpleado));
                 ObjConexion.Abrircon();
                 int FilasInicioCaja = Cmd_D.ExecuteNonQuery();
