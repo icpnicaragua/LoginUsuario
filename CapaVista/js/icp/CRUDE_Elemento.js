@@ -1,24 +1,19 @@
-﻿var tablaE;//tabla
-var VarJsModCElem = $('#ModCElem');//modal
-var VarJsElemId=0;//id elem para cud
+﻿var tablaE;
+var VarJsModCElem = $('#ModCElem');
+var VarJsElemId=0;         
 var VarJsElemento = "";
 var VarJsElementoAsp = "";
 var VarJsIdTipoControl = "";
 var VarJsIdVista = "";
 
-//validador
 var formElemento = document.querySelector('#form1');
-//variables crud
 var CRUDElemento = "";
-//variables de alertas
 var VarJsColorAlertElemento = "";
 var VarJsTextoAlertElemento = "";
 
-//variables existe
 var VarjstxtCElemAEOK;
 var VarjstxtCElemElOK;
 
-//variables de elementos
 var VarJslblCElemEl = $('#lblCElemEl');
 var VarJstxtCElemEl = $('#txtCElemEl');
 var VarJslblCElemAs = $('#lblCElemAs');
@@ -29,7 +24,6 @@ var VarJsbtnCElem = $("#btnCElemento");
 var VAlDDLElementoTC = "";
 var VAlDDLElementoVista = "";
 
-/*ocultar btnCelem*/
 var VarJsDdlCElemOK;
 
 $('#lbMostrarE').click(function (e) {
@@ -40,26 +34,26 @@ $('#lbMostrarE').click(function (e) {
 function FnJsAjaxRElemento() {
     $.ajax({
         type: "POST",
-        url: "/modulo4/vst13.aspx/FnRElem", // nombre de página y nombre de función
+        url: "/modulo4/vst13.aspx/FnRElem",                      
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            FnJsAddrowElemento(data.d); // 
+            FnJsAddrowElemento(data.d);    
         }
     }
     );
 }
 function FnJsAddrowElemento(data) {
 
-    $('#tblE').DataTable().clear().destroy(); // necesario para actualizar, borra y destru
+    $('#tblE').DataTable().clear().destroy();                   
 
     tablaE = $("#tblE").DataTable({
 
         "retrieve": true,
         dom: 'Bfrtip',
-        "order": [1, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden
+        "order": [1, 'asc'],                                 
         "columnDefs": [
             { "targets": 6, "searchable": false },
             { "orderable": false, "targets": 6 }
@@ -69,10 +63,10 @@ function FnJsAddrowElemento(data) {
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colvise'//se añade el id para ocultar
+                    id: 'colvise'               
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info ', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',             
+                className: 'btn btn-info ',       
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -84,7 +78,7 @@ function FnJsAddrowElemento(data) {
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(6)):visible'] /// index 6 de controles 
+                    columns: [':not(:eq(6)):visible']                
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -97,12 +91,11 @@ function FnJsAddrowElemento(data) {
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(6)):visible'] /// index 6 de controles 
+                    columns: [':not(:eq(6)):visible']                
                 },
                 titleAttr: 'PDF',
                 filename: 'Elem' + "_" + FnJsDate() + "_" + FnJsHour(),
                 pageSize: 'LETTER',
-                //title: 'tc titulo',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
                 },
@@ -162,7 +155,7 @@ function FnJsAddrowElemento(data) {
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(6)):visible'] /// index 6 de controles 
+                    columns: [':not(:eq(6)):visible']                
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -176,7 +169,7 @@ function FnJsAddrowElemento(data) {
         "language": FnJsEspTbl()
     });
 
-    tablaE.buttons().container().addClass('form-inline');///nuevo
+    tablaE.buttons().container().addClass('form-inline');
 
 
     for (var contE = 0; contE < data.length; contE++) {
@@ -194,7 +187,6 @@ function FnJsAddrowElemento(data) {
     }
 }
 
-/*acciones cud*/
 $('#lbEN').click(function (e) {
     e.preventDefault();
 
@@ -213,25 +205,23 @@ $('#lbEN').click(function (e) {
      VAlDDLElementoTC = "";
      VAlDDLElementoVista = "";
 
-    //llenar ddl
     FnJSCUElemTC();
     FnJSCUElemVi();
 
 
-    $('#FrmCElem :text').val("");//vaciar txt
-    $('#FrmCElem label').text("");//vaciar lbl
+    $('#FrmCElem :text').val("");   
+    $('#FrmCElem label').text("");   
 
 });
-$(document).on('click', '.btn-editEle', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editEle', function (e) {         
     e.preventDefault();
-    FnJsUElemento();//nombre de función xxxx
-    var dataElemento = tablaE.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsElemId = dataElemento[0]; //id de la fila seleccionada
-    $('#txtCElemEl').val(dataElemento[1]);// [indice columna]  de la fila seleccionada xxxx
-    $('#txtCElemAs').val(dataElemento[2]);// [indice columna]  de la fila seleccionada xxxx
+    FnJsUElemento();         
+    var dataElemento = tablaE.row($(this).parents("tr")).data();                                                
+    VarJsElemId = dataElemento[0];             
+    $('#txtCElemEl').val(dataElemento[1]);                        
+    $('#txtCElemAs').val(dataElemento[2]);                        
     VAlDDLElementoTC = dataElemento[4];
     VAlDDLElementoVista = dataElemento[5];
-    //llenar ddl
     FnJSCUElemTC();
     FnJSCUElemVi();
 
@@ -242,24 +232,22 @@ $(document).on('click', '.btn-editEle', function (e) {//nombre de clase xxxx
     VarJsIdTipoControl = $('#DdlCElemTC').val();;
     VarJsIdVista = $('#DdlCElemVi').val();;
 
-    // variable crud, estado crud xxxx
 });
-$(document).on('click', '.btn-deleteEle', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteEle', function (e) {         
     e.preventDefault();
-    FnJsDElemento();//nombre de función xxxx
+    FnJsDElemento();         
     VarjstxtCElemAEOK = false;
     VarjstxtCElemElOK = false;
 
-    FnJsSbtnCelem(); //bloquear
-    var dataElemento = tablaE.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsElemId = dataElemento[0]; //id de la fila seleccionada
-    $('#txtCElemEl').val(dataElemento[1]);// [indice columna]  de la fila seleccionada xxxx
-    $('#txtCElemAs').val(dataElemento[2]);// [indice columna]  de la fila seleccionada xxxx
+    FnJsSbtnCelem(); 
+    var dataElemento = tablaE.row($(this).parents("tr")).data();                                                
+    VarJsElemId = dataElemento[0];             
+    $('#txtCElemEl').val(dataElemento[1]);                        
+    $('#txtCElemAs').val(dataElemento[2]);                        
 
     VAlDDLElementoTC = dataElemento[4];
     VAlDDLElementoVista = dataElemento[5];
 
-    //llenar ddl
     FnJSCUElemTC();
     FnJSCUElemVi();
 
@@ -272,111 +260,89 @@ $(document).on('click', '.btn-deleteEle', function (e) {//nombre de clase xxxx
 
 });
 
-//pintar modal
-function FnJsCElemento() { //nombe función xxxx
-    $('#lblCElemEl').text(""); // id etiqueta texto etiqueta xxxx
-    $('#lblCElemAs').text(""); // id etiqueta texto etiqueta xxxx
-    //cambiar el color del modal borde
-    $("#DivModBorElemento").removeAttr("class");//quitar el atributo class
-    $("#DivModBorElemento").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeadElemento").removeAttr("class");//quitar el atributo class
-    $("#DivModHeadElemento").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
+function FnJsCElemento() {       
+    $('#lblCElemEl').text("");                
+    $('#lblCElemAs').text("");                
+    $("#DivModBorElemento").removeAttr("class");         
+    $("#DivModBorElemento").attr('class', 'modal-content border-success');   
+    $("#DivModHeadElemento").removeAttr("class");         
+    $("#DivModHeadElemento").attr('class', 'modal-header bg-success');   
     $('#H4ModTitElemento').text('Nuevo Elemento');
-    //cambiar el color icono btn
-    $("#btnCElemento").removeAttr("class");//quitar el atributo class
-    $("#btnCElemento").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+    $("#btnCElemento").removeAttr("class");         
+    $("#btnCElemento").attr('class', 'btn btn-success pull-right');               
     $("#btnCElemento i").removeAttr("class");
     $("#btnCElemento i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtCElemEl").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#txtCElemAs").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#DdlCElemTC").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#DdlCElemVi").attr('disabled', false); //variables de los elementos del modal xxxx
-    //vaciar elementos text de todo el modal
-    $('#' + VarJsModCElem[0].id + ' :text').val(""); // variable del modal xxxx
+    $("#txtCElemEl").attr('disabled', false);                   
+    $("#txtCElemAs").attr('disabled', false);                   
+    $("#DdlCElemTC").attr('disabled', false);                   
+    $("#DdlCElemVi").attr('disabled', false);                   
+    $('#' + VarJsModCElem[0].id + ' :text').val("");             
 
 }
-function FnJsUElemento() { //nombe función xxxx
+function FnJsUElemento() {       
 
-    $('#lblCElemEl').text(""); // id etiqueta texto etiqueta xxxx
-    $('#lblCElemAs').text(""); // id etiqueta texto etiqueta xxxx
-    //cambiar el color del modal borde
-    $("#DivModBorElemento").removeAttr("class");//quitar el atributo class
-    $("#DivModBorElemento").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeadElemento").removeAttr("class");//quitar el atributo class
-    $("#DivModHeadElemento").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
+    $('#lblCElemEl').text("");                
+    $('#lblCElemAs').text("");                
+    $("#DivModBorElemento").removeAttr("class");         
+    $("#DivModBorElemento").attr('class', 'modal-content border-warning');   
+    $("#DivModHeadElemento").removeAttr("class");         
+    $("#DivModHeadElemento").attr('class', 'modal-header bg-warning');   
     $('#H4ModTitElemento').text('Editar Elemento');
-    //cambiar el color icono btn
-    $("#btnCElemento").removeAttr("class");//quitar el atributo class
-    $("#btnCElemento").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#btnCElemento").removeAttr("class");         
+    $("#btnCElemento").attr('class', 'btn btn-warning pull-right');               
     $("#btnCElemento i").removeAttr("class");
     $("#btnCElemento i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtCElemEl").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#txtCElemAs").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#DdlCElemTC").attr('disabled', false); //variables de los elementos del modal xxxx
-    $("#DdlCElemVi").attr('disabled', false); //variables de los elementos del modal xxxx
-    //vaciar elementos text de todo el modal
-    $('#' + VarJsModCElem[0].id + ' :text').val(""); // variable del modal xxxx
+    $("#txtCElemEl").attr('disabled', false);                   
+    $("#txtCElemAs").attr('disabled', false);                   
+    $("#DdlCElemTC").attr('disabled', false);                   
+    $("#DdlCElemVi").attr('disabled', false);                   
+    $('#' + VarJsModCElem[0].id + ' :text').val("");             
 
 }
-function FnJsDElemento() { //nombe función xxxx
+function FnJsDElemento() {       
 
-    $('#lblCElemEl').text(""); // id etiqueta texto etiqueta xxxx
-    $('#lblCElemAs').text(""); // id etiqueta texto etiqueta xxxx
-    //cambiar el color del modal borde
-    $("#DivModBorElemento").removeAttr("class");//quitar el atributo class
-    $("#DivModBorElemento").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeadElemento").removeAttr("class");//quitar el atributo class
-    $("#DivModHeadElemento").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
+    $('#lblCElemEl').text("");                
+    $('#lblCElemAs').text("");                
+    $("#DivModBorElemento").removeAttr("class");         
+    $("#DivModBorElemento").attr('class', 'modal-content border-danger');   
+    $("#DivModHeadElemento").removeAttr("class");         
+    $("#DivModHeadElemento").attr('class', 'modal-header bg-danger');   
     $('#H4ModTitElemento').text('Eliminar Elemento');
-    //cambiar el color icono btn
-    $("#btnCElemento").removeAttr("class");//quitar el atributo class
-    $("#btnCElemento").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#btnCElemento").removeAttr("class");         
+    $("#btnCElemento").attr('class', 'btn btn-danger pull-right');               
     $("#btnCElemento i").removeAttr("class");
     $("#btnCElemento i").attr("class", "fa fa-trash fa-2x");
-    //bloquear elementos
-    $("#txtCElemEl").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#txtCElemAs").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#DdlCElemTC").attr('disabled', true); //variables de los elementos del modal xxxx
-    $("#DdlCElemVi").attr('disabled', true); //variables de los elementos del modal xxxx
-    //vaciar elementos text de todo el modal
-    $('#' + VarJsModCElem[0].id + ' :text').val(""); // variable del modal xxxx
+    $("#txtCElemEl").attr('disabled', true);                   
+    $("#txtCElemAs").attr('disabled', true);                   
+    $("#DdlCElemTC").attr('disabled', true);                   
+    $("#DdlCElemVi").attr('disabled', true);                   
+    $('#' + VarJsModCElem[0].id + ' :text').val("");             
 
 }
 
-/*quitar btn CUD*/
 function FnJsSbtnCelem() {
-    /*ddl seleccionado existe elem/asp */
     if (VarJsDdlCElemOK == true || VarjstxtCElemAEOK == true || VarjstxtCElemElOK == true) {
-        VarJsbtnCElem.fadeOut("fast"); //efecto de fuga para desapareecer 
-        VarJsbtnCElem.attr('disabled', true);  // se tiene que deshabilitar el btn para que no permita tap enter
+        VarJsbtnCElem.fadeOut("fast");                
+        VarJsbtnCElem.attr('disabled', true);                                      
     }
     else if (VarJsDdlCElemOK == false && VarjstxtCElemAEOK == false && VarjstxtCElemElOK == false) {
-        VarJsbtnCElem.fadeIn("slow"); //efecto de fuga para apareecer 
-        VarJsbtnCElem.attr('disabled', false);  // se tiene que habilitar el btn para que  permita tap enter
+        VarJsbtnCElem.fadeIn("slow");                
+        VarJsbtnCElem.attr('disabled', false);                                      
     }
 }
 
-/*guardar CUD*/
 VarJsbtnCElem[0].addEventListener('click', function (e) {
     e.preventDefault();
     if (formElemento.checkValidity()) {
-        switch (CRUDElemento) { // variable crud xxxx
+        switch (CRUDElemento) {          
             case "C":
-                FnJsAjaxCElemento(); // función para crear xxxx
+                FnJsAjaxCElemento();             
                 break;
             case "U":
-                FnJsAjaxUElemento();// función para crear xxxx
+                FnJsAjaxUElemento();            
                 break;
             case "D":
-                FnJsAjaxDElemento();// función para crear xxxx
+                FnJsAjaxDElemento();            
                 break;
             default:
                 console.log("Error en cud Elemento");
@@ -385,141 +351,131 @@ VarJsbtnCElem[0].addEventListener('click', function (e) {
 }, false);
 
 
-//ajax CUD
 function FnJsAjaxCElemento() {
     $.ajax({
-        url: "/modulo4/vst13.aspx/FnCElementoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo4/vst13.aspx/FnCElementoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             Elemento: VarJsElemento,
             ElementoAsp: VarJsElementoAsp,
             IdTipoControl: VarJsIdTipoControl,
             IdVista: VarJsIdVista
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Elemento Agregado"); //texto xxxx            
+                console.log("Elemento Agregado");                                        
             }
             else {
-                //no se creó
                 CRUDElemento = "Error"
-                console.log("No se pudo agregar el Elemento");//
+                console.log("No se pudo agregar el Elemento");
             }
-            FnAlertaElemento(); // nombre función alerta xxxx
+            FnAlertaElemento();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUElemento() {
     $.ajax({
-        url: "/modulo4/vst13.aspx/FnUElementoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo4/vst13.aspx/FnUElementoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdElemento: VarJsElemId,
             Elemento: VarJsElemento,
             ElementoAsp: VarJsElementoAsp,
             IdTipoControl: VarJsIdTipoControl,
             IdVista: VarJsIdVista
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Elemento Actualizado"); //texto xxxx            
+                console.log("Elemento Actualizado");                                        
             }
             else {
-                //no se creó
                 CRUDElemento = "Error"
-                console.log("No se pudo Actualizar el Elemento");//
+                console.log("No se pudo Actualizar el Elemento");
             }
-            FnAlertaElemento(); // nombre función alerta xxxx
+            FnAlertaElemento();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxDElemento() {
     $.ajax({
-        url: "/modulo4/vst13.aspx/FnDElementoV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo4/vst13.aspx/FnDElementoV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdElemento: VarJsElemId           
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Elemento Eliminado"); //texto xxxx            
+                console.log("Elemento Eliminado");                                        
             }
             else {
-                //no se creó
                 CRUDElemento = "Error"
-                console.log("No se pudo Eliminar el Elemento");//
+                console.log("No se pudo Eliminar el Elemento");
             }
-            FnAlertaElemento(); // nombre función alerta xxxx
+            FnAlertaElemento();             
         }
-    });//ajax fin
+    });   
 }
-function FnAlertaElemento() {//nombre de la función xxxx
+function FnAlertaElemento() {            
 
-    switch (CRUDElemento) {//nombre de la variable cud xxxx
+    switch (CRUDElemento) {               
         case "C":
-            VarJsColorAlertElemento = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertElemento = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertElemento = "bg-success";            
+            VarJsTextoAlertElemento = "Creado";            
             break;
         case "U":
-            VarJsColorAlertElemento = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertElemento = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertElemento = "bg-warning";            
+            VarJsTextoAlertElemento = "Actualizado";            
             break;
         case "D":
-            VarJsColorAlertElemento = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertElemento = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertElemento = "bg-danger";            
+            VarJsTextoAlertElemento = "Eliminado";            
             break;
         case "Error":
-            VarJsColorAlertElemento = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertElemento = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertElemento = "bg-secondary";            
+            VarJsTextoAlertElemento = "No se pudo realizar la operación";            
             break;
         default:
             console.log("Error CUD Elemento Alert")
     }
-    //alerta
-    $('#alerta .modal-content').addClass(VarJsColorAlertElemento);//variable de color alerta xxxx
-    $('#alerta h5').text(VarJsTextoAlertElemento);//variable de texto alerta xxxx
+    $('#alerta .modal-content').addClass(VarJsColorAlertElemento);            
+    $('#alerta h5').text(VarJsTextoAlertElemento);            
     $('#alerta').modal('show');
     setTimeout(function () {
         $('#alerta').modal('hide');
-        $('#alerta .modal-content').removeClass(VarJsColorAlertElemento);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
+        $('#alerta .modal-content').removeClass(VarJsColorAlertElemento);            
+    }, 1500);                           
 
-    if ($("#secciontblE.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRElemento();//función ajax de llenado de la tabla xxxx
+    if ($("#secciontblE.show").length > 0) {      
+        FnJsAjaxRElemento();                     
     }
-    //cerrar modal
-    $("#ModCElem").modal("toggle");//nombre modal xxxx
+    $("#ModCElem").modal("toggle");      
 }
 
-/*iniciar ddl tico de elem*/
 function FnJSCUElemTC() {
     VarJsDdlCElemTC.empty();
     $.ajax({
         type: "POST",
-        url: "/modulo4/vst13.aspx/MostrarTC", // nombre de página y nombre de función
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo4/vst13.aspx/MostrarTC",                      
+        data: {},          
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (VAlDDLElementoTC == "") {
-                VarJsDdlCElemTC.append($("<option> </option>").val("0").html("Seleccionar Tipo De Control"));  // xxxx id val html            
+                VarJsDdlCElemTC.append($("<option> </option>").val("0").html("Seleccionar Tipo De Control"));                                                  
             }
             else {
                 $.each(data.d, function (data, value) {
@@ -536,13 +492,12 @@ function FnJSCUElemTC() {
         }
     });
 }
-/*iniciar ddl vist de elem*/
 function FnJSCUElemVi() {
     VarJSDdlCElemVi.empty();
     $.ajax({
         type: "POST",
-        url: "/modulo4/vst13.aspx/FnRVist", // nombre de página y nombre de función
-        data: {}, /*{ data: jsonString }*/
+        url: "/modulo4/vst13.aspx/FnRVist",                      
+        data: {},          
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
@@ -566,63 +521,60 @@ function FnJSCUElemVi() {
     });
 }
 
-/*existe elemento*/
 function FnJsEElem() {
     if (VarJSDdlCElemVi.val() != 0) {
-        /*existe elemento elemento*/
         if (VarJstxtCElemEl.val().length > 3 && VarJsDdlCElemTC.val() != 0) {
 
             $.ajax({
-                url: "/modulo4/vst13.aspx/FnEElemEl", // nombre de página y nombre de función
+                url: "/modulo4/vst13.aspx/FnEElemEl",                      
                 contentType: 'application/json; charser=utf-8',
                 data: JSON.stringify({
                     EIdEl: VarJsElemId,
                     EElem: VarJstxtCElemEl.val(),
                     EIdTC: VarJsDdlCElemTC.val().toString(),
                     EIdVi: VarJSDdlCElemVi.val().toString()
-                }), /*parametro: valor*/
+                }),    
                 method: 'post',
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
                 },
                 success: function (data) {
                     if (data.d) {
-                        VarJslblCElemEl.text("Ya Existe Elemento"); //imprimir en la etiqueta 
+                        VarJslblCElemEl.text("Ya Existe Elemento");             
                         VarjstxtCElemElOK = true;
                     }
                     else {
-                        VarJslblCElemEl.text("");// quitar lo que se imprimió en la etiqueta
+                        VarJslblCElemEl.text("");                        
                         VarjstxtCElemElOK = false;
                     }
-                    FnJsSbtnCelem();//ocultar bton
+                    FnJsSbtnCelem();   
                 }
             });
         }
-        /*existe elemento asp*/
         if (VarJstxtCElemAs.val().length > 3) {
 
             $.ajax({
-                url: "/modulo4/vst13.aspx/FnEElemAE", // nombre de página y nombre de función
+                url: "/modulo4/vst13.aspx/FnEElemAE",                      
                 contentType: 'application/json; charser=utf-8',
                 data: JSON.stringify({
                     EIdEl: VarJsElemId,
                     EAspE: VarJstxtCElemAs.val(),
                     EIdVi: VarJSDdlCElemVi.val().toString()
-                }), /*parametro: valor*/
+                }),    
                 method: 'post',
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
                 },
                 success: function (data) {
                     if (data.d) {
-                        VarJslblCElemAs.text("Ya Existe Asp"); //imprimir en la etiqueta 
+                        VarJslblCElemAs.text("Ya Existe Asp");             
                         VarjstxtCElemAEOK = true;
                     }
                     else {
-                        VarJslblCElemAs.text("");// quitar lo que se imprimió en la etiqueta
+                        VarJslblCElemAs.text("");                        
                         VarjstxtCElemAEOK = false;
                     }
-                    FnJsSbtnCelem();//ocultar bton
+                    FnJsSbtnCelem();   
                 }
             });
         }
@@ -638,7 +590,6 @@ function FnJsEElem() {
 }
 
 
-/*cambio en txt*/
 VarJstxtCElemEl.keyup(function (e) {
     VarJsElemento = $(this).val();
     FnJsEElem();
@@ -649,7 +600,6 @@ VarJstxtCElemAs.keyup(function (e) {
     FnJsEElem();
 });
 
-/*seleccionado ddl*/
 VarJsDdlCElemTC.change(function (e) {
     console.log(VarJsDdlCElemTC.val());
     VarJsIdTipoControl = $(this).val();
@@ -661,7 +611,6 @@ VarJSDdlCElemVi.change(function (e) {
     FnJsEElem();
 });
 
-/*poner el cursos en el primer txtbox de modal elemento*/
 VarJsModCElem.on('shown.bs.modal', function () {
     VarJstxtCElemEl.focus();
 })

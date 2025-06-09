@@ -137,6 +137,7 @@
     <Compile Include="ClsFamiliaD.cs" />
     <Compile Include="ClsFinCajaD.cs" />
     <Compile Include="ClsGarantiaD.cs" />
+    <Compile Include="ClsGastoD.cs" />
     <Compile Include="ClsGeneroD.cs" />
     <Compile Include="ClsIdentificacionD.cs" />
     <Compile Include="ClsInicioCajaD.cs" />

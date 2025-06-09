@@ -8,6 +8,7 @@ $('.popinfo45').attr('data-content', "Letras,mínimo 3, máximo 45 caracteres");
 $('.popinfo345NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 45 caracteres");
 $('.popinfo360NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 60 caracteres");
 $('.popinfo345N').attr('data-content', "Letras y números. Mínimo 3, máximo 45 caracteres");
+$('.popinfo120N').attr('data-content', "Letras y números. Mínimo 3, máximo 20 caracteres");
 $('.popinfo38N').attr('data-content', "Letras y números. Mínimo 3, máximo 8 caracteres");
 $('.popinfo3150NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 150 caracteres");
 $('.popinfo320NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 20 caracteres");
@@ -15,6 +16,7 @@ $('.popinfo320S').attr('data-content', "Letras y espacios. Mínimo 3, máximo 20
 $('.popinfo350S').attr('data-content', "Letras y espacios. Mínimo 3, máximo 50 caracteres");
 $('.popinfoMAIL').attr('data-content', "Formato para correo electrónico");
 $('.popinfo3_5NS').attr('data-content', "Letras espacios y números. Mínimo 3, máximo 5 caracteres");
+$('.popinfo1_3N').attr('data-content', "Letras y números. Mínimo 1, máximo 3 caracteres");
 $('.popinfoDecimal2').attr('data-content', "Enteros o decimales, hasta 2 cifras decimales"); //^\d + ([,.]\d{ 1, 2 })?$
 $('.popinfoDATE').attr('data-content', "Solo fechas válidas."); //^\d + ([,.]\d{ 1, 2 })?$
 

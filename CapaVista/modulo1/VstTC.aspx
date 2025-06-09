@@ -110,7 +110,7 @@
                         </div>
                            <label id="lblFechaAnterior" for="txtNuevoFecha" runat="server" class="text-warning" text=""></label>
                         <div class="input-group mb-3">
-                            <asp:TextBox ID="txtNuevoFecha" runat="server" TabIndex="3" CssClass="form-control" data-inputmask="'alias':'dd/mm/yyyy'" data-mask="" ClientIDMode="Static"></asp:TextBox><!-- id placeholder pattern maxlen-->
+                            <asp:TextBox ID="txtNuevoFecha" runat="server" TabIndex="3" CssClass="form-control" data-inputmask="'alias':'dd/mm/yyyy'" data-mask="" ClientIDMode="Static"></asp:TextBox>
                             <span class="input-group-addon">
                                 <span class="input-group-addon">
                                     <button type="button" class="btn btn-secondary popinfoDATE" data-container="body" data-toggle="popover" data-placement="top" data-content="">

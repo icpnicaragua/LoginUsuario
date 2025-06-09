@@ -67,6 +67,7 @@
     <Compile Include="ClsFamiliaN.cs" />
     <Compile Include="ClsFinCajaN.cs" />
     <Compile Include="ClsGarantiaN.cs" />
+    <Compile Include="ClsGastoN.cs" />
     <Compile Include="ClsGeneroN.cs" />
     <Compile Include="ClsIdentificacionN.cs" />
     <Compile Include="ClsInicioCajaN.cs" />

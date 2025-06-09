@@ -1,54 +1,48 @@
-﻿/*variable de tablas*/
-var tablaArea;/*tabla mpodulo*/
-var ModCArea = $('#modalNArea'); // modal 
-//campos de tablas
+﻿var tablaArea;   
+var ModCArea = $('#modalNArea');       
 var VarJsAreaId = 0;
 var VarJsArea = "";
 
 
-//igual para todos
 var formArea = document.querySelector('#form1');
 
-//variables crud
 CRUDArea = "";
-//variables alertas
 var VarJsColorAlertArea = "";
 var VarJsTextoAlertArea = "";
-//variables existe
 var EArea = true;
 
 
-$('#lbMostrarArea').click(function (e) {//1 evento para mostrar contenido  xxxx
+$('#lbMostrarArea').click(function (e) {                  
     e.preventDefault();
-    FnJsAjaxRArea(); //llama al ajax xxxx
+    FnJsAjaxRArea();          
 });
 
-function FnJsAjaxRArea() { //2 pide los datos en bd de la tabla  xxxx
+function FnJsAjaxRArea() {                               
     $.ajax({
         type: "POST",
-        url: "/modulo7/VstEmpleados.aspx/FnRAreaV", // nombre de página y nombre de función xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnRAreaV",                         
         data: {},
         contentType: 'application/json; charser=utf-8',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
-            AddrowArea(data.d); // se envía los datos recuperados a la función que llena la tabla xxxx
+            AddrowArea(data.d);                                        
         }
     }
     );
 }
 
-function AddrowArea(data) {//3 llenar la tabla xxxx
+function AddrowArea(data) {            
 
-    $('#tblArea').DataTable().clear().destroy(); // nombre tabla necesario para actualizar, borra y destru xxxx
+    $('#tblArea').DataTable().clear().destroy();                            
 
-    tablaArea = $("#tblArea").DataTable({// variable nombre tabla xxxx
+    tablaArea = $("#tblArea").DataTable({            
 
         "retrieve": true,
         dom: 'Bfrtip',
 
-        "order": [1, 'asc'],//"order": [[ 0, 'asc' ], [ 1, 'desc' ]] // columna, orden xxxx comienza en 0
+        "order": [1, 'asc'],                                             
         "columnDefs": [
             { "targets": 2, "searchable": false },
             { "orderable": false, "targets": 2 }
@@ -58,10 +52,10 @@ function AddrowArea(data) {//3 llenar la tabla xxxx
                 extend: 'colvis',
                 collectionLayout: 'fixed',
                 attr: {
-                    id: 'colArea'//se añade el id para ocultar xxxx
+                    id: 'colArea'                  
                 },
-                text: '<i class="fas fa-columns fa-2x"></i>', // el icono a mostar
-                className: 'btn btn-info', //clase para mostrar
+                text: '<i class="fas fa-columns fa-2x"></i>',             
+                className: 'btn btn-info',       
                 titleAttr: 'Ocultar/Mostrar Columnas',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -73,7 +67,7 @@ function AddrowArea(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-copy fa-2x"></i>',
                 className: 'btn btn-primary d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] /// index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(2)):visible']                               
                 },
                 titleAttr: 'Copiar',
                 init: function (api, node, config) {
@@ -86,10 +80,10 @@ function AddrowArea(data) {//3 llenar la tabla xxxx
                 text: '<i class="far fa-file-pdf fa-2x"></i>',
                 className: 'btn btn-danger',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] ///  index de controles xxxx para no mostrar comienza en 0
+                    columns: [':not(:eq(2)):visible']                                  
                 },
                 titleAttr: 'PDF',
-                filename: 'Área' + "_" + FnJsDate() + "_" + FnJsHour(),// nombre reporte tttt
+                filename: 'Área' + "_" + FnJsDate() + "_" + FnJsHour(),         
                 pageSize: 'LETTER',
                 init: function (api, node, config) {
                     $(node).removeClass('dt-button')
@@ -97,7 +91,7 @@ function AddrowArea(data) {//3 llenar la tabla xxxx
                 customize: function (doc) {
                     doc.content.splice(0, 1);
                     var jsDate = FnJsDate() + " " + FnJsHour();
-                    var image = FnJsLogo64(); // funcion del logo
+                    var image = FnJsLogo64();          
                     doc.pageMargins = [20, 60, 20, 30];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
@@ -111,14 +105,14 @@ function AddrowArea(data) {//3 llenar la tabla xxxx
                                 {
                                     alignment: 'left',
                                     italics: true,
-                                    text: 'Área', //tttt
+                                    text: 'Área', 
                                     fontSize: 18,
                                     margin: [10, 0]
                                 },
                                 {
                                     alignment: 'right',
                                     fontSize: 14,
-                                    text: 'Reporte Área' //tttt
+                                    text: 'Reporte Área' 
                                 }
                             ],
                             margin: 20
@@ -145,11 +139,11 @@ function AddrowArea(data) {//3 llenar la tabla xxxx
             },
             {
                 extend: 'excel',
-                filename: 'Área' + "_" + FnJsDate() + "_" + FnJsHour(), //tttt
+                filename: 'Área' + "_" + FnJsDate() + "_" + FnJsHour(), 
                 text: '<i class="far fa-file-excel fa-2x"></i>',
                 className: 'btn btn-success d-none d-lg-block',
                 exportOptions: {
-                    columns: [':not(:eq(2)):visible'] // index de controles xxxx para no mostrar inicia en 0
+                    columns: [':not(:eq(2)):visible']                               
                 },
                 titleAttr: 'Excel',
                 init: function (api, node, config) {
@@ -161,285 +155,249 @@ function AddrowArea(data) {//3 llenar la tabla xxxx
         ],
         "language": FnJsEspTbl()
     });
-    tablaArea.buttons().container().addClass('form-inline');///variable xxxx
+    tablaArea.buttons().container().addClass('form-inline');   
 
-    for (var contArea = 0; contArea < data.length; contArea++) { // declarar variable de recorrido de arreglo data xxxx
-        tablaArea.row.add([//sensitivecase:
-            data[contArea].IdArea,//campos
+    for (var contArea = 0; contArea < data.length; contArea++) {                         
+        tablaArea.row.add([
+            data[contArea].IdArea,
             data[contArea].Area,
-            '<button value="editar" href="#modalNArea" data-toggle="modal" title="editar" class="btn btn-warning  btn-editArea"><i class="fas fa-pencil-alt"></i> </button>' +// modal editar y clase de botón xxxx
-            '<button value="eliminar" href="#modalNArea" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteArea"><i class="fa fa-trash" ></i> </button>'// modal eliminar y clase de botón xxxx
+            '<button value="editar" href="#modalNArea" data-toggle="modal" title="editar" class="btn btn-warning  btn-editArea"><i class="fas fa-pencil-alt"></i> </button>' +                     
+            '<button value="eliminar" href="#modalNArea" data-toggle="modal" title="eliminar" class="btn btn-danger btn-deleteArea"><i class="fa fa-trash" ></i> </button>'                     
         ]
         ).draw(false);
     }
 }
 
-//acciones cud
-$('#lbNArea').click(function (e) {//4 evento para mostrar modal de nuevo
+$('#lbNArea').click(function (e) {                  
     e.preventDefault();
-    FnJsCArea(); // nombre función xxxx
-    EArea = true; // variable xxxx
+    FnJsCArea();          
+    EArea = true;       
 
-    FnJsBlockArea(); // nombre función xxxx
+    FnJsBlockArea();          
 
-    CRUDArea = "C"; // nombre variable xxxx
+    CRUDArea = "C";          
 
-    //campos xxxx
-    VarJsAreaId = 0; // cada campo tiene una variable, inicializar xxxx
-    VarJsArea = ""; // cada campo tiene una variable, inicializar xxxx
+    VarJsAreaId = 0;                      
+    VarJsArea = "";                      
 
 });
-$(document).on('click', '.btn-editArea', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-editArea', function (e) {         
     e.preventDefault();
-    FnJsUArea();//nombre de función xxxx
-    var dataArea = tablaArea.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsAreaId = dataArea[0]; //id de la fila seleccionada
-    $('#txtNuevoArea').val(dataArea[1]);// [indice columna]  de la fila seleccionada xxxx
-    VarJsArea = dataArea[1]; // variable elemento, variable data, índice xxxx
+    FnJsUArea();         
+    var dataArea = tablaArea.row($(this).parents("tr")).data();                                                
+    VarJsAreaId = dataArea[0];             
+    $('#txtNuevoArea').val(dataArea[1]);                        
+    VarJsArea = dataArea[1];                   
 
-    CRUDArea = "U";// variable crud, estado crud xxxx
+    CRUDArea = "U";               
 });
-$(document).on('click', '.btn-deleteArea', function (e) {//nombre de clase xxxx
+$(document).on('click', '.btn-deleteArea', function (e) {         
     e.preventDefault();
-    FnJsDArea();//nombre de función xxxx
-    EArea = false; // variable de existe xxxx
+    FnJsDArea();         
+    EArea = false;             
 
 
-    FnJsBlockArea();//función bloquear xxxx
-    var dataArea = tablaArea.row($(this).parents("tr")).data();// variable, tabla xxxx agarra la fila, luego hay que llamar datatc con subíndice de la columna
-    VarJsAreaId = dataArea[0]; //id de la fila seleccionada
-    $('#txtNuevoArea').val(dataArea[1]);// [indice columna]  de la fila seleccionada xxxx
+    FnJsBlockArea();      
+    var dataArea = tablaArea.row($(this).parents("tr")).data();                                                
+    VarJsAreaId = dataArea[0];             
+    $('#txtNuevoArea').val(dataArea[1]);                        
 
-    VarJsArea = dataArea[1]; // variable elemento, variable data, índice xxxx
+    VarJsArea = dataArea[1];                   
 
     CRUDArea = "D";
 });
 
-//pintar modal
-function FnJsCArea() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoArea').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsCArea() {       
+    $('#lblexistenuevoArea').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorArea").removeAttr("class");//quitar el atributo class
-    $("#DivModBorArea").attr('class', 'modal-content border-success');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaArea").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaArea").attr('class', 'modal-header bg-success');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitArea').text('Nuevo Área');//tttt
-    //cambiar el color icono btn
-    $("#btnNueArea").removeAttr("class");//quitar el atributo class
-    $("#btnNueArea").attr('class', 'btn btn-success pull-right');//poner verde tirar a la derecha
+    $("#DivModBorArea").removeAttr("class");         
+    $("#DivModBorArea").attr('class', 'modal-content border-success');   
+    $("#DivModHeaArea").removeAttr("class");         
+    $("#DivModHeaArea").attr('class', 'modal-header bg-success');   
+    $('#H4ModTitArea').text('Nuevo Área');
+    $("#btnNueArea").removeAttr("class");         
+    $("#btnNueArea").attr('class', 'btn btn-success pull-right');               
     $("#btnNueArea i").removeAttr("class");
     $("#btnNueArea i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtNuevoArea").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoArea").attr('disabled', false);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCArea[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCArea[0].id + ' :text').val("");             
 
 }
-function FnJsUArea() { //nombe función xxxx
-    //campos xxx
-    $('#lblexistenuevoArea').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsUArea() {       
+    $('#lblexistenuevoArea').text("");                
 
     console.log("colorear nuevo");
-    //cambiar el color del modal borde
-    $("#DivModBorArea").removeAttr("class");//quitar el atributo class
-    $("#DivModBorArea").attr('class', 'modal-content border-warning');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaArea").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaArea").attr('class', 'modal-header bg-warning');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitArea').text('Editar Área');//tttt
-    //cambiar el color icono btn
-    $("#btnNueArea").removeAttr("class");//quitar el atributo class
-    $("#btnNueArea").attr('class', 'btn btn-warning pull-right');//poner verde tirar a la derecha
+    $("#DivModBorArea").removeAttr("class");         
+    $("#DivModBorArea").attr('class', 'modal-content border-warning');   
+    $("#DivModHeaArea").removeAttr("class");         
+    $("#DivModHeaArea").attr('class', 'modal-header bg-warning');   
+    $('#H4ModTitArea').text('Editar Área');
+    $("#btnNueArea").removeAttr("class");         
+    $("#btnNueArea").attr('class', 'btn btn-warning pull-right');               
     $("#btnNueArea i").removeAttr("class");
     $("#btnNueArea i").attr("class", "fa fa-save fa-2x");
-    //bloquear elementos
-    $("#txtNuevoArea").attr('disabled', false); //variables de los elementos del modal xxxx
+    $("#txtNuevoArea").attr('disabled', false);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCArea[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCArea[0].id + ' :text').val("");             
 
 }
-function FnJsDArea() { //nombe función xxxx
-    //campos xxxx
-    $('#lblexistenuevoArea').text(""); // id etiqueta texto etiqueta xxxx
+function FnJsDArea() {       
+    $('#lblexistenuevoArea').text("");                
 
-    //cambiar el color del modal borde
-    $("#DivModBorArea").removeAttr("class");//quitar el atributo class
-    $("#DivModBorArea").attr('class', 'modal-content border-danger');//poner verde
-    //cambiar el color del modal header
-    $("#DivModHeaArea").removeAttr("class");//quitar el atributo class
-    $("#DivModHeaArea").attr('class', 'modal-header bg-danger');//poner verde
-    //cambiar el titulo del modal header
-    $('#H4ModTitArea').text('Eliminar Área');//tttt
-    //cambiar el color icono btn
-    $("#btnNueArea").removeAttr("class");//quitar el atributo class
-    $("#btnNueArea").attr('class', 'btn btn-danger pull-right');//poner verde tirar a la derecha
+    $("#DivModBorArea").removeAttr("class");         
+    $("#DivModBorArea").attr('class', 'modal-content border-danger');   
+    $("#DivModHeaArea").removeAttr("class");         
+    $("#DivModHeaArea").attr('class', 'modal-header bg-danger');   
+    $('#H4ModTitArea').text('Eliminar Área');
+    $("#btnNueArea").removeAttr("class");         
+    $("#btnNueArea").attr('class', 'btn btn-danger pull-right');               
     $("#btnNueArea i").removeAttr("class");
-    $("#btnNueArea i").attr("class", "fa fa-trash fa-2x");//ícono
-    //bloquear elementos
-    $("#txtNuevoArea").attr('disabled', true); //variables de los elementos del modal xxxx
+    $("#btnNueArea i").attr("class", "fa fa-trash fa-2x");
+    $("#txtNuevoArea").attr('disabled', true);                   
 
-    //vaciar elementos text de todo el modal
-    $('#' + ModCArea[0].id + ' :text').val(""); // variable del modal xxxx
+    $('#' + ModCArea[0].id + ' :text').val("");             
 
 }
 
-/*quitar btn CUD*/
-function FnJsBlockArea() {// nombre función xxxx
+function FnJsBlockArea() {         
 
-    if (EArea == true) {// variables xxxx
-        $("#btnNueArea").fadeOut("fast"); //id xxxx efecto de fuga para desapareecer 
-        $("#btnNueArea").attr('disabled', true);  //id xxxx se tiene que deshabilitar el btn para que no permita tap enter
+    if (EArea == true) {      
+        $("#btnNueArea").fadeOut("fast");                      
+        $("#btnNueArea").attr('disabled', true);                                         
     }
-    else if (EArea == false) {// variables xxxx
-        $("#btnNueArea").fadeIn("slow"); //id xxxx efecto de fuga para apareecer 
-        $("#btnNueArea").attr('disabled', false);  //id xxxx se tiene que habilitar el btn para que  permita tap enter
+    else if (EArea == false) {      
+        $("#btnNueArea").fadeIn("slow");                      
+        $("#btnNueArea").attr('disabled', false);                                         
     }
 }
 
-//guardar CUD
-$('#btnNueArea').click(function (e) {//1 evento para mostrar contenido xxxx
+$('#btnNueArea').click(function (e) {               
     e.preventDefault();
     if (formArea.checkValidity()) {
-        switch (CRUDArea) { // variable crud xxxx
+        switch (CRUDArea) {          
             case "C":
-                FnJsAjaxCArea(); // función para crear xxxx
+                FnJsAjaxCArea();             
                 break;
             case "U":
-                FnJsAjaxUArea();// función para crear xxxx
+                FnJsAjaxUArea();            
                 break;
             case "D":
-                FnJsAjaxDArea();// función para crear xxxx
+                FnJsAjaxDArea();            
                 break;
             default:
-                console.log("Error en cud Área");/////tttt
+                console.log("Error en cud Área");
         }
     }
     console.log(formArea.checkValidity());
 });
 
-//ajax CUD
 function FnJsAjaxCArea() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnCAreaV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnCAreaV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             Area: VarJsArea,
 
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Área Agregado"); ////tttt        
+                console.log("Área Agregado");                         
             }
             else {
-                //no se creó
                 CRUDArea = "error"
-                console.log("No se pudo agregar Tipo de indentificación");//
+                console.log("No se pudo agregar Tipo de indentificación");
             }
-            FnAlertaArea(); // nombre función alerta xxxx
+            FnAlertaArea();             
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxUArea() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnUAreaV", // nombre de página y nombre de función cude
+        url: "/modulo7/VstEmpleados.aspx/FnUAreaV",                         
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdArea: VarJsAreaId,
             Area: VarJsArea,
 
 
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se actualizó
-                console.log("Área Actualizado"); ////tttt
+                console.log("Área Actualizado"); 
             }
             else {
-                //no se borró
                 CRUDArea = "error"
-                console.log("no se pudo actualizar");//
+                console.log("no se pudo actualizar");
             }
-            FnAlertaArea();// nombre función alerta xxxx
+            FnAlertaArea();            
         }
-    });//ajax fin
+    });   
 }
 function FnJsAjaxDArea() {
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnDAreaV", // nombre de página y nombre de función cude xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnDAreaV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({// los parámetros de la sig línea
+        data: JSON.stringify({                  
             IdArea: VarJsAreaId
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //se creó
-                console.log("Área Eliminado"); ////tttt
+                console.log("Área Eliminado"); 
             }
             else {
-                //no se creó
                 CRUDArea = "error"
-                console.log("No se pudo Eliminar Área");////tttt
+                console.log("No se pudo Eliminar Área");
             }
-            FnAlertaArea(); // nombre función alerta xxxx
+            FnAlertaArea();             
 
         }
-    });//ajax fin
+    });   
 }
 
-//Existe
-function FnJsAjaxEArea() {// nombre de la función existe xxxx
+function FnJsAjaxEArea() {                  
     $.ajax({
-        url: "/modulo7/VstEmpleados.aspx/FnEAreaV", // nombre de página y nombre de función existe xxxx
+        url: "/modulo7/VstEmpleados.aspx/FnEAreaV",                            
         contentType: 'application/json; charser=utf-8',
-        data: JSON.stringify({//parámetros xxxx
+        data: JSON.stringify({   
             IdArea: VarJsAreaId,
             Area: VarJsArea
-        }), /*parametro: valor*/
+        }),    
         method: 'post',
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status + "  " + xhr.responseText, "  " + thrownError);
         },
         success: function (data) {
             if (data.d) {
-                //ocultar botón
-                EArea = true; // variable existe xxxx
-                $('#lblexistenuevoArea').text("Existe Área");// id etiqueta texto etiqueta //tttt
-                FnJsBlockArea();//nombre de función bloquear xxxx
+                EArea = true;          
+                $('#lblexistenuevoArea').text("Existe Área");               
+                FnJsBlockArea();            
 
             }
             else {
-                //mostrar btn
-                EArea = false;// variable existe xxxx
-                $('#lblexistenuevoArea').text(""); // id etiqueta texto etiqueta xxxx
-                FnJsBlockArea(); //nombre de función bloquear xxxx
+                EArea = false;         
+                $('#lblexistenuevoArea').text("");                
+                FnJsBlockArea();             
             }
         }
-    });//ajax fin
+    });   
 }
 
 
-function VerificarExisteArea() {// nombre de función verificarexiste xxxx
-    if ($('#txtNuevoArea').val().length > 3) { // id de objetos de entradas, cantidad mínima permitida xxxx
+function VerificarExisteArea() {               
+    if ($('#txtNuevoArea').val().length > 3) {                            
         return true;
     }
     else {
@@ -448,49 +406,47 @@ function VerificarExisteArea() {// nombre de función verificarexiste xxxx
 }
 
 
-$('#txtNuevoArea').keyup(function (e) {//id de cada elemento en el modal xxxx
-    VarJsArea = $(this).val(); // variable de este elemento xxxx
-    if (VerificarExisteArea()) {//nombre función verificar existe xxxx
-        FnJsAjaxEArea(); // llamar todos los existes xxxx
+$('#txtNuevoArea').keyup(function (e) {                     
+    VarJsArea = $(this).val();                
+    if (VerificarExisteArea()) {            
+        FnJsAjaxEArea();                
 
     }
 });
 
 
-function FnAlertaArea() {//nombre de la función xxxx
+function FnAlertaArea() {            
 
-    switch (CRUDArea) {//nombre de la variable cud xxxx
+    switch (CRUDArea) {               
         case "C":
-            VarJsColorAlertArea = "bg-success";//variable de color alerta xxxx
-            VarJsTextoAlertArea = "Creado";//variable de texto alerta xxxx
+            VarJsColorAlertArea = "bg-success";            
+            VarJsTextoAlertArea = "Creado";            
             break;
         case "U":
-            VarJsColorAlertArea = "bg-warning";//variable de color alerta xxxx
-            VarJsTextoAlertArea = "Actualizado";//variable de texto alerta xxxx
+            VarJsColorAlertArea = "bg-warning";            
+            VarJsTextoAlertArea = "Actualizado";            
             break;
         case "D":
-            VarJsColorAlertArea = "bg-danger";//variable de color alerta xxxx
-            VarJsTextoAlertArea = "Eliminado";//variable de texto alerta xxxx
+            VarJsColorAlertArea = "bg-danger";            
+            VarJsTextoAlertArea = "Eliminado";            
             break;
         case "Error":
-            VarJsColorAlertArea = "bg-secondary";//variable de color alerta xxxx
-            VarJsTextoAlertArea = "No se pudo realizar la operación";//variable de texto alerta xxxx
+            VarJsColorAlertArea = "bg-secondary";            
+            VarJsTextoAlertArea = "No se pudo realizar la operación";            
             break;
         default:
-            console.log("Error CUD Área Alert")//tttt
+            console.log("Error CUD Área Alert")
     }
-    //alerta
-    $('#alertaEmpleados .modal-content').addClass(VarJsColorAlertArea);//variable de color alerta xxxx
-    $('#alertaEmpleados h5').text(VarJsTextoAlertArea);//variable de texto alerta xxxx
+    $('#alertaEmpleados .modal-content').addClass(VarJsColorAlertArea);            
+    $('#alertaEmpleados h5').text(VarJsTextoAlertArea);            
     $('#alertaEmpleados').modal('show');
     setTimeout(function () {
         $('#alertaEmpleados').modal('hide');
-        $('#alertaEmpleados .modal-content').removeClass(VarJsColorAlertArea);//variable de color alerta xxxx
-    }, 1500);// tiempo para que aparezca la alerta crear variable ms
+        $('#alertaEmpleados .modal-content').removeClass(VarJsColorAlertArea);            
+    }, 1500);                           
 
-    if ($("#secciontblArea.show").length > 0) {//seccion tabla xxxx
-        FnJsAjaxRArea();//función ajax de llenado de la tabla xxxx
+    if ($("#secciontblArea.show").length > 0) {      
+        FnJsAjaxRArea();                     
     }
-    //cerrar modal
-    $("#modalNArea").modal("toggle");//nombre modal xxxx
+    $("#modalNArea").modal("toggle");      
 }
