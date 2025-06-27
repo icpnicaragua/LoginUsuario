@@ -654,6 +654,7 @@
     <Content Include="js\icp\CRUDEPalabraClave.js" />
     <Content Include="js\icp\CRUDEPersona.js" />
     <Content Include="js\icp\CRUDEPersonajs.js" />
+    <Content Include="js\icp\CRUDEProducto.js" />
     <Content Include="js\icp\CRUDEPromo.js" />
     <Content Include="js\icp\CRUDEProveedor.js" />
     <Content Include="js\icp\CRUDERack.js" />
@@ -2779,6 +2780,7 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="img\productos\" />
     <Folder Include="modulo5\" />
     <Folder Include="modulo6\" />
     <Folder Include="modulo_configuracion\" />

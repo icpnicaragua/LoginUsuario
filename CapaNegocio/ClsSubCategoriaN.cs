@@ -57,5 +57,11 @@ namespace CapaNegocio
                 return true;
             }
         }
+
+        public List<ClsSubCategoria> FnRRSubCategoriaN(ClsSubCategoria OSubCategoriaN)
+        {
+            List<ClsSubCategoria> OSubCategoria = new ClsSubCategoriaD().FnRRSubCategoriaD(OSubCategoriaN);
+            return OSubCategoria;
+        }
     }
 }

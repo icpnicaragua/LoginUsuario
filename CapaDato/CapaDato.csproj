@@ -140,6 +140,7 @@
     <Compile Include="ClsGastoD.cs" />
     <Compile Include="ClsGeneroD.cs" />
     <Compile Include="ClsIdentificacionD.cs" />
+    <Compile Include="ClsImagenD.cs" />
     <Compile Include="ClsInicioCajaD.cs" />
     <Compile Include="ClsInyeccionD.cs" />
     <Compile Include="ClsMonedaD.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="ClsPalabraClaveD.cs" />
     <Compile Include="ClsPermisosD.cs" />
     <Compile Include="ClsPersonaD.cs" />
+    <Compile Include="ClsProductoD.cs" />
     <Compile Include="ClsPromoD.cs" />
     <Compile Include="ClsProveedorD.cs" />
     <Compile Include="ClsRackD.cs" />

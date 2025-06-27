@@ -70,6 +70,7 @@
     <Compile Include="ClsGastoN.cs" />
     <Compile Include="ClsGeneroN.cs" />
     <Compile Include="ClsIdentificacionN.cs" />
+    <Compile Include="ClsImagenN.cs" />
     <Compile Include="ClsInicioCajaN.cs" />
     <Compile Include="ClsInyeccionN.cs" />
     <Compile Include="ClsModuloN.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="ClsPalabraClaveN.cs" />
     <Compile Include="ClsPermisosN.cs" />
     <Compile Include="ClsPersonaN.cs" />
+    <Compile Include="ClsProductoN.cs" />
     <Compile Include="ClsPromoN.cs" />
     <Compile Include="ClsProveedorN.cs" />
     <Compile Include="ClsRackN.cs" />

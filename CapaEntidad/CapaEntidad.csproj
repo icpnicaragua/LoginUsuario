@@ -86,6 +86,7 @@
     <Compile Include="ClsGenero.cs" />
     <Compile Include="ClsIdentificacion.cs" />
     <Compile Include="ClsIdioma.cs" />
+    <Compile Include="ClsImagen.cs" />
     <Compile Include="ClsInicioCaja.cs" />
     <Compile Include="ClsInyeccion.cs" />
     <Compile Include="ClsModulo.cs" />

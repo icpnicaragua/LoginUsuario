@@ -151,6 +151,16 @@ namespace CapaVista.modulo10
             return ExisteCategoria;
 
         }
+
+        [WebMethod]
+        public static List<ClsCategoria> FnRRCategoriaV(string IdFamilia)
+        {
+            ClsCategoria OCategoriaV = new ClsCategoria();
+            OCategoriaV.ObjFamilia.IdFamilia = IdFamilia;
+            List<ClsCategoria> OCategoria = new ClsCategoriaN().FnRRCategoriaN(OCategoriaV);
+            return OCategoria;
+        }
+
         #endregion
 
         #region RegSubCategoria
@@ -219,6 +229,15 @@ namespace CapaVista.modulo10
 
             return ExisteSubCategoria;
 
+        }
+
+        [WebMethod]
+        public static List<ClsSubCategoria> FnRRSubCategoriaV(string IdCategoria)
+        {
+            ClsSubCategoria OSubCategoriaV = new ClsSubCategoria();
+            OSubCategoriaV.ObjCategoria.IdCategoria = IdCategoria;
+            List<ClsSubCategoria> OSubCategoria = new ClsSubCategoriaN().FnRRSubCategoriaN(OSubCategoriaV);
+            return OSubCategoria;
         }
         #endregion
     }

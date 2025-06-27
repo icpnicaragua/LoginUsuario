@@ -162,5 +162,39 @@ namespace CapaDato
             }
         }
 
+        public List<ClsCategoria> FnRRCategoriaD(ClsCategoria OCategoriaD)
+        {
+            ClsCategoria OCategoria = null;
+            try
+            {
+                ObjConexion = new ClsConexion();
+                Cmd_D = new MySqlCommand("spRRCategoria", ObjConexion.Con_D);
+                Cmd_D.CommandType = CommandType.StoredProcedure;
+                Cmd_D.Parameters.AddWithValue("prmRRIdFamilia", Convert.ToInt16(OCategoriaD.ObjFamilia.IdFamilia));
+                ObjConexion.Abrircon();
+                Dr_D = Cmd_D.ExecuteReader();
+                List<ClsCategoria> LstCategoria = new List<ClsCategoria>();
+                while (Dr_D.Read())
+                {
+                    OCategoria = new ClsCategoria();
+                    OCategoria.IdCategoria = Dr_D[0].ToString();
+                    OCategoria.Categoria = Dr_D[1].ToString();
+                    OCategoria.ObjFamilia.IdFamilia = Dr_D[2].ToString();
+                    OCategoria.ObjFamilia.Familia = Dr_D[3].ToString();
+                    LstCategoria.Add(OCategoria);
+                }
+                return LstCategoria;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            }
+            finally
+            {
+                ObjConexion.Cerrarcon();
+            }
+        }
+
     }
 }

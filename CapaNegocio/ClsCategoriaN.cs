@@ -57,5 +57,11 @@ namespace CapaEntidad
                 return true;
             }
         }
+
+        public List<ClsCategoria> FnRRCategoriaN(ClsCategoria OCategoriaN)
+        {
+            List<ClsCategoria> OCategoria = new ClsCategoriaD().FnRRCategoriaD(OCategoriaN);
+            return OCategoria;
+        }
     }
 }
